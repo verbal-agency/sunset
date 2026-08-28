@@ -153,6 +153,7 @@ When all criteria pass:
 
 1. Record criterion-level evidence in the cycle handoff.
 2. Change G02 to `complete` in `docs/ROADMAP.md`.
-3. Expand G03 with only findings routed to structured investigation memory.
-4. Mark G03 `proposed`; do not begin it without user authorization.
+3. Confirm G03's collector scope and route only relevant provenance findings to
+   its deterministic detection work.
+4. Keep G03 `proposed`; do not begin it without user authorization.
 5. End the cycle report with a suggested commit message based only on G02 work.

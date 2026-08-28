@@ -7,12 +7,13 @@ goal may be active.
 | --- | --- | --- | --- |
 | [G01](goals/G01-deterministic-scanner.md) | complete | Build the project foundation and deterministic pytest-marker scanner | None |
 | [G02](goals/G02-provenance-artifacts.md) | proposed | Trace candidate provenance and persist content-addressed evidence | G01 |
-| G03 | proposed | Investigate rationale with LangGraph and compact, checkpointed memory | G02 |
-| G04 | proposed | Verify external assumptions using replaceable evidence providers | G03 |
-| G05 | proposed | Validate candidate removal in an approved disposable sandbox | G04 |
-| G06 | proposed | Produce citation-verified case files with a skeptical review stage | G05 |
-| G07 | proposed | Benchmark quality and memory efficiency with LangSmith | G06 |
-| G08 | proposed | Package and publish a polished end-to-end Sunset release | G07 |
+| [G03](goals/G03-broader-deterministic-collectors.md) | proposed | Collect dependency/version guards and compatibility shims deterministically | G02 |
+| G04 | proposed | Investigate rationale with LangGraph and compact, checkpointed memory | G03 |
+| G05 | proposed | Verify external assumptions using replaceable evidence providers | G04 |
+| G06 | proposed | Validate candidate removal in an approved disposable sandbox | G05 |
+| G07 | proposed | Produce citation-verified case files with a skeptical review stage | G06 |
+| G08 | proposed | Benchmark quality and memory efficiency with LangSmith | G07 |
+| G09 | proposed | Package and publish a polished end-to-end Sunset release | G08 |
 
 ## G01 — Deterministic scanner
 
@@ -37,7 +38,22 @@ Expected completion evidence: fixture repositories demonstrate rename-aware
 history where feasible, repeated retrieval reuses immutable artifacts, and a
 changed HEAD invalidates only mutable repository views.
 
-## G03 — LangGraph investigation and efficient memory
+## G03 — Broader deterministic collectors
+
+**Purpose:** Expand Sunset beyond disabled tests while preserving a
+high-precision, zero-model candidate boundary for code whose compatibility
+assumption may have expired.
+
+Recognize a deliberately bounded set of static Python dependency/version guards
+and compatibility shims, emit a versioned candidate contract with exact source
+and Git provenance, and make unsupported dynamic forms explicit. This advances
+OUT-01 across the code paths that tests alone cannot represent.
+
+Expected completion evidence: fixture repositories demonstrate recognized
+runtime and dependency-version guards plus import-fallback compatibility shims;
+unrelated conditionals and dynamic forms are not fabricated as candidates.
+
+## G04 — LangGraph investigation and efficient memory
 
 **Purpose:** Support long-running rationale investigations that can resume,
 remain within token budgets, and retain provenance without replaying full
@@ -53,7 +69,7 @@ Expected completion evidence: an interrupted fixture investigation resumes;
 unchanged artifacts are not fetched twice; no graph prompt contains an entire
 raw history; a full-context comparison is recorded for later benchmarking.
 
-## G04 — External assumption verification
+## G05 — External assumption verification
 
 **Purpose:** Distinguish code that is merely old from code whose causal
 justification has actually expired.
@@ -68,7 +84,7 @@ Expected completion evidence: recorded provider fixtures cover fixed, open,
 missing, and contradictory external evidence without live-network dependence in
 the default test suite.
 
-## G05 — Approved sandbox validation
+## G06 — Approved sandbox validation
 
 **Purpose:** Turn a probabilistic expiry hypothesis into reproducible empirical
 evidence without risking the maintainer's working repository.
@@ -83,7 +99,7 @@ Expected completion evidence: approved experiments classify confirmed,
 still-failing, flaky, environment-error, and inconclusive results; denied
 approval performs no mutation; target Git status remains unchanged.
 
-## G06 — Case file and skeptical review
+## G07 — Case file and skeptical review
 
 **Purpose:** Make every recommendation conservative, challengeable, and useful
 to a human reviewer instead of asking them to trust an agent narrative.
@@ -98,7 +114,7 @@ Expected completion evidence: every report claim resolves to stored raw
 evidence; deliberately unsupported claims are rejected; reports never equate
 passing tests with proof of safety.
 
-## G07 — Historical benchmark and LangSmith evaluation
+## G08 — Historical benchmark and LangSmith evaluation
 
 **Purpose:** Prove that Sunset identifies genuine cleanup opportunities and that
 its memory savings do not conceal a material loss in decision quality.
@@ -112,7 +128,7 @@ claims, tokens, latency, and cost. Advances OUT-03, OUT-05, and SCN-06.
 Expected completion evidence: reproducible experiments run over at least 20
 cases, publish per-case traces, and explicitly pass or fail the SCN-06 target.
 
-## G08 — End-to-end release
+## G09 — End-to-end release
 
 **Purpose:** Convert the validated components into a reproducible public product
 that demonstrates Sunset's thesis, safety model, and measured limitations.
