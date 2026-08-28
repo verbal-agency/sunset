@@ -1,6 +1,6 @@
 # G01 — Project foundation and deterministic scanner
 
-**Status:** active
+**Status:** complete
 **Dependencies:** none
 
 ## Purpose
@@ -126,3 +126,20 @@ When all criteria pass:
    findings routed to G02.
 4. Mark G02 `proposed`; do not begin it without user authorization.
 5. End the cycle report with a suggested commit message based only on G01 work.
+
+## Completion evidence
+
+Completed on 2026-08-28.
+
+| Criterion | Result |
+| --- | --- |
+| G01-AC01 | `uv sync --all-groups` completed with the repository-pinned Python 3.12 environment; `uv run --locked pytest` passed all 9 tests. |
+| G01-AC02 | `test_discovers_supported_markers_with_static_metadata` and the CLI acceptance scan found five supported fixture markers exactly once with their static metadata. |
+| G01-AC03 | `test_scan_is_byte_stable_for_same_commit` verifies byte-identical JSON and IDs across repeated scans. |
+| G01-AC04 | The invalid fixture is returned as a structured `parse_error` while all five valid candidates remain available. |
+| G01-AC05 | Git fixture tests verify HEAD, historical blame commits, and the explicit `not_git_repository` result. |
+| G01-AC06 | The side-effect test blocks socket creation and compares target status plus content hashes before and after scanning; runtime dependencies are empty. |
+| G01-AC07 | README documents syntax, schema v1, deterministic committed-snapshot behavior, exit codes, exclusions, and the non-recommendation boundary. |
+
+The next goal is [G02 — Provenance and content-addressed artifacts](G02-provenance-artifacts.md),
+which remains proposed and has not been started.

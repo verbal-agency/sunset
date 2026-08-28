@@ -5,8 +5,8 @@ goal may be active.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
-| [G01](goals/G01-deterministic-scanner.md) | active | Build the project foundation and deterministic pytest-marker scanner | None |
-| G02 | proposed | Trace candidate provenance and persist content-addressed evidence | G01 |
+| [G01](goals/G01-deterministic-scanner.md) | complete | Build the project foundation and deterministic pytest-marker scanner | None |
+| [G02](goals/G02-provenance-artifacts.md) | proposed | Trace candidate provenance and persist content-addressed evidence | G01 |
 | G03 | proposed | Investigate rationale with LangGraph and compact, checkpointed memory | G02 |
 | G04 | proposed | Verify external assumptions using replaceable evidence providers | G03 |
 | G05 | proposed | Validate candidate removal in an approved disposable sandbox | G04 |
