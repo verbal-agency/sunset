@@ -4,9 +4,10 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G01 release is deliberately narrower: it deterministically discovers
-pytest skip and expected-failure markers in a committed Git snapshot. It does
-not decide that a marker is obsolete and does not modify the repository.
+The current G02 release deterministically discovers pytest skip and
+expected-failure markers in a committed Git snapshot, then records local Git
+provenance as immutable artifacts. It does not decide that a marker is obsolete
+and does not modify the analyzed repository.
 
 ## Quick start
 
@@ -17,11 +18,13 @@ development environment so the verification toolchain is reproducible.
 ```bash
 uv sync --all-groups
 uv run sunset scan /path/to/repository --format json
+uv run sunset provenance /path/to/repository --store /path/outside/repository --format json
 ```
 
-The command returns `0` for a complete scan, `1` when candidate discovery
-succeeds with one or more structured file errors, and `2` for a repository-level
-error such as a missing Git repository or committed HEAD.
+Both commands return `0` for a complete result, `1` when useful output is
+available with one or more structured errors, and `2` for a repository-level
+error such as a missing Git repository, missing committed HEAD, or an artifact
+store placed inside the analyzed repository.
 
 ## Supported syntax
 
@@ -63,11 +66,51 @@ G01 scans only files committed at `HEAD`:
 - The same target, commit, and configuration produce normalized byte-identical
   JSON and stable candidate IDs.
 
-This model gives later investigation stages an immutable source boundary. A
-future goal will add versioned evidence storage; G01 performs no network or model
-calls.
+This model gives later investigation stages an immutable source boundary. G02
+adds local artifact storage without network or model calls.
 
-## JSON schema version 1
+## Provenance and artifact storage
+
+`sunset provenance` performs the same committed-HEAD scan and records evidence
+for every discovered candidate:
+
+- source bytes at the scanned HEAD;
+- line blame and its best-supported introduction point;
+- bounded, rename-aware file history; and
+- the patch for the blame commit when that object is available.
+
+The store is explicit and must be outside the analyzed repository:
+
+```bash
+uv run sunset provenance /path/to/repository \
+  --store /path/to/sunset-artifacts \
+  --format json
+```
+
+Raw bytes live at `artifacts/sha256/<digest>`. Their `sha256:<digest>` IDs
+are derived only from the bytes. Deterministic candidate views live separately
+under `views/` and reference those artifacts; the CLI prints references and
+metadata, not full history or patches.
+
+Repeated collection at the same HEAD verifies and reuses the same immutable
+artifacts. A changed HEAD creates a new derived view, while unchanged source,
+history, and patch bytes keep their existing artifact IDs. This is the cache
+boundary: derived conclusions are keyed to repository state; raw Git evidence is
+not discarded merely because HEAD moves.
+
+Repository identity uses `origin`'s configured URL when present, without
+contacting it. Local repositories without an origin use a SHA-256 hash of their
+resolved local path. A shallow clone remains usable: Sunset records the source
+evidence it can read and emits structured uncertainty when history or the blame
+commit patch is incomplete.
+
+Provenance JSON has its own schema version and includes `repository_identity`,
+`repository_head`, candidate artifact references, and structured errors or
+uncertainties. A candidate's `introduction_commit` is currently the
+blame-backed best-supported introduction point; it is not a claim that history
+proves the first ever semantic rationale.
+
+## Scan JSON schema version 1
 
 ```json
 {
@@ -96,17 +139,18 @@ relative path, qualified target name, marker kind, line, and column.
 
 ## Safety boundary and limitations
 
-G01 does not:
+G02 does not:
 
 - infer why a marker exists or whether its rationale expired;
 - access GitHub, release notes, models, embeddings, or the network;
 - execute test modules or evaluate dynamic marker arguments;
 - run tests, remove markers, create worktrees, or open pull requests;
+- write into the analyzed repository; the artifact store must be external;
 - support aliased imports, module-level `pytestmark`, parameter-level marks,
   custom collection patterns, non-pytest frameworks, or non-Python languages.
 
-A passing scan means only that Sunset found supported markers and Git provenance.
-It is not a removal recommendation.
+A passing scan or provenance run means only that Sunset found supported markers
+and recorded available local Git evidence. It is not a removal recommendation.
 
 ## Development
 
@@ -114,7 +158,9 @@ It is not a removal recommendation.
 uv sync --all-groups
 uv run pytest
 uv run sunset scan tests/fixtures/pytest_repo --format json
+uv run sunset provenance tests/fixtures/pytest_repo --store /tmp/sunset-artifacts --format json
 ```
 
-The fixture directory is part of the Sunset repository, so the last command
-uses Sunset's committed HEAD after these files are committed.
+The fixture directory is part of the Sunset repository, so both fixture commands
+use Sunset's committed HEAD after these files are committed. The provenance store
+path remains outside that repository.

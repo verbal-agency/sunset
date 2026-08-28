@@ -6,7 +6,7 @@ goal may be active.
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G01](goals/G01-deterministic-scanner.md) | complete | Build the project foundation and deterministic pytest-marker scanner | None |
-| [G02](goals/G02-provenance-artifacts.md) | proposed | Trace candidate provenance and persist content-addressed evidence | G01 |
+| [G02](goals/G02-provenance-artifacts.md) | complete | Trace candidate provenance and persist content-addressed evidence | G01 |
 | [G03](goals/G03-broader-deterministic-collectors.md) | proposed | Collect dependency/version guards and compatibility shims deterministically | G02 |
 | G04 | proposed | Investigate rationale with LangGraph and compact, checkpointed memory | G03 |
 | G05 | proposed | Verify external assumptions using replaceable evidence providers | G04 |
@@ -30,8 +30,8 @@ domain foundation for every later goal.
 evidence outside model context with explicit source and validity metadata.
 
 For each candidate, resolve repository identity, HEAD, blame, introduction
-commit, and focused history. Store raw artifacts by content hash with source,
-retrieval time, and repository provenance. Add immutable-artifact reuse and
+commit, and focused history. Store raw artifacts by content hash with source and
+repository provenance. Add immutable-artifact reuse and
 repository-state invalidation. Advances OUT-02 and SCN-05.
 
 Expected completion evidence: fixture repositories demonstrate rename-aware
@@ -64,6 +64,10 @@ selective artifact retrieval, checkpoint/resume, per-node token accounting, and
 adaptive evidence expansion. It must distinguish facts, inferences,
 contradictions, unknowns, and rejected hypotheses. Advances OUT-02, OUT-03,
 SCN-03, and SCN-04.
+
+G02's blame-backed `introduction_commit` is a provenance lead, not proof of the
+first semantic rationale. G04 must retain that distinction and carry shallow or
+otherwise incomplete Git history forward as an explicit unknown.
 
 Expected completion evidence: an interrupted fixture investigation resumes;
 unchanged artifacts are not fetched twice; no graph prompt contains an entire

@@ -1,6 +1,6 @@
 # G02 — Provenance and content-addressed artifacts
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G01
 
 ## Purpose
@@ -157,3 +157,21 @@ When all criteria pass:
    its deterministic detection work.
 4. Keep G03 `proposed`; do not begin it without user authorization.
 5. End the cycle report with a suggested commit message based only on G02 work.
+
+## Completion evidence
+
+Completed on 2026-08-28.
+
+| Criterion | Result |
+| --- | --- |
+| G02-AC01 | `test_collects_rename_aware_provenance` verifies HEAD, blame, the best-supported introduction commit, source, focused-history, and patch artifacts. |
+| G02-AC02 | The rename fixture starts as `test_legacy.py`, moves to `test_markers.py`, and verifies that the stored `--follow` history retains the old path. |
+| G02-AC03 | `test_artifact_integrity_failure_is_detected` corrupts a stored artifact, verifies its SHA-256 failure, and receives a structured `artifact_integrity_error` on recollection. |
+| G02-AC04 | `test_repeated_collection_reuses_artifacts_and_view` verifies byte-identical JSON with unchanged artifact and view write counts. |
+| G02-AC05 | `test_changed_head_recomputes_view_and_reuses_immutable_artifacts` commits unrelated documentation, verifies a new view and unchanged raw-artifact writes. |
+| G02-AC06 | The side-effect test blocks sockets and compares target Git status plus content hashes; the CLI and direct API reject a store inside the analyzed repository. |
+| G02-AC07 | `test_shallow_history_retains_source_evidence_with_uncertainty` uses a depth-one local clone and preserves source evidence while reporting `shallow_history`. |
+| G02-AC08 | README documents the CLI, external store, schemas, reuse, invalidation, identity, shallow-history behavior, and non-recommendation boundary; CLI integration tests pass. |
+
+The next goal is [G03 — Broader deterministic collectors](G03-broader-deterministic-collectors.md),
+which remains proposed and has not been started.

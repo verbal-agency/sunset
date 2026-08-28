@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 from pathlib import Path, PurePosixPath
 import subprocess
 
@@ -100,16 +101,21 @@ class GitRepository:
         return tuple(sorted(selected))
 
     def read_text(self, path: str) -> str:
-        result = _run_git(self.root, "show", f"{self.head}:{path}")
-        if result.returncode != 0:
-            raise RepositoryError("git_show_failed", _git_error(result))
         try:
-            return result.stdout.decode("utf-8")
+            return self.read_bytes(path).decode("utf-8")
         except UnicodeDecodeError as exc:
             raise RepositoryError(
                 "source_decode_failed",
                 f"source is not valid UTF-8 at byte {exc.start}",
             ) from exc
+
+    def read_bytes(self, path: str) -> bytes:
+        """Return exact bytes for a path in the immutable HEAD snapshot."""
+
+        result = _run_git(self.root, "show", f"{self.head}:{path}")
+        if result.returncode != 0:
+            raise RepositoryError("git_show_failed", _git_error(result))
+        return result.stdout
 
     def blame_commit(self, path: str, line: int) -> str:
         result = _run_git(
@@ -130,6 +136,61 @@ class GitRepository:
         if not commit:
             raise RepositoryError("git_blame_failed", "Git blame returned no commit")
         return commit
+
+    def history_bytes(self, path: str, *, max_count: int = 25) -> bytes:
+        """Return bounded, rename-aware history for one repository path."""
+
+        result = _run_git(
+            self.root,
+            "log",
+            "--follow",
+            f"--max-count={max_count}",
+            "--format=%H%x00%P%x00%an%x00%ae%x00%aI%x00%s",
+            "--name-status",
+            self.head,
+            "--",
+            path,
+        )
+        if result.returncode != 0:
+            raise RepositoryError("git_history_failed", _git_error(result))
+        return result.stdout
+
+    def commit_patch_bytes(self, commit: str, path: str) -> bytes:
+        """Return the relevant patch for a committed provenance point."""
+
+        result = _run_git(
+            self.root,
+            "show",
+            "--format=fuller",
+            "--find-renames",
+            "--patch",
+            commit,
+            "--",
+            path,
+        )
+        if result.returncode != 0:
+            raise RepositoryError("git_patch_failed", _git_error(result))
+        return result.stdout
+
+    def repository_identity(self) -> tuple[str, str]:
+        """Return a deterministic origin identity without contacting a network."""
+
+        remote_result = _run_git(self.root, "config", "--get", "remote.origin.url")
+        if remote_result.returncode == 0:
+            remote = _decode(remote_result.stdout).strip()
+            if remote:
+                return "origin_remote", _canonical_remote(remote)
+        if remote_result.returncode not in {0, 1}:
+            raise RepositoryError("git_config_failed", _git_error(remote_result))
+
+        root_digest = hashlib.sha256(str(self.root).encode("utf-8")).hexdigest()
+        return "local_path_sha256", f"sha256:{root_digest}"
+
+    def is_shallow(self) -> bool:
+        result = _run_git(self.root, "rev-parse", "--is-shallow-repository")
+        if result.returncode != 0:
+            raise RepositoryError("git_shallow_check_failed", _git_error(result))
+        return _decode(result.stdout).strip() == "true"
 
     def _inside_target(self, path: str) -> bool:
         if not self.target_prefix:
@@ -165,3 +226,9 @@ def _git_error(result: subprocess.CompletedProcess[bytes]) -> str:
     message = _decode(result.stderr).strip()
     return message or f"Git exited with status {result.returncode}"
 
+
+def _canonical_remote(remote: str) -> str:
+    normalized = remote.rstrip("/")
+    if normalized.endswith(".git"):
+        normalized = normalized[:-4]
+    return normalized

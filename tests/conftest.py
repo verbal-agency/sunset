@@ -52,3 +52,45 @@ def repository_snapshot(repository: Path) -> dict[str, str]:
         snapshot[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
     return snapshot
 
+
+@pytest.fixture
+def renamed_repository(tmp_path: Path) -> Path:
+    repository = tmp_path / "renamed-repository"
+    (repository / "tests").mkdir(parents=True)
+    run_git(repository, "init", "-q")
+    run_git(repository, "config", "user.email", "sunset@example.test")
+    run_git(repository, "config", "user.name", "Sunset Tests")
+
+    legacy_path = repository / "tests" / "test_legacy.py"
+    legacy_path.write_text(
+        "import pytest\n\n\n@pytest.mark.xfail(reason=\"upstream issue #417\")\ndef test_compatibility():\n    pass\n",
+        encoding="utf-8",
+    )
+    run_git(repository, "add", ".")
+    run_git(repository, "commit", "-qm", "introduce compatibility marker")
+
+    run_git(repository, "mv", "tests/test_legacy.py", "tests/test_markers.py")
+    run_git(repository, "commit", "-qm", "rename compatibility test")
+
+    (repository / "README.md").write_text("# Fixture\n", encoding="utf-8")
+    run_git(repository, "add", "README.md")
+    run_git(repository, "commit", "-qm", "add unrelated documentation")
+    return repository
+
+
+@pytest.fixture
+def shallow_repository(renamed_repository: Path, tmp_path: Path) -> Path:
+    repository = tmp_path / "shallow-repository"
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "--quiet",
+            "--depth",
+            "1",
+            renamed_repository.as_uri(),
+            str(repository),
+        ],
+        check=True,
+    )
+    return repository
