@@ -4,10 +4,11 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G03 release deterministically discovers pytest skip and
+The current G04 release deterministically discovers pytest skip and
 expected-failure markers plus a deliberately narrow family of Python
 compatibility guards in a committed Git snapshot. It then records local Git
-provenance as immutable artifacts. It does not decide that any candidate is
+provenance as immutable artifacts and can assemble one candidate's bounded,
+local-only investigation ledger. It does not decide that any candidate is
 obsolete and does not modify the analyzed repository.
 
 ## Quick start
@@ -22,6 +23,7 @@ uv run sunset scan /path/to/repository --format json
 uv run sunset collect /path/to/repository --collector compatibility --format json
 uv run sunset provenance /path/to/repository --store /path/outside/repository --format json
 uv run sunset provenance /path/to/repository --collector compatibility --store /path/outside/repository --format json
+uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json
 ```
 
 Both commands return `0` for a complete result, `1` when useful output is
@@ -153,6 +155,33 @@ uncertainties. A candidate's `introduction_commit` is currently the
 blame-backed best-supported introduction point; it is not a claim that history
 proves the first ever semantic rationale.
 
+## Bounded local investigation
+
+G04 adds a LangGraph workflow for one explicitly selected candidate:
+
+```bash
+uv run sunset investigate /path/to/repository \
+  --candidate-id sunset-v1-... \
+  --store /path/to/sunset-artifacts \
+  --format json
+```
+
+It resumes automatically when the repository identity, committed `HEAD`,
+collector, candidate ID, and token-budget configuration identify a prior
+checkpoint. `--interrupt-after retrieve_core` is available for deterministic
+interruption testing; rerun without it to resume.
+
+The graph loads provenance, retrieves source and blame-patch evidence, records
+a structured ledger, retrieves focused history only when core evidence lacks a
+rationale cue, then finalizes `inconclusive`. Checkpoints and JSON include
+artifact IDs, compact ledger claims, open questions, and per-node *estimated*
+tokens. They never contain raw source, patches, or full history.
+
+No model is called in G04. Its byte-based token estimate enforces the default
+100,000-input/8,000-output budget and records a full-context comparison
+baseline. G05 owns external evidence and is the earliest stage that can
+classify an assumption as active, expired, or unknown.
+
 ## Scan JSON schema version 1
 
 ```json
@@ -182,12 +211,13 @@ relative path, qualified target name, marker kind, line, and column.
 
 ## Safety boundary and limitations
 
-G03 does not:
+G04 does not:
 
 - infer why a marker exists or whether its rationale expired;
 - access GitHub, release notes, models, embeddings, or the network;
 - execute test modules or evaluate dynamic marker arguments;
 - import target modules, resolve dependency versions, or evaluate guards;
+- call a model, contact external evidence providers, or classify expiry;
 - run tests, remove markers, create worktrees, or open pull requests;
 - write into the analyzed repository; the artifact store must be external;
 - support aliased imports, module-level `pytestmark`, parameter-level marks,
@@ -204,6 +234,7 @@ uv run pytest
 uv run sunset scan tests/fixtures/pytest_repo --format json
 uv run sunset collect tests/fixtures/pytest_repo --collector compatibility --format json
 uv run sunset provenance tests/fixtures/pytest_repo --store /tmp/sunset-artifacts --format json
+uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /tmp/sunset-artifacts --format json
 ```
 
 The fixture directory is part of the Sunset repository, so both fixture commands

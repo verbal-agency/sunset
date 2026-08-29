@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 from sunset.cli import main
+from sunset.scanner import scan_repository
 
 
 def test_cli_emits_normalized_json_and_partial_failure_status(
@@ -100,3 +101,23 @@ def test_compatibility_cli_and_provenance_selection(
     assert len(collection["candidates"]) == 6
     assert provenance_exit == 0
     assert len(provenance["candidates"]) == 6
+
+
+def test_investigate_cli_emits_inconclusive_checkpointed_result(
+    renamed_repository: Path,
+    tmp_path: Path,
+    capsys,
+) -> None:
+    candidate_id = scan_repository(renamed_repository).candidates[0].candidate_id
+    exit_code = main(
+        [
+            "investigate", str(renamed_repository), "--candidate-id", candidate_id,
+            "--store", str(tmp_path / "store"),
+        ]
+    )
+    payload = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 0
+    assert payload["status"] == "inconclusive"
+    assert payload["checkpoint_id"]
+    assert payload["token_usage"]

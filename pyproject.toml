@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Evidence-driven garbage collection for expired code rationale"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "langgraph>=1.2.11",
+]
 
 [project.scripts]
 sunset = "sunset.cli:entrypoint"
