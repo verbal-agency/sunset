@@ -94,3 +94,89 @@ def shallow_repository(renamed_repository: Path, tmp_path: Path) -> Path:
         check=True,
     )
     return repository
+
+
+@pytest.fixture
+def compatibility_repository(tmp_path: Path) -> Path:
+    """A committed snapshot with positive and deliberately excluded forms."""
+
+    repository = tmp_path / "compatibility-repository"
+    (repository / "src").mkdir(parents=True)
+    run_git(repository, "init", "-q")
+    run_git(repository, "config", "user.email", "sunset@example.test")
+    run_git(repository, "config", "user.name", "Sunset Tests")
+    (repository / "src" / "compatibility.py").write_text(
+        '''import sys
+import importlib.metadata
+from packaging.version import Version
+
+
+if sys.version_info < (3, 11):
+    from legacy_runtime import Parser
+else:
+    from modern_runtime import Parser
+
+
+if Version(importlib.metadata.version("upstream-lib")) < Version("2.4"):
+    from legacy_client import Client
+else:
+    from modern_client import Client
+
+
+if importlib.metadata.version("direct-lib") >= "5.0":
+    from modern_direct import Tool
+else:
+    from legacy_direct import Tool
+
+
+try:
+    from modern_api import Widget
+except ImportError:
+    from legacy_api import Widget
+
+
+try:
+    from optional_api import Tool as OptionalTool
+except ModuleNotFoundError:
+    from legacy_tool import Tool as OptionalTool
+
+
+# A permanent policy branch has no alternative import path.
+if sys.version_info < (3, 8):
+    raise RuntimeError("Python 3.8 is required")
+
+
+# Dynamic/aliased/general forms are intentionally not recognized.
+minimum = (3, 12)
+if sys.version_info < minimum:
+    from dynamic_old import Item
+else:
+    from dynamic_new import Item
+
+from importlib.metadata import version as distribution_version
+if distribution_version("aliased-lib") < "1.0":
+    from alias_old import Item
+else:
+    from alias_new import Item
+
+if sys.platform == "win32":
+    from platform_old import Item
+else:
+    from platform_new import Item
+
+if sys.version_info < (3, 13):
+    if sys.version_info < (3, 12):
+        from nested_old import Item
+    else:
+        from nested_middle import Item
+else:
+    from nested_new import Item
+''',
+        encoding="utf-8",
+    )
+    run_git(repository, "add", ".")
+    run_git(repository, "commit", "-qm", "add compatibility fixtures")
+    (repository / "README.md").write_text("# Fixture\n", encoding="utf-8")
+    run_git(repository, "add", "README.md")
+    run_git(repository, "commit", "-qm", "add unrelated documentation")
+    return repository

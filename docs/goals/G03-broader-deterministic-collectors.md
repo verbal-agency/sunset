@@ -1,6 +1,6 @@
 # G03 — Broader deterministic collectors
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G02
 
 ## Purpose
@@ -143,3 +143,26 @@ When all criteria pass:
    investigation memory.
 4. Mark G04 `proposed`; do not begin it without user authorization.
 5. End the cycle report with a suggested commit message based only on G03 work.
+
+## Completion evidence
+
+- `tests/test_compatibility.py` covers canonical runtime and dependency guards,
+  `ImportError` and `ModuleNotFoundError` fallbacks, nested static guards,
+  dynamic values, aliases, ordinary platform branches, and policy-only
+  branches. It also checks source spans, candidate stability, no network or
+  target mutation, and G02 artifact/view reuse.
+- `tests/test_cli.py` verifies `sunset collect --collector compatibility` and
+  `sunset provenance --collector compatibility`; the original `sunset scan`
+  tests remain the G01 compatibility regression.
+- The collector reads only Python files from committed `HEAD`, parses them with
+  `ast`, and obtains provenance via the existing G02 store. It makes no model,
+  network, import, dependency-resolution, or target-repository write call.
+
+## G04 handoff
+
+The compatibility candidate contract supplies explicit guard condition, source
+spans, import alternatives, HEAD, and blame provenance. G04 should treat these
+as structured facts and retain G02's limitation that a blame-backed
+`introduction_commit` is a lead, not proof of original semantic rationale.
+The bounded collector rejects aliases and dynamic expressions, so G04 must not
+silently widen this discovery contract while investigating a candidate.

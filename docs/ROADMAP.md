@@ -7,7 +7,7 @@ goal may be active.
 | --- | --- | --- | --- |
 | [G01](goals/G01-deterministic-scanner.md) | complete | Build the project foundation and deterministic pytest-marker scanner | None |
 | [G02](goals/G02-provenance-artifacts.md) | complete | Trace candidate provenance and persist content-addressed evidence | G01 |
-| [G03](goals/G03-broader-deterministic-collectors.md) | proposed | Collect dependency/version guards and compatibility shims deterministically | G02 |
+| [G03](goals/G03-broader-deterministic-collectors.md) | complete | Collect dependency/version guards and compatibility shims deterministically | G02 |
 | G04 | proposed | Investigate rationale with LangGraph and compact, checkpointed memory | G03 |
 | G05 | proposed | Verify external assumptions using replaceable evidence providers | G04 |
 | G06 | proposed | Validate candidate removal in an approved disposable sandbox | G05 |

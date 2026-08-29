@@ -4,10 +4,11 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G02 release deterministically discovers pytest skip and
-expected-failure markers in a committed Git snapshot, then records local Git
-provenance as immutable artifacts. It does not decide that a marker is obsolete
-and does not modify the analyzed repository.
+The current G03 release deterministically discovers pytest skip and
+expected-failure markers plus a deliberately narrow family of Python
+compatibility guards in a committed Git snapshot. It then records local Git
+provenance as immutable artifacts. It does not decide that any candidate is
+obsolete and does not modify the analyzed repository.
 
 ## Quick start
 
@@ -18,7 +19,9 @@ development environment so the verification toolchain is reproducible.
 ```bash
 uv sync --all-groups
 uv run sunset scan /path/to/repository --format json
+uv run sunset collect /path/to/repository --collector compatibility --format json
 uv run sunset provenance /path/to/repository --store /path/outside/repository --format json
+uv run sunset provenance /path/to/repository --collector compatibility --store /path/outside/repository --format json
 ```
 
 Both commands return `0` for a complete result, `1` when useful output is
@@ -69,10 +72,50 @@ G01 scans only files committed at `HEAD`:
 This model gives later investigation stages an immutable source boundary. G02
 adds local artifact storage without network or model calls.
 
+## Compatibility collector schema version 1
+
+`sunset collect --collector compatibility` is an additive collector family. It
+does not alter the schema-v1 output of `sunset scan`.
+
+It recognizes only these syntactic forms when both branches contain direct,
+concrete imports:
+
+```python
+if sys.version_info < (3, 11):
+    from legacy_runtime import Parser
+else:
+    from modern_runtime import Parser
+
+if Version(importlib.metadata.version("upstream-lib")) < Version("2.4"):
+    from legacy_client import Client
+else:
+    from modern_client import Client
+
+try:
+    from modern_api import Widget
+except ImportError:
+    from legacy_api import Widget
+```
+
+The dependency form also accepts the direct canonical
+`importlib.metadata.version("package") < "threshold"` shape. The output
+identifies its candidate family, exact guard/protected/fallback source spans,
+canonical subject, comparator, literal threshold when applicable, import
+targets, committed HEAD, and blame commit.
+
+The collector intentionally ignores aliases, computed thresholds or package
+names, reversed comparisons, general platform conditionals, policy-only
+branches, `try` blocks with extra control-flow clauses, and arbitrary code.
+It never imports target modules, evaluates a version expression, resolves the
+installed dependency graph, or infers whether a guard is obsolete. A candidate
+is a lead for a later investigation, not proof that a shim should be removed.
+
 ## Provenance and artifact storage
 
-`sunset provenance` performs the same committed-HEAD scan and records evidence
-for every discovered candidate:
+`sunset provenance` performs the selected committed-HEAD scan and records
+evidence for every discovered candidate. Its default collector remains
+`pytest`; use `--collector compatibility` for G03 candidates. For each it
+records:
 
 - source bytes at the scanned HEAD;
 - line blame and its best-supported introduction point;
@@ -139,11 +182,12 @@ relative path, qualified target name, marker kind, line, and column.
 
 ## Safety boundary and limitations
 
-G02 does not:
+G03 does not:
 
 - infer why a marker exists or whether its rationale expired;
 - access GitHub, release notes, models, embeddings, or the network;
 - execute test modules or evaluate dynamic marker arguments;
+- import target modules, resolve dependency versions, or evaluate guards;
 - run tests, remove markers, create worktrees, or open pull requests;
 - write into the analyzed repository; the artifact store must be external;
 - support aliased imports, module-level `pytestmark`, parameter-level marks,
@@ -158,6 +202,7 @@ and recorded available local Git evidence. It is not a removal recommendation.
 uv sync --all-groups
 uv run pytest
 uv run sunset scan tests/fixtures/pytest_repo --format json
+uv run sunset collect tests/fixtures/pytest_repo --collector compatibility --format json
 uv run sunset provenance tests/fixtures/pytest_repo --store /tmp/sunset-artifacts --format json
 ```
 

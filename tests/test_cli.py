@@ -78,3 +78,25 @@ def test_provenance_cli_rejects_store_inside_target(
 
     assert exit_code == 2
     assert payload["errors"][0]["kind"] == "artifact_store_inside_repository"
+
+
+def test_compatibility_cli_and_provenance_selection(
+    compatibility_repository: Path,
+    tmp_path: Path,
+    capsys,
+) -> None:
+    exit_code = main(["collect", str(compatibility_repository), "--collector", "compatibility"])
+    collection = json.loads(capsys.readouterr().out)
+    provenance_exit = main(
+        [
+            "provenance", str(compatibility_repository), "--collector", "compatibility",
+            "--store", str(tmp_path / "store"),
+        ]
+    )
+    provenance = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 0
+    assert collection["collector"] == "compatibility"
+    assert len(collection["candidates"]) == 6
+    assert provenance_exit == 0
+    assert len(provenance["candidates"]) == 6

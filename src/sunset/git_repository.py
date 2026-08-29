@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from collections.abc import Callable
 import hashlib
 from pathlib import Path, PurePosixPath
 import subprocess
@@ -81,6 +82,14 @@ class GitRepository:
         return cls(root=root, target_prefix=target_prefix, head=_decode(head_result.stdout).strip())
 
     def list_test_files(self) -> tuple[str, ...]:
+        return self._list_files(_is_test_file)
+
+    def list_python_files(self) -> tuple[str, ...]:
+        """List committed Python files below the requested target."""
+
+        return self._list_files(_is_python_file)
+
+    def _list_files(self, predicate: Callable[[str], bool]) -> tuple[str, ...]:
         result = _run_git(
             self.root,
             "ls-tree",
@@ -96,7 +105,7 @@ class GitRepository:
         selected = [
             path
             for path in paths
-            if path and self._inside_target(path) and _is_test_file(path)
+            if path and self._inside_target(path) and predicate(path)
         ]
         return tuple(sorted(selected))
 
@@ -204,6 +213,11 @@ def _is_test_file(path: str) -> bool:
         return False
     name = pure_path.name
     return name.endswith(".py") and (name.startswith("test_") or name.endswith("_test.py"))
+
+
+def _is_python_file(path: str) -> bool:
+    pure_path = PurePosixPath(path)
+    return not EXCLUDED_PATH_PARTS.intersection(pure_path.parts) and path.endswith(".py")
 
 
 def _run_git(cwd: Path, *args: str) -> subprocess.CompletedProcess[bytes]:

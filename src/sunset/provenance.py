@@ -5,10 +5,11 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from collections.abc import Callable
+from typing import Protocol
 
 from sunset.artifact_store import ArtifactStore, ArtifactStoreError
 from sunset.git_repository import GitRepository, RepositoryError
-from sunset.models import Candidate
 from sunset.provenance_models import (
     CandidateProvenance,
     ProvenanceError,
@@ -17,6 +18,21 @@ from sunset.provenance_models import (
 )
 from sunset.provenance_providers import ArtifactStoreProvider, GitProvenanceProvider
 from sunset.scanner import scan_repository
+from sunset.compatibility import scan_compatibility_repository
+
+
+class _ProvenanceCandidate(Protocol):
+    candidate_id: str
+    path: str
+    line: int
+    column: int
+    repository_head: str
+    blame_commit: str
+
+
+class _CandidateScanResult(Protocol):
+    candidates: tuple[_ProvenanceCandidate, ...]
+    errors: tuple[object, ...]
 
 
 def collect_provenance(
@@ -27,6 +43,28 @@ def collect_provenance(
 ) -> ProvenanceResult:
     """Collect and cache local Git provenance without modifying *target*."""
 
+    return _collect_provenance(target, store_path=store_path, artifact_store=artifact_store, scanner=scan_repository)
+
+
+def collect_compatibility_provenance(
+    target: str | Path,
+    *,
+    store_path: str | Path,
+    artifact_store: ArtifactStoreProvider | None = None,
+) -> ProvenanceResult:
+    """Collect G02-style provenance for compatibility candidates."""
+
+    return _collect_provenance(target, store_path=store_path, artifact_store=artifact_store, scanner=scan_compatibility_repository)
+
+
+def _collect_provenance(
+    target: str | Path,
+    *,
+    store_path: str | Path,
+    artifact_store: ArtifactStoreProvider | None,
+    scanner: Callable[[str | Path], _CandidateScanResult],
+) -> ProvenanceResult:
+
     repository = GitRepository.open(target)
     store: ArtifactStoreProvider = artifact_store or ArtifactStore(store_path)
     expected_store_root = Path(store_path).expanduser().resolve()
@@ -34,7 +72,7 @@ def collect_provenance(
         raise ValueError("injected artifact store does not match store_path")
     _assert_store_is_external(repository, store)
     identity_kind, identity_value = repository.repository_identity()
-    scan_result = scan_repository(target)
+    scan_result = scanner(target)
 
     errors = [
         ProvenanceError(
@@ -95,7 +133,7 @@ def collect_provenance(
 def _collect_candidate(
     repository: GitProvenanceProvider,
     store: ArtifactStoreProvider,
-    candidate: Candidate,
+    candidate: _ProvenanceCandidate,
     *,
     identity_kind: str,
     identity_value: str,
@@ -189,7 +227,7 @@ def _assert_store_is_external(
     )
 
 
-def _view_id(identity_kind: str, identity_value: str, candidate: Candidate) -> str:
+def _view_id(identity_kind: str, identity_value: str, candidate: _ProvenanceCandidate) -> str:
     key = "\0".join(
         (
             "sunset-provenance-view-v1",
