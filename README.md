@@ -4,13 +4,14 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G05 release deterministically discovers pytest skip and
+The current G06 release deterministically discovers pytest skip and
 expected-failure markers plus a deliberately narrow family of Python
 compatibility guards in a committed Git snapshot. It then records local Git
 provenance as immutable artifacts, assembles one candidate's bounded
 investigation ledger, and can classify explicitly cited external assumptions
-from recorded evidence. It does not decide that any candidate is obsolete and
-does not modify the analyzed repository.
+from recorded evidence. With explicit approval, it can validate one marker
+removal in a disposable local clone. It does not decide that any candidate is
+obsolete and does not modify the analyzed repository.
 
 ## Quick start
 
@@ -26,6 +27,7 @@ uv run sunset provenance /path/to/repository --store /path/outside/repository --
 uv run sunset provenance /path/to/repository --collector compatibility --store /path/outside/repository --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --evidence-mode recorded --recorded-evidence /path/to/responses.json --format json
+uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --approve --format json
 ```
 
 Both commands return `0` for a complete result, `1` when useful output is
@@ -213,6 +215,39 @@ remain `unknown`. A live release-note adapter is deliberately unavailable until
 it is configured, and it likewise returns `unknown`. Sunset never uses live
 network access by default.
 
+## Approved clone validation
+
+G06 can empirically test one selected pytest marker only after the person
+running Sunset grants approval:
+
+```bash
+uv run sunset validate /path/to/repository \
+  --candidate-id sunset-v1-... \
+  --store /path/to/sunset-artifacts \
+  --approve \
+  --repeat 2 \
+  --broader-command "python -m pytest -q"
+```
+
+Without `--approve`, Sunset returns `approval_required`; it creates no clone,
+runs no command, and writes no artifacts. With approval, it clones the
+repository locally into a temporary directory, pins the clone to the selected
+committed `HEAD`, removes only the selected `pytest.mark.xfail`, `skip`, or
+`skipif` AST decorator there, and runs the exact test target twice by default.
+Optional `--broader-command` values are split with shell-like quoting but run
+without a shell, in that clone only.
+
+Each approved run returns one of `confirmed`, `still_failing`, `flaky`,
+`environment_error`, or `inconclusive`; its output and a versioned environment
+manifest are content-addressed in the external store. `confirmed` means only
+that the configured clone experiment passed. It is not a removal recommendation
+and does not replace an approval or skeptical review.
+
+The disposable clone protects repository state, not the host: tests are still
+the target project's code. G06 does not install dependencies, start containers,
+or provide a network/security sandbox. Use commands you are willing to execute
+locally.
+
 ## Scan JSON schema version 1
 
 ```json
@@ -242,7 +277,7 @@ relative path, qualified target name, marker kind, line, and column.
 
 ## Safety boundary and limitations
 
-G05 does not:
+G06 does not:
 
 - infer why a marker exists or whether removal is safe;
 - make a network request unless `--evidence-mode live` is explicitly selected;
@@ -250,7 +285,9 @@ G05 does not:
 - import target modules, resolve dependency versions, or evaluate guards;
 - call a model or treat an issue state, release note, or assumption status as
   proof of safety;
-- run tests, remove markers, create worktrees, or open pull requests;
+- run a command or create a clone without `--approve`;
+- remove markers in the analyzed repository, create worktrees there, or open
+  pull requests;
 - write into the analyzed repository; the artifact store must be external;
 - support aliased imports, module-level `pytestmark`, parameter-level marks,
   custom collection patterns, non-pytest frameworks, or non-Python languages.
@@ -268,6 +305,7 @@ uv run sunset collect tests/fixtures/pytest_repo --collector compatibility --for
 uv run sunset provenance tests/fixtures/pytest_repo --store /tmp/sunset-artifacts --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /tmp/sunset-artifacts --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /tmp/sunset-artifacts --evidence-mode recorded --recorded-evidence tests/fixtures/evidence/recorded_responses.json --format json
+uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /tmp/sunset-artifacts --approve --format json
 ```
 
 The fixture directory is part of the Sunset repository, so both fixture commands

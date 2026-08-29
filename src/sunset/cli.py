@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from collections.abc import Sequence
+import shlex
 import sys
 
 from sunset.git_repository import RepositoryError
@@ -15,6 +16,8 @@ from sunset.investigation_models import InvestigationError, InvestigationResult,
 from sunset.provenance import collect_compatibility_provenance, collect_provenance
 from sunset.provenance_models import ProvenanceError, ProvenanceResult
 from sunset.scanner import scan_repository
+from sunset.validation import ValidationConfig, validate_candidate
+from sunset.validation_models import ValidationError, ValidationResult
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -78,6 +81,25 @@ def build_parser() -> argparse.ArgumentParser:
         help="recorded provider fixture; required for --evidence-mode recorded",
     )
     investigate_parser.add_argument("--format", choices=("json",), default="json")
+    validate_parser = subparsers.add_parser(
+        "validate",
+        help="run an approved marker-removal experiment in a disposable clone",
+    )
+    validate_parser.add_argument("repository", help="repository root or subdirectory")
+    validate_parser.add_argument("--candidate-id", required=True, help="pytest candidate ID from scan")
+    validate_parser.add_argument("--store", required=True, help="external artifact store")
+    validate_parser.add_argument(
+        "--collector", choices=("pytest", "compatibility"), default="pytest",
+        help="candidate family; only pytest is currently supported",
+    )
+    validate_parser.add_argument("--approve", action="store_true", help="explicitly approve clone-only marker removal and test execution")
+    validate_parser.add_argument("--repeat", type=int, default=2, help="narrow-test repetitions (default: 2)")
+    validate_parser.add_argument("--timeout-seconds", type=int, default=60)
+    validate_parser.add_argument(
+        "--broader-command", action="append", default=[], metavar="COMMAND",
+        help="optional shell-free command to run in the disposable clone; repeatable",
+    )
+    validate_parser.add_argument("--format", choices=("json",), default="json")
     provenance_parser.add_argument(
         "--store",
         required=True,
@@ -186,6 +208,50 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         sys.stdout.write(result.to_json())
         return 0 if result.status == "inconclusive" else 1
+
+    if args.command == "validate":
+        try:
+            commands = tuple(tuple(shlex.split(value)) for value in args.broader_command)
+            result = validate_candidate(
+                args.repository,
+                store_path=args.store,
+                candidate_id=args.candidate_id,
+                approved=args.approve,
+                collector=args.collector,
+                config=ValidationConfig(
+                    repeat_count=args.repeat,
+                    broader_commands=commands,
+                    timeout_seconds=args.timeout_seconds,
+                ),
+            )
+        except RepositoryError as exc:
+            result = ValidationResult(
+                approved=args.approve,
+                candidate_id=args.candidate_id,
+                collector=args.collector,
+                environment=None,
+                errors=(ValidationError(exc.code, exc.message),),
+                repository_head="",
+                runs=(),
+                status="inconclusive",
+            )
+            sys.stdout.write(result.to_json())
+            return 2
+        except ValueError as exc:
+            result = ValidationResult(
+                approved=args.approve,
+                candidate_id=args.candidate_id,
+                collector=args.collector,
+                environment=None,
+                errors=(ValidationError("invalid_validation_config", str(exc)),),
+                repository_head="",
+                runs=(),
+                status="inconclusive",
+            )
+            sys.stdout.write(result.to_json())
+            return 2
+        sys.stdout.write(result.to_json())
+        return 0 if result.status in {"confirmed", "still_failing", "flaky", "inconclusive"} else 1
 
     raise AssertionError(f"unhandled command: {args.command}")
 
