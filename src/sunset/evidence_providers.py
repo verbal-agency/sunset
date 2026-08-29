@@ -20,6 +20,25 @@ class EvidenceProvider(Protocol):
         """Resolve one explicit reference without turning it into an authority."""
 
 
+class UnavailableEvidenceProvider:
+    """Make an incomplete provider configuration visible as structured uncertainty."""
+
+    name = "unavailable"
+
+    def __init__(self, summary: str, error_kind: str) -> None:
+        self.summary = summary
+        self.error_kind = error_kind
+
+    def resolve(self, reference: ExternalReference, store: ArtifactStore) -> ProviderResolution:
+        return ProviderResolution(
+            reference,
+            "failed",
+            self.summary,
+            reference.locator,
+            error_kind=self.error_kind,
+        )
+
+
 class RecordedEvidenceProvider:
     """A deterministic provider backed by a checked-in JSON fixture file."""
 
@@ -29,15 +48,19 @@ class RecordedEvidenceProvider:
         self.fixture_path = Path(fixture_path).expanduser().resolve()
         try:
             value = json.loads(self.fixture_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as exc:
+            if not isinstance(value, dict) or not isinstance(value.get("responses"), list):
+                raise ValueError("fixture must contain a responses list")
+            records: dict[tuple[str, str], dict[str, object]] = {}
+            for item in value["responses"]:
+                if not isinstance(item, dict) or "provider" not in item or "locator" not in item:
+                    raise ValueError("each fixture response needs provider and locator")
+                records[(str(item["provider"]), str(item["locator"]))] = item
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
             self._records: dict[tuple[str, str], dict[str, object]] = {}
             self._load_error = str(exc)
         else:
             self._load_error = None
-            self._records = {
-                (str(item["provider"]), str(item["locator"])): item
-                for item in value.get("responses", [])
-            }
+            self._records = records
 
     def resolve(self, reference: ExternalReference, store: ArtifactStore) -> ProviderResolution:
         if self._load_error is not None:
@@ -123,6 +146,21 @@ class UnavailableLiveReleaseNoteProvider:
             reference, "failed", "No live release-note provider is configured.", reference.locator,
             error_kind="provider_unavailable",
         )
+
+
+class LiveEvidenceProvider:
+    """Dispatch explicit references to live providers without a default request path."""
+
+    name = "live"
+
+    def __init__(self, github_token: str | None = None) -> None:
+        self.github = LiveGitHubProvider(github_token)
+        self.release_notes = UnavailableLiveReleaseNoteProvider()
+
+    def resolve(self, reference: ExternalReference, store: ArtifactStore) -> ProviderResolution:
+        if reference.provider == "github":
+            return self.github.resolve(reference, store)
+        return self.release_notes.resolve(reference, store)
 
 
 def _github_api_url(locator: str) -> str | None:

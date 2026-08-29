@@ -13,6 +13,13 @@ from typing import Any, Literal, NotRequired, TypedDict
 from langgraph.graph import END, START, StateGraph
 
 from sunset.artifact_store import ArtifactStore
+from sunset.evidence_providers import (
+    LiveEvidenceProvider,
+    RecordedEvidenceProvider,
+    UnavailableEvidenceProvider,
+)
+from sunset.external_evidence import assess_assumption, extract_external_references
+from sunset.external_evidence_models import ExternalReference
 from sunset.git_repository import GitRepository
 from sunset.investigation_models import (
     INVESTIGATION_SCHEMA_VERSION,
@@ -29,7 +36,14 @@ from sunset.scanner import scan_repository
 from sunset.compatibility import scan_compatibility_repository
 
 
-_STAGES = ("load_provenance", "retrieve_core", "summarize_core", "expand_history", "finalize")
+_STAGES = (
+    "load_provenance",
+    "retrieve_core",
+    "summarize_core",
+    "expand_history",
+    "verify_external",
+    "finalize",
+)
 _RATIONALE_PATTERN = re.compile(
     r"(?:issue\s*#?\d+|bug\s*#?\d+|workaround|compatib|temporary|upstream|reason)",
     re.IGNORECASE,
@@ -41,6 +55,8 @@ class InvestigationConfig:
     max_input_tokens: int = 100_000
     max_output_tokens: int = 8_000
     interrupt_after: str | None = None
+    evidence_mode: Literal["offline", "recorded", "live"] = "offline"
+    recorded_fixture_path: str | None = None
 
     def fingerprint(self) -> str:
         value = json.dumps(
@@ -48,6 +64,8 @@ class InvestigationConfig:
                 "schema_version": INVESTIGATION_SCHEMA_VERSION,
                 "max_input_tokens": self.max_input_tokens,
                 "max_output_tokens": self.max_output_tokens,
+                "evidence_mode": self.evidence_mode,
+                "recorded_fixture_digest": _recorded_fixture_digest(self.recorded_fixture_path),
             },
             sort_keys=True,
             separators=(",", ":"),
@@ -74,6 +92,9 @@ class _State(TypedDict):
     checkpoint_ref: str
     needs_history: bool
     rationale_cues: list[str]
+    external_references: list[dict[str, Any]]
+    external_resolutions: list[dict[str, Any]]
+    assumption_status: str
 
 
 def investigate_candidate(
@@ -85,7 +106,7 @@ def investigate_candidate(
     config: InvestigationConfig | None = None,
     artifact_store: ArtifactStore | None = None,
 ) -> InvestigationResult:
-    """Run or resume one bounded investigation without external evidence."""
+    """Run or resume one bounded investigation with optional external evidence."""
 
     config = config or InvestigationConfig()
     if config.interrupt_after is not None and config.interrupt_after not in _STAGES:
@@ -117,6 +138,9 @@ def investigate_candidate(
             "checkpoint_ref": "",
             "needs_history": False,
             "rationale_cues": [],
+            "external_references": [],
+            "external_resolutions": [],
+            "assumption_status": "unknown",
         }
     else:
         state["status"] = "running"
@@ -133,6 +157,7 @@ class _InvestigationRunner:
         self.target = target
         self.store = store
         self.config = config
+        self.provider = _provider_for(config)
 
     def load_provenance(self, state: _State) -> _State:
         collector = state["collector"]
@@ -236,15 +261,78 @@ class _InvestigationRunner:
 
     def expand_history(self, state: _State) -> _State:
         if not state["needs_history"]:
-            return self._finish(state, "expand_history", "finalize", {})
+            return self._finish(state, "expand_history", "verify_external", {})
         provenance = _provenance_from_state(state)
         history = next(item for item in provenance.artifacts if item.source_kind == "focused_history")
         return self._retrieve(
             state,
             "expand_history",
-            "finalize",
+            "verify_external",
             [history],
             "adaptive rationale-history expansion",
+        )
+
+    def verify_external(self, state: _State) -> _State:
+        references = tuple(ExternalReference.from_dict(item) for item in state["external_references"])
+        assessment = assess_assumption(references, self.provider, self.store)
+        entries = list(state["ledger"])
+        selected = list(state["selected_evidence"])
+        raw_bytes = state["raw_artifact_bytes"]
+        for resolution in assessment.resolutions:
+            evidence_ids: tuple[str, ...] = ()
+            if resolution.artifact is not None:
+                evidence_ids = (resolution.artifact.artifact_id,)
+                raw_bytes += resolution.artifact.byte_length
+                if not any(item["artifact_id"] == resolution.artifact.artifact_id for item in selected):
+                    selected.append(
+                        asdict(
+                            EvidenceSelection(
+                                artifact_id=resolution.artifact.artifact_id,
+                                byte_length=resolution.artifact.byte_length,
+                                source_kind=resolution.artifact.source_kind,
+                                reason="external assumption verification",
+                            )
+                        )
+                    )
+            kind = "fact" if resolution.outcome.startswith("supports_") else "unknown"
+            entries.append(_ledger(state, kind, resolution.summary, evidence_ids, "verify_external"))
+        if assessment.status == "unknown" and {
+            item.outcome for item in assessment.resolutions
+        } >= {"supports_active", "supports_expired"}:
+            entries.append(
+                _ledger(
+                    state,
+                    "contradiction",
+                    "External evidence supports both active and expired interpretations; no assumption status was selected.",
+                    tuple(
+                        item.artifact.artifact_id
+                        for item in assessment.resolutions
+                        if item.artifact is not None
+                    ),
+                    "verify_external",
+                )
+            )
+        if not references:
+            entries.append(
+                _ledger(
+                    state,
+                    "unknown",
+                    "No explicit GitHub issue, pull-request, release-note, or changelog reference was found in selected local evidence.",
+                    (),
+                    "verify_external",
+                )
+            )
+        return self._finish(
+            state,
+            "verify_external",
+            "finalize",
+            {
+                "ledger": entries,
+                "selected_evidence": selected,
+                "raw_artifact_bytes": raw_bytes,
+                "external_resolutions": [item.to_dict() for item in assessment.resolutions],
+                "assumption_status": assessment.status,
+            },
         )
 
     def finalize(self, state: _State) -> _State:
@@ -260,7 +348,7 @@ class _InvestigationRunner:
             _ledger(
                 state,
                 "unknown",
-                "External issue, release-note, and dependency evidence has not been verified in this local-only investigation.",
+                "Assumption status does not prove that removal is safe; isolated validation and human approval remain required.",
                 (),
                 "finalize",
             ),
@@ -278,6 +366,7 @@ class _InvestigationRunner:
         selected = list(state["selected_evidence"])
         raw_bytes = state["raw_artifact_bytes"]
         cues = list(state["rationale_cues"])
+        external_references = list(state["external_references"])
         for reference in references:
             if any(item["artifact_id"] == reference.artifact_id for item in selected):
                 continue
@@ -287,6 +376,11 @@ class _InvestigationRunner:
                 for cue in _rationale_cues((data.decode("utf-8", errors="replace"),)):
                     if cue not in cues:
                         cues.append(cue)
+            for external_reference in extract_external_references(
+                (data.decode("utf-8", errors="replace"),)
+            ):
+                if external_reference.to_dict() not in external_references:
+                    external_references.append(external_reference.to_dict())
             selected.append(
                 asdict(
                     EvidenceSelection(
@@ -305,6 +399,7 @@ class _InvestigationRunner:
                 "selected_evidence": selected,
                 "raw_artifact_bytes": raw_bytes,
                 "rationale_cues": cues[:3],
+                "external_references": external_references,
             },
         )
 
@@ -350,6 +445,7 @@ def _build_graph(runner: _InvestigationRunner):
     graph.add_node("retrieve_core", runner.retrieve_core)
     graph.add_node("summarize_core", runner.summarize_core)
     graph.add_node("expand_history", runner.expand_history)
+    graph.add_node("verify_external", runner.verify_external)
     graph.add_node("finalize", runner.finalize)
     graph.add_conditional_edges(START, _next_node, {stage: stage for stage in _STAGES})
     for stage in _STAGES:
@@ -384,6 +480,29 @@ def _run_id(
         )
     )
     return hashlib.sha256(value.encode("utf-8")).hexdigest()[:24]
+
+
+def _recorded_fixture_digest(path: str | None) -> str | None:
+    if path is None:
+        return None
+    try:
+        data = Path(path).expanduser().read_bytes()
+    except OSError:
+        return f"unavailable:{Path(path).expanduser()}"
+    return hashlib.sha256(data).hexdigest()
+
+
+def _provider_for(config: InvestigationConfig):
+    if config.evidence_mode == "recorded":
+        if config.recorded_fixture_path is None:
+            return UnavailableEvidenceProvider(
+                "Recorded evidence mode requires --recorded-evidence.",
+                "recorded_fixture_required",
+            )
+        return RecordedEvidenceProvider(config.recorded_fixture_path)
+    if config.evidence_mode == "live":
+        return LiveEvidenceProvider()
+    return None
 
 
 def _checkpoint_id(run_id: str, stage: str) -> str:
@@ -425,6 +544,8 @@ def _working_memory(state: _State) -> bytes:
         "ledger": state["ledger"],
         "open_questions": state["open_questions"],
         "selected_evidence": state["selected_evidence"],
+        "external_references": state["external_references"],
+        "assumption_status": state["assumption_status"],
     }
     return _json_bytes(compact)
 
@@ -457,6 +578,7 @@ def _result_from_state(state: _State) -> InvestigationResult:
         raw_artifact_bytes=state["raw_artifact_bytes"],
     )
     return InvestigationResult(
+        assumption_status=state["assumption_status"],
         candidate_id=state["candidate_id"],
         checkpoint_id=state["checkpoint_ref"],
         collector=state["collector"],

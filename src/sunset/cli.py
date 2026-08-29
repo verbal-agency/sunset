@@ -57,7 +57,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     investigate_parser = subparsers.add_parser(
         "investigate",
-        help="run or resume one bounded local-only rationale investigation",
+        help="run or resume one bounded rationale investigation",
     )
     investigate_parser.add_argument("repository", help="repository root or subdirectory")
     investigate_parser.add_argument("--candidate-id", required=True, help="candidate ID from scan or collect")
@@ -66,9 +66,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="candidate family (default: pytest)",
     )
     investigate_parser.add_argument("--store", required=True, help="external artifact and checkpoint store")
-    investigate_parser.add_argument("--interrupt-after", choices=("load_provenance", "retrieve_core", "summarize_core", "expand_history", "finalize"))
+    investigate_parser.add_argument("--interrupt-after", choices=("load_provenance", "retrieve_core", "summarize_core", "expand_history", "verify_external", "finalize"))
     investigate_parser.add_argument("--max-input-tokens", type=int, default=100_000)
     investigate_parser.add_argument("--max-output-tokens", type=int, default=8_000)
+    investigate_parser.add_argument(
+        "--evidence-mode", choices=("offline", "recorded", "live"), default="offline",
+        help="external evidence mode; offline makes no requests (default: offline)",
+    )
+    investigate_parser.add_argument(
+        "--recorded-evidence", metavar="FIXTURE.json",
+        help="recorded provider fixture; required for --evidence-mode recorded",
+    )
     investigate_parser.add_argument("--format", choices=("json",), default="json")
     provenance_parser.add_argument(
         "--store",
@@ -154,10 +162,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                     max_input_tokens=args.max_input_tokens,
                     max_output_tokens=args.max_output_tokens,
                     interrupt_after=args.interrupt_after,
+                    evidence_mode=args.evidence_mode,
+                    recorded_fixture_path=args.recorded_evidence,
                 ),
             )
         except RepositoryError as exc:
             result = InvestigationResult(
+                assumption_status="unknown",
                 candidate_id=args.candidate_id,
                 checkpoint_id="",
                 collector=args.collector,

@@ -121,3 +121,24 @@ def test_investigate_cli_emits_inconclusive_checkpointed_result(
     assert payload["status"] == "inconclusive"
     assert payload["checkpoint_id"]
     assert payload["token_usage"]
+
+
+def test_investigate_cli_exposes_explicit_recorded_evidence_mode(
+    renamed_repository: Path,
+    tmp_path: Path,
+    capsys,
+) -> None:
+    candidate_id = scan_repository(renamed_repository).candidates[0].candidate_id
+    fixture = Path(__file__).parent / "fixtures" / "evidence" / "recorded_responses.json"
+    exit_code = main(
+        [
+            "investigate", str(renamed_repository), "--candidate-id", candidate_id,
+            "--store", str(tmp_path / "store"),
+            "--evidence-mode", "recorded", "--recorded-evidence", str(fixture),
+        ]
+    )
+    payload = json.loads(capsys.readouterr().out)
+
+    assert exit_code == 0
+    assert payload["assumption_status"] == "unknown"
+    assert payload["status"] == "inconclusive"

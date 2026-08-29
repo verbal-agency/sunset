@@ -4,12 +4,13 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G04 release deterministically discovers pytest skip and
+The current G05 release deterministically discovers pytest skip and
 expected-failure markers plus a deliberately narrow family of Python
 compatibility guards in a committed Git snapshot. It then records local Git
-provenance as immutable artifacts and can assemble one candidate's bounded,
-local-only investigation ledger. It does not decide that any candidate is
-obsolete and does not modify the analyzed repository.
+provenance as immutable artifacts, assembles one candidate's bounded
+investigation ledger, and can classify explicitly cited external assumptions
+from recorded evidence. It does not decide that any candidate is obsolete and
+does not modify the analyzed repository.
 
 ## Quick start
 
@@ -24,6 +25,7 @@ uv run sunset collect /path/to/repository --collector compatibility --format jso
 uv run sunset provenance /path/to/repository --store /path/outside/repository --format json
 uv run sunset provenance /path/to/repository --collector compatibility --store /path/outside/repository --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json
+uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --evidence-mode recorded --recorded-evidence /path/to/responses.json --format json
 ```
 
 Both commands return `0` for a complete result, `1` when useful output is
@@ -155,7 +157,7 @@ uncertainties. A candidate's `introduction_commit` is currently the
 blame-backed best-supported introduction point; it is not a claim that history
 proves the first ever semantic rationale.
 
-## Bounded local investigation
+## Bounded investigation and external assumptions
 
 G04 adds a LangGraph workflow for one explicitly selected candidate:
 
@@ -173,14 +175,43 @@ interruption testing; rerun without it to resume.
 
 The graph loads provenance, retrieves source and blame-patch evidence, records
 a structured ledger, retrieves focused history only when core evidence lacks a
-rationale cue, then finalizes `inconclusive`. Checkpoints and JSON include
-artifact IDs, compact ledger claims, open questions, and per-node *estimated*
-tokens. They never contain raw source, patches, or full history.
+rationale cue, optionally verifies explicit external references, then finalizes
+`inconclusive`. Checkpoints and JSON include artifact IDs, compact ledger
+claims, `assumption_status`, open questions, and per-node *estimated* tokens.
+They never contain raw source, patches, history, or provider-response bodies.
 
-No model is called in G04. Its byte-based token estimate enforces the default
+No model is called. Its byte-based token estimate enforces the default
 100,000-input/8,000-output budget and records a full-context comparison
-baseline. G05 owns external evidence and is the earliest stage that can
-classify an assumption as active, expired, or unknown.
+baseline.
+
+G05 recognizes only explicit references in selected local evidence:
+
+```python
+@pytest.mark.xfail(reason="https://github.com/example/widget/issues/417")
+def test_widget():
+    ...
+
+
+@pytest.mark.xfail(
+    reason="changelog: widget==2.4 https://docs.example.test/widget/changelog"
+)
+def test_widget_on_old_version():
+    ...
+```
+
+`--evidence-mode offline` is the default: it performs no request and yields
+`assumption_status: "unknown"`. `--evidence-mode recorded` reads a local JSON
+fixture with a `responses` list; each response has `provider`, `locator`,
+`outcome` (`supports_active`, `supports_expired`, `missing`, or `failed`), and
+a concise `summary`. Its raw normalized response is content-addressed in the
+artifact store and the ledger retains only the artifact ID. This is the default
+mode for deterministic tests and demos.
+
+`--evidence-mode live` is explicit. GitHub issue and pull-request URLs require
+`GITHUB_TOKEN`; absent credentials, malformed responses, and request failures
+remain `unknown`. A live release-note adapter is deliberately unavailable until
+it is configured, and it likewise returns `unknown`. Sunset never uses live
+network access by default.
 
 ## Scan JSON schema version 1
 
@@ -211,13 +242,14 @@ relative path, qualified target name, marker kind, line, and column.
 
 ## Safety boundary and limitations
 
-G04 does not:
+G05 does not:
 
-- infer why a marker exists or whether its rationale expired;
-- access GitHub, release notes, models, embeddings, or the network;
+- infer why a marker exists or whether removal is safe;
+- make a network request unless `--evidence-mode live` is explicitly selected;
 - execute test modules or evaluate dynamic marker arguments;
 - import target modules, resolve dependency versions, or evaluate guards;
-- call a model, contact external evidence providers, or classify expiry;
+- call a model or treat an issue state, release note, or assumption status as
+  proof of safety;
 - run tests, remove markers, create worktrees, or open pull requests;
 - write into the analyzed repository; the artifact store must be external;
 - support aliased imports, module-level `pytestmark`, parameter-level marks,
@@ -235,6 +267,7 @@ uv run sunset scan tests/fixtures/pytest_repo --format json
 uv run sunset collect tests/fixtures/pytest_repo --collector compatibility --format json
 uv run sunset provenance tests/fixtures/pytest_repo --store /tmp/sunset-artifacts --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /tmp/sunset-artifacts --format json
+uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /tmp/sunset-artifacts --evidence-mode recorded --recorded-evidence tests/fixtures/evidence/recorded_responses.json --format json
 ```
 
 The fixture directory is part of the Sunset repository, so both fixture commands

@@ -16,6 +16,10 @@ _RELEASE_NOTE_REFERENCE = re.compile(
     r"(?:release[- ]?notes?|changelog)\s*[:=]\s*(https?://[^\s'\"),]+)",
     re.IGNORECASE,
 )
+_VERSIONED_RELEASE_NOTE_REFERENCE = re.compile(
+    r"(?:release[- ]?notes?|changelog)\s*[:=]\s*([A-Za-z0-9_.-]+)==([A-Za-z0-9_.+-]+)\s+(https?://[^\s'\"),]+)",
+    re.IGNORECASE,
+)
 
 
 def extract_external_references(values: tuple[str, ...]) -> tuple[ExternalReference, ...]:
@@ -25,8 +29,18 @@ def extract_external_references(values: tuple[str, ...]) -> tuple[ExternalRefere
     for value in values:
         for match in _GITHUB_REFERENCE.finditer(value):
             _append_once(references, ExternalReference("github", match.group(0).rstrip("/")))
+        versioned_locators: set[str] = set()
+        for match in _VERSIONED_RELEASE_NOTE_REFERENCE.finditer(value):
+            locator = match.group(3).rstrip("/")
+            versioned_locators.add(locator)
+            _append_once(
+                references,
+                ExternalReference("release_note", locator, match.group(1), match.group(2)),
+            )
         for match in _RELEASE_NOTE_REFERENCE.finditer(value):
-            _append_once(references, ExternalReference("release_note", match.group(1).rstrip("/")))
+            locator = match.group(1).rstrip("/")
+            if locator not in versioned_locators:
+                _append_once(references, ExternalReference("release_note", locator))
     return tuple(references)
 
 

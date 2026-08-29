@@ -21,18 +21,33 @@ class ExternalReference:
 
     provider: Literal["github", "release_note"]
     locator: str
+    dependency_name: str | None = None
+    dependency_version: str | None = None
 
     @property
     def reference_id(self) -> str:
-        digest = hashlib.sha256(f"{self.provider}\0{self.locator}".encode("utf-8")).hexdigest()
+        digest = hashlib.sha256(
+            f"{self.provider}\0{self.locator}\0{self.dependency_name}\0{self.dependency_version}".encode("utf-8")
+        ).hexdigest()
         return f"external-ref-v{EXTERNAL_EVIDENCE_SCHEMA_VERSION}-{digest[:20]}"
 
-    def to_dict(self) -> dict[str, str]:
-        return {"provider": self.provider, "locator": self.locator, "reference_id": self.reference_id}
+    def to_dict(self) -> dict[str, str | None]:
+        return {
+            "provider": self.provider,
+            "locator": self.locator,
+            "dependency_name": self.dependency_name,
+            "dependency_version": self.dependency_version,
+            "reference_id": self.reference_id,
+        }
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> ExternalReference:
-        return cls(provider=value["provider"], locator=str(value["locator"]))
+        return cls(
+            provider=value["provider"],
+            locator=str(value["locator"]),
+            dependency_name=value.get("dependency_name"),
+            dependency_version=value.get("dependency_version"),
+        )
 
 
 @dataclass(frozen=True, slots=True)

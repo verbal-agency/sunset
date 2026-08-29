@@ -1,4 +1,4 @@
-"""Versioned models for a bounded, local-only Sunset investigation."""
+"""Versioned models for a bounded Sunset investigation."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import json
 from typing import Any
 
 
-INVESTIGATION_SCHEMA_VERSION = "1"
+INVESTIGATION_SCHEMA_VERSION = "2"
 CLAIM_KINDS = frozenset({"fact", "inference", "contradiction", "unknown", "rejected_hypothesis"})
 
 
@@ -71,6 +71,7 @@ class InvestigationError:
 
 @dataclass(frozen=True, slots=True)
 class InvestigationResult:
+    assumption_status: str
     candidate_id: str
     checkpoint_id: str
     collector: str
@@ -87,6 +88,7 @@ class InvestigationResult:
 
     def to_dict(self) -> dict[str, Any]:
         return {
+            "assumption_status": self.assumption_status,
             "candidate_id": self.candidate_id,
             "checkpoint_id": self.checkpoint_id,
             "collector": self.collector,

@@ -1,0 +1,29 @@
+{
+  "responses": [
+    {
+      "locator": "https://github.com/sunset-fixtures/widget/issues/101",
+      "outcome": "supports_expired",
+      "provider": "github",
+      "summary": "Issue 101 is closed with the upstream fix released."
+    },
+    {
+      "locator": "https://github.com/sunset-fixtures/widget/issues/102",
+      "outcome": "supports_active",
+      "provider": "github",
+      "summary": "Issue 102 remains open upstream."
+    },
+    {
+      "locator": "https://docs.sunset-fixtures.test/widget/changelog",
+      "outcome": "supports_active",
+      "provider": "release_note",
+      "summary": "The recorded changelog still lists the affected behavior."
+    },
+    {
+      "locator": "https://github.com/sunset-fixtures/widget/issues/104",
+      "outcome": "failed",
+      "provider": "github",
+      "summary": "The recorded provider response failed.",
+      "error_kind": "recorded_timeout"
+    }
+  ]
+}

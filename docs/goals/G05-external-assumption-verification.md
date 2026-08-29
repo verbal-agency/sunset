@@ -1,6 +1,6 @@
 # G05 — External assumption verification
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G04
 
 ## Purpose
@@ -78,3 +78,19 @@ and classify only the assumption status as `active`, `expired`, or `unknown`.
 | G05-AC03 | Artifact reuse and derived-view invalidation tests |
 | G05-AC04 | Negative tests for removal/sandbox actions |
 | G05-AC05 | CLI JSON and documentation review |
+
+## Completion evidence
+
+| Criterion | Verified evidence |
+| --- | --- |
+| G05-AC01 | `tests/test_external_evidence.py` records fixed, open, missing, contradictory, malformed, and failed provider cases; successful results assert content-addressed artifact references. |
+| G05-AC02 | The same test module covers unavailable `GITHUB_TOKEN`, an injected live `URLError`, an absent recorded-fixture configuration, and retention of local fact claims. |
+| G05-AC03 | `test_changed_recorded_input_invalidates_the_view_but_reuses_identical_artifact` proves same-input reuse, fixture-fingerprint invalidation, immutable-artifact reuse, and new derived views. |
+| G05-AC04 | `test_investigation_records_external_artifact_and_remains_inconclusive` asserts no removal recommendation and confirms the target repository snapshot is unchanged. |
+| G05-AC05 | `tests/test_cli.py` exercises explicit recorded mode and JSON `assumption_status`; the README documents offline, recorded, and opt-in live behavior. |
+
+Final verification: `uv lock --check`, `uv run --locked pytest -q` (44 passed),
+`git diff --check`, and a direct recorded-mode `sunset investigate` run all
+passed. The direct CLI result remained `inconclusive` with
+`assumption_status: "unknown"` when its selected local evidence had no explicit
+provider reference.
