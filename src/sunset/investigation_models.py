@@ -106,3 +106,32 @@ class InvestigationResult:
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> InvestigationResult:
+        baseline = value["token_baseline"]
+        return cls(
+            assumption_status=str(value["assumption_status"]),
+            candidate_id=str(value["candidate_id"]),
+            checkpoint_id=str(value["checkpoint_id"]),
+            collector=str(value["collector"]),
+            errors=tuple(InvestigationError(**item) for item in value["errors"]),
+            ledger=tuple(
+                LedgerEntry(
+                    claim_id=str(item["claim_id"]),
+                    kind=str(item["kind"]),
+                    statement=str(item["statement"]),
+                    evidence_ids=tuple(item["evidence_ids"]),
+                    node=str(item["node"]),
+                )
+                for item in value["ledger"]
+            ),
+            open_questions=tuple(value["open_questions"]),
+            repository_head=str(value["repository_head"]),
+            run_id=str(value["run_id"]),
+            selected_evidence=tuple(EvidenceSelection(**item) for item in value["selected_evidence"]),
+            status=str(value["status"]),
+            token_baseline=TokenBaseline(**baseline),
+            token_usage=tuple(TokenUsage(**item) for item in value["token_usage"]),
+            schema_version=str(value.get("schema_version", INVESTIGATION_SCHEMA_VERSION)),
+        )

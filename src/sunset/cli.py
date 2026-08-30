@@ -4,9 +4,13 @@ from __future__ import annotations
 
 import argparse
 from collections.abc import Sequence
+import json
+from pathlib import Path
 import shlex
 import sys
 
+from sunset.casefile import build_case_file
+from sunset.casefile_models import CaseFileError
 from sunset.git_repository import RepositoryError
 from sunset.models import ScanError, ScanResult
 from sunset.compatibility import scan_compatibility_repository
@@ -100,6 +104,20 @@ def build_parser() -> argparse.ArgumentParser:
         help="optional shell-free command to run in the disposable clone; repeatable",
     )
     validate_parser.add_argument("--format", choices=("json",), default="json")
+    casefile_parser = subparsers.add_parser(
+        "casefile",
+        help="render a citation-verified, read-only case file from saved results",
+    )
+    casefile_parser.add_argument(
+        "--investigation-result", required=True, metavar="INVESTIGATION.json",
+        help="saved JSON emitted by sunset investigate",
+    )
+    casefile_parser.add_argument(
+        "--validation-result", metavar="VALIDATION.json",
+        help="optional saved JSON emitted by sunset validate",
+    )
+    casefile_parser.add_argument("--store", required=True, help="external artifact store to verify")
+    casefile_parser.add_argument("--format", choices=("json", "markdown"), default="json")
     provenance_parser.add_argument(
         "--store",
         required=True,
@@ -253,8 +271,36 @@ def main(argv: Sequence[str] | None = None) -> int:
         sys.stdout.write(result.to_json())
         return 0 if result.status in {"confirmed", "still_failing", "flaky", "inconclusive"} else 1
 
+    if args.command == "casefile":
+        try:
+            investigation = InvestigationResult.from_dict(_load_saved_json(args.investigation_result))
+            validation = None
+            if args.validation_result:
+                validation = ValidationResult.from_dict(_load_saved_json(args.validation_result))
+            result = build_case_file(
+                investigation,
+                validation=validation,
+                store_path=args.store,
+            )
+        except (CaseFileError, KeyError, TypeError, ValueError, json.JSONDecodeError, OSError) as exc:
+            if isinstance(exc, CaseFileError):
+                error = exc.to_dict()
+            else:
+                error = {"kind": "saved_result_invalid", "message": str(exc)}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(result.to_markdown() if args.format == "markdown" else result.to_json())
+        return 0
+
     raise AssertionError(f"unhandled command: {args.command}")
 
 
 def entrypoint() -> None:
     raise SystemExit(main())
+
+
+def _load_saved_json(path: str) -> dict[str, object]:
+    value = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError("saved result must be a JSON object")
+    return value

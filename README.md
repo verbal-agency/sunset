@@ -4,14 +4,17 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G06 release deterministically discovers pytest skip and
+The current G07 release deterministically discovers pytest skip and
 expected-failure markers plus a deliberately narrow family of Python
 compatibility guards in a committed Git snapshot. It then records local Git
 provenance as immutable artifacts, assembles one candidate's bounded
 investigation ledger, and can classify explicitly cited external assumptions
 from recorded evidence. With explicit approval, it can validate one marker
-removal in a disposable local clone. It does not decide that any candidate is
-obsolete and does not modify the analyzed repository.
+removal in a disposable local clone. It can also turn saved investigation and
+validation results into a citation-verified case file that keeps skeptical
+evidence and limitations beside a conservative, human-only recommendation. It
+does not decide that any candidate is obsolete and does not modify the analyzed
+repository.
 
 ## Quick start
 
@@ -28,12 +31,23 @@ uv run sunset provenance /path/to/repository --collector compatibility --store /
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --evidence-mode recorded --recorded-evidence /path/to/responses.json --format json
 uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --approve --format json
+uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json > investigation.json
+uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --approve --format json > validation.json
+uv run sunset casefile --investigation-result investigation.json --validation-result validation.json --store /path/outside/repository --format markdown
 ```
 
-Both commands return `0` for a complete result, `1` when useful output is
+Commands return `0` for a complete result, `1` when useful output is
 available with one or more structured errors, and `2` for a repository-level
 error such as a missing Git repository, missing committed HEAD, or an artifact
 store placed inside the analyzed repository.
+
+The `casefile` command is a read-only finalizer. It loads prior JSON rather
+than rerunning investigation or validation, makes no provider request, and does
+not open the target repository. Before rendering, it reloads every cited
+`sha256:<digest>` raw artifact from the configured store and verifies its digest.
+An uncited or unavailable material claim produces a structured error instead of
+a report. A `confirmed` validation run remains empirical evidence only: it is
+not proof that removal is safe and does not apply a change.
 
 ## Supported syntax
 

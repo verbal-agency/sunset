@@ -11,7 +11,7 @@ goal may be active.
 | [G04](goals/G04-langgraph-investigation-memory.md) | complete | Investigate rationale with LangGraph and compact, checkpointed memory | G03 |
 | [G05](goals/G05-external-assumption-verification.md) | complete | Verify external assumptions using replaceable evidence providers | G04 |
 | [G06](goals/G06-approved-sandbox-validation.md) | complete | Validate candidate removal in an approved disposable sandbox | G05 |
-| G07 | proposed | Produce citation-verified case files with a skeptical review stage | G06 |
+| [G07](goals/G07-case-file-skeptical-review.md) | complete | Produce citation-verified case files with a skeptical review stage | G06 |
 | G08 | proposed | Benchmark quality and memory efficiency with LangSmith | G07 |
 | G09 | proposed | Package and publish a polished end-to-end Sunset release | G08 |
 

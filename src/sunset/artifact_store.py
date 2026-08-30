@@ -60,6 +60,20 @@ class ArtifactStore:
             )
         return self._verify_bytes(path, reference.digest)
 
+    def read_artifact_id(self, artifact_id: str) -> bytes:
+        """Resolve and integrity-check a raw artifact using its public ID."""
+
+        prefix = "sha256:"
+        digest = artifact_id.removeprefix(prefix)
+        if not artifact_id.startswith(prefix) or len(digest) != 64 or any(
+            character not in "0123456789abcdef" for character in digest
+        ):
+            raise ArtifactStoreError("artifact_id_invalid", f"invalid artifact ID: {artifact_id}")
+        path = self._artifact_path_for_digest(digest)
+        if not path.exists():
+            raise ArtifactStoreError("artifact_missing", f"artifact {artifact_id} is not present in the store")
+        return self._verify_bytes(path, digest)
+
     def put_view(self, view_id: str, data: bytes) -> None:
         path = self.root / "views" / f"{view_id}.json"
         if path.exists():

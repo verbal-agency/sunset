@@ -99,6 +99,37 @@ class ValidationResult:
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> ValidationResult:
+        environment_value = value.get("environment")
+        environment = None
+        if environment_value is not None:
+            environment = EnvironmentManifest(
+                artifact=ArtifactRef.from_dict(environment_value["artifact"]),
+                fingerprint=str(environment_value["fingerprint"]),
+            )
+        return cls(
+            approved=bool(value["approved"]),
+            candidate_id=str(value["candidate_id"]),
+            collector=str(value["collector"]),
+            environment=environment,
+            errors=tuple(ValidationError(**item) for item in value["errors"]),
+            repository_head=str(value["repository_head"]),
+            runs=tuple(
+                CommandRun(
+                    command=tuple(item["command"]),
+                    phase=item["phase"],
+                    attempt=int(item["attempt"]),
+                    return_code=item["return_code"],
+                    output=ArtifactRef.from_dict(item["output"]),
+                    timed_out=bool(item.get("timed_out", False)),
+                )
+                for item in value["runs"]
+            ),
+            status=value["status"],
+            schema_version=str(value.get("schema_version", VALIDATION_SCHEMA_VERSION)),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class CommandExecution:
