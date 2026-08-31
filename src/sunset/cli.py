@@ -11,6 +11,13 @@ import sys
 
 from sunset.casefile import build_case_file
 from sunset.casefile_models import CaseFileError
+from sunset.benchmark import (
+    BenchmarkError,
+    evaluate_corpus,
+    langsmith_export,
+    load_corpus,
+    publish_langsmith_export,
+)
 from sunset.git_repository import RepositoryError
 from sunset.models import ScanError, ScanResult
 from sunset.compatibility import scan_compatibility_repository
@@ -19,6 +26,7 @@ from sunset.investigation import InvestigationConfig, investigate_candidate
 from sunset.investigation_models import InvestigationError, InvestigationResult, TokenBaseline
 from sunset.provenance import collect_compatibility_provenance, collect_provenance
 from sunset.provenance_models import ProvenanceError, ProvenanceResult
+from sunset.public_corpus import PublicCorpusError, PublicCorpusReport, load_public_corpus
 from sunset.scanner import scan_repository
 from sunset.validation import ValidationConfig, validate_candidate
 from sunset.validation_models import ValidationError, ValidationResult
@@ -118,6 +126,23 @@ def build_parser() -> argparse.ArgumentParser:
     )
     casefile_parser.add_argument("--store", required=True, help="external artifact store to verify")
     casefile_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+    benchmark_parser = subparsers.add_parser(
+        "benchmark",
+        help="evaluate a saved compact-memory benchmark corpus without rerunning repositories",
+    )
+    benchmark_parser.add_argument("--corpus", required=True, help="versioned benchmark corpus JSON")
+    benchmark_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+    benchmark_parser.add_argument(
+        "--langsmith-export", metavar="FILE.json",
+        help="write a data-only LangSmith experiment export",
+    )
+    benchmark_parser.add_argument(
+        "--publish-langsmith", action="store_true",
+        help="explicitly POST the export to LangSmith; requires --langsmith-api-key",
+    )
+    benchmark_parser.add_argument("--langsmith-api-key", help="LangSmith API key used only with --publish-langsmith")
+    corpus_parser = subparsers.add_parser("corpus", help="validate a saved public corpus without contacting target repositories")
+    corpus_parser.add_argument("--manifest", required=True, help="saved public corpus JSON")
     provenance_parser.add_argument(
         "--store",
         required=True,
@@ -290,6 +315,37 @@ def main(argv: Sequence[str] | None = None) -> int:
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
         sys.stdout.write(result.to_markdown() if args.format == "markdown" else result.to_json())
+        return 0
+
+    if args.command == "benchmark":
+        try:
+            corpus = load_corpus(args.corpus)
+            result = evaluate_corpus(corpus)
+            export = langsmith_export(corpus, result)
+            if args.langsmith_export:
+                Path(args.langsmith_export).write_text(
+                    json.dumps(export, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+            if args.publish_langsmith:
+                publish_langsmith_export(export, api_key=args.langsmith_api_key or "")
+        except (BenchmarkError, OSError) as exc:
+            error = {"kind": exc.code, "message": exc.message} if isinstance(exc, BenchmarkError) else {
+                "kind": "benchmark_output_failed", "message": str(exc)
+            }
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(result.to_markdown() if args.format == "markdown" else result.to_json())
+        return 0
+
+    if args.command == "corpus":
+        try:
+            result = PublicCorpusReport(load_public_corpus(args.manifest))
+        except (PublicCorpusError, OSError) as exc:
+            error = {"kind": exc.code, "message": exc.message} if isinstance(exc, PublicCorpusError) else {"kind": "public_corpus_read_failed", "message": str(exc)}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(result.to_json())
         return 0
 
     raise AssertionError(f"unhandled command: {args.command}")

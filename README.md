@@ -34,6 +34,9 @@ uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json > investigation.json
 uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --approve --format json > validation.json
 uv run sunset casefile --investigation-result investigation.json --validation-result validation.json --store /path/outside/repository --format markdown
+uv run sunset benchmark --corpus tests/fixtures/benchmarks/corpus-v1.json --format markdown
+uv run sunset benchmark --corpus tests/fixtures/benchmarks/corpus-v1.json --langsmith-export sunset-experiment.json
+uv run sunset corpus --manifest tests/fixtures/public_corpus/langchain-ecosystem-v1.json
 ```
 
 Commands return `0` for a complete result, `1` when useful output is
@@ -48,6 +51,29 @@ not open the target repository. Before rendering, it reloads every cited
 An uncited or unavailable material claim produces a structured error instead of
 a report. A `confirmed` validation run remains empirical evidence only: it is
 not proof that removal is safe and does not apply a change.
+
+## Benchmarking memory and quality
+
+G08 evaluates a committed 20-case, manually adjudicated regression corpus. It
+compares a recorded full-context baseline with the compact-memory result,
+measuring recommendation accuracy, citation accuracy, unsupported claims,
+estimated input-token reduction, latency, and availability of cost or semantic
+metrics. It evaluates SCN-06 directly: compact memory needs at least 50% median
+input-token reduction, no more than a five-point classification-accuracy drop,
+and no citation-accuracy decline.
+
+The default command reads only saved benchmark data and makes no network
+request. `--langsmith-export` writes a data-only experiment document. Sending
+that document to LangSmith requires both `--publish-langsmith` and a supplied
+`--langsmith-api-key`; it is never implied by running the benchmark. The
+included corpus is a transparent, history-shaped fixture set—not a claim about
+production prevalence, model quality, or provider-billed cost.
+
+## Public historical corpus
+
+G08a adds a committed 20-record public corpus drawn from pinned LangChain, LangGraph, and LangSmith SDK Git history. It has 10 historical marker/shim removals and 10 still-present markers or compatibility shims. The `corpus` command only validates saved JSON: it never contacts GitHub, clones, checks out, imports, installs, or executes code from those repositories.
+
+Each record names the repository's canonical Git URL, a full source commit, the collection-time HEAD, path, observed outcome, and a GitHub URL to the patch or pinned source. A historical removal establishes that a particular maintainer change happened; it does not establish that a similar candidate is safe to remove. Retained records deliberately keep contrary examples visible.
 
 ## Supported syntax
 
