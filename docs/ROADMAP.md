@@ -14,7 +14,7 @@ goal may be active.
 | [G07](goals/G07-case-file-skeptical-review.md) | complete | Produce citation-verified case files with a skeptical review stage | G06 |
 | [G08](goals/G08-benchmark-langsmith-evaluation.md) | complete | Benchmark quality and memory efficiency with LangSmith | G07 |
 | [G08a](goals/G08a-langchain-public-corpus.md) | complete | Collect a public, pinned LangChain ecosystem evaluation corpus | G08 |
-| G09 | proposed | Package and publish a polished end-to-end Sunset release | G08a |
+| [G09](goals/G09-end-to-end-release.md) | complete | Package a polished, reproducible end-to-end Sunset release | G08a |
 
 ## G01 — Deterministic scanner
 

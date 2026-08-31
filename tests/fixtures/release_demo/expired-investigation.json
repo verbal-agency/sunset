@@ -1,0 +1,24 @@
+{
+  "assumption_status": "expired",
+  "candidate_id": "sunset-v1-release-demo-expired",
+  "checkpoint_id": "release-demo-expired",
+  "collector": "pytest",
+  "errors": [],
+  "ledger": [
+    {
+      "claim_id": "recorded-expiry",
+      "evidence_ids": ["sha256:8d5548703cfbcf2c1a3867a463d874aafb5db960cbdbc86e0b91d31dddd152cc"],
+      "kind": "fact",
+      "node": "verify_external",
+      "statement": "Recorded fixture evidence supports an expired external assumption."
+    }
+  ],
+  "open_questions": ["A maintainer must still assess untested downstream behavior."],
+  "repository_head": "1111111111111111111111111111111111111111",
+  "run_id": "release-demo-expired",
+  "schema_version": "2",
+  "selected_evidence": [],
+  "status": "inconclusive",
+  "token_baseline": {"full_context_tokens": 100, "raw_artifact_bytes": 80, "working_memory_tokens": 20},
+  "token_usage": []
+}

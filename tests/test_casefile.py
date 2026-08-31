@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import json
 from pathlib import Path
 
@@ -183,3 +184,52 @@ def test_casefile_cli_returns_structured_error_for_uncited_claim(tmp_path: Path,
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 2
     assert payload["error"]["kind"] == "claim_uncited"
+
+
+def test_html_viewer_is_standalone_passive_and_escapes_untrusted_text(tmp_path: Path) -> None:
+    store = ArtifactStore(tmp_path / "store")
+    raw_body = b"raw evidence body that must stay outside the viewer"
+    artifact = store.put(raw_body, media_type="text/plain", source_kind="fixture", source_locator="fixture")
+    investigation = _investigation(artifact.artifact_id)
+    hostile = replace(
+        investigation,
+        ledger=(
+            LedgerEntry(
+                claim_id="<claim>",
+                kind="fact",
+                statement='<img src="https://tracker.example/pixel" onerror="alert(1)">',
+                evidence_ids=(artifact.artifact_id,),
+                node="summarize_core",
+            ),
+        ),
+    )
+
+    rendered = build_case_file(
+        hostile, store_path=store.root, validation=_validation(artifact)
+    ).to_html()
+
+    assert rendered.startswith("<!doctype html>")
+    assert "Content-Security-Policy" in rendered
+    assert "<script" not in rendered.lower()
+    assert 'src="https://' not in rendered
+    assert "&lt;img src=&quot;https://tracker.example/pixel&quot;" in rendered
+    assert raw_body.decode() not in rendered
+
+
+def test_casefile_cli_renders_html_viewer(tmp_path: Path, capsys) -> None:
+    store = ArtifactStore(tmp_path / "store")
+    artifact = store.put(b"evidence", media_type="text/plain", source_kind="fixture", source_locator="fixture")
+    investigation_path = tmp_path / "investigation.json"
+    investigation_path.write_text(_investigation(artifact.artifact_id).to_json(), encoding="utf-8")
+
+    exit_code = main(
+        [
+            "casefile", "--investigation-result", str(investigation_path),
+            "--store", str(store.root), "--format", "html",
+        ]
+    )
+
+    rendered = capsys.readouterr().out
+    assert exit_code == 0
+    assert "<title>Sunset case file" in rendered
+    assert "Recommendation" in rendered

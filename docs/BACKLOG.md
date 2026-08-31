@@ -6,6 +6,7 @@ that goal, not duplicated here.
 
 | Priority | Item | Why it matters | Dependencies / destination trigger |
 | --- | --- | --- | --- |
+| High | Choose and add an explicit project license | G09's distribution audit found no `LICENSE` file or package license metadata, leaving reuse terms unclear; the license choice requires human legal intent | Resolve before publishing to a package registry or inviting third-party redistribution |
 | Medium | JavaScript/TypeScript test-marker support | Broadens the maintainer audience after the Python workflow is validated | Consider after G09; requires a language-neutral candidate model proven by G01–G08 |
 | Medium | Feature-flag collector | Stale flags are common temporal debt but have distinct runtime evidence and established competitors | Consider only after Sunset demonstrates differentiation on rationale expiry |
 | Low | IDE extension | Makes line-level review convenient but does not validate the core thesis | Only after stable CLI and case-file contracts |

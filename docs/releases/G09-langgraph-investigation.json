@@ -1,0 +1,98 @@
+{
+  "assumption_status": "unknown",
+  "candidate_id": "sunset-v1-ed51e3cc1b1b6c3bb84e5c5a",
+  "checkpoint_id": "sunset-investigation-v2-05d21aa7c86d9e8ce55a7740-finalize",
+  "collector": "pytest",
+  "errors": [],
+  "ledger": [
+    {
+      "claim_id": "ledger-v1-10c750044b39dd5ad446",
+      "evidence_ids": [
+        "sha256:a77db9fe4b6bb880ea8e05fbd5436e474c3cee34872dd0d8b9ce117535d658bd",
+        "sha256:e460d48f3b5f83c78d14e878a5b5e6819c4b9d1c8d1ae6c10cb78ef74aa9ce6e",
+        "sha256:f9e19ba344291edcddd59792d97ff8183611ef34ae951910278078c496ae0550"
+      ],
+      "kind": "fact",
+      "node": "load_provenance",
+      "statement": "Candidate provenance is anchored to the committed repository HEAD."
+    },
+    {
+      "claim_id": "ledger-v1-8816218cafe20afbdd8b",
+      "evidence_ids": [
+        "sha256:a77db9fe4b6bb880ea8e05fbd5436e474c3cee34872dd0d8b9ce117535d658bd",
+        "sha256:f9e19ba344291edcddd59792d97ff8183611ef34ae951910278078c496ae0550"
+      ],
+      "kind": "fact",
+      "node": "summarize_core",
+      "statement": "The candidate condition is sys.version_info < (3, 11)."
+    },
+    {
+      "claim_id": "ledger-v1-7d3099c242489ef8bb38",
+      "evidence_ids": [
+        "sha256:a77db9fe4b6bb880ea8e05fbd5436e474c3cee34872dd0d8b9ce117535d658bd",
+        "sha256:f9e19ba344291edcddd59792d97ff8183611ef34ae951910278078c496ae0550"
+      ],
+      "kind": "inference",
+      "node": "summarize_core",
+      "statement": "Blame commit 4849501ccfc0a21703d93d2d1ee71220c72eb742 is a provenance lead, not proof of the first semantic rationale."
+    },
+    {
+      "claim_id": "ledger-v1-fc0478dd942a27f7904e",
+      "evidence_ids": [],
+      "kind": "unknown",
+      "node": "verify_external",
+      "statement": "No explicit GitHub issue, pull-request, release-note, or changelog reference was found in selected local evidence."
+    },
+    {
+      "claim_id": "ledger-v1-ce6436293eb2dc519d02",
+      "evidence_ids": [
+        "sha256:a77db9fe4b6bb880ea8e05fbd5436e474c3cee34872dd0d8b9ce117535d658bd",
+        "sha256:f9e19ba344291edcddd59792d97ff8183611ef34ae951910278078c496ae0550"
+      ],
+      "kind": "rejected_hypothesis",
+      "node": "finalize",
+      "statement": "Age, blame, and local history alone do not prove that removal is safe."
+    },
+    {
+      "claim_id": "ledger-v1-38eafe1313509aeb24a9",
+      "evidence_ids": [],
+      "kind": "unknown",
+      "node": "finalize",
+      "statement": "Assumption status does not prove that removal is safe; isolated validation and human approval remain required."
+    }
+  ],
+  "open_questions": [
+    "Which external assumption originally justified this candidate, and does it still hold?"
+  ],
+  "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+  "run_id": "05d21aa7c86d9e8ce55a7740",
+  "schema_version": "2",
+  "selected_evidence": [
+    {
+      "artifact_id": "sha256:a77db9fe4b6bb880ea8e05fbd5436e474c3cee34872dd0d8b9ce117535d658bd",
+      "byte_length": 27507,
+      "reason": "core provenance evidence",
+      "source_kind": "marker_source"
+    },
+    {
+      "artifact_id": "sha256:f9e19ba344291edcddd59792d97ff8183611ef34ae951910278078c496ae0550",
+      "byte_length": 2595,
+      "reason": "core provenance evidence",
+      "source_kind": "blame_commit_patch"
+    }
+  ],
+  "status": "inconclusive",
+  "token_baseline": {
+    "full_context_tokens": 7526,
+    "raw_artifact_bytes": 30102,
+    "working_memory_tokens": 741
+  },
+  "token_usage": [
+    {"estimated": true, "input_tokens": 45, "node": "load_provenance", "output_tokens": 574},
+    {"estimated": true, "input_tokens": 253, "node": "retrieve_core", "output_tokens": 115},
+    {"estimated": true, "input_tokens": 342, "node": "summarize_core", "output_tokens": 314},
+    {"estimated": true, "input_tokens": 540, "node": "expand_history", "output_tokens": 1},
+    {"estimated": true, "input_tokens": 540, "node": "verify_external", "output_tokens": 455},
+    {"estimated": true, "input_tokens": 599, "node": "finalize", "output_tokens": 482}
+  ]
+}

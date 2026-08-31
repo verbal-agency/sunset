@@ -4,12 +4,23 @@ version = "0.1.0"
 description = "Evidence-driven garbage collection for expired code rationale"
 readme = "README.md"
 requires-python = ">=3.10"
+keywords = ["code-maintenance", "git", "pytest", "static-analysis", "technical-debt"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Quality Assurance",
+]
 dependencies = [
     "langgraph>=1.2.11",
 ]
 
 [project.scripts]
 sunset = "sunset.cli:entrypoint"
+
+[project.urls]
+Repository = "https://github.com/verbal-agency/sunset"
 
 [dependency-groups]
 dev = [
@@ -27,4 +38,3 @@ packages = ["src/sunset"]
 addopts = "-q"
 testpaths = ["tests"]
 norecursedirs = ["tests/fixtures"]
-

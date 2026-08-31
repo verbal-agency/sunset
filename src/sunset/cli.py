@@ -27,16 +27,19 @@ from sunset.investigation_models import InvestigationError, InvestigationResult,
 from sunset.provenance import collect_compatibility_provenance, collect_provenance
 from sunset.provenance_models import ProvenanceError, ProvenanceResult
 from sunset.public_corpus import PublicCorpusError, PublicCorpusReport, load_public_corpus
+from sunset.release import ReleaseEvidenceError, validate_public_run
 from sunset.scanner import scan_repository
 from sunset.validation import ValidationConfig, validate_candidate
 from sunset.validation_models import ValidationError, ValidationResult
+from sunset import __version__
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="sunset",
-        description="Find pytest markers whose rationale may warrant investigation.",
+        description="Conservatively investigate code whose original rationale may have expired.",
     )
+    parser.add_argument("--version", action="version", version=f"sunset {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
     scan_parser = subparsers.add_parser(
         "scan",
@@ -125,7 +128,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="optional saved JSON emitted by sunset validate",
     )
     casefile_parser.add_argument("--store", required=True, help="external artifact store to verify")
-    casefile_parser.add_argument("--format", choices=("json", "markdown"), default="json")
+    casefile_parser.add_argument(
+        "--format", choices=("json", "markdown", "html"), default="json",
+        help="output format; HTML is a passive standalone viewer",
+    )
     benchmark_parser = subparsers.add_parser(
         "benchmark",
         help="evaluate a saved compact-memory benchmark corpus without rerunning repositories",
@@ -143,6 +149,10 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark_parser.add_argument("--langsmith-api-key", help="LangSmith API key used only with --publish-langsmith")
     corpus_parser = subparsers.add_parser("corpus", help="validate a saved public corpus without contacting target repositories")
     corpus_parser.add_argument("--manifest", required=True, help="saved public corpus JSON")
+    release_parser = subparsers.add_parser(
+        "release-check", help="validate saved public-release evidence and immutable output digests"
+    )
+    release_parser.add_argument("--manifest", required=True, help="saved public-run manifest JSON")
     provenance_parser.add_argument(
         "--store",
         required=True,
@@ -314,7 +324,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 error = {"kind": "saved_result_invalid", "message": str(exc)}
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
-        sys.stdout.write(result.to_markdown() if args.format == "markdown" else result.to_json())
+        if args.format == "markdown":
+            rendered = result.to_markdown()
+        elif args.format == "html":
+            rendered = result.to_html()
+        else:
+            rendered = result.to_json()
+        sys.stdout.write(rendered)
         return 0
 
     if args.command == "benchmark":
@@ -346,6 +362,29 @@ def main(argv: Sequence[str] | None = None) -> int:
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
         sys.stdout.write(result.to_json())
+        return 0
+
+    if args.command == "release-check":
+        try:
+            manifest = validate_public_run(args.manifest)
+        except ReleaseEvidenceError as exc:
+            sys.stdout.write(json.dumps({"error": {"kind": exc.code, "message": exc.message}}, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(
+            json.dumps(
+                {
+                    "repository": manifest["repository"],
+                    "result_statuses": {
+                        item["kind"]: item["status"] for item in manifest["results"]
+                    },
+                    "schema_version": manifest["schema_version"],
+                    "valid": True,
+                },
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            ) + "\n"
+        )
         return 0
 
     raise AssertionError(f"unhandled command: {args.command}")

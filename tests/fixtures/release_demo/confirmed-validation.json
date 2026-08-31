@@ -1,0 +1,37 @@
+{
+  "approved": true,
+  "candidate_id": "sunset-v1-release-demo-expired",
+  "collector": "pytest",
+  "environment": {
+    "artifact": {
+      "artifact_id": "sha256:8d5548703cfbcf2c1a3867a463d874aafb5db960cbdbc86e0b91d31dddd152cc",
+      "byte_length": 80,
+      "digest": "8d5548703cfbcf2c1a3867a463d874aafb5db960cbdbc86e0b91d31dddd152cc",
+      "media_type": "text/plain",
+      "source_kind": "recorded_demo_environment",
+      "source_locator": "release-demo"
+    },
+    "fingerprint": "release-demo"
+  },
+  "errors": [],
+  "repository_head": "1111111111111111111111111111111111111111",
+  "runs": [
+    {
+      "attempt": 1,
+      "command": ["python", "-m", "pytest", "-q", "tests/test_demo.py::test_candidate"],
+      "output": {
+        "artifact_id": "sha256:8d5548703cfbcf2c1a3867a463d874aafb5db960cbdbc86e0b91d31dddd152cc",
+        "byte_length": 80,
+        "digest": "8d5548703cfbcf2c1a3867a463d874aafb5db960cbdbc86e0b91d31dddd152cc",
+        "media_type": "text/plain",
+        "source_kind": "recorded_demo_test_output",
+        "source_locator": "release-demo"
+      },
+      "phase": "narrow",
+      "return_code": 0,
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1",
+  "status": "confirmed"
+}

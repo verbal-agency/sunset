@@ -3,8 +3,18 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from sunset.cli import main
 from sunset.scanner import scan_repository
+
+
+def test_cli_reports_package_version(capsys) -> None:
+    with pytest.raises(SystemExit) as stopped:
+        main(["--version"])
+
+    assert stopped.value.code == 0
+    assert capsys.readouterr().out == "sunset 0.1.0\n"
 
 
 def test_cli_emits_normalized_json_and_partial_failure_status(

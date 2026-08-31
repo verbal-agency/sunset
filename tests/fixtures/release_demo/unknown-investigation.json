@@ -1,0 +1,24 @@
+{
+  "assumption_status": "unknown",
+  "candidate_id": "sunset-v1-release-demo-unknown",
+  "checkpoint_id": "release-demo-unknown",
+  "collector": "pytest",
+  "errors": [],
+  "ledger": [
+    {
+      "claim_id": "recorded-unknown",
+      "evidence_ids": ["sha256:8d5548703cfbcf2c1a3867a463d874aafb5db960cbdbc86e0b91d31dddd152cc"],
+      "kind": "fact",
+      "node": "summarize_core",
+      "statement": "Recorded fixture evidence does not resolve the external assumption."
+    }
+  ],
+  "open_questions": ["External evidence is still required."],
+  "repository_head": "2222222222222222222222222222222222222222",
+  "run_id": "release-demo-unknown",
+  "schema_version": "2",
+  "selected_evidence": [],
+  "status": "inconclusive",
+  "token_baseline": {"full_context_tokens": 100, "raw_artifact_bytes": 80, "working_memory_tokens": 20},
+  "token_usage": []
+}

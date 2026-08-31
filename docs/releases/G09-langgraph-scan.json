@@ -1,0 +1,139 @@
+{
+  "candidates": [
+    {
+      "blame_commit": "5c18bde0f889b7dd24965906fed8e091adf71a25",
+      "candidate_id": "sunset-v1-934c3accff4b2d2177a0f2d2",
+      "column": 0,
+      "condition": null,
+      "line": 303,
+      "marker_kind": "skip",
+      "path": "libs/langgraph/tests/test_delta_channel_benchmark.py",
+      "qualified_name": "test_delta_channel_benchmark",
+      "reason": "slow benchmark — run manually with: python tests/test_delta_channel_benchmark.py",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "e8a2f7ef92bbf12b02380d12e6acfc28628c61a8",
+      "candidate_id": "sunset-v1-e6255c75808e26b98009fe89",
+      "column": 0,
+      "condition": "sys.version_info < (3, 11)",
+      "line": 3527,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_large_cases_async.py",
+      "qualified_name": "test_weather_subgraph",
+      "reason": "Python 3.11+ is required for async contextvars support",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "4f1bf4fa7a6e0f2c208e824d467686151cf161a7",
+      "candidate_id": "sunset-v1-402819cb9dff85d7acc023bb",
+      "column": 0,
+      "condition": "not ((CORE_MINOR == 3 and CORE_PATCH >= 11) or CORE_MINOR > 3)",
+      "line": 207,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_messages_state.py",
+      "qualified_name": "test_messages_state_format_openai",
+      "reason": "Requires langchain_core>=0.3.11.",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "d1710e2eacc5c04a28cd2380ae17e749b8b6cd5e",
+      "candidate_id": "sunset-v1-518c1d60e01b28fa53d323ae",
+      "column": 0,
+      "condition": "sys.version_info < (3, 11)",
+      "line": 2526,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_pregel_async.py",
+      "qualified_name": "test_send_dedupe_on_resume",
+      "reason": "Requires Python 3.11 or higher for context management",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "4ffae6065f1c7fe4dc00fed21ee9a584cbbb14b3",
+      "candidate_id": "sunset-v1-7a70de86cacd85bbdc041b21",
+      "column": 0,
+      "condition": null,
+      "line": 1097,
+      "marker_kind": "skip",
+      "path": "libs/langgraph/tests/test_remote_graph.py",
+      "qualified_name": "test_langgraph_cloud_integration",
+      "reason": null,
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "9c2deacb28d0de5e601bef13dfb9efb92106bac1",
+      "candidate_id": "sunset-v1-fadcd53d8b9e363aabb016a7",
+      "column": 0,
+      "condition": "sys.version_info < (3, 11)",
+      "line": 2232,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_time_travel_async.py",
+      "qualified_name": "test_stateful_subgraph_retains_state_on_parent_replay",
+      "reason": "Python 3.11+ required for async test",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "9c2deacb28d0de5e601bef13dfb9efb92106bac1",
+      "candidate_id": "sunset-v1-1c812add7acae799d22ee315",
+      "column": 0,
+      "condition": "sys.version_info < (3, 11)",
+      "line": 2318,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_time_travel_async.py",
+      "qualified_name": "test_stateful_subgraph_retains_state_on_parent_fork",
+      "reason": "Python 3.11+ required for async test",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "9c2deacb28d0de5e601bef13dfb9efb92106bac1",
+      "candidate_id": "sunset-v1-d6b646b914172746a22ddc99",
+      "column": 0,
+      "condition": "sys.version_info < (3, 11)",
+      "line": 2394,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_time_travel_async.py",
+      "qualified_name": "test_replay_creates_branch_preserving_old_checkpoints",
+      "reason": "Python 3.11+ required for async test",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "2fccd0958534f6266c53a331b6717c73b62e83ab",
+      "candidate_id": "sunset-v1-e8d9e5692e20f3aaaaea4836",
+      "column": 0,
+      "condition": null,
+      "line": 60,
+      "marker_kind": "skip",
+      "path": "libs/langgraph/tests/test_tracing_interops.py",
+      "qualified_name": "test_nested_tracing",
+      "reason": null,
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "5f00938aa25e60501d03e66fb32551b6f61a7311",
+      "candidate_id": "sunset-v1-9e87fcb3a26f637f44ae12a9",
+      "column": 0,
+      "condition": null,
+      "line": 110,
+      "marker_kind": "skip",
+      "path": "libs/langgraph/tests/test_type_checking.py",
+      "qualified_name": "test_invoke_with_all_valid_types",
+      "reason": null,
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    },
+    {
+      "blame_commit": "4849501ccfc0a21703d93d2d1ee71220c72eb742",
+      "candidate_id": "sunset-v1-ed51e3cc1b1b6c3bb84e5c5a",
+      "column": 0,
+      "condition": "sys.version_info < (3, 11)",
+      "line": 144,
+      "marker_kind": "skipif",
+      "path": "libs/langgraph/tests/test_utils.py",
+      "qualified_name": "test_runnable_callable_tracing_nested_async",
+      "reason": "Python 3.11+ is required for async contextvars support",
+      "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686"
+    }
+  ],
+  "errors": [],
+  "repository_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+  "schema_version": "1"
+}

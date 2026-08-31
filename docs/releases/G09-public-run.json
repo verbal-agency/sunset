@@ -1,0 +1,36 @@
+{
+  "collected_at": "2026-08-31T00:00:00Z",
+  "repository": {
+    "name": "langgraph",
+    "pinned_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+    "target": "libs/langgraph/tests",
+    "url": "https://github.com/langchain-ai/langgraph.git"
+  },
+  "results": [
+    {
+      "command": [".venv/bin/sunset", "scan", "/private/tmp/sunset-g09-langgraph-full/libs/langgraph/tests", "--format", "json"],
+      "kind": "scan",
+      "output": "G09-langgraph-scan.json",
+      "sha256": "10ef2d41f386e326661b83102fef0b6a55840697ceef47685c4414a4a448e061",
+      "status": "success"
+    },
+    {
+      "command": [".venv/bin/sunset", "investigate", "/private/tmp/sunset-g09-langgraph-full/libs/langgraph/tests", "--candidate-id", "sunset-v1-ed51e3cc1b1b6c3bb84e5c5a", "--store", "/private/tmp/sunset-g09-artifacts-full", "--evidence-mode", "offline", "--format", "json"],
+      "kind": "investigation",
+      "output": "G09-langgraph-investigation.json",
+      "sha256": "66af837e90865bf6d6367025861b49c2da4df2652c9bc1d981c32beb6dddba6f",
+      "status": "inconclusive"
+    }
+  ],
+  "safety": {
+    "artifact_store_outside_target": true,
+    "default_network_mode": "offline",
+    "target_code_executed": false,
+    "target_code_installed": false,
+    "tree_after": "10eb6105430f2551a0f49a55904f625b6877ac85",
+    "tree_before": "10eb6105430f2551a0f49a55904f625b6877ac85",
+    "working_tree_after": "clean",
+    "working_tree_before": "clean"
+  },
+  "schema_version": "1"
+}

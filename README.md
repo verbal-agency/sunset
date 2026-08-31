@@ -4,7 +4,7 @@ Sunset is a conservative, evidence-driven garbage collector for source code.
 It finds code whose original rationale may have expired, gathers evidence, and
 eventually validates cleanup proposals for human review.
 
-The current G07 release deterministically discovers pytest skip and
+The 0.1.0 alpha release deterministically discovers pytest skip and
 expected-failure markers plus a deliberately narrow family of Python
 compatibility guards in a committed Git snapshot. It then records local Git
 provenance as immutable artifacts, assembles one candidate's bounded
@@ -16,6 +16,11 @@ evidence and limitations beside a conservative, human-only recommendation. It
 does not decide that any candidate is obsolete and does not modify the analyzed
 repository.
 
+Release setup, privacy and host-execution boundaries, a short deterministic
+demo, and a pinned LangGraph run are documented in
+[`docs/RELEASE.md`](docs/RELEASE.md), [`docs/SAFETY.md`](docs/SAFETY.md),
+[`docs/DEMO.md`](docs/DEMO.md), and [`docs/PUBLIC-RUN.md`](docs/PUBLIC-RUN.md).
+
 ## Quick start
 
 Sunset supports Python 3.10 or newer and requires Git and
@@ -24,6 +29,7 @@ development environment so the verification toolchain is reproducible.
 
 ```bash
 uv sync --all-groups
+uv run --locked sunset --version
 uv run sunset scan /path/to/repository --format json
 uv run sunset collect /path/to/repository --collector compatibility --format json
 uv run sunset provenance /path/to/repository --store /path/outside/repository --format json
@@ -34,9 +40,11 @@ uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /
 uv run sunset investigate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --format json > investigation.json
 uv run sunset validate /path/to/repository --candidate-id CANDIDATE_ID --store /path/outside/repository --approve --format json > validation.json
 uv run sunset casefile --investigation-result investigation.json --validation-result validation.json --store /path/outside/repository --format markdown
+uv run sunset casefile --investigation-result investigation.json --validation-result validation.json --store /path/outside/repository --format html > casefile.html
 uv run sunset benchmark --corpus tests/fixtures/benchmarks/corpus-v1.json --format markdown
 uv run sunset benchmark --corpus tests/fixtures/benchmarks/corpus-v1.json --langsmith-export sunset-experiment.json
 uv run sunset corpus --manifest tests/fixtures/public_corpus/langchain-ecosystem-v1.json
+uv run sunset release-check --manifest docs/releases/G09-public-run.json
 ```
 
 Commands return `0` for a complete result, `1` when useful output is
@@ -51,6 +59,8 @@ not open the target repository. Before rendering, it reloads every cited
 An uncited or unavailable material claim produces a structured error instead of
 a report. A `confirmed` validation run remains empirical evidence only: it is
 not proof that removal is safe and does not apply a change.
+The HTML format is a standalone, script-free viewer with no remote assets or raw
+artifact bodies; it still may contain sensitive paths and rationale text.
 
 ## Benchmarking memory and quality
 
