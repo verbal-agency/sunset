@@ -1,6 +1,6 @@
 # G08a — Public LangChain historical corpus
 
-**Status:** active
+**Status:** complete
 **Dependencies:** G08
 
 ## Purpose

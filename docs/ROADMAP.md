@@ -13,7 +13,7 @@ goal may be active.
 | [G06](goals/G06-approved-sandbox-validation.md) | complete | Validate candidate removal in an approved disposable sandbox | G05 |
 | [G07](goals/G07-case-file-skeptical-review.md) | complete | Produce citation-verified case files with a skeptical review stage | G06 |
 | [G08](goals/G08-benchmark-langsmith-evaluation.md) | complete | Benchmark quality and memory efficiency with LangSmith | G07 |
-| [G08a](goals/G08a-langchain-public-corpus.md) | active | Collect a public, pinned LangChain ecosystem evaluation corpus | G08 |
+| [G08a](goals/G08a-langchain-public-corpus.md) | complete | Collect a public, pinned LangChain ecosystem evaluation corpus | G08 |
 | G09 | proposed | Package and publish a polished end-to-end Sunset release | G08a |
 
 ## G01 — Deterministic scanner
