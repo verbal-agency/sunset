@@ -3,6 +3,8 @@
 Status values are `active`, `proposed`, `blocked`, and `complete`. Exactly one
 goal may be active.
 
+## Phase 1 — Deterministic foundation
+
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G01](goals/G01-deterministic-scanner.md) | complete | Build the project foundation and deterministic pytest-marker scanner | None |
@@ -147,3 +149,171 @@ canonical scenarios end to end.
 Expected completion evidence: clean-install instructions work, the demo can be
 reproduced from a pinned repository revision, and public results include both
 successful and inconclusive cases.
+
+## Phase 2 — Bounded agentic investigation
+
+Phase 2 makes the Phase 1 heuristics and evidence services usable as safe tools
+inside a LangChain ecosystem agent. G10 is fully specified and active. Later
+goals are intentionally scoped outlines: when each predecessor completes, the
+cycle handoff must refine only the next eligible goal using the evidence and
+risks discovered so far.
+
+Refinement protocol: the cycle that completes an active Phase 2 goal creates a
+detailed specification and roadmap link for only the next eligible goal, keeps
+that next goal `proposed`, and carries forward only findings routed to it. A
+later user-authorized cycle may change that goal to `active`. The outlines below
+are planning boundaries, not frozen acceptance criteria.
+
+| Goal | Status | Objective | Dependencies |
+| --- | --- | --- | --- |
+| [G10](goals/G10-agent-tool-contracts.md) | active | Expose local deterministic evidence operations as typed, scoped LangChain tools | G09 |
+| G11 | proposed | Add a replaceable chat-model runtime and one recorded structured reasoning step | G10 |
+| G12 | proposed | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
+| G13 | proposed | Let the agent research external assumptions through recorded-first provider tools | G12 |
+| G14 | proposed | Pause and resume agentic investigations across the human validation boundary | G13 |
+| G15 | proposed | Add an independent skeptical reviewer and citation-verified agentic case file | G14 |
+| G16 | proposed | Evaluate and package the agentic vertical slice with LangSmith and public evidence | G15 |
+
+### G10 — Agent-ready deterministic tool contracts
+
+**Purpose:** Turn the proven Phase 1 heuristics into a safe capability boundary
+that an agent can use without bypassing provenance, budgets, or human control.
+
+The [detailed G10 specification](goals/G10-agent-tool-contracts.md) is the sole
+active Phase 2 goal. It introduces no model call or autonomous loop.
+
+### G11 — Replaceable model runtime and structured reasoning
+
+**Purpose:** Introduce probabilistic interpretation behind an explicit provider
+boundary without allowing a model to execute tools or become evidence.
+
+**Objective:** Add a LangChain chat-model adapter, recorded replay provider, and
+one LangGraph reasoning node that converts compact tool receipts into a
+versioned hypothesis, cited supporting or contradicting evidence, open
+questions, and proposed next tool names.
+
+**Scope:** Structured output validation; prompt and model versioning; token,
+latency, and cost accounting; model-disabled, recorded, and explicitly
+configured live modes; checkpoint-safe replay and structured provider failure.
+
+**Exclusions:** Executing model-proposed tools, autonomous iteration, live
+external research, validation requests, skeptical multi-agent review, or final
+recommendations.
+
+**Expected exit evidence:** Recorded responses are deterministic; malformed or
+failed responses become structured `inconclusive` evidence; no prompt contains
+an entire raw history; disabling the model preserves Phase 1 behavior; a second
+fake `BaseChatModel` works without domain changes. Advances OUT-02, OUT-03,
+OUT-06, OUT-07 and SCN-03, SCN-04, SCN-09, SCN-10.
+
+### G12 — Bounded local-evidence agent loop
+
+**Purpose:** Allow the investigator to choose evidence adaptively while keeping
+every action allowlisted, observable, resumable, and budgeted.
+
+**Objective:** Build a LangGraph planner–tool–observation loop that may execute
+G10's local read-only tools, revise structured hypotheses, and stop for
+completion, insufficient evidence, error, or budget exhaustion.
+
+**Scope:** Iteration and tool-call budgets; deterministic tool dispatch;
+duplicate-call suppression; graph interrupts and resume; terminal-reason
+contracts; compact working-memory updates; model and tool invocation receipts.
+
+**Exclusions:** Live or recorded external-provider tools, validation execution,
+arbitrary shell or filesystem tools, multi-agent debate, and cleanup proposals.
+
+**Expected exit evidence:** Different recorded evidence gaps cause different
+bounded local tool paths; invalid or repeated calls are contained; interruption
+does not repeat completed calls; target state remains unchanged; partial failure
+preserves earlier evidence. Advances OUT-02, OUT-03, OUT-06 and SCN-03 through
+SCN-05, SCN-08, SCN-09.
+
+### G13 — Agentic external-assumption research
+
+**Purpose:** Give the agent current causal evidence so it can distinguish old
+code from code whose external justification actually expired.
+
+**Objective:** Add typed provider tools for explicit GitHub, release-note, and
+dependency-version references, allowing the bounded loop to select and compare
+recorded-first external evidence while retaining contradictions and unknowns.
+
+**Scope:** Provider-tool schemas and effect declarations; reference extraction;
+recorded fixtures; opt-in live reads with credentials, rate and request budgets;
+dependency-range evidence; source ranking without suppressing disagreement.
+
+**Exclusions:** General web browsing, search without a candidate-linked lead,
+enterprise connectors, external writes, validation, or treating issue closure
+as proof of safe removal.
+
+**Expected exit evidence:** Fixed, active, missing, contradictory, rate-limited,
+and failed evidence paths produce cited structured outcomes; default tests and
+demos are offline; live access is explicit and budgeted. Advances OUT-02,
+OUT-06, OUT-07 and SCN-01 through SCN-03, SCN-08, SCN-09.
+
+### G14 — Human-gated agentic validation
+
+**Purpose:** Let an investigation seek empirical evidence without allowing an
+agent to authorize code execution or mutate the maintainer's repository.
+
+**Objective:** Allow the graph to produce a bounded validation request, pause at
+a human decision, and on approval resume through G06's disposable validation
+adapter with the result returned as a tool receipt.
+
+**Scope:** Versioned request and decision contracts; configured command-template
+selection; graph interrupts; approve and deny flows; environment/result
+fingerprints; idempotent resume; target-state verification.
+
+**Exclusions:** Agent-invented shell commands, implicit approval, target working-
+tree changes, automatic cleanup, pull requests, or replacing the disposable
+validation boundary.
+
+**Expected exit evidence:** Denial executes nothing; approval runs only the
+reviewed plan in a disposable clone; resume cannot duplicate an experiment;
+confirmed, failing, flaky, environment-error, and inconclusive results remain
+artifact-backed. Advances OUT-04, OUT-06 and SCN-01, SCN-02, SCN-07, SCN-09,
+SCN-11.
+
+### G15 — Skeptical agentic review and case files
+
+**Purpose:** Challenge the investigator's best explanation before presenting a
+cleanup recommendation to a maintainer.
+
+**Objective:** Add an independently prompted skeptical reviewer that can inspect
+the cited ledger, request bounded read-only evidence, record objections, and
+hand a reconciled result to the deterministic citation-verifying finalizer.
+
+**Scope:** Separate reviewer state and budget; disconfirming-evidence requests;
+investigator/reviewer disagreement; unsupported-claim rejection; JSON,
+Markdown, and HTML agentic case-file fields; human decision boundary.
+
+**Exclusions:** Hidden chain-of-thought capture, reviewer access to validation
+approval, majority-vote authority, automatic edits, or uncited narrative claims.
+
+**Expected exit evidence:** Seeded unsupported, contradictory, and omitted-risk
+claims are blocked or surfaced; every material final claim resolves to raw
+evidence; passing validation alone never establishes safety. Advances OUT-02,
+OUT-05, OUT-06 and SCN-01 through SCN-03, SCN-07 through SCN-09.
+
+### G16 — Agentic evaluation and Phase 2 release
+
+**Purpose:** Determine whether bounded agency adds trustworthy investigative
+value over the deterministic baseline before presenting it as a product
+capability.
+
+**Objective:** Trace and evaluate heuristic-only and agentic configurations with
+LangSmith-compatible experiments, declare release thresholds before the final
+run, and package a reproducible agentic demonstration with measured limitations.
+
+**Scope:** Versioned public evaluation cases; per-node and per-tool traces;
+rationale, classification, citation, unsupported-claim, tool-use, token, cost,
+latency, interruption, and approval metrics; recorded CI replay; opt-in live
+evaluation; CLI/viewer release polish and pinned public demonstration.
+
+**Exclusions:** Hiding failed thresholds, claiming fixture results prove
+production precision, new collector families, enterprise connectors, automatic
+cleanup, or external publication without separate human authorization.
+
+**Expected exit evidence:** SCN-12 explicitly passes or fails predeclared
+thresholds; heuristic regressions are visible; public successful, retained, and
+inconclusive cases are reproducible; privacy, cost, model, and sandbox limits are
+published. Advances OUT-03, OUT-05 through OUT-07 and SCN-01 through SCN-12.
