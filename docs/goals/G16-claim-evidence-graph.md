@@ -36,10 +36,13 @@ condition states with explicit proof obligations.
 
 When activated, implement the graph in framework-independent modules following
 the existing frozen-dataclass and normalized JSON conventions. The expected
-surface is a graph-model module, deterministic graph/inference logic, and
-`tests/test_claim_evidence_graph.py` with isolated fixtures. The implementation
-must not add providers, arbitrary context access, validation execution, model
-calls, reviewer agents, or cleanup authority.
+surface is `src/sunset/claim_evidence_models.py`,
+`src/sunset/claim_evidence_graph.py`, `tests/test_claim_evidence_graph.py`,
+isolated fixtures under `tests/fixtures/claim_evidence/`, and vocabulary
+updates in `docs/PROJECT.md`. Equivalent module names are allowed only when the
+same contracts and test surface are preserved. The implementation must not add
+providers, arbitrary context access, validation execution, model calls,
+reviewer agents, or cleanup authority.
 
 The graph must represent:
 
@@ -51,6 +54,34 @@ The graph must represent:
 - proof obligations for missing or scope-insufficient evidence; and
 - a non-authoritative conclusion derived only from declared deterministic rules.
 
+### Canonical contracts and invariants
+
+Define versioned, round-trippable contracts for `Claim`, `EvidenceEdge`,
+`Contradiction`, `GraphProofObligation`, and `GraphResult`. Each claim and edge
+must identify one candidate and, when applicable, one G15 hypothesis. Evidence
+edges retain role, source class, artifact/provenance IDs, scope, and freshness;
+contradictions retain both edge IDs. Graph results retain all hypotheses,
+unknowns, contradictions, proof obligations, and a non-authority flag.
+
+### Deterministic behavior matrix
+
+| Input condition | Required result |
+| --- | --- |
+| `establish` edge with matching required scope and fresh provenance | Claim is `established` and retains the edge. |
+| `support` edge without establishment scope | Claim is `supported` but remains unestablished. |
+| Scope mismatch or stale edge | Claim remains `unknown`; add a scope/freshness proof obligation. |
+| Support/establishment and contradiction for one claim | Preserve both edges and return `contradictory_evidence`. |
+| No decisive edge | Return `insufficient_evidence` with the missing proof obligation. |
+| Unknown claim/edge reference or malformed input | Reject the graph without dropping previously valid records. |
+
+### Authority and stop conditions
+
+Graph construction consumes supplied G15 records only. It opens no socket,
+imports no target module, invokes no provider/model/validator, and performs no
+repository mutation. Processing stops after all inputs are normalized, on a
+schema/reference failure, or when a contradiction or missing proof obligation
+prevents a deterministic conclusion; the partial graph is retained.
+
 ## In scope
 
 1. Claim, evidence-edge, contradiction, proof-obligation, and graph-result
@@ -59,7 +90,8 @@ The graph must represent:
 3. Deterministic support, establishment, contradiction, scope, and freshness
    rules, including incompatible-evidence handling.
 4. Fixtures for upstream EOL versus local support, active conditions,
-   contradictory sources, missing evidence, and validation-scope limits.
+   contradictory sources, missing, malformed, partial-failure,
+   budget-exhausted, unsupported, and validation-scope cases.
 5. Documentation of graph semantics and proof-obligation vocabulary.
 
 ## Explicit exclusions
@@ -104,6 +136,11 @@ The graph must represent:
 | G16-AC04 | Conservative state and proof-obligation assertions |
 | G16-AC05 | Receipt compatibility, raw-content, socket, and execution guards |
 | G16-AC06 | Focused tests, locked full suite, documentation review, and diff check |
+
+The focused module must use named tests `test_g16_ac01_graph_integrity`,
+`test_g16_ac02_scope_aware_establishment`, `test_g16_ac03_preserves_contradictions`,
+`test_g16_ac04_conservative_inference`, `test_g16_ac05_receipt_and_authority_guards`,
+and `test_g16_ac06_documented_verification` (or recorded equivalent names).
 
 ## Required verification commands
 

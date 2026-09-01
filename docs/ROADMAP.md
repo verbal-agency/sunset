@@ -158,9 +158,9 @@ and validation receipts. The product focus now shifts to the epistemic model:
 what condition code protects, which evidence can support or contradict it, and
 which proof obligation remains before a human reviews a counterfactual change.
 
-G15 is the only fully specified Phase 2 goal. Later goals remain scoped
-outlines; when each predecessor completes, the cycle handoff refines only the
-next eligible goal using discovered evidence and risks.
+G16–G20 are fully specified proposed Phase 2 goals. Only the next eligible goal
+is refined or activated by a cycle; later goals remain planning boundaries and
+may be adjusted when predecessor evidence changes their assumptions.
 
 Refinement protocol: the cycle that completes an active Phase 2 goal creates a
 detailed specification and roadmap link for only the next eligible goal, keeps
@@ -188,10 +188,10 @@ execute as-is.
 | [G14](goals/G14-human-gated-agentic-validation.md) | complete | Pause and resume agentic investigations across the human validation boundary | G13 |
 | [G15](goals/G15-skeptical-agentic-review.md) | complete | Define protected-condition hypotheses, proof obligations, and temporal-debt taxonomy | G14 |
 | [G16](goals/G16-claim-evidence-graph.md) | proposed | Build claim–evidence graphs and conservative condition-status inference | G15 |
-| G17 | proposed | Add bounded context expansion across code, history, and configuration relations | G16 |
-| G18 | proposed | Add recorded-first operational/internal evidence providers | G17 |
-| G19 | proposed | Add skeptical review and citation-verified temporal-debt case files | G18 |
-| G20 | proposed | Calibrate and release the temporal-condition investigator | G19 |
+| [G17](goals/G17-controlled-context-expansion.md) | proposed | Add bounded context expansion across code, history, and configuration relations | G16 |
+| [G18](goals/G18-operational-internal-evidence.md) | proposed | Add recorded-first operational/internal evidence providers | G17 |
+| [G19](goals/G19-skeptical-review-case-files.md) | proposed | Add skeptical review and citation-verified temporal-debt case files | G18 |
+| [G20](goals/G20-calibration-release.md) | proposed | Calibrate and release the temporal-condition investigator | G19 |
 
 ### G10 — Agent-ready deterministic tool contracts
 
@@ -382,6 +382,10 @@ Excludes operational providers, arbitrary file/system access, and mutation.
 **Unlocks:** Evidence requests that can name the missing repository relation
 instead of guessing from a compact receipt.
 
+The [detailed G17 specification](goals/G17-controlled-context-expansion.md) is
+proposed and will be activated only after G16 completes and a user-authorized
+cycle begins it.
+
 ### G18 — Operational/internal evidence providers
 
 **Dependencies:** G17 (proposed)
@@ -403,6 +407,9 @@ SCN-08, SCN-09.
 **Unlocks:** Internal-condition verification that can distinguish upstream
 status from deployment, customer, or support reality.
 
+The [detailed G18 specification](goals/G18-operational-internal-evidence.md) is
+proposed and remains gated on completion of G17.
+
 ### G19 — Skeptical review and temporal-debt case files
 
 **Dependencies:** G18 (proposed)
@@ -422,6 +429,9 @@ SCN-09, SCN-11.
 
 **Unlocks:** Human-readable case files whose claims and missing proof are
 independently auditable.
+
+The [detailed G19 specification](goals/G19-skeptical-review-case-files.md) is
+proposed and remains gated on completion of G18.
 
 ### G20 — Calibration and temporal-condition release
 
@@ -443,3 +453,6 @@ SCN-06, SCN-08 through SCN-12.
 
 **Unlocks:** A calibrated release decision and explicit limits on what Sunset
 may claim about temporal-condition investigations.
+
+The [detailed G20 specification](goals/G20-calibration-release.md) is proposed
+and remains gated on completion of G19.
