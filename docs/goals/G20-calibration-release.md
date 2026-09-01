@@ -8,6 +8,15 @@
 Demonstrate whether Sunset's epistemic model improves conservative temporal-debt
 decisions before making release or product claims.
 
+## Completion limitation
+
+G20 completed the versioned evaluator, metric, threshold, replay, and gate
+contracts with a committed calibration fixture. That verifies the mechanics,
+not the product thesis: the fixture is not an independently adjudicated
+protected-condition corpus, a held-out evaluation, an optimization study, or a
+maintainer pilot. Phase 3 owns those empirical claims and may use G20's
+contracts only with provenance- and split-controlled inputs.
+
 ## Objective
 
 Evaluate protected-condition identification, contradiction handling,

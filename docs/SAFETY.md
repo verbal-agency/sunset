@@ -78,3 +78,8 @@ LangChain ecosystem corpus records pinned historical removals and retained code;
 it is not a prevalence study or a claim of production precision. The public G09
 run intentionally returns an inconclusive investigation when offline evidence
 cannot resolve the assumption.
+
+The G20 calibration fixture additionally validates release-gate mechanics; it
+is not an independently adjudicated protected-condition benchmark. Phase 3
+keeps historical outcomes, condition labels, held-out evaluation, and pilot
+findings separate so a passing fixture cannot be presented as product efficacy.

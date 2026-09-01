@@ -45,6 +45,29 @@ languages, generic dead-code detection, enterprise knowledge connectors,
 automatic cleanup, and automatic pull requests remain outside the planned
 agentic vertical slice.
 
+## Phase 3 validation direction
+
+Phase 2 completed an implementation substrate: it can represent condition
+hypotheses, collect bounded evidence, replay investigation traces, and compute
+a deterministic calibration-gate result. That result is not empirical evidence
+that Sunset solves the protected-condition problem. Its current fixture is a
+small, manually authored regression check, not an independently adjudicated
+corpus, a held-out evaluation, or a maintainer pilot.
+
+Phase 3 tests the product thesis rather than adding more agency. It first makes
+each evaluation case traceable to immutable historical evidence and separates
+historical outcomes from claims about a protected condition. It then requires
+independent human adjudication for condition labels, evaluates frozen
+heuristic-only and recorded-agentic traces, optimizes only against a development
+split, and reports a held-out result plus any pilot evidence. A failed,
+inconclusive, contradictory, or unvalidatable result is useful validation data;
+none may be hidden by aggregate scores.
+
+No Phase 3 result proves that removal is safe in every deployment. Its purpose
+is to measure whether Sunset produces better-calibrated condition hypotheses,
+proof obligations, and bounded validation requests than its baselines under a
+declared evaluation protocol.
+
 ### Temporal-condition vocabulary
 
 Sunset treats the reason for a temporal-debt candidate as a hypothesis about a
@@ -265,3 +288,20 @@ remains unknown or contradictory rather than becoming an expiry conclusion.
   `inconclusive` outcome rather than a guessed recommendation.
 - Phase 2 release thresholds are declared before the final comparative run; no
   agentic quality claim is made solely from fixtures or model confidence.
+
+## Phase 3 quality targets
+
+- No product-quality, calibration, or optimization claim may use a case whose
+  source, label provenance, split, or exclusion reason is absent from the
+  versioned evaluation artifact.
+- Historical removal or retention is recorded as an outcome, never silently
+  promoted to proof of the code's protected condition or production safety.
+- Development and holdout splits are fixed and digest-identified before any
+  optimization run; holdout results may be read for release decisions but never
+  used to select a prompt, policy, threshold, or heuristic.
+- Independent adjudication disagreement, evidence gaps, contradictory evidence,
+  unsupported cases, and incomplete runs remain visible in per-case and
+  aggregate reports.
+- Model cost, latency, tool use, and failure containment are measured alongside
+  hypothesis and proof-obligation quality; a higher aggregate score cannot hide
+  a higher unsafe-cleanup signal.

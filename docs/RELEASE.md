@@ -12,3 +12,11 @@ gate inconclusive when required coverage is unmet. A passing gate means only
 that the implementation met its declared historical benchmark thresholds; it
 does not establish that any production condition is absent or authorize a
 cleanup.
+
+## Current status
+
+The completed G20 gate verifies evaluator and threshold mechanics using a
+small, committed calibration fixture. It has not produced an independently
+adjudicated corpus result, a held-out comparison, an optimization result, or a
+maintainer-pilot finding. Phase 3 owns those empirical claims; until then,
+Sunset has no product-quality release verdict.

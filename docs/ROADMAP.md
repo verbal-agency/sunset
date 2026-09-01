@@ -158,10 +158,13 @@ and validation receipts. The product focus now shifts to the epistemic model:
 what condition code protects, which evidence can support or contradict it, and
 which proof obligation remains before a human reviews a counterfactual change.
 
-G16, G17, G18, G19, and G20 are complete. Phase 2 is complete; post-release
-work remains in the backlog. Only the next eligible goal is refined or
-activated by a cycle; later goals remain planning boundaries and may be
-adjusted when predecessor evidence changes their assumptions.
+G16, G17, G18, G19, and G20 are complete. This completes the Phase 2
+implementation substrate, including a deterministic calibration-gate contract;
+it does **not** establish that Sunset's condition inferences are empirically
+accurate or optimized. Phase 3 supplies that missing validation. Only the next
+eligible goal is refined or activated by a cycle; later goals remain planning
+boundaries and may be adjusted when predecessor evidence changes their
+assumptions.
 
 Refinement protocol: the cycle that completes an active Phase 2 goal creates a
 detailed specification and roadmap link for only the next eligible goal, keeps
@@ -332,13 +335,11 @@ validation scope without calling any condition safe. Advances OUT-02, OUT-06,
 OUT-08 and SCN-01 through SCN-03, SCN-08, SCN-09.
 
 The [detailed G15 specification](goals/G15-skeptical-agentic-review.md) is
-complete. The next eligible goal is the proposed [detailed G16
-specification](goals/G16-claim-evidence-graph.md); it is not started by this
-cycle.
+complete.
 
 ### G16 — Claim–evidence graph and conservative inference
 
-**Dependencies:** G15 (proposed)
+**Dependencies:** G15 (complete)
 
 **Purpose:** Make evidence relationships and condition-status conclusions
 auditable instead of treating citation presence or model confidence as proof.
@@ -362,11 +363,11 @@ expansion and operational providers can enrich without rewriting evidence
 semantics.
 
 The [detailed G16 specification](goals/G16-claim-evidence-graph.md) is
-proposed and will be activated only after an explicit user-authorized cycle.
+complete.
 
 ### G17 — Controlled context expansion
 
-**Dependencies:** G16 (proposed)
+**Dependencies:** G16 (complete)
 
 **Purpose:** Avoid a compact-receipt sensor bottleneck without granting models
 arbitrary repository or system access.
@@ -384,12 +385,11 @@ Excludes operational providers, arbitrary file/system access, and mutation.
 instead of guessing from a compact receipt.
 
 The [detailed G17 specification](goals/G17-controlled-context-expansion.md) is
-proposed and will be activated only after G16 completes and a user-authorized
-cycle begins it.
+complete.
 
 ### G18 — Operational/internal evidence providers
 
-**Dependencies:** G17 (proposed)
+**Dependencies:** G17 (complete)
 
 **Purpose:** Make evidence such as support policy, deployment inventory,
 configuration, runtime traces, and contracts first-class because external status
@@ -409,11 +409,11 @@ SCN-08, SCN-09.
 status from deployment, customer, or support reality.
 
 The [detailed G18 specification](goals/G18-operational-internal-evidence.md) is
-proposed and remains gated on completion of G17.
+complete.
 
 ### G19 — Skeptical review and temporal-debt case files
 
-**Dependencies:** G18 (proposed)
+**Dependencies:** G18 (complete)
 
 **Purpose:** Challenge the condition graph and proof obligations before a human
 reviews a cleanup decision.
@@ -432,18 +432,18 @@ SCN-09, SCN-11.
 independently auditable.
 
 The [detailed G19 specification](goals/G19-skeptical-review-case-files.md) is
-proposed and remains gated on completion of G18.
+complete.
 
 ### G20 — Calibration and temporal-condition release
 
-**Dependencies:** G19 (proposed)
+**Dependencies:** G19 (complete)
 
-**Purpose:** Demonstrate whether Sunset’s epistemic model improves conservative
-temporal-debt decisions over search, heuristic, and agent-only baselines.
+**Purpose:** Build reproducible calibration and release-gate mechanics without
+mistaking a small fixture for proof that Sunset improves temporal-debt decisions.
 
-**Objective:** Evaluate protected-condition identification, contradiction and
-proof-obligation quality, calibration, false-removal risk, cost, and latency on
-historical positive and negative cases before release claims.
+**Objective:** Implement versioned comparative-evaluation, metric, threshold,
+and gate contracts that a later empirically adjudicated corpus can use to
+measure protected-condition quality and false-removal risk.
 
 **Scope boundary:** Versioned benchmark cases, declared release thresholds, and
 reproducible recorded evaluation. Excludes claims that benchmark performance
@@ -452,8 +452,158 @@ proves production removability or authorizes automatic cleanup.
 **Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-03,
 SCN-06, SCN-08 through SCN-12.
 
-**Unlocks:** A calibrated release decision and explicit limits on what Sunset
-may claim about temporal-condition investigations.
+**Unlocks:** Deterministic gate mechanics and explicit limits for the Phase 3
+empirical release decision.
 
-The [detailed G20 specification](goals/G20-calibration-release.md) is proposed
-and remains gated on completion of G19.
+The [detailed G20 specification](goals/G20-calibration-release.md) is complete.
+
+## Phase 3 — Empirical validation and optimization
+
+Phase 3 tests the product thesis: whether Sunset can infer a historically
+contingent code path's protected condition, state what evidence is missing, and
+produce better-calibrated handoffs than deterministic baselines. It does not
+treat G20's calibration mechanics or historical outcomes as proof that a
+condition label is true. The phase requires provenance-bound evaluation cases,
+independent adjudication, frozen comparison runs, split-safe optimization, and
+an explicitly limited maintainer pilot.
+
+There is deliberately no active goal. G21 is the next eligible proposal and is
+fully Luna-ready; G22--G25 are scoped planning boundaries. A Cycle invocation
+may activate only G21 after explicit user authorization. G22 requires human
+adjudication input, and any Cycle reaching it without that input must stop as
+blocked rather than manufacture labels.
+
+| Goal | Status | Objective | Dependencies |
+| --- | --- | --- | --- |
+| [G21](goals/G21-validation-corpus-protocol.md) | proposed | Establish a provenance-bound validation-corpus protocol and offline audit | G20 |
+| [G22](goals/G22-independent-adjudication.md) | proposed | Capture independently adjudicated protected-condition labels and disagreement | G21 + human review input |
+| [G23](goals/G23-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G22 |
+| [G24](goals/G24-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G23 |
+| [G25](goals/G25-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G24 + pilot authorization |
+
+### G21 — Validation corpus protocol and provenance audit
+
+**Dependencies:** G20 (complete)
+
+**Purpose:** Establish trustworthy evaluation inputs before measuring or
+optimizing an epistemic system whose labels cannot safely be inferred from code
+age or historical removals alone.
+
+**Objective:** Define and enforce a versioned, provenance-bound corpus packet
+and offline audit that separates a pinned historical outcome from an
+unadjudicated protected-condition label, records required evidence and
+exclusions, and fixes development/holdout partitions before later evaluation.
+
+**Scope boundary:** Local schema, manifest, audit, CLI, fixtures, and
+documentation only. Excludes model evaluation, label adjudication, live
+collection, optimization, and any claim about Sunset quality.
+
+**Advances:** OUT-02, OUT-05, OUT-08; SCN-01 through SCN-03 and SCN-12.
+
+**Unlocks:** A replayable, leakage-controlled input contract that G22 can
+adjudicate without conflating provenance with ground truth.
+
+The [detailed G21 specification](goals/G21-validation-corpus-protocol.md) is
+proposed and may be activated by an explicit user-authorized Cycle.
+
+### G22 — Independent adjudication and evidence quality
+
+**Dependencies:** G21 (complete) and recorded human review input
+
+**Purpose:** Turn provenance-bound case packets into defensible evaluation
+labels without allowing the model under test to create its own ground truth.
+
+**Objective:** Record two independent protected-condition and proof-obligation
+assessments per eligible case, preserve disagreement and abstention, and freeze
+an adjudicated evaluation manifest.
+
+**Scope boundary:** Review packets, label/import contracts, disagreement
+records, and provenance checks. Excludes automatic label generation, model
+optimization, live provider access, cleanup, and rewriting historical evidence.
+
+**Advances:** OUT-02, OUT-05, OUT-08; SCN-01 through SCN-03 and SCN-12.
+
+**Unlocks:** A human-grounded development/holdout corpus. If the required
+independent reviews are not supplied, the goal is blocked; it must not be
+completed with model-authored stand-in labels.
+
+The [G22 outline](goals/G22-independent-adjudication.md) will receive a full
+execution contract only after G21 supplies the packet schema and human review
+input is available.
+
+### G23 — Frozen baseline evaluation
+
+**Dependencies:** G22 (complete)
+
+**Purpose:** Measure the system's actual epistemic behavior on frozen,
+independently adjudicated cases before changing policies or prompts to improve
+scores.
+
+**Objective:** Execute heuristic-only and recorded-agentic baselines over the
+same frozen development and holdout corpus, then publish per-case traces,
+coverage, calibration, unsupported-claim, proof-obligation, safety, cost, and
+latency results.
+
+**Scope boundary:** Offline/replay evaluation and error taxonomy only. Excludes
+prompt or heuristic changes, live providers, cleanup, and changing labels or
+partitions after outputs are known.
+
+**Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-03, SCN-06, SCN-08 through
+SCN-10, and SCN-12.
+
+**Unlocks:** A pre-optimization baseline and documented failure modes for G24.
+
+The [G23 outline](goals/G23-frozen-baseline-evaluation.md) will be refined only
+after G22 freezes the corpus identities and adjudication coverage.
+
+### G24 — Split-safe optimization and ablation
+
+**Dependencies:** G23 (complete)
+
+**Purpose:** Improve measurable decision quality without tuning against the
+same evidence used to make the product-quality claim.
+
+**Objective:** Test predeclared, bounded changes to prompts, retrieval policy,
+tool policy, or deterministic thresholds on the development split; retain an
+optimization only when it meets safety and quality criteria, then measure it
+once on the untouched holdout split.
+
+**Scope boundary:** Versioned ablations and bounded policy changes. Excludes
+holdout-driven tuning, corpus relabeling, new authority, automatic cleanup, and
+claims that an aggregate score proves removability.
+
+**Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-06, SCN-08 through SCN-10,
+and SCN-12.
+
+**Unlocks:** A reproducible candidate configuration and known regressions for a
+limited maintainer pilot.
+
+The [G24 outline](goals/G24-split-safe-optimization.md) will be refined after
+G23 identifies concrete, measured error classes and baseline budgets.
+
+### G25 — Maintainer pilot and product decision
+
+**Dependencies:** G24 (complete) and explicit pilot authorization
+
+**Purpose:** Test whether the validated workflow is useful and appropriately
+conservative in real maintainer review, where operational evidence and missing
+context matter most.
+
+**Objective:** Run a consented, read-only pilot against a small declared set of
+maintainer-selected candidates, record review outcomes and failures, and publish
+an evidence-bounded continue, revise, or stop decision.
+
+**Scope boundary:** Read-only investigations and human-reviewed validation
+requests under the existing approval boundary. Excludes automatic cleanup,
+changes to target repositories, broad telemetry collection, and general
+availability claims.
+
+**Advances:** OUT-04, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-03, SCN-07
+through SCN-12.
+
+**Unlocks:** A product decision based on empirical results and maintainer
+feedback rather than architecture claims alone.
+
+The [G25 outline](goals/G25-maintainer-pilot-decision.md) will be refined only
+after G24 supplies the pilot configuration, risk limits, and measurable
+success/failure criteria.
