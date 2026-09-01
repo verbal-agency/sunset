@@ -1,6 +1,6 @@
 # G16 — Claim–evidence graph and conservative inference
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G15 (complete)
 
 ## Purpose
@@ -136,6 +136,20 @@ prevents a deterministic conclusion; the partial graph is retained.
 | G16-AC04 | Conservative state and proof-obligation assertions |
 | G16-AC05 | Receipt compatibility, raw-content, socket, and execution guards |
 | G16-AC06 | Focused tests, locked full suite, documentation review, and diff check |
+
+## Completion evidence
+
+- `uv lock --check` completed successfully.
+- `uv run --locked pytest -q` completed successfully (full suite green).
+- `uv run --locked pytest -q tests/test_claim_evidence_graph.py` completed
+  successfully: 6 tests passed.
+- `git diff --check` completed successfully; the worktree was inspected with
+  `git status --short`, including untracked graph modules and fixtures.
+- `docs/PROJECT.md` documents claim–evidence graph semantics, including scope,
+  freshness, contradiction preservation, proof obligations, and the
+  non-authority boundary.
+
+G17 remains proposed and is not started by this cycle.
 
 The focused module must use named tests `test_g16_ac01_graph_integrity`,
 `test_g16_ac02_scope_aware_establishment`, `test_g16_ac03_preserves_contradictions`,

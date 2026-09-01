@@ -62,6 +62,19 @@ Condition progress is represented separately from removal authority:
 `unvalidatable` are conservative terminal outcomes. `human_approved` is an
 approval-boundary state, never an inference from evidence or validation.
 
+### Claim–evidence graph semantics
+
+Phase 2 represents each protected-condition hypothesis as a claim node linked
+to evidence edges. Edges retain their role (`support`, `contradict`,
+`establish`, `scope_limit`, or `missing`), source class, declared scope,
+freshness, and immutable provenance IDs. `support` can make a claim plausible;
+only a fresh `establish` edge whose scope matches the claim can establish it.
+Contradictory edges remain visible and produce `contradictory_evidence` rather
+than being ranked away. Missing or scope-insufficient evidence becomes an
+explicit proof obligation. Graph inference is deterministic and
+non-authoritative: it never turns model confidence, citation presence, or a
+passing validation run into permission to remove code.
+
 ## Garbage-collection model
 
 | Garbage collection concept | Sunset concept |

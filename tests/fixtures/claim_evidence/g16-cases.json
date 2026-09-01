@@ -1,0 +1,51 @@
+{
+  "schema_version": "1",
+  "purpose": "Deterministic G16 graph behavior fixtures",
+  "cases": [
+    {
+      "case_id": "upstream-eol-local-support",
+      "description": "Upstream status is supportive but does not establish local deployment scope.",
+      "required_scope": "production",
+      "edges": [
+        {"edge_id": "e-upstream", "role": "support", "source_class": "external", "scope": "upstream", "freshness": "current"},
+        {"edge_id": "e-local", "role": "establish", "source_class": "operational", "scope": "production", "freshness": "current"}
+      ],
+      "expected_status": "established"
+    },
+    {
+      "case_id": "active-condition",
+      "description": "A current operational edge establishes an active condition.",
+      "required_scope": "production",
+      "edges": [
+        {"edge_id": "e-active", "role": "establish", "source_class": "operational", "scope": "production", "freshness": "current"}
+      ],
+      "expected_status": "established"
+    },
+    {
+      "case_id": "contradictory-sources",
+      "description": "Positive and contradicting evidence remain visible.",
+      "required_scope": "production",
+      "edges": [
+        {"edge_id": "e-positive", "role": "support", "source_class": "historical", "scope": "production", "freshness": "current"},
+        {"edge_id": "e-negative", "role": "contradict", "source_class": "operational", "scope": "production", "freshness": "current"}
+      ],
+      "expected_status": "contradictory_evidence"
+    },
+    {
+      "case_id": "missing-evidence",
+      "description": "No edge yields an explicit missing proof obligation.",
+      "required_scope": "customers",
+      "edges": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "case_id": "stale-validation",
+      "description": "Stale validation does not establish a current claim.",
+      "required_scope": "production",
+      "edges": [
+        {"edge_id": "e-stale", "role": "establish", "source_class": "validation", "scope": "production", "freshness": "stale:2024"}
+      ],
+      "expected_status": "unknown"
+    }
+  ]
+}

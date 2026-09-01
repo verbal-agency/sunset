@@ -158,9 +158,10 @@ and validation receipts. The product focus now shifts to the epistemic model:
 what condition code protects, which evidence can support or contradict it, and
 which proof obligation remains before a human reviews a counterfactual change.
 
-G16–G20 are fully specified proposed Phase 2 goals. Only the next eligible goal
-is refined or activated by a cycle; later goals remain planning boundaries and
-may be adjusted when predecessor evidence changes their assumptions.
+G16 is complete. G17 is the next eligible proposed Phase 2 goal; G18–G20
+remain fully specified proposed goals. Only the next eligible goal is refined
+or activated by a cycle; later goals remain planning boundaries and may be
+adjusted when predecessor evidence changes their assumptions.
 
 Refinement protocol: the cycle that completes an active Phase 2 goal creates a
 detailed specification and roadmap link for only the next eligible goal, keeps
@@ -187,7 +188,7 @@ execute as-is.
 | [G13](goals/G13-agentic-external-assumption-research.md) | complete | Let the agent research external assumptions through recorded-first provider tools | G12 |
 | [G14](goals/G14-human-gated-agentic-validation.md) | complete | Pause and resume agentic investigations across the human validation boundary | G13 |
 | [G15](goals/G15-skeptical-agentic-review.md) | complete | Define protected-condition hypotheses, proof obligations, and temporal-debt taxonomy | G14 |
-| [G16](goals/G16-claim-evidence-graph.md) | proposed | Build claim–evidence graphs and conservative condition-status inference | G15 |
+| [G16](goals/G16-claim-evidence-graph.md) | complete | Build claim–evidence graphs and conservative condition-status inference | G15 |
 | [G17](goals/G17-controlled-context-expansion.md) | proposed | Add bounded context expansion across code, history, and configuration relations | G16 |
 | [G18](goals/G18-operational-internal-evidence.md) | proposed | Add recorded-first operational/internal evidence providers | G17 |
 | [G19](goals/G19-skeptical-review-case-files.md) | proposed | Add skeptical review and citation-verified temporal-debt case files | G18 |
