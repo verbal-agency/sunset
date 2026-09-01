@@ -174,6 +174,16 @@ constructs no model; recorded and injected-live modes use the same contracts.
 Raw excerpts remain immediate-only, and a trace is never a cleanup authority.
 See [`docs/AGENT-LOOP.md`](docs/AGENT-LOOP.md).
 
+## Recorded-first external evidence tools
+
+G13 adds an optional `sunset_resolve_external_reference` tool for explicit,
+candidate-linked GitHub, release-note, and dependency-version evidence. The
+default is a socket-free recorded provider. A live GitHub adapter requires a
+host-supplied credential and explicit host allowlist; it never discovers an
+environment credential. External status is a cited observation, not proof of a
+safe cleanup, and raw provider bodies remain outside checkpointed agent state.
+See [`docs/EXTERNAL-AGENT-TOOLS.md`](docs/EXTERNAL-AGENT-TOOLS.md).
+
 ## Compatibility collector schema version 1
 
 `sunset collect --collector compatibility` is an additive collector family. It

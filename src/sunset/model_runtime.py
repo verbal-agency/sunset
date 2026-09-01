@@ -38,6 +38,7 @@ _MAX_TRANSIENT_BYTES = 8_192
 _MAX_SUMMARY_CHARS = 1_200
 _MAX_CLAIMS = 12
 _MAX_QUESTIONS = 12
+_MAX_PROPOSED_TOOLS = 8
 _FORBIDDEN_RESULT_KEYS = frozenset(
     {"body", "content", "credential", "diff", "history", "patch", "raw", "response", "source", "store", "text", "transcript"}
 )
@@ -58,7 +59,7 @@ class _RecordedResponse(BaseModel):
     summary: str = Field(min_length=1, max_length=_MAX_SUMMARY_CHARS)
     claims: list[_RecordedClaim] = Field(default_factory=list, max_length=_MAX_CLAIMS)
     open_questions: list[Annotated[str, Field(min_length=1, max_length=_MAX_SUMMARY_CHARS)]] = Field(default_factory=list, max_length=_MAX_QUESTIONS)
-    proposed_tools: list[Annotated[str, Field(min_length=1, max_length=80)]] = Field(default_factory=list, max_length=len(TOOL_NAMES))
+    proposed_tools: list[Annotated[str, Field(min_length=1, max_length=80)]] = Field(default_factory=list, max_length=_MAX_PROPOSED_TOOLS)
 
 
 @dataclass(frozen=True, slots=True)
@@ -72,6 +73,7 @@ class ModelRuntimeConfig:
     timeout_seconds: float | None = None
     prompt_version: str = REASONING_PROMPT_VERSION
     output_schema_version: str = REASONING_OUTPUT_SCHEMA_VERSION
+    allowed_tool_names: tuple[str, ...] = TOOL_NAMES
 
     def __post_init__(self) -> None:
         if self.mode not in {"disabled", "recorded", "live"}:
@@ -86,6 +88,8 @@ class ModelRuntimeConfig:
             raise ValueError("recorded mode requires a recorded fixture path")
         if self.mode == "live" and self.model_identity in {"", "disabled"}:
             raise ValueError("live mode requires an explicit model identity")
+        if not self.allowed_tool_names or len(set(self.allowed_tool_names)) != len(self.allowed_tool_names):
+            raise ValueError("allowed tool names must be a non-empty unique tuple")
 
     def fingerprint(self) -> str:
         value = {
@@ -93,6 +97,7 @@ class ModelRuntimeConfig:
             "max_input_tokens": self.max_input_tokens,
             "max_output_tokens": self.max_output_tokens,
             "max_cost_usd": self.max_cost_usd,
+            "allowed_tool_names": self.allowed_tool_names,
             "mode": self.mode,
             "model_identity": self.model_identity,
             "output_schema_version": self.output_schema_version,
@@ -155,7 +160,7 @@ class ModelRuntime:
         started = time.monotonic_ns()
         try:
             invocation_id = self.invocation_id(request, transient_evidence)
-            prompt = assemble_prompt(request, transient_evidence=transient_evidence)
+            prompt = assemble_prompt(request, transient_evidence=transient_evidence, allowed_tool_names=self.config.allowed_tool_names)
         except (AttributeError, TypeError, ValueError) as exc:
             result = self._result(
                 request,
@@ -224,7 +229,7 @@ class ModelRuntime:
         started = time.monotonic_ns()
         try:
             invocation_id = self.invocation_id(request, transient_evidence)
-            prompt = assemble_prompt(request, transient_evidence=transient_evidence)
+            prompt = assemble_prompt(request, transient_evidence=transient_evidence, allowed_tool_names=self.config.allowed_tool_names)
         except (AttributeError, TypeError, ValueError) as exc:
             result = self._result(request, _invalid_invocation_id(request), "error", errors=(ReasoningError("prompt_input_invalid", str(exc)),))
             self._record(result, started)
@@ -315,7 +320,7 @@ class ModelRuntime:
                 unknown = set(claim.citations).difference(allowed_evidence)
                 if unknown:
                     raise ValueError(f"response cites ungranted evidence: {sorted(unknown)}")
-            unknown_tools = set(parsed.proposed_tools).difference(TOOL_NAMES)
+            unknown_tools = set(parsed.proposed_tools).difference(self.config.allowed_tool_names)
             if unknown_tools:
                 raise ValueError(f"response proposes unregistered tools: {sorted(unknown_tools)}")
             hypothesis = ReasoningHypothesis(
@@ -416,6 +421,7 @@ def assemble_prompt(
     request: ReasoningRequest,
     *,
     transient_evidence: tuple[TransientEvidence, ...] = (),
+    allowed_tool_names: tuple[str, ...] = TOOL_NAMES,
 ) -> str:
     """Create a bounded ephemeral prompt without persisting it or raw artifacts."""
 
@@ -445,7 +451,7 @@ def assemble_prompt(
             "assumption_status": "active|expired|unknown",
             "claims": "[{kind: supporting|contradicting|unknown, summary, citations}]",
             "open_questions": "[string]",
-            "proposed_tools": list(TOOL_NAMES),
+            "proposed_tools": list(allowed_tool_names),
             "summary": "string",
         },
         "task": request.task,

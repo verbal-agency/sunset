@@ -101,8 +101,9 @@ class DispatchObservation:
 class DeterministicToolDispatcher:
     """The only G12 path that invokes a context-bound G10 BaseTool."""
 
-    def __init__(self, registry: BoundToolRegistry) -> None:
+    def __init__(self, registry: BoundToolRegistry, *, allowed_effects: tuple[dict[str, Any], ...] | None = None) -> None:
         self._tools = {tool.name: tool for tool in registry.tools}
+        self._allowed_effects = allowed_effects or (LOCAL_READ_ONLY_EFFECT.to_dict(),)
 
     @property
     def tool_names(self) -> tuple[str, ...]:
@@ -127,8 +128,8 @@ class DeterministicToolDispatcher:
             return self._rejected(request, "tool_not_allowlisted", "request is outside the bound G10 registry")
         try:
             effect = tool.metadata.get("sunset_effect") if tool.metadata else None
-            if effect != LOCAL_READ_ONLY_EFFECT.to_dict():
-                return self._rejected(request, "tool_effect_rejected", "tool does not declare the local read-only effect")
+            if effect not in self._allowed_effects:
+                return self._rejected(request, "tool_effect_rejected", "tool does not declare an allowed effect")
             schema = tool.args_schema
             if not isinstance(schema, type) or not issubclass(schema, BaseModel):
                 return self._rejected(request, "tool_schema_invalid", "tool does not expose a typed input schema")

@@ -1,6 +1,6 @@
 # G13 — Agentic external-assumption research
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G12 (complete)
 
 ## Purpose
@@ -136,3 +136,30 @@ git status --short
 - Raw external bodies can be sensitive and may contain hostile text. Normalized
   provider claims and citations must remain compact, while raw evidence stays in
   the artifact store and never becomes agent memory by default.
+
+## Completion evidence
+
+- **G13-AC01:** `tests/test_external_agent_tools.py` verifies that only
+  extracted reference IDs enter the typed external registry. Schema, effect,
+  host allowlist, rate/request/response limits, and reasoning antecedents are
+  checked before the provider is invoked.
+- **G13-AC02:** Recorded GitHub and release-note fixtures cover expired, active,
+  missing, failed, malformed, and rate-limited outcomes. Socket guards prove
+  recorded execution is offline; supporting responses are immutable artifacts.
+- **G13-AC03:** Existing and new external-evidence tests retain contradictory
+  active/expired evidence as `unknown`. The new tool records provider outcome
+  only and contains no removal recommendation.
+- **G13-AC04:** `ExplicitGitHubProvider` accepts only an injected credential,
+  supported GitHub host/reference, and bounded response read. G13 loop tests
+  verify provider-policy/freshness invalidation and compatible interruption
+  resume without a second provider call.
+- **G13-AC05:** `test_recorded_external_tool_runs_inside_bounded_g12_loop`
+  scans the run and checkpoint views for a seeded raw provider body. Existing
+  G10–G12 and full locked regressions remain compatible.
+- **G13-AC06:** `README.md` and `docs/EXTERNAL-AGENT-TOOLS.md` document the
+  recorded-first policy, live opt-in, credential and raw-data boundaries,
+  replay identity, and non-authority rule.
+
+Verification on 2026-09-01: `uv lock --check`, the focused external/G10/G11/G12
+suite, the locked full suite, and `git diff --check` passed. The worktree remains
+uncommitted pending human authorization.

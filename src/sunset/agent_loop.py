@@ -13,8 +13,9 @@ from langgraph.graph import END, START, StateGraph
 
 from sunset.agent_dispatch import DeterministicToolDispatcher, ToolRequest
 from sunset.agent_loop_models import AgentCallRecord, AgentLoopError, AgentRunResult, AgentTraceEvent
-from sunset.agent_tools import DISCOVER_TOOL, EXCERPT_TOOL, PROVENANCE_TOOL, ToolExecutionContext, create_tool_registry
+from sunset.agent_tools import DISCOVER_TOOL, EXCERPT_TOOL, LOCAL_READ_ONLY_EFFECT, PROVENANCE_TOOL, ToolExecutionContext, create_tool_registry
 from sunset.artifact_store import ArtifactStore, ArtifactStoreError
+from sunset.external_agent_tools import EXTERNAL_TOOL_NAMES, ExternalEvidenceContext, create_external_tool_registry
 from sunset.model_runtime import ModelRuntime
 from sunset.model_runtime_models import ReasoningRequest, ReasoningResult, TransientEvidence
 from sunset.reasoning_graph import ReasoningGraph
@@ -69,6 +70,8 @@ class LocalEvidenceAgentLoop:
         *,
         config: AgentLoopConfig = AgentLoopConfig(),
         runtime: ModelRuntime | None = None,
+        external_context: ExternalEvidenceContext | None = None,
+        seed_receipts: tuple[Any, ...] = (),
         clock: Callable[[], float] = time.monotonic,
     ) -> None:
         if config.mode == "heuristic" and runtime is not None:
@@ -80,8 +83,22 @@ class LocalEvidenceAgentLoop:
         self.context = context
         self.config = config
         self.runtime = runtime
+        self.external_context = external_context
+        self.seed_receipts = tuple(seed_receipts)
+        if external_context is not None and external_context.local is not context:
+            raise ValueError("external evidence must use the same trusted local context")
+        if external_context is not None and runtime is not None:
+            missing = set(EXTERNAL_TOOL_NAMES).difference(runtime.config.allowed_tool_names)
+            if missing:
+                raise ValueError("model runtime must explicitly allow configured external tools")
         self.clock = clock
         self.dispatcher = DeterministicToolDispatcher(create_tool_registry(context))
+        self.external_dispatcher = (
+            DeterministicToolDispatcher(
+                create_external_tool_registry(external_context),
+                allowed_effects=(external_context.effect.to_dict(),),
+            ) if external_context is not None else None
+        )
         self.reasoning_graph = ReasoningGraph(runtime, context.store) if runtime is not None else None
         graph = StateGraph(_GraphState)
         graph.add_node("advance", RunnableLambda(self._advance))
@@ -158,11 +175,21 @@ class LocalEvidenceAgentLoop:
         }
         tool_calls = sum(1 for record in result.call_ledger if record.status == "completed")
         evidence_bytes = sum(receipt.budget.evidence_bytes_debit for receipt in result.receipts)
-        if tool_calls >= self.config.max_tool_calls or self.context.tool_calls_remaining == 0:
-            return self._terminal(result, "tool_budget_exhausted", "aggregate or G10 tool-call budget is exhausted")
-        if evidence_bytes >= self.config.max_evidence_bytes or self.context.evidence_bytes_remaining == 0:
-            return self._terminal(result, "tool_budget_exhausted", "aggregate or G10 evidence-byte budget is exhausted")
-        observation = self.dispatcher.dispatch(request, completed=completed)
+        is_external = request.tool_name in EXTERNAL_TOOL_NAMES
+        if tool_calls >= self.config.max_tool_calls:
+            return self._terminal(result, "tool_budget_exhausted", "aggregate tool-call budget is exhausted")
+        if evidence_bytes >= self.config.max_evidence_bytes:
+            return self._terminal(result, "tool_budget_exhausted", "aggregate evidence-byte budget is exhausted")
+        if is_external:
+            if self.external_context is None or self.external_dispatcher is None:
+                return self._terminal(result, "tool_error", "external tool is not configured")
+            if self.external_context.requests_remaining == 0 or self.external_context.response_bytes_remaining == 0:
+                return self._terminal(result, "tool_budget_exhausted", "external provider budget is exhausted")
+            observation = self.external_dispatcher.dispatch(request, completed=completed)
+        else:
+            if self.context.tool_calls_remaining == 0 or self.context.evidence_bytes_remaining == 0:
+                return self._terminal(result, "tool_budget_exhausted", "G10 local tool budget is exhausted")
+            observation = self.dispatcher.dispatch(request, completed=completed)
         record = AgentCallRecord(request, observation.status, observation.receipt.invocation_id if observation.receipt else None, observation.error)
         updated = replace(
             result,
@@ -179,7 +206,7 @@ class LocalEvidenceAgentLoop:
         if observation.receipt.status == "budget_exhausted":
             return self._terminal(updated, "tool_budget_exhausted", "G10 tool budget is exhausted")
         if observation.receipt.status == "error":
-            return self._terminal(updated, "tool_error", "G10 tool returned a structured error")
+            return self._terminal(updated, "tool_error", "bounded tool returned a structured error")
         return updated
 
     def _heuristic_request(self, result: AgentRunResult) -> ToolRequest | None:
@@ -204,6 +231,10 @@ class LocalEvidenceAgentLoop:
                     request = {"artifact_id": artifact_id, "offset": 0, "length": min(512, self.context.max_excerpt_bytes)}
                     if not self._already_completed(result, tool_name, request):
                         return ToolRequest(tool_name, request, "reasoning", reasoning.invocation_id)
+            if tool_name in EXTERNAL_TOOL_NAMES and self.external_context is not None:
+                reference_id = self._first_unresolved_external_reference(result)
+                if reference_id is not None:
+                    return ToolRequest(tool_name, {"reference_id": reference_id}, "reasoning", reasoning.invocation_id)
         return None
 
     @staticmethod
@@ -223,6 +254,14 @@ class LocalEvidenceAgentLoop:
             for receipt in result.receipts if receipt.tool_name == EXCERPT_TOOL
         }
         return next((artifact_id for artifact_id in sorted(self.context.granted_artifacts) if artifact_id not in read), None)
+
+    def _first_unresolved_external_reference(self, result: AgentRunResult) -> str | None:
+        assert self.external_context is not None
+        completed = {
+            str(receipt.result.get("reference", {}).get("reference_id"))
+            for receipt in result.receipts if receipt.tool_name in EXTERNAL_TOOL_NAMES
+        }
+        return next((reference_id for reference_id in sorted(self.external_context.references) if reference_id not in completed), None)
 
     @staticmethod
     def _already_completed(result: AgentRunResult, tool_name: str, tool_input: dict[str, Any]) -> bool:
@@ -244,7 +283,7 @@ class LocalEvidenceAgentLoop:
         identity_kind, identity_value = self.context.repository_identity
         value = {
             "config": self.config.fingerprint(self.runtime),
-            "context_policy": self.context.policy_fingerprint(),
+            "context_policy": self._context_policy_fingerprint(),
             "ledger": {"evidence_bytes_used": self.context.evidence_bytes_used, "tool_calls_used": self.context.tool_calls_used},
             "repository": {"head": self.context.repository.head, "identity": [identity_kind, identity_value]},
             "schema_version": "1",
@@ -257,12 +296,12 @@ class LocalEvidenceAgentLoop:
             run_id=run_id,
             repository_identity={"kind": kind, "value": value},
             repository_head=self.context.repository.head,
-            context_policy_fingerprint=self.context.policy_fingerprint(),
+            context_policy_fingerprint=self._context_policy_fingerprint(),
             config_fingerprint=self.config.fingerprint(self.runtime),
             initial_grant_scope=tuple(sorted(self.context.granted_artifacts)),
             initial_tool_calls_used=self.context.tool_calls_used,
             initial_evidence_bytes_used=self.context.evidence_bytes_used,
-            receipts=(), reasoning=(), call_ledger=(), trace=(), errors=(), iterations=0,
+            receipts=self.seed_receipts, reasoning=(), call_ledger=(), trace=(), errors=(), iterations=0,
             checkpoint_sequence=0, terminal_reason=None,
         )
 
@@ -270,7 +309,7 @@ class LocalEvidenceAgentLoop:
         kind, value = self.context.repository_identity
         if result.repository_identity != {"kind": kind, "value": value} or result.repository_head != self.context.repository.head:
             raise ValueError("checkpoint is incompatible with the bound repository identity or HEAD")
-        if result.context_policy_fingerprint != self.context.policy_fingerprint():
+        if result.context_policy_fingerprint != self._context_policy_fingerprint():
             raise ValueError("checkpoint is incompatible with the bound context policy")
         if result.config_fingerprint != self.config.fingerprint(self.runtime):
             raise ValueError("checkpoint is incompatible with the model or loop configuration")
@@ -279,14 +318,22 @@ class LocalEvidenceAgentLoop:
         if self.context.tool_calls_used not in {result.initial_tool_calls_used, expected_calls} or self.context.evidence_bytes_used not in {result.initial_evidence_bytes_used, expected_bytes}:
             raise ValueError("checkpoint is incompatible with the current G10 budget ledger")
         expected_grants = set(result.initial_grant_scope).union(
-            reference.artifact_id for receipt in result.receipts for reference in receipt.evidence
+            reference.artifact_id for receipt in result.receipts
+            if receipt.effect == LOCAL_READ_ONLY_EFFECT
+            for reference in receipt.evidence
         )
         actual_grants = set(self.context.granted_artifacts)
         if actual_grants != set(result.initial_grant_scope) and actual_grants != expected_grants:
             raise ValueError("checkpoint is incompatible with the current evidence grant scope")
         for receipt in result.receipts:
+            if receipt.effect != LOCAL_READ_ONLY_EFFECT:
+                continue
             for reference in receipt.evidence:
                 self.context.granted_artifacts.setdefault(reference.artifact_id, reference)
+
+    def _context_policy_fingerprint(self) -> str:
+        value = {"local": self.context.policy_fingerprint(), "external": self.external_context.policy_fingerprint() if self.external_context else None}
+        return hashlib.sha256(_canonical(value)).hexdigest()
 
     def _checkpoint(self, result: AgentRunResult) -> AgentRunResult:
         result = replace(result, checkpoint_sequence=result.checkpoint_sequence + 1)
