@@ -184,6 +184,15 @@ environment credential. External status is a cited observation, not proof of a
 safe cleanup, and raw provider bodies remain outside checkpointed agent state.
 See [`docs/EXTERNAL-AGENT-TOOLS.md`](docs/EXTERNAL-AGENT-TOOLS.md).
 
+## Human-gated validation
+
+G14 turns a receipt-derived validation plan into an explicit human decision
+before it can call the existing disposable-clone validator. Missing, denied,
+expired, wrong-plan, or changed-HEAD approvals execute nothing. A valid approval
+authorizes exactly the reviewed G06 experiment and returns its artifact-backed
+result; it is never approval to remove code. See
+[`docs/AGENT-VALIDATION.md`](docs/AGENT-VALIDATION.md).
+
 ## Compatibility collector schema version 1
 
 `sunset collect --collector compatibility` is an additive collector family. It

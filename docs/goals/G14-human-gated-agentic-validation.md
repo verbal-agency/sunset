@@ -1,6 +1,6 @@
 # G14 — Human-gated agentic validation
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G13 (complete)
 
 ## Purpose
@@ -111,7 +111,7 @@ environment policy; on denial or expiry, execute nothing.
 ```bash
 uv lock --check
 uv run --locked pytest -q
-uv run --locked pytest -q tests/test_agent_validation.py tests/test_approved_validation.py
+uv run --locked pytest -q tests/test_agent_validation.py tests/test_validation.py
 git diff --check
 git status --short
 ```
@@ -127,3 +127,25 @@ git status --short
 - External-provider freshness participates in loop identity. G14 must bind the
   exact evidence receipt IDs into the approval plan so a changed external view
   cannot resume an old approval.
+
+## Completion evidence
+
+- **G14-AC01:** `test_plan_is_deterministic_reviewable_and_receipt_derived`
+  proves the versioned plan and stable ID derive only from one provenance
+  receipt, the bound HEAD, and trusted `ValidationConfig`.
+- **G14-AC02:** Missing, denied, expired, wrong-plan, and changed-HEAD approval
+  tests assert zero validator calls and unchanged target snapshots/status.
+- **G14-AC03:** `test_approved_gate_delegates_to_g06_and_replay_does_not_repeat`
+  delegates an approved plan to G06, preserves target immutability, and returns
+  its artifact-backed confirmed result.
+- **G14-AC04:** The same replay test proves a saved compatible result suppresses
+  a second validator call; plan IDs bind candidate, receipts, HEAD, and config.
+- **G14-AC05:** Parameterized tests preserve all five G06 result classes and
+  scan gate views for raw-output text.
+- **G14-AC06:** Existing G06/G10–G13 tests and the locked full suite pass.
+  `README.md` and `docs/AGENT-VALIDATION.md` document review, approval, replay,
+  target safety, and the non-cleanup-authority rule.
+
+Verification on 2026-09-01: `uv lock --check`, focused G14/G06/G12/G13 tests,
+the locked full suite, and `git diff --check` passed. The worktree remains
+uncommitted pending human authorization.

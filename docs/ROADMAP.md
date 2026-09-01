@@ -153,8 +153,9 @@ successful and inconclusive cases.
 ## Phase 2 — Bounded agentic investigation
 
 Phase 2 makes the Phase 1 heuristics and evidence services usable as safe tools
-inside a LangChain ecosystem agent. G10 through G13 are complete. G14 is the
-only fully specified proposed goal. Later goals remain scoped outlines: when each
+inside a LangChain ecosystem agent. G10 through G14 are complete. G15 is the
+only fully specified proposed goal. G16 remains a scoped outline until G15
+completes.
 predecessor completes, the cycle handoff must refine only the next eligible goal
 using the evidence and risks discovered so far.
 
@@ -170,8 +171,8 @@ are planning boundaries, not frozen acceptance criteria.
 | [G11](goals/G11-model-runtime-structured-reasoning.md) | complete | Add a replaceable chat-model runtime and one recorded structured reasoning step | G10 |
 | [G12](goals/G12-bounded-local-evidence-loop.md) | complete | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
 | [G13](goals/G13-agentic-external-assumption-research.md) | complete | Let the agent research external assumptions through recorded-first provider tools | G12 |
-| [G14](goals/G14-human-gated-agentic-validation.md) | proposed | Pause and resume agentic investigations across the human validation boundary | G13 |
-| G15 | proposed | Add an independent skeptical reviewer and citation-verified agentic case file | G14 |
+| [G14](goals/G14-human-gated-agentic-validation.md) | complete | Pause and resume agentic investigations across the human validation boundary | G13 |
+| [G15](goals/G15-skeptical-agentic-review.md) | proposed | Add an independent skeptical reviewer and citation-verified agentic case file | G14 |
 | G16 | proposed | Evaluate and package the agentic vertical slice with LangSmith and public evidence | G15 |
 
 ### G10 — Agent-ready deterministic tool contracts
@@ -288,8 +289,8 @@ artifact-backed. Advances OUT-04, OUT-06 and SCN-01, SCN-02, SCN-07, SCN-09,
 SCN-11.
 
 The [detailed G14 specification](goals/G14-human-gated-agentic-validation.md)
-is proposed. It may be activated by a later user-authorized cycle; this G13
-handoff does not begin its implementation.
+is complete. It added a human-scoped, replay-safe approval boundary without
+giving models any execution authority.
 
 ### G15 — Skeptical agentic review and case files
 
@@ -311,6 +312,10 @@ approval, majority-vote authority, automatic edits, or uncited narrative claims.
 claims are blocked or surfaced; every material final claim resolves to raw
 evidence; passing validation alone never establishes safety. Advances OUT-02,
 OUT-05, OUT-06 and SCN-01 through SCN-03, SCN-07 through SCN-09.
+
+The [detailed G15 specification](goals/G15-skeptical-agentic-review.md) is
+proposed. It may be activated by a later user-authorized cycle; this G14 handoff
+does not begin its implementation.
 
 ### G16 — Agentic evaluation and Phase 2 release
 
