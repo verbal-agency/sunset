@@ -1,6 +1,6 @@
 # G15 — Temporal-debt epistemic model
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G14 (complete)
 
 > The filename retains the original planning label for link stability; the
@@ -56,7 +56,7 @@ The implementation must define and serialize, with one schema-version field:
 | --- | --- |
 | Candidate family | One of the bounded supported families; unsupported forms remain `unknown`. |
 | Protected-condition hypothesis | Stable hypothesis ID, candidate ID, condition statement, confidence-independent status, and supporting evidence IDs. Multiple hypotheses must coexist. |
-| Evidence statement | Evidence ID, source class, role (`support`, `contradict`, `scope_limit`, or `missing`), claim/condition reference, scope, freshness, and provenance. |
+| Evidence statement | Evidence ID, source class, role (`support`, `contradict`, `establish`, `scope_limit`, or `missing`), claim/condition reference, scope, freshness, and provenance. |
 | Proof obligation | Concrete missing evidence, why it matters, scope/owner if known, and whether validation can address it. |
 | Conclusion | Progress/status state, hypothesis IDs, evidence IDs, contradictions, proof obligations, and an explicit non-authority flag. |
 
@@ -189,6 +189,27 @@ uv run --locked pytest -q tests/test_temporal_epistemics.py
 git diff --check
 git status --short
 ```
+
+## Completion evidence
+
+- **G15-AC01:** `test_g15_ac01_bounded_ontology` covers disabled markers,
+  compatibility shims, version guards, and an unsupported dynamic form.
+- **G15-AC02:** `test_g15_ac02_hypotheses_and_evidence_roles_round_trip` proves
+  competing hypotheses and all evidence roles serialize without collapsing
+  ambiguity.
+- **G15-AC03:** `test_g15_ac03_state_transitions_are_conservative`,
+  `test_g15_ac03_conservative_terminal_states_round_trip`, and the
+  contradiction/missing-evidence test cover legal transitions and conservative
+  terminal outcomes.
+- **G15-AC04:** `test_g15_ac04_scope_and_proof_obligations_are_retained` keeps
+  upstream evidence scope-limited and records the missing customer/runtime
+  proof obligation.
+- **G15-AC05:** Receipt adapter tests prove G10/G13/G14-shaped records round
+  trip without raw content; socket, subprocess, validator, and target-execution
+  guards remain absent from the deterministic module.
+- **G15-AC06:** The project and goal documentation define the vocabulary;
+  `uv lock --check`, the locked 150-test suite, the 11 focused tests, and
+  `git diff --check` pass.
 
 ## Carried-forward findings and risks
 

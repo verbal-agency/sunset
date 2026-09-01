@@ -45,6 +45,23 @@ languages, generic dead-code detection, enterprise knowledge connectors,
 automatic cleanup, and automatic pull requests remain outside the planned
 agentic vertical slice.
 
+### Temporal-condition vocabulary
+
+Sunset treats the reason for a temporal-debt candidate as a hypothesis about a
+protected condition, not as a fact recovered from Git history. A condition can
+have competing hypotheses and evidence with different roles: `support`,
+`contradict`, `establish`, `scope_limit`, or `missing`. Evidence is also classified by scope
+(`static`, `historical`, `operational`, `external`, or `validation`) and carries
+freshness and provenance. A citation can support a claim without establishing
+that the claim applies to this repository's users or deployments.
+
+Condition progress is represented separately from removal authority:
+`discovered`, `condition_hypothesized`, `condition_identified`,
+`condition_likely_expired`, `condition_likely_active`, `removal_testable`, and
+`validated_in_scope`. `contradictory_evidence`, `insufficient_evidence`, and
+`unvalidatable` are conservative terminal outcomes. `human_approved` is an
+approval-boundary state, never an inference from evidence or validation.
+
 ## Garbage-collection model
 
 | Garbage collection concept | Sunset concept |

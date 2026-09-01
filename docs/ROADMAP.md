@@ -158,7 +158,7 @@ and validation receipts. The product focus now shifts to the epistemic model:
 what condition code protects, which evidence can support or contradict it, and
 which proof obligation remains before a human reviews a counterfactual change.
 
-G15 is the only fully specified proposed goal. Later goals remain scoped
+G15 is the only fully specified Phase 2 goal. Later goals remain scoped
 outlines; when each predecessor completes, the cycle handoff refines only the
 next eligible goal using discovered evidence and risks.
 
@@ -186,8 +186,8 @@ execute as-is.
 | [G12](goals/G12-bounded-local-evidence-loop.md) | complete | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
 | [G13](goals/G13-agentic-external-assumption-research.md) | complete | Let the agent research external assumptions through recorded-first provider tools | G12 |
 | [G14](goals/G14-human-gated-agentic-validation.md) | complete | Pause and resume agentic investigations across the human validation boundary | G13 |
-| [G15](goals/G15-skeptical-agentic-review.md) | proposed | Define protected-condition hypotheses, proof obligations, and temporal-debt taxonomy | G14 |
-| G16 | proposed | Build claim–evidence graphs and conservative condition-status inference | G15 |
+| [G15](goals/G15-skeptical-agentic-review.md) | complete | Define protected-condition hypotheses, proof obligations, and temporal-debt taxonomy | G14 |
+| [G16](goals/G16-claim-evidence-graph.md) | proposed | Build claim–evidence graphs and conservative condition-status inference | G15 |
 | G17 | proposed | Add bounded context expansion across code, history, and configuration relations | G16 |
 | G18 | proposed | Add recorded-first operational/internal evidence providers | G17 |
 | G19 | proposed | Add skeptical review and citation-verified temporal-debt case files | G18 |
@@ -331,8 +331,9 @@ validation scope without calling any condition safe. Advances OUT-02, OUT-06,
 OUT-08 and SCN-01 through SCN-03, SCN-08, SCN-09.
 
 The [detailed G15 specification](goals/G15-skeptical-agentic-review.md) is
-proposed. It may be activated by a later user-authorized cycle; this reframing
-does not begin its implementation.
+complete. The next eligible goal is the proposed [detailed G16
+specification](goals/G16-claim-evidence-graph.md); it is not started by this
+cycle.
 
 ### G16 — Claim–evidence graph and conservative inference
 
@@ -358,6 +359,9 @@ SCN-01 through SCN-03, SCN-08, SCN-09.
 **Unlocks:** A deterministic condition-status result that downstream context
 expansion and operational providers can enrich without rewriting evidence
 semantics.
+
+The [detailed G16 specification](goals/G16-claim-evidence-graph.md) is
+proposed and will be activated only after an explicit user-authorized cycle.
 
 ### G17 — Controlled context expansion
 
