@@ -32,6 +32,7 @@ from sunset.scanner import scan_repository
 from sunset.validation import ValidationConfig, validate_candidate
 from sunset.validation_models import ValidationError, ValidationResult
 from sunset import __version__
+from sunset.agent_tools import tool_catalog_json
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -41,6 +42,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--version", action="version", version=f"sunset {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
+    tools_parser = subparsers.add_parser(
+        "tools",
+        help="list the local read-only agent tool contracts",
+    )
+    tools_parser.add_argument(
+        "--format",
+        choices=("json",),
+        default="json",
+        help="output format (default: json)",
+    )
     scan_parser = subparsers.add_parser(
         "scan",
         help="scan a committed Git snapshot for supported pytest markers",
@@ -169,6 +180,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "tools":
+        sys.stdout.write(tool_catalog_json())
+        return 0
+
     if args.command == "scan":
         try:
             result = scan_repository(args.repository)

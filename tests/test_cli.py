@@ -5,7 +5,9 @@ from pathlib import Path
 
 import pytest
 
+import sunset.agent_tools as agent_tools
 from sunset.cli import main
+from sunset.agent_tools import TOOL_NAMES
 from sunset.scanner import scan_repository
 
 
@@ -15,6 +17,30 @@ def test_cli_reports_package_version(capsys) -> None:
 
     assert stopped.value.code == 0
     assert capsys.readouterr().out == "sunset 0.1.0\n"
+
+
+def test_tools_cli_is_deterministic_and_context_free(capsys, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        agent_tools.GitRepository,
+        "open",
+        lambda *args, **kwargs: pytest.fail("tool catalog opened a repository"),
+    )
+    monkeypatch.setattr(
+        agent_tools.ArtifactStore,
+        "read_view",
+        lambda *args, **kwargs: pytest.fail("tool catalog accessed an artifact store"),
+    )
+    first_exit = main(["tools", "--format", "json"])
+    first = capsys.readouterr().out
+    second_exit = main(["tools", "--format", "json"])
+    second = capsys.readouterr().out
+    payload = json.loads(first)
+
+    assert first_exit == second_exit == 0
+    assert first == second
+    assert payload["schema_version"] == "1"
+    assert [item["name"] for item in payload["tools"]] == list(TOOL_NAMES)
+    assert all(item["effect"]["network_access"] is False for item in payload["tools"])
 
 
 def test_cli_emits_normalized_json_and_partial_failure_status(

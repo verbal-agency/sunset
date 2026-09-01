@@ -153,10 +153,10 @@ successful and inconclusive cases.
 ## Phase 2 — Bounded agentic investigation
 
 Phase 2 makes the Phase 1 heuristics and evidence services usable as safe tools
-inside a LangChain ecosystem agent. G10 is fully specified and active. Later
-goals are intentionally scoped outlines: when each predecessor completes, the
-cycle handoff must refine only the next eligible goal using the evidence and
-risks discovered so far.
+inside a LangChain ecosystem agent. G10 is complete and G11 is the only fully
+specified proposed goal. Later goals remain scoped outlines: when each
+predecessor completes, the cycle handoff must refine only the next eligible goal
+using the evidence and risks discovered so far.
 
 Refinement protocol: the cycle that completes an active Phase 2 goal creates a
 detailed specification and roadmap link for only the next eligible goal, keeps
@@ -166,8 +166,8 @@ are planning boundaries, not frozen acceptance criteria.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
-| [G10](goals/G10-agent-tool-contracts.md) | active | Expose local deterministic evidence operations as typed, scoped LangChain tools | G09 |
-| G11 | proposed | Add a replaceable chat-model runtime and one recorded structured reasoning step | G10 |
+| [G10](goals/G10-agent-tool-contracts.md) | complete | Expose local deterministic evidence operations as typed, scoped LangChain tools | G09 |
+| [G11](goals/G11-model-runtime-structured-reasoning.md) | proposed | Add a replaceable chat-model runtime and one recorded structured reasoning step | G10 |
 | G12 | proposed | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
 | G13 | proposed | Let the agent research external assumptions through recorded-first provider tools | G12 |
 | G14 | proposed | Pause and resume agentic investigations across the human validation boundary | G13 |
@@ -179,13 +179,18 @@ are planning boundaries, not frozen acceptance criteria.
 **Purpose:** Turn the proven Phase 1 heuristics into a safe capability boundary
 that an agent can use without bypassing provenance, budgets, or human control.
 
-The [detailed G10 specification](goals/G10-agent-tool-contracts.md) is the sole
-active Phase 2 goal. It introduces no model call or autonomous loop.
+The [detailed G10 specification](goals/G10-agent-tool-contracts.md) is complete.
+It introduced the safe local capability boundary without a model call or
+autonomous loop.
 
 ### G11 — Replaceable model runtime and structured reasoning
 
 **Purpose:** Introduce probabilistic interpretation behind an explicit provider
 boundary without allowing a model to execute tools or become evidence.
+
+The [detailed G11 specification](goals/G11-model-runtime-structured-reasoning.md)
+is proposed. It may be activated by a later user-authorized cycle; this G10
+handoff does not begin its implementation.
 
 **Objective:** Add a LangChain chat-model adapter, recorded replay provider, and
 one LangGraph reasoning node that converts compact tool receipts into a

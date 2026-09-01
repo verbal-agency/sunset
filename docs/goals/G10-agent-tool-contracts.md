@@ -1,6 +1,6 @@
 # G10 — Agent-ready deterministic tool contracts
 
-**Status:** active
+**Status:** complete
 **Dependencies:** G09
 
 ## Purpose
@@ -239,3 +239,41 @@ changing G10 to `complete`.
 - Synchronous and asynchronous LangChain invocation may schedule work
   differently. Deterministic IDs and receipts cannot depend on task ordering,
   timestamps, or framework-generated call IDs.
+
+## Completion evidence
+
+- **G10-AC01:** `test_registry_is_typed_exact_and_effect_declared` verifies the
+  exact three-tool `BaseTool` registry, strict versioned input schemas, and
+  machine-readable local-read-only effects. The locked package now declares
+  `langchain-core` directly.
+- **G10-AC02:** Discovery and provenance parity tests compare wrapper payloads
+  with the existing domain models, preserve candidate/artifact IDs and partial
+  scan errors, reproduce byte-identical receipts in recreated contexts, and
+  show that immutable raw artifacts are not rewritten.
+- **G10-AC03:** Bound-authority tests reject forbidden arguments and an internal
+  store, fail any socket open, prove target modules are not imported, allowlist
+  subprocess activity to read-only Git, and compare repository bytes and Git
+  status before and after invocation.
+- **G10-AC04:** Evidence-scope tests cover granted slices, exact ranges and
+  digests, truncation, per-call and cumulative budgets, insufficient/exhausted
+  budgets, ungranted and cross-store IDs, invalid ranges, and traversal-like
+  input without disclosing rejected bytes.
+- **G10-AC05:** Receipt normalization round-trips byte-identically through JSON.
+  A real LangGraph `InMemorySaver` fixture contains only the persisted receipt;
+  the immediate excerpt text and `transient_content` key are absent.
+- **G10-AC06:** Parse errors, shallow history, missing candidates, malformed
+  inputs, missing/corrupt artifacts, HEAD changes, and call/byte exhaustion all
+  return structured sync/async receipts while retaining successful evidence.
+- **G10-AC07:** The invalidation matrix covers contract version, repository HEAD
+  and target scope, collector, policy, evidence grants, and consumed budget.
+  Equivalent recreated contexts reuse the same normalized receipt.
+- **G10-AC08:** The context-free catalog CLI is deterministic under repository
+  and artifact-store access guards. Existing CLI behavior remains covered by
+  the full regression suite, and `README.md` plus `docs/AGENT-TOOLS.md` document
+  effects, capabilities, transient data, budgets, and the interpretation limit.
+
+Verification on 2026-08-31: `uv lock --check`, the 96-test locked full suite,
+the 22-test focused agent-tool/CLI suite, `uv run --locked sunset tools --format
+json`, and `git diff --check` all passed. The worktree contains only the
+intended G10 implementation, tests, dependency metadata, documentation, and
+planning handoff; it is intentionally uncommitted pending human authorization.

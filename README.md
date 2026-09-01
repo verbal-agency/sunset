@@ -45,6 +45,7 @@ uv run sunset benchmark --corpus tests/fixtures/benchmarks/corpus-v1.json --form
 uv run sunset benchmark --corpus tests/fixtures/benchmarks/corpus-v1.json --langsmith-export sunset-experiment.json
 uv run sunset corpus --manifest tests/fixtures/public_corpus/langchain-ecosystem-v1.json
 uv run sunset release-check --manifest docs/releases/G09-public-run.json
+uv run sunset tools --format json
 ```
 
 Commands return `0` for a complete result, `1` when useful output is
@@ -127,6 +128,26 @@ G01 scans only files committed at `HEAD`:
 
 This model gives later investigation stages an immutable source boundary. G02
 adds local artifact storage without network or model calls.
+
+## Local agent tool contracts
+
+G10 makes the deterministic discovery and local-Git evidence operations
+available as three context-bound LangChain tools:
+
+- `sunset_discover_candidates`
+- `sunset_get_candidate_provenance`
+- `sunset_read_evidence_excerpt`
+
+They are capability boundaries for later agent graphs, not an agent. G10 makes
+no model call, chooses no tool autonomously, opens no network connection, runs
+no target code, and cannot modify the analyzed repository. Trusted application
+code fixes the repository, committed HEAD, collector, external artifact store,
+evidence grants, and call/byte budgets before it gives the tools to a model.
+
+`sunset tools --format json` lists the versioned input schemas and effect
+declarations without opening a repository or artifact store. Library setup,
+receipt identity, transient evidence handling, and security boundaries are
+documented in [`docs/AGENT-TOOLS.md`](docs/AGENT-TOOLS.md).
 
 ## Compatibility collector schema version 1
 
