@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "responses": [
+    {"source": "support_policy", "locator": "policy://support/python", "source_identity": "support-policy-v3", "outcome": "supports_active", "summary": "Supported Python versions are 3.10 and newer.", "observed_at": "2026-09-01T00:00:00+00:00", "max_age_seconds": 86400, "freshness_key": "policy-v3", "payload": {"minimum": "3.10"}},
+    {"source": "deployment_inventory", "locator": "inventory://production/python", "source_identity": "inventory-snapshot-42", "outcome": "supports_expired", "summary": "No production image uses Python 3.9.", "observed_at": "2026-09-01T00:00:00+00:00", "max_age_seconds": 86400, "freshness_key": "inventory-42", "payload": {"images": 12, "legacy": 0}},
+    {"source": "runtime_telemetry", "locator": "telemetry://python/legacy", "source_identity": "telemetry-window-7", "outcome": "contradictory", "summary": "A legacy runtime was observed in the reporting window.", "observed_at": "2026-09-01T00:00:00+00:00", "max_age_seconds": 86400, "freshness_key": "telemetry-7", "payload": {"legacy": true}},
+    {"source": "contract", "locator": "contract://customer/compatibility", "source_identity": "contract-register-1", "outcome": "unknown", "summary": "Customer compatibility field is redacted.", "error_kind": "privacy_redacted", "observed_at": "2026-09-01T00:00:00+00:00", "max_age_seconds": 86400, "freshness_key": "contract-1", "payload": {"customer_count": 8}}
+  ]
+}

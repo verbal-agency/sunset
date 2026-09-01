@@ -1,6 +1,6 @@
 # G18 — Operational and internal evidence providers
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G17 (proposed)
 
 ## Purpose
@@ -126,6 +126,20 @@ exhaustion returns a structured terminal result.
 | G18-AC04 | Contradiction and missing-proof fixtures |
 | G18-AC05 | Explicit live-policy and budget tests with injected opener |
 | G18-AC06 | Focused suite, locked full suite, docs review, and diff check |
+
+## Completion evidence
+
+- `uv lock --check` completed successfully.
+- `uv run --locked pytest -q tests/test_operational_evidence.py` completed
+  successfully: 6 tests passed.
+- `uv run --locked pytest -q` completed successfully (full suite green).
+- `git diff --check` completed successfully; tracked and untracked files were
+  inspected with `git status --short`.
+- `docs/PROJECT.md` and `docs/SAFETY.md` document the five-source provider
+  boundary, recorded-first behavior, privacy/redaction, freshness, and live
+  containment rules.
+
+G19 remains proposed and is not started by this cycle.
 
 Focused tests should be named `test_g18_ac01_provider_boundary` through
 `test_g18_ac06_verification` (or recorded equivalent names).

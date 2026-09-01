@@ -84,6 +84,24 @@ HEAD; missing, truncated, stale, or budget-exhausted results remain explicit
 unknowns. This expands observability without granting arbitrary paths, shell,
 network, credentials, imports, execution, or mutation authority to a model.
 
+Operational evidence is a separate candidate-linked provider boundary. Sunset
+recognizes only configured support-policy, deployment-inventory, configuration,
+contract, and runtime-telemetry sources. Recorded fixtures are the default;
+live reads require an explicit host, credential identity, freshness policy,
+privacy policy, and byte/request budget. Receipts retain source scope,
+freshness, provenance, redaction summaries, and immutable artifact IDs, while
+unavailable, stale, privacy-redacted, or conflicting data remains unknown or
+contradictory rather than becoming an expiry conclusion.
+
+Operational and internal evidence is a separate, candidate-linked provider
+boundary. Sunset recognizes only configured support-policy, deployment-
+inventory, configuration, contract, and runtime-telemetry sources. Recorded
+fixtures are the default; live reads require an explicit host, credential
+identity, freshness policy, privacy policy, and byte/request budget. Receipts
+retain source scope, freshness, provenance, redaction summaries, and immutable
+artifact IDs, while unavailable, stale, privacy-redacted, or conflicting data
+remains unknown or contradictory rather than becoming an expiry conclusion.
+
 ## Garbage-collection model
 
 | Garbage collection concept | Sunset concept |

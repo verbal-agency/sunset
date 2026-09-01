@@ -43,6 +43,26 @@ human approval boundary explicit, and Sunset never applies a cleanup. Age,
 model confidence, issue state, and passing tests are insufficient proof of
 safety.
 
+Operational evidence is candidate-linked and recorded-first. The provider
+catalog is limited to support policy, deployment inventory, configuration,
+contracts, and runtime telemetry. Live reads require explicit host and
+credential identities plus request, byte, freshness, and privacy policies;
+ambient credentials and broad enterprise queries are rejected. Raw payloads
+remain in the configured content-addressed store when permitted, while model
+state receives only receipt metadata and redaction summaries. Missing, stale,
+redacted, or contradictory operational data produces an unknown or proof
+obligation rather than a cleanup recommendation.
+
+Operational evidence is candidate-linked and recorded-first. The provider
+catalog is limited to support policy, deployment inventory, configuration,
+contracts, and runtime telemetry. Live reads require explicit host and
+credential identities plus request, byte, freshness, and privacy policies;
+ambient credentials and broad enterprise queries are rejected. Raw payloads
+remain in the configured content-addressed store when permitted, while model
+state receives only receipt metadata and redaction summaries. Missing, stale,
+redacted, or contradictory operational data produces an unknown or proof
+obligation rather than a cleanup recommendation.
+
 ## Measured limitations
 
 The 20-case benchmark is a manually adjudicated, history-shaped regression
