@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {"case_id": "supported", "expected_terminal_state": "reviewed"},
+    {"case_id": "contradictory", "expected_terminal_state": "inconclusive"},
+    {"case_id": "tampered-artifact", "expected_error": "artifact_unresolved"},
+    {"case_id": "missing-proof", "expected_terminal_state": "inconclusive"}
+  ]
+}

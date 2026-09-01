@@ -8,6 +8,8 @@ from sunset.context_expansion import ContextExpansionContext, ContextExpansionEr
 from sunset.context_expansion_models import ContextExpansionObservation, ContextExpansionReceipt, ContextExpansionRequest
 from sunset.operational_evidence import ExplicitLiveOperationalProvider, OperationalEvidenceContext, RecordedOperationalProvider, receipt_to_evidence_edge
 from sunset.operational_evidence_models import FreshnessMetadata, OperationalEvidenceReceipt, OperationalQuery, PrivacyPolicy
+from sunset.casefile_finalizer import finalize_case_file, review_graph
+from sunset.review_models import CaseFile, CaseFileError, ClaimVerification, ReviewFinding, ReviewRequest, ReviewResult
 from sunset.temporal_epistemics_models import (
     ConditionHypothesis,
     EvidenceStatement,
@@ -20,6 +22,8 @@ from sunset.temporal_epistemics_models import (
 
 __all__ = [
     "Candidate",
+    "CaseFile",
+    "CaseFileError",
     "Claim",
     "ConditionHypothesis",
     "ContextExpansionContext",
@@ -27,8 +31,12 @@ __all__ = [
     "ContextExpansionObservation",
     "ContextExpansionReceipt",
     "ContextExpansionRequest",
+    "ClaimVerification",
     "ExplicitLiveOperationalProvider",
     "FreshnessMetadata",
+    "ReviewFinding",
+    "ReviewRequest",
+    "ReviewResult",
     "Contradiction",
     "EvidenceEdge",
     "EvidenceStatement",
@@ -50,6 +58,8 @@ __all__ = [
     "build_graph",
     "graph_from_epistemic_result",
     "receipt_to_evidence_edge",
+    "finalize_case_file",
+    "review_graph",
     "scan_repository",
 ]
 __version__ = "0.1.0"

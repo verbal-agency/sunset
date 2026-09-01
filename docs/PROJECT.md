@@ -93,6 +93,14 @@ freshness, provenance, redaction summaries, and immutable artifact IDs, while
 unavailable, stale, privacy-redacted, or conflicting data remains unknown or
 contradictory rather than becoming an expiry conclusion.
 
+Case files are a separate skeptical-review artifact. Review findings may add
+support, contradiction, scope limits, or missing proof obligations, but they
+cannot mutate the graph or grant approval. Finalization reloads every
+artifact-backed edge and distinguishes citation existence from citation
+support and condition establishment. Markdown and JSON outputs contain IDs,
+scope, freshness, findings, and open obligations—not raw payloads—and remain
+explicitly non-authoritative.
+
 Operational and internal evidence is a separate, candidate-linked provider
 boundary. Sunset recognizes only configured support-policy, deployment-
 inventory, configuration, contract, and runtime-telemetry sources. Recorded

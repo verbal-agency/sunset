@@ -1,6 +1,6 @@
 # G19 — Skeptical review and temporal-debt case files
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G18 (proposed)
 
 ## Purpose
@@ -119,6 +119,19 @@ without raw payloads.
 | G19-AC04 | Markdown/JSON round-trip and raw-content scans |
 | G19-AC05 | Tamper, malformed, interruption, and budget fixtures |
 | G19-AC06 | Focused suite, locked full suite, docs review, and diff check |
+
+## Completion evidence
+
+- `uv lock --check` completed successfully.
+- `uv run --locked pytest -q tests/test_skeptical_review_casefiles.py` completed
+  successfully: 6 tests passed.
+- `uv run --locked pytest -q` completed successfully (full suite green).
+- `git diff --check` completed successfully; tracked and untracked files were
+  inspected with `git status --short`.
+- `docs/PROJECT.md` and `docs/SAFETY.md` document independent skeptical review,
+  artifact digest verification, contradiction visibility, and non-authority.
+
+G20 remains proposed and is not started by this cycle.
 
 Focused tests should be named `test_g19_ac01_independent_challenge` through
 `test_g19_ac06_verification` (or recorded equivalent names).

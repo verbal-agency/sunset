@@ -53,6 +53,13 @@ state receives only receipt metadata and redaction summaries. Missing, stale,
 redacted, or contradictory operational data produces an unknown or proof
 obligation rather than a cleanup recommendation.
 
+Skeptical review is independent of validation and approval. It preserves
+contradictions and missing proof obligations, verifies referenced artifact
+digests before finalization, and emits an inconclusive result for missing or
+tampered evidence. Case files are passive Markdown/JSON artifacts with no raw
+payloads and no authority to edit, delete, execute, approve, or open a pull
+request.
+
 Operational evidence is candidate-linked and recorded-first. The provider
 catalog is limited to support policy, deployment inventory, configuration,
 contracts, and runtime telemetry. Live reads require explicit host and
