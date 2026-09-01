@@ -1,6 +1,6 @@
 # G17 — Controlled context expansion
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G16 (proposed)
 
 ## Purpose
@@ -118,6 +118,20 @@ network connections, import target code, execute commands, or mutate the target.
 | G17-AC04 | Duplicate/replay and invalidation tests |
 | G17-AC05 | Socket/import/process/target-state guards |
 | G17-AC06 | Focused suite, locked full suite, docs review, and diff check |
+
+## Completion evidence
+
+- `uv lock --check` completed successfully.
+- `uv run --locked pytest -q tests/test_context_expansion.py` completed
+  successfully: 7 tests passed.
+- `uv run --locked pytest -q` completed successfully (full suite green).
+- `git diff --check` completed successfully; tracked and untracked files were
+  inspected with `git status --short`.
+- `docs/AGENT-TOOLS.md` and `docs/PROJECT.md` document the six-relation
+  allowlist, structured receipts, proof obligations, replay behavior, and
+  authority boundaries.
+
+G18 remains proposed and is not started by this cycle.
 
 Focused tests should be named `test_g17_ac01_allowlisted_relations` through
 `test_g17_ac06_verification` (or recorded equivalent names).

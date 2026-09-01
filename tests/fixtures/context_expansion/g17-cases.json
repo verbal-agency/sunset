@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "purpose": "Deterministic G17 relation-expansion cases",
+  "cases": [
+    {"case_id": "resolved-ast-parent", "relation": "ast_parent", "expected_status": "success"},
+    {"case_id": "missing-callee", "relation": "callees", "expected_status": "unknown"},
+    {"case_id": "contradictory-history", "relation": "historical_variant", "expected_status": "success"},
+    {"case_id": "malformed-selector", "relation": "configuration_reference", "expected_status": "error"},
+    {"case_id": "budget-exhausted", "relation": "callers", "expected_status": "budget_exhausted"}
+  ]
+}

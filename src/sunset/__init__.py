@@ -4,6 +4,8 @@ from sunset.models import Candidate, ScanError, ScanResult
 from sunset.scanner import scan_repository
 from sunset.claim_evidence_graph import GraphValidationError, build_graph, graph_from_epistemic_result
 from sunset.claim_evidence_models import Claim, Contradiction, EvidenceEdge, GraphProofObligation, GraphResult
+from sunset.context_expansion import ContextExpansionContext, ContextExpansionError
+from sunset.context_expansion_models import ContextExpansionObservation, ContextExpansionReceipt, ContextExpansionRequest
 from sunset.temporal_epistemics_models import (
     ConditionHypothesis,
     EvidenceStatement,
@@ -18,6 +20,11 @@ __all__ = [
     "Candidate",
     "Claim",
     "ConditionHypothesis",
+    "ContextExpansionContext",
+    "ContextExpansionError",
+    "ContextExpansionObservation",
+    "ContextExpansionReceipt",
+    "ContextExpansionRequest",
     "Contradiction",
     "EvidenceEdge",
     "EvidenceStatement",

@@ -75,6 +75,15 @@ explicit proof obligation. Graph inference is deterministic and
 non-authoritative: it never turns model confidence, citation presence, or a
 passing validation run into permission to remove code.
 
+Context expansion is the controlled remedy for the graph's sensor bottleneck.
+The investigator may request one of six named repository relations—AST parent,
+callers, callees, same-commit changes, historical variant, or configuration
+reference—using a candidate or symbol identity and explicit budgets. The
+deterministic resolver returns structured references tied to the committed
+HEAD; missing, truncated, stale, or budget-exhausted results remain explicit
+unknowns. This expands observability without granting arbitrary paths, shell,
+network, credentials, imports, execution, or mutation authority to a model.
+
 ## Garbage-collection model
 
 | Garbage collection concept | Sunset concept |

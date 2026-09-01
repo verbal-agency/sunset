@@ -89,3 +89,21 @@ inference and makes no recommendation. Later goals may place a replaceable
 model runtime and a bounded loop above this registry, but deterministic policy
 continues to authorize tools and human approval continues to guard validation
 and cleanup.
+
+## Controlled context expansion
+
+G17 adds a separate repository-bound capability for exactly six relation names:
+`ast_parent`, `callers`, `callees`, `same_commit_changes`,
+`historical_variant`, and `configuration_reference`. A
+`ContextExpansionRequest` carries the bound HEAD, candidate or symbol identity,
+one relation, and explicit per-call, cumulative-byte, call, and wall-time
+budgets.
+
+`ContextExpansionContext.expand()` reads only the committed HEAD through the
+existing Git/AST boundary and returns structured references tied to that HEAD.
+Its receipt records scope, provenance, truncation, budgets, and errors; raw
+source is never persisted in `checkpoint_dict()`. Missing relations become
+`unknown` with a proof obligation. Duplicate compatible requests reuse their
+receipt, while changed HEAD, policy, or grant bindings are rejected. No
+relation may open a network connection, import target code, run arbitrary
+commands, or mutate the target repository.

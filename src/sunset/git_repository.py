@@ -89,6 +89,11 @@ class GitRepository:
 
         return self._list_files(_is_python_file)
 
+    def list_paths(self) -> tuple[str, ...]:
+        """List all committed paths below the requested target."""
+
+        return self._list_files(lambda _path: True)
+
     def _list_files(self, predicate: Callable[[str], bool]) -> tuple[str, ...]:
         result = _run_git(
             self.root,
