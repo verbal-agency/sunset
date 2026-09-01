@@ -149,6 +149,21 @@ declarations without opening a repository or artifact store. Library setup,
 receipt identity, transient evidence handling, and security boundaries are
 documented in [`docs/AGENT-TOOLS.md`](docs/AGENT-TOOLS.md).
 
+## Structured model runtime
+
+G11 adds a library-only, single-step reasoning adapter above those tools. It
+has three explicit modes: `disabled`, deterministic local `recorded` replay,
+and `live` with an application-injected LangChain `BaseChatModel`. There is no
+implicit model selection, credential discovery, tool dispatch, agent loop, or
+cleanup recommendation.
+
+The adapter receives compact G10 receipts and may receive one already-bounded
+transient excerpt for an immediate invocation. It returns a versioned,
+model-derived hypothesis with scoped citations and proposed *names* of G10
+tools. Proposed names are data only; G11 cannot execute them. Checkpoints retain
+only receipts and the structured result, never prompt text, raw model responses,
+or transient evidence. See [`docs/MODEL-RUNTIME.md`](docs/MODEL-RUNTIME.md).
+
 ## Compatibility collector schema version 1
 
 `sunset collect --collector compatibility` is an additive collector family. It

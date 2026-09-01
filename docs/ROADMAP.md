@@ -153,8 +153,8 @@ successful and inconclusive cases.
 ## Phase 2 — Bounded agentic investigation
 
 Phase 2 makes the Phase 1 heuristics and evidence services usable as safe tools
-inside a LangChain ecosystem agent. G10 is complete and G11 is the only fully
-specified proposed goal. Later goals remain scoped outlines: when each
+inside a LangChain ecosystem agent. G10 and G11 are complete, and G12 is the
+only fully specified proposed goal. Later goals remain scoped outlines: when each
 predecessor completes, the cycle handoff must refine only the next eligible goal
 using the evidence and risks discovered so far.
 
@@ -167,8 +167,8 @@ are planning boundaries, not frozen acceptance criteria.
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G10](goals/G10-agent-tool-contracts.md) | complete | Expose local deterministic evidence operations as typed, scoped LangChain tools | G09 |
-| [G11](goals/G11-model-runtime-structured-reasoning.md) | proposed | Add a replaceable chat-model runtime and one recorded structured reasoning step | G10 |
-| G12 | proposed | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
+| [G11](goals/G11-model-runtime-structured-reasoning.md) | complete | Add a replaceable chat-model runtime and one recorded structured reasoning step | G10 |
+| [G12](goals/G12-bounded-local-evidence-loop.md) | proposed | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
 | G13 | proposed | Let the agent research external assumptions through recorded-first provider tools | G12 |
 | G14 | proposed | Pause and resume agentic investigations across the human validation boundary | G13 |
 | G15 | proposed | Add an independent skeptical reviewer and citation-verified agentic case file | G14 |
@@ -189,8 +189,8 @@ autonomous loop.
 boundary without allowing a model to execute tools or become evidence.
 
 The [detailed G11 specification](goals/G11-model-runtime-structured-reasoning.md)
-is proposed. It may be activated by a later user-authorized cycle; this G10
-handoff does not begin its implementation.
+is complete. It introduced a replaceable single reasoning step without tool
+dispatch or an autonomous loop.
 
 **Objective:** Add a LangChain chat-model adapter, recorded replay provider, and
 one LangGraph reasoning node that converts compact tool receipts into a
@@ -215,6 +215,10 @@ OUT-06, OUT-07 and SCN-03, SCN-04, SCN-09, SCN-10.
 
 **Purpose:** Allow the investigator to choose evidence adaptively while keeping
 every action allowlisted, observable, resumable, and budgeted.
+
+The [detailed G12 specification](goals/G12-bounded-local-evidence-loop.md) is
+proposed. It may be activated by a later user-authorized cycle; this G11 handoff
+does not begin its implementation.
 
 **Objective:** Build a LangGraph planner–tool–observation loop that may execute
 G10's local read-only tools, revise structured hypotheses, and stop for

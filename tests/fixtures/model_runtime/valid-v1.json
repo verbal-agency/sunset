@@ -1,0 +1,20 @@
+{
+  "response": {
+    "assumption_status": "unknown",
+    "claims": [
+      {
+        "citations": ["sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],
+        "kind": "unknown",
+        "summary": "The available local provenance does not establish whether the original external assumption still holds."
+      }
+    ],
+    "open_questions": ["Which explicit external condition originally justified the marker?"],
+    "proposed_tools": ["sunset_read_evidence_excerpt"],
+    "summary": "More bounded evidence is needed before interpreting the rationale."
+  },
+  "schema_version": "1",
+  "usage": {
+    "input_tokens": 48,
+    "output_tokens": 36
+  }
+}

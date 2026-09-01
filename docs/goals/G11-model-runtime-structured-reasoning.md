@@ -1,6 +1,6 @@
 # G11 — Replaceable model runtime and structured reasoning
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G10 (complete)
 
 ## Purpose
@@ -206,3 +206,41 @@ git status --short
   must be explicit and may not be fabricated from latency or text length.
 - Recorded fixtures can prove determinism and containment, not live-model
   quality. Comparative quality claims and release thresholds remain G16 work.
+
+## Completion evidence
+
+- **G11-AC01:** `test_explicit_disabled_and_recorded_modes_do_not_open_sockets`
+  and `test_two_injected_base_chat_models_preserve_one_domain_contract` cover
+  all three runtime modes and two distinct `BaseChatModel` fakes. Persisted
+  results are Sunset dataclasses and never include LangChain message objects.
+- **G11-AC02:** Recorded fixture tests accept a cited hypothesis and reject
+  ungranted citations, unknown proposed tools, invalid enums, extra fields, and
+  oversized output. Invalid output becomes a structured `inconclusive` result.
+- **G11-AC03:** Prompt boundary tests demonstrate compact receipt projection,
+  exclusion of raw source/history and store locations, transient grant/size
+  enforcement, and absence of transient text from the persisted graph view.
+- **G11-AC04:** Socket guards cover disabled and recorded modes; explicit live
+  construction requires an injected model. A registry-construction guard proves
+  that a proposed tool name is data only. A real G10 receipt replay preserves
+  the fixture target snapshot.
+- **G11-AC05:** Token, cost, usage-metadata, and prompt-budget tests distinguish
+  provider-reported usage from estimates and return structured budget results.
+  Runtime latency and graph cache observations are telemetry only and absent
+  from normalized results.
+- **G11-AC06:** Byte-identical recorded replay, live-model call counting across
+  graph reuse, and prompt/receipt/transient/configuration invalidation tests
+  verify compatible reuse and incompatible checkpoint separation.
+- **G11-AC07:** Malformed/missing fixtures, invalid provider usage, timeout,
+  cancellation-shaped adapter failure, invalid model output, and corrupt
+  checkpoint paths all return structured sync/async results without discarding
+  receipt IDs or throwing across the Sunset boundary.
+- **G11-AC08:** The locked full regression suite preserves all existing
+  deterministic APIs and G10 tests. `README.md` and `docs/MODEL-RUNTIME.md`
+  document explicit modes, prompt/citation constraints, accounting, checkpoint
+  contents, and why a model hypothesis is neither evidence nor authority.
+
+Verification on 2026-08-31: `uv lock --check`, the locked full suite, the
+focused `tests/test_model_runtime.py` and `tests/test_reasoning_graph.py`
+suite, and `git diff --check` passed. The worktree contains only G11 runtime,
+test, documentation, and cycle-planning changes and remains uncommitted pending
+human authorization.
