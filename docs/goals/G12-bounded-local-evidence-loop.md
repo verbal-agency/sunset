@@ -1,6 +1,6 @@
 # G12 — Bounded local-evidence agent loop
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G11 (complete)
 
 ## Purpose
@@ -195,3 +195,38 @@ git status --short
 - Recorded paths demonstrate containment and replay, not autonomous quality or
   real-world tool-selection precision. G16 remains responsible for comparative
   evaluation and release thresholds.
+
+## Completion evidence
+
+- **G12-AC01:** `tests/test_agent_dispatch.py` verifies exact-registry,
+  typed-input, effect-metadata, antecedent, and duplicate-reuse checks before a
+  `BaseTool` invocation.
+- **G12-AC02:** `test_recorded_hypotheses_take_distinct_bounded_local_paths`
+  records discovery → provenance and discovery → granted excerpt paths, with
+  each non-initial record linked to its G11 reasoning invocation ID.
+- **G12-AC03:** `test_iteration_walltime_and_tool_budgets_have_explicit_terminals`
+  verifies bounded terminal reasons; the loop composes those limits with G10's
+  existing context budgets.
+- **G12-AC04:** `test_interrupted_checkpoint_resumes_without_repeating_completed_call`
+  resumes from immutable state without repeating discovery.
+  `test_checkpoint_rejects_changed_policy_and_trace_excludes_raw_excerpt`
+  rejects changed policy and grant scope; repository, model/config, and budget
+  identity are enforced by the same checkpoint compatibility contract.
+- **G12-AC05:** Dispatcher reuse tests and the loop's receipt/call ledger retain
+  prior successful receipts and turn rejected or exhausted requests into
+  explicit terminal state.
+- **G12-AC06:** Socket/import/target-snapshot guards in the heuristic test and
+  raw-content checkpoint scan prove the default stays offline, target-code-free,
+  immutable, and excludes excerpts from state.
+- **G12-AC07:** The heuristic test has no model object; recorded-path and
+  `test_two_live_adapters_use_the_same_agent_contract` tests cover recorded
+  replay and two injected `BaseChatModel` implementations on one Sunset result
+  contract.
+- **G12-AC08:** Existing G10/G11 focused regressions and the locked full suite
+  pass. `README.md` and `docs/AGENT-LOOP.md` document policy, bounds,
+  checkpoint/replay identity, the heuristic baseline, and the trace's
+  non-authoritative role.
+
+Verification on 2026-09-01: `uv lock --check`, locked focused G12 tests,
+locked G10/G11 regression tests, the locked full suite, and `git diff --check`
+passed. The worktree remains uncommitted pending human authorization.

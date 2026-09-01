@@ -164,6 +164,16 @@ tools. Proposed names are data only; G11 cannot execute them. Checkpoints retain
 only receipts and the structured result, never prompt text, raw model responses,
 or transient evidence. See [`docs/MODEL-RUNTIME.md`](docs/MODEL-RUNTIME.md).
 
+## Bounded local-evidence loop
+
+G12 combines the three G10 tools and a G11 result in a small, resumable
+LangGraph loop. Deterministic application policy—not a model—validates each
+typed request, enforces declared local-read-only effects and call/byte budgets,
+and records a compact receipt/reasoning trace. The heuristic-only baseline
+constructs no model; recorded and injected-live modes use the same contracts.
+Raw excerpts remain immediate-only, and a trace is never a cleanup authority.
+See [`docs/AGENT-LOOP.md`](docs/AGENT-LOOP.md).
+
 ## Compatibility collector schema version 1
 
 `sunset collect --collector compatibility` is an additive collector family. It

@@ -91,6 +91,16 @@ class ArtifactStore:
         path = self.root / "views" / f"{view_id}.json"
         return path.read_bytes() if path.exists() else None
 
+    def list_views(self, prefix: str = "") -> tuple[str, ...]:
+        """List cached view IDs without reading raw artifacts."""
+
+        directory = self.root / "views"
+        if not directory.exists():
+            return ()
+        return tuple(
+            sorted(path.stem for path in directory.glob("*.json") if path.is_file() and path.stem.startswith(prefix))
+        )
+
     def artifact_path(self, reference: ArtifactRef) -> Path:
         """Expose an artifact location for integrity-focused tests and tools."""
 
