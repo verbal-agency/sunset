@@ -2,14 +2,16 @@
 
 ## Product thesis
 
-Code does not merely become old; the reasons for code expire. Repositories
-rarely track when a temporary workaround, disabled test, compatibility shim, or
-version constraint has outlived the condition that justified it.
+Code does not merely become old; it often protects against a condition that may
+no longer exist. Repositories rarely track when a temporary workaround,
+disabled test, compatibility shim, or version constraint has outlived the
+condition it was meant to protect against.
 
-Sunset is a conservative, evidence-driven garbage collector for source code. It
-finds temporal-debt candidates, reconstructs their original rationale, checks
-whether the underlying assumption still holds, validates a proposed cleanup in
-an isolated environment, and produces a case file for human review.
+Sunset is a conservative, evidence-driven investigator of temporal debt. It
+finds historically contingent code, forms competing hypotheses about the
+protected condition, gathers evidence about whether that condition still holds,
+states what remains unproven, and can validate a narrowly scoped counterfactual
+experiment in an isolated environment for human review.
 
 Sunset proposes collection. It never treats age, lack of references, model
 confidence, or passing tests as sufficient proof that deletion is safe.
@@ -28,13 +30,15 @@ release.
 
 Phase 1 established the deterministic, evidence, validation, and evaluation
 substrate. Phase 2 turns those capabilities into allowlisted tools for a bounded
-agentic investigator built with LangChain, LangGraph, and LangSmith.
+agentic investigator. The agent framework is an implementation detail, not the
+product: the product is a conservative epistemic model for determining whether
+the premise behind historically contingent code is still true.
 
-The agent may choose which evidence tool to call, form and revise hypotheses,
-identify contradictions, and decide when the evidence is insufficient. It does
-not replace the deterministic collectors, raw evidence, executable validation,
-or human approval. Heuristic-only operation remains supported as a safe baseline
-and fallback.
+The investigator may choose bounded evidence operations, form and revise
+protected-condition hypotheses, identify contradictions, and conclude that the
+evidence is insufficient or the condition is unvalidatable. It does not replace
+deterministic collectors, raw evidence, executable validation, or human
+approval. Heuristic-only operation remains supported as a safe baseline.
 
 Phase 2 initially remains focused on the same Python-maintainer workflow. New
 languages, generic dead-code detection, enterprise knowledge connectors,
@@ -48,8 +52,8 @@ agentic vertical slice.
 | Roots | Supported contracts, active behavior, users, platforms, and policies |
 | Heap objects | Disabled tests, workarounds, pins, flags, and compatibility code |
 | Reachability | Current callers or a still-valid external assumption |
-| Mark | Evidence that the rationale remains valid |
-| Sweep candidate | Rationale appears to have expired |
+| Mark | Evidence that a protected condition still applies |
+| Sweep candidate | The protected condition may no longer apply |
 | Finalizer | Isolated removal experiment and tests |
 | Collection | Human-approved cleanup change |
 
@@ -71,18 +75,23 @@ agentic vertical slice.
 - **OUT-07 — Ecosystem portability:** Deterministic tools, model providers,
   graph persistence, and evaluation adapters integrate through replaceable
   LangChain ecosystem contracts without changing Sunset's domain objects.
+- **OUT-08 — Epistemic discipline:** Every condition-status conclusion records
+  its hypotheses, supporting and contradicting evidence, scope, freshness,
+  missing proof obligations, and the limits of counterfactual validation.
 
 ## Canonical acceptance scenarios
 
 - **SCN-01 — Expired marker:** Given an xfail introduced for a documented
   upstream bug that is fixed in the repository's current dependency range,
-  Sunset reconstructs the rationale, validates the unmarked test, and recommends
-  removal with evidence and residual risks.
+  Sunset records an upstream-condition hypothesis, distinguishes that evidence
+  from local deployment/support evidence, validates the unmarked test in scope,
+  and states the remaining proof obligation for a human reviewer.
 - **SCN-02 — Still-required marker:** Given an old xfail whose triggering
-  condition remains active, Sunset records why it is retained and does not
-  recommend removal.
+  condition remains active, Sunset records the supporting evidence and does not
+  assert that removal is safe.
 - **SCN-03 — Insufficient evidence:** Given missing or contradictory history,
-  Sunset returns `inconclusive` and identifies the evidence needed to continue.
+  Sunset returns `insufficient_evidence` or `contradictory_evidence` and
+  identifies the evidence needed to continue.
 - **SCN-04 — Safe interruption:** Given an investigation interrupted after
   evidence collection, Sunset resumes from a checkpoint without refetching
   unchanged artifacts or losing provenance.
@@ -112,9 +121,10 @@ agentic vertical slice.
   and pauses; denial executes nothing, while approval resumes only the existing
   disposable validation path.
 - **SCN-12 — Comparative agent evaluation:** On a versioned public benchmark,
-  heuristic-only and agentic modes are compared for rationale recovery,
-  classification, citations, unsupported claims, tool use, tokens, latency, and
-  cost, and the release gate explicitly passes or fails declared thresholds.
+  heuristic-only and agentic modes are compared for protected-condition
+  hypotheses, condition-status calibration, proof-obligation quality, citations,
+  unsupported claims, tool use, tokens, latency, and cost, and the release gate
+  explicitly passes or fails declared thresholds.
 
 ## Architecture constraints
 
@@ -153,15 +163,25 @@ agentic vertical slice.
     an explicit human decision crosses an approval boundary.
 15. **Agent traces are evidence maps, not hidden authority.** Tool calls,
     structured model outputs, budgets, errors, and citations are observable and
-    evaluable without treating chain-of-thought or confidence as proof.
+   evaluable without treating chain-of-thought or confidence as proof.
+16. **Protected conditions are hypotheses.** Git history can locate an
+    introduction, but cannot establish a single original rationale. Sunset must
+    represent alternative protected-condition hypotheses and preserve ambiguity.
+17. **Evidence has scope.** Static, historical, operational/internal, external,
+    and counterfactual-validation evidence answer different questions. A citation
+    may support, contradict, or fail to establish a claim; no evidence type is a
+    universal substitute for another.
+18. **Insufficient evidence is useful.** `insufficient_evidence`,
+    `contradictory_evidence`, and `unvalidatable` are successful conservative
+    outcomes, not errors to hide with a recommendation.
 
 ## Initial quality targets
 
 - Candidate discovery is deterministic for the same repository commit and
   configuration.
 - No unsupported material claim appears in a final case file.
-- Confirmed-removable recommendations require raw evidence and an isolated test
-  result.
+- A passing isolated test can only support `validated_in_scope`; it cannot by
+  itself establish a removal recommendation.
 - The default complete-investigation budget is 100,000 input tokens and 8,000
   output tokens per candidate.
 - The memory comparison target is defined by SCN-06.
@@ -171,8 +191,9 @@ agentic vertical slice.
 - Existing deterministic CLI and domain contracts remain backward compatible
   unless a goal explicitly defines and tests a migration.
 - Model-disabled and recorded-replay modes make no live model or network request.
-- Every model-derived material claim cites an evidence artifact; unsupported or
-  malformed claims are rejected before case-file finalization.
+- Every model-derived material claim cites an evidence artifact with an explicit
+  support, contradiction, or scope-limiting role; unsupported or malformed
+  claims are rejected before case-file finalization.
 - Each agentic run records model, prompt, tool, graph-state, and budget versions
   plus tool calls, token use, latency, cost availability, and terminal reason.
 - Model, tool, or budget failure yields structured partial evidence and an

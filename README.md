@@ -1,20 +1,22 @@
 # Sunset
 
-Sunset is a conservative, evidence-driven garbage collector for source code.
-It finds code whose original rationale may have expired, gathers evidence, and
-eventually validates cleanup proposals for human review.
+Sunset is a conservative, evidence-driven investigator of temporal debt. It
+finds code that encodes a historically contingent condition, gathers evidence
+about whether that condition still holds, and states the proof obligations a
+maintainer would need to review before any cleanup experiment.
 
 The 0.1.0 alpha release deterministically discovers pytest skip and
 expected-failure markers plus a deliberately narrow family of Python
 compatibility guards in a committed Git snapshot. It then records local Git
 provenance as immutable artifacts, assembles one candidate's bounded
 investigation ledger, and can classify explicitly cited external assumptions
-from recorded evidence. With explicit approval, it can validate one marker
-removal in a disposable local clone. It can also turn saved investigation and
-validation results into a citation-verified case file that keeps skeptical
-evidence and limitations beside a conservative, human-only recommendation. It
-does not decide that any candidate is obsolete and does not modify the analyzed
-repository.
+from recorded evidence. Such external evidence can establish upstream status,
+not whether an organization's operational condition has disappeared. With
+explicit approval, it can validate one marker removal in a disposable local
+clone. It can also turn saved investigation and validation results into a
+citation-verified case file that keeps skeptical evidence and limitations beside
+a conservative, human-only recommendation. It does not decide that any
+candidate is obsolete and does not modify the analyzed repository.
 
 Release setup, privacy and host-execution boundaries, a short deterministic
 demo, and a pinned LangGraph run are documented in

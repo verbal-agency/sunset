@@ -152,12 +152,15 @@ successful and inconclusive cases.
 
 ## Phase 2 — Bounded agentic investigation
 
-Phase 2 makes the Phase 1 heuristics and evidence services usable as safe tools
-inside a LangChain ecosystem agent. G10 through G14 are complete. G15 is the
-only fully specified proposed goal. G16 remains a scoped outline until G15
-completes.
-predecessor completes, the cycle handoff must refine only the next eligible goal
-using the evidence and risks discovered so far.
+Phase 2 treats the completed G10–G14 work as a safety substrate: bounded
+evidence access, provenance, external research, replay, human-gated experiments,
+and validation receipts. The product focus now shifts to the epistemic model:
+what condition code protects, which evidence can support or contradict it, and
+which proof obligation remains before a human reviews a counterfactual change.
+
+G15 is the only fully specified proposed goal. Later goals remain scoped
+outlines; when each predecessor completes, the cycle handoff refines only the
+next eligible goal using discovered evidence and risks.
 
 Refinement protocol: the cycle that completes an active Phase 2 goal creates a
 detailed specification and roadmap link for only the next eligible goal, keeps
@@ -172,8 +175,12 @@ are planning boundaries, not frozen acceptance criteria.
 | [G12](goals/G12-bounded-local-evidence-loop.md) | complete | Build a bounded, resumable planner–tool–observation loop over local evidence | G11 |
 | [G13](goals/G13-agentic-external-assumption-research.md) | complete | Let the agent research external assumptions through recorded-first provider tools | G12 |
 | [G14](goals/G14-human-gated-agentic-validation.md) | complete | Pause and resume agentic investigations across the human validation boundary | G13 |
-| [G15](goals/G15-skeptical-agentic-review.md) | proposed | Add an independent skeptical reviewer and citation-verified agentic case file | G14 |
-| G16 | proposed | Evaluate and package the agentic vertical slice with LangSmith and public evidence | G15 |
+| [G15](goals/G15-skeptical-agentic-review.md) | proposed | Define protected-condition hypotheses, proof obligations, and temporal-debt taxonomy | G14 |
+| G16 | proposed | Build claim–evidence graphs and conservative condition-status inference | G15 |
+| G17 | proposed | Add bounded context expansion across code, history, and configuration relations | G16 |
+| G18 | proposed | Add recorded-first operational/internal evidence providers | G17 |
+| G19 | proposed | Add skeptical review and citation-verified temporal-debt case files | G18 |
+| G20 | proposed | Calibrate and release the temporal-condition investigator | G19 |
 
 ### G10 — Agent-ready deterministic tool contracts
 
@@ -292,51 +299,95 @@ The [detailed G14 specification](goals/G14-human-gated-agentic-validation.md)
 is complete. It added a human-scoped, replay-safe approval boundary without
 giving models any execution authority.
 
-### G15 — Skeptical agentic review and case files
+### G15 — Temporal-debt epistemic model
 
-**Purpose:** Challenge the investigator's best explanation before presenting a
-cleanup recommendation to a maintainer.
+**Purpose:** Give Sunset a falsifiable model of what historically contingent
+code protects before adding more agents, providers, or case-file prose.
 
-**Objective:** Add an independently prompted skeptical reviewer that can inspect
-the cited ledger, request bounded read-only evidence, record objections, and
-hand a reconciled result to the deterministic citation-verifying finalizer.
+**Objective:** Define a versioned taxonomy of temporal-debt candidates,
+protected-condition hypotheses, condition states, evidence roles, contradictions,
+scope/freshness, and explicit proof obligations.
 
-**Scope:** Separate reviewer state and budget; disconfirming-evidence requests;
-investigator/reviewer disagreement; unsupported-claim rejection; JSON,
-Markdown, and HTML agentic case-file fields; human decision boundary.
+**Scope:** Domain contracts, deterministic normalization, fixture taxonomy,
+condition-state transitions, and compatibility adapters from G10–G14 receipts.
 
-**Exclusions:** Hidden chain-of-thought capture, reviewer access to validation
-approval, majority-vote authority, automatic edits, or uncited narrative claims.
+**Exclusions:** New provider integrations, broader code access, validation
+execution, reviewer agents, recommendations, edits, or final case files.
 
-**Expected exit evidence:** Seeded unsupported, contradictory, and omitted-risk
-claims are blocked or surfaced; every material final claim resolves to raw
-evidence; passing validation alone never establishes safety. Advances OUT-02,
-OUT-05, OUT-06 and SCN-01 through SCN-03, SCN-07 through SCN-09.
+**Expected exit evidence:** Fixtures distinguish competing hypotheses,
+contradictions, missing proof obligations, progress states, and bounded
+validation scope without calling any condition safe. Advances OUT-02, OUT-06,
+OUT-08 and SCN-01 through SCN-03, SCN-08, SCN-09.
 
 The [detailed G15 specification](goals/G15-skeptical-agentic-review.md) is
-proposed. It may be activated by a later user-authorized cycle; this G14 handoff
+proposed. It may be activated by a later user-authorized cycle; this reframing
 does not begin its implementation.
 
-### G16 — Agentic evaluation and Phase 2 release
+### G16 — Claim–evidence graph and conservative inference
 
-**Purpose:** Determine whether bounded agency adds trustworthy investigative
-value over the deterministic baseline before presenting it as a product
-capability.
+**Purpose:** Make evidence relationships and condition-status conclusions
+auditable instead of treating citation presence or model confidence as proof.
 
-**Objective:** Trace and evaluate heuristic-only and agentic configurations with
-LangSmith-compatible experiments, declare release thresholds before the final
-run, and package a reproducible agentic demonstration with measured limitations.
+**Objective:** Build a claim–evidence–contradiction graph with scope, freshness,
+and proof-obligation rules, then derive conservative condition states.
 
-**Scope:** Versioned public evaluation cases; per-node and per-tool traces;
-rationale, classification, citation, unsupported-claim, tool-use, token, cost,
-latency, interruption, and approval metrics; recorded CI replay; opt-in live
-evaluation; CLI/viewer release polish and pinned public demonstration.
+**Scope:** Evidence-role normalization, source ranking without suppression of
+disagreement, claim support tests, and receipt-to-graph adapters.
 
-**Exclusions:** Hiding failed thresholds, claiming fixture results prove
-production precision, new collector families, enterprise connectors, automatic
-cleanup, or external publication without separate human authorization.
+**Exclusions:** Operational provider integrations, arbitrary context expansion,
+validation changes, reviewer agents, release claims, or automatic cleanup.
 
-**Expected exit evidence:** SCN-12 explicitly passes or fails predeclared
-thresholds; heuristic regressions are visible; public successful, retained, and
-inconclusive cases are reproducible; privacy, cost, model, and sandbox limits are
-published. Advances OUT-03, OUT-05 through OUT-07 and SCN-01 through SCN-12.
+**Expected exit evidence:** The same evidence can support, contradict, or fail
+to establish a claim based on declared scope; incompatible evidence yields an
+explicit unknown rather than consensus. Advances OUT-02, OUT-06, OUT-08 and
+SCN-01 through SCN-03, SCN-08, SCN-09.
+
+### G17 — Controlled context expansion
+
+**Purpose:** Avoid a compact-receipt sensor bottleneck without granting models
+arbitrary repository or system access.
+
+**Objective:** Add allowlisted, relation-based expansion for AST parents,
+callers/callees, same-commit changes, historical variants, and configuration
+references under explicit budgets.
+
+**Scope boundary:** Relation-specific, read-only expansions and receipts only.
+Excludes operational providers, arbitrary file/system access, and mutation.
+
+### G18 — Operational/internal evidence providers
+
+**Purpose:** Make evidence such as support policy, deployment inventory,
+configuration, runtime traces, and contracts first-class because external status
+often cannot establish whether a protected condition still applies.
+
+**Objective:** Add recorded-first, replaceable operational provider contracts
+with explicit privacy, scope, freshness, and access policy.
+
+**Scope boundary:** Explicitly configured support-policy, inventory,
+configuration, contract, and runtime-telemetry sources. Excludes broad
+enterprise crawling and external writes.
+
+### G19 — Skeptical review and temporal-debt case files
+
+**Purpose:** Challenge the condition graph and proof obligations before a human
+reviews a cleanup decision.
+
+**Objective:** Add independent bounded review and citation-verified case-file
+finalization.
+
+**Scope boundary:** Challenge claims and proof obligations using the established
+graph and receipts. Excludes reviewer approval authority, new evidence-source
+classes, and automatic edits.
+
+### G20 — Calibration and temporal-condition release
+
+**Purpose:** Demonstrate whether Sunset’s epistemic model improves conservative
+temporal-debt decisions over search, heuristic, and agent-only baselines.
+
+**Objective:** Evaluate protected-condition identification, contradiction and
+proof-obligation quality, calibration, false-removal risk, cost, and latency on
+historical positive and negative cases before release claims.
+
+**Scope boundary:** Versioned benchmark cases, declared release thresholds, and
+reproducible recorded evaluation. Excludes claims that benchmark performance
+proves production removability or authorizes automatic cleanup.

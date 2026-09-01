@@ -1,114 +1,127 @@
-# G15 — Skeptical agentic review and citation-verified case files
+# G15 — Temporal-debt epistemic model
 
 **Status:** proposed
 **Dependencies:** G14 (complete)
 
 ## Purpose
 
-Challenge an investigator’s strongest explanation before a maintainer sees a
-recommendation, so a bounded agentic trace cannot silently convert incomplete,
-contradictory, or empirical-only evidence into unsafe cleanup advice.
+Define what Sunset is trying to know before adding more agent behavior: the
+condition historically contingent code protects, the competing explanations for
+that condition, and the evidence still needed before a maintainer reviews a
+counterfactual removal experiment.
 
 ## Objective
 
-Add an independently budgeted skeptical-review stage that inspects the compact
-investigator ledger, identifies missing/disconfirming evidence, can request only
-allowlisted read-only evidence, and passes a reconciled, citation-verified
-result to the existing deterministic case-file finalizer.
+Introduce versioned domain contracts and deterministic normalization for a
+temporal-debt ontology, protected-condition hypotheses, evidence roles,
+condition-status states, contradictions, scope/freshness, and explicit proof
+obligations. Adapt existing G10–G14 receipts into this model without treating a
+Git introduction, citation, external status, or passing validation as proof.
 
 ## Project alignment
 
-- Advances OUT-02, OUT-05, OUT-06, and OUT-07.
-- Advances SCN-01 through SCN-03 and SCN-07 through SCN-09.
-- Produces the reviewable case-file input that G16 will evaluate; it does not
-  publish results or apply changes.
+- Advances OUT-02, OUT-06, OUT-07, and OUT-08.
+- Advances SCN-01 through SCN-03, SCN-08, and SCN-09.
+- Establishes the shared semantics required by G16 evidence graphs, G17 context
+  expansion, G18 operational evidence, G19 review, and G20 calibration.
 
 ## Architecture constraints to preserve
 
-- The reviewer is independent inference, never an approval authority. It may
-  identify objections and request bounded evidence but cannot approve G14,
-  validate, edit, or create a pull request.
-- G10–G14 receipts/artifacts remain facts; reviewer/investigator conclusions
-  are hypotheses. The deterministic case-file finalizer must reload every
-  material citation from the artifact store before rendering.
-- Keep reviewer state/prompt compact and persist only structured findings,
-  receipt IDs, budgets, disagreement, and trace metadata—never raw prompts,
-  chain of thought, raw evidence/logs, credentials, or framework messages.
+- A protected condition is a hypothesis, not a recovered historical fact.
+  Multiple hypotheses and unresolved ambiguity must be representable.
+- Evidence roles are explicit: support, contradict, establish, scope-limit, and
+  missing. Citation presence alone must not establish a condition-status claim.
+- Static, historical, external, operational, and validation evidence have
+  distinct scope. A G14 result is `validated_in_scope`, never proof of safe
+  removal or absence of an unsupported runtime/customer condition.
+- The goal is deterministic and offline: no new model calls, provider requests,
+  repository execution, validation execution, or arbitrary context access.
 
 ## In scope
 
-1. Versioned skeptical finding, reviewer request, reconciliation, and
-   investigator/reviewer disagreement contracts.
-2. Separate recorded/live/disabled reviewer runtime configuration and bounded
-   read-only tool policy composed with G12/G13 budgets.
-3. Deterministic citation reload and rejection of unsupported/unknown material
-   claims before the existing JSON, Markdown, and HTML case-file finalizer.
-4. Agentic case-file fields for evidence map, external uncertainty, validation
-   result, objections, reconciliation, residual risk, and human-only decision.
-5. Fixtures for unsupported claims, contradictory evidence, omitted risks,
-   reviewer failure/budget exhaustion, checkpoint resume, and raw-data safety.
+1. A bounded temporal-debt taxonomy for the supported Phase 1 families:
+   disabled pytest markers, compatibility shims, version guards, and explicit
+   feature-flag-like conditional candidates where existing receipts can identify
+   them.
+2. Versioned protected-condition, hypothesis, claim, evidence-role,
+   contradiction, scope/freshness, proof-obligation, and conclusion contracts.
+3. Deterministic adapters from G10 local receipts, G13 external receipts, and
+   G14 validation results into normalized evidence statements.
+4. A non-automatic status vocabulary that separates investigation progress from
+   removal authority: `discovered`, `condition_hypothesized`,
+   `condition_identified`, `condition_likely_expired`,
+   `condition_likely_active`, `removal_testable`, `validated_in_scope`, and
+   `human_approved`; plus conservative terminal outcomes
+   `contradictory_evidence`, `insufficient_evidence`, and `unvalidatable`.
+5. Isolated fixtures that demonstrate ambiguity, contradiction, scope limits,
+   missing operational evidence, and counterfactual-validation limits.
+6. Documentation of the ontology and product vocabulary.
 
 ## Explicit exclusions
 
-- Hidden reasoning capture, majority-vote truth, reviewer approval/validation
-  access, new evidence providers, external writes, automatic edits, pull
-  requests, publication, or release-threshold evaluation.
+- New external or operational providers, arbitrary source/context expansion,
+  model/reviewer calls, approval/validation changes, case-file rendering,
+  recommendations, edits, pull requests, or release claims.
+- Universal automated classification of arbitrary temporal debt; the taxonomy is
+  deliberately bounded to current supported candidate families.
 
 ## Deliverables
 
-1. Reviewer/reconciliation/citation contracts and bounded graph stage.
-2. Allowlisted skeptical evidence-request adapter and independent budget state.
-3. Citation-verified agentic case-file bridge to the G07 finalizer.
-4. Adversarial fixtures and documentation.
+1. Framework-independent epistemic domain models and deterministic adapters.
+2. Fixture corpus and tests for supported candidate classes and condition states.
+3. Documentation for evidence roles, scope, proof obligations, and result
+   vocabulary.
 
 ## Goal-level acceptance criteria
 
-- **G15-AC01 — Independent bounded review:** Reviewer state and budgets are
-  separate; it can only inspect supplied compact receipts and request declared
-  read-only evidence with an explicit antecedent finding.
-- **G15-AC02 — Disagreement remains visible:** Contradictory, missing, and
-  omitted-risk fixtures produce structured objections/unknowns rather than a
-  forced consensus or recommendation.
-- **G15-AC03 — Citation-verified finalization:** Every material agentic
-  case-file claim reloads a referenced raw artifact; unsupported, stale, or
-  uncited claims are rejected before render.
-- **G15-AC04 — Validation is not proof:** Confirmed G14 validation remains one
-  cited empirical input; it never alone authorizes a removal recommendation.
-- **G15-AC05 — Replay and data safety:** Reviewer checkpoints resume compatible
-  work without repeating calls, invalidate on receipts/runtime/budget change,
-  and exclude raw prompts, bodies, logs, credentials, and messages.
-- **G15-AC06 — Compatibility and documentation:** Existing Phase 1–G14 APIs and
-  rendered case files remain compatible; documentation states reviewer limits,
-  citation rules, disagreement handling, and human decision boundary.
+- **G15-AC01 — Bounded ontology:** Every supported candidate maps to a declared
+  temporal-debt family and protected-condition shape; unsupported forms remain
+  explicit unknowns rather than fabricated categories.
+- **G15-AC02 — Hypotheses and evidence roles:** The model represents multiple
+  condition hypotheses plus supporting, contradicting, scope-limiting, and
+  missing evidence without equating a Git commit or citation with rationale.
+- **G15-AC03 — Conservative condition states:** Deterministic fixtures produce
+  progress, condition-status, and conservative terminal outcomes only when their
+  declared evidence rules hold; `validated_in_scope` and `human_approved` never
+  imply a claim that deletion is safe.
+- **G15-AC04 — Scope and proof obligations:** External EOL, source metadata,
+  and validation results retain their limits; missing operational/customer/runtime
+  evidence becomes a concrete proof obligation rather than a removal conclusion.
+- **G15-AC05 — Compatibility and safety:** G10–G14 receipts adapt without schema
+  migration or raw-content leakage, and the offline model opens no socket,
+  target repository, provider, validator, or model runtime.
+- **G15-AC06 — Documentation and verification:** Project framing and ontology
+  documentation distinguish condition evidence from safety proof; locked full
+  and focused tests pass.
 
 ## Expected verification evidence
 
 | Criterion | Evidence |
 | --- | --- |
-| G15-AC01 | Registry/effect/budget/antecedent adversarial tests |
-| G15-AC02 | Contradictory and omitted-risk fixture snapshots |
-| G15-AC03 | Citation reload, missing-artifact, and unsupported-claim rejection tests |
-| G15-AC04 | Confirmed-validation-only fixture with conservative output assertion |
-| G15-AC05 | Interrupt/resume counters, invalidation matrix, and raw-content checkpoint scans |
-| G15-AC06 | Locked full suite, focused reviewer/case-file tests, docs review, and diff check |
+| G15-AC01 | Positive/negative family fixture matrix |
+| G15-AC02 | Multi-hypothesis and evidence-role serialization tests |
+| G15-AC03 | State transition fixtures for every conservative outcome |
+| G15-AC04 | EOL, support-policy-missing, and validation-scope examples |
+| G15-AC05 | Receipt compatibility, socket/import/validator guards, and raw scans |
+| G15-AC06 | Documentation review, focused tests, locked full suite, and diff check |
 
 ## Required verification commands
 
 ```bash
 uv lock --check
 uv run --locked pytest -q
-uv run --locked pytest -q tests/test_agent_review.py tests/test_casefile.py
+uv run --locked pytest -q tests/test_temporal_epistemics.py
 git diff --check
 git status --short
 ```
 
 ## Carried-forward findings and risks
 
-- G14’s approval confirms only a bounded experiment, not deletion safety. G15
-  must preserve the exact validation plan/result as empirical evidence while
-  asking what it did not test.
-- G13 external observations can be expired, active, missing, or contradictory.
-  Reviewer prompts must retain those normalized outcomes and may not summarize
-  them as a single expiry fact.
-- G12/G13/G14 each use immutable external store views. G15 must reuse those
-  receipts without coupling its review state to framework checkpoint internals.
+- G13 external evidence often establishes upstream state, not deployment or
+  customer compatibility. G18 must provide operational evidence contracts; G15
+  must model that absence now as a proof obligation.
+- G14 validation proves only behavior covered by the reviewed experiment. Its
+  result must remain scope-limited even when confirmed.
+- Compact receipts are safety boundaries but can become a sensor bottleneck.
+  G17 must add controlled relation-based expansion only after G15 defines what
+  evidence relation a hypothesis is missing.
