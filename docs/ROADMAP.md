@@ -168,6 +168,17 @@ that next goal `proposed`, and carries forward only findings routed to it. A
 later user-authorized cycle may change that goal to `active`. The outlines below
 are planning boundaries, not frozen acceptance criteria.
 
+### Execution-readiness rules
+
+Luna or another implementation model may execute only the single roadmap entry
+marked `active`. If no entry is active, it must stop after identifying the next
+eligible proposal and request authorization. A detailed active-goal
+specification must include an execution contract: expected implementation
+surface, canonical contracts and invariants, fixture/test locations, side-effect
+boundaries, and terminal conditions. Downstream proposals intentionally omit
+those details until their predecessor supplies evidence; they are not safe to
+execute as-is.
+
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G10](goals/G10-agent-tool-contracts.md) | complete | Expose local deterministic evidence operations as typed, scoped LangChain tools | G09 |
@@ -325,6 +336,8 @@ does not begin its implementation.
 
 ### G16 — Claim–evidence graph and conservative inference
 
+**Dependencies:** G15 (proposed)
+
 **Purpose:** Make evidence relationships and condition-status conclusions
 auditable instead of treating citation presence or model confidence as proof.
 
@@ -342,7 +355,13 @@ to establish a claim based on declared scope; incompatible evidence yields an
 explicit unknown rather than consensus. Advances OUT-02, OUT-06, OUT-08 and
 SCN-01 through SCN-03, SCN-08, SCN-09.
 
+**Unlocks:** A deterministic condition-status result that downstream context
+expansion and operational providers can enrich without rewriting evidence
+semantics.
+
 ### G17 — Controlled context expansion
+
+**Dependencies:** G16 (proposed)
 
 **Purpose:** Avoid a compact-receipt sensor bottleneck without granting models
 arbitrary repository or system access.
@@ -354,7 +373,14 @@ references under explicit budgets.
 **Scope boundary:** Relation-specific, read-only expansions and receipts only.
 Excludes operational providers, arbitrary file/system access, and mutation.
 
+**Advances:** OUT-02, OUT-03, OUT-06, OUT-08; SCN-04, SCN-05, SCN-08, SCN-09.
+
+**Unlocks:** Evidence requests that can name the missing repository relation
+instead of guessing from a compact receipt.
+
 ### G18 — Operational/internal evidence providers
+
+**Dependencies:** G17 (proposed)
 
 **Purpose:** Make evidence such as support policy, deployment inventory,
 configuration, runtime traces, and contracts first-class because external status
@@ -367,7 +393,15 @@ with explicit privacy, scope, freshness, and access policy.
 configuration, contract, and runtime-telemetry sources. Excludes broad
 enterprise crawling and external writes.
 
+**Advances:** OUT-02, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-03,
+SCN-08, SCN-09.
+
+**Unlocks:** Internal-condition verification that can distinguish upstream
+status from deployment, customer, or support reality.
+
 ### G19 — Skeptical review and temporal-debt case files
+
+**Dependencies:** G18 (proposed)
 
 **Purpose:** Challenge the condition graph and proof obligations before a human
 reviews a cleanup decision.
@@ -379,7 +413,15 @@ finalization.
 graph and receipts. Excludes reviewer approval authority, new evidence-source
 classes, and automatic edits.
 
+**Advances:** OUT-02, OUT-06, OUT-08; SCN-01 through SCN-03, SCN-07 through
+SCN-09, SCN-11.
+
+**Unlocks:** Human-readable case files whose claims and missing proof are
+independently auditable.
+
 ### G20 — Calibration and temporal-condition release
+
+**Dependencies:** G19 (proposed)
 
 **Purpose:** Demonstrate whether Sunset’s epistemic model improves conservative
 temporal-debt decisions over search, heuristic, and agent-only baselines.
@@ -391,3 +433,9 @@ historical positive and negative cases before release claims.
 **Scope boundary:** Versioned benchmark cases, declared release thresholds, and
 reproducible recorded evaluation. Excludes claims that benchmark performance
 proves production removability or authorizes automatic cleanup.
+
+**Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-03,
+SCN-06, SCN-08 through SCN-12.
+
+**Unlocks:** A calibrated release decision and explicit limits on what Sunset
+may claim about temporal-condition investigations.
