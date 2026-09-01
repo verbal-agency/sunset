@@ -158,10 +158,10 @@ and validation receipts. The product focus now shifts to the epistemic model:
 what condition code protects, which evidence can support or contradict it, and
 which proof obligation remains before a human reviews a counterfactual change.
 
-G16, G17, G18, and G19 are complete. G20 is the next eligible proposed Phase 2
-goal. Only the next eligible goal is refined or activated by a cycle; later
-goals remain planning boundaries and may be adjusted when predecessor evidence
-changes their assumptions.
+G16, G17, G18, G19, and G20 are complete. Phase 2 is complete; post-release
+work remains in the backlog. Only the next eligible goal is refined or
+activated by a cycle; later goals remain planning boundaries and may be
+adjusted when predecessor evidence changes their assumptions.
 
 Refinement protocol: the cycle that completes an active Phase 2 goal creates a
 detailed specification and roadmap link for only the next eligible goal, keeps
@@ -192,7 +192,7 @@ execute as-is.
 | [G17](goals/G17-controlled-context-expansion.md) | complete | Add bounded context expansion across code, history, and configuration relations | G16 |
 | [G18](goals/G18-operational-internal-evidence.md) | complete | Add recorded-first operational/internal evidence providers | G17 |
 | [G19](goals/G19-skeptical-review-case-files.md) | complete | Add skeptical review and citation-verified temporal-debt case files | G18 |
-| [G20](goals/G20-calibration-release.md) | proposed | Calibrate and release the temporal-condition investigator | G19 |
+| [G20](goals/G20-calibration-release.md) | complete | Calibrate and release the temporal-condition investigator | G19 |
 
 ### G10 — Agent-ready deterministic tool contracts
 

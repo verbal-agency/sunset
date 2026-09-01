@@ -1,6 +1,6 @@
 # G20 — Calibration and temporal-condition release
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G19 (proposed)
 
 ## Purpose
@@ -126,6 +126,17 @@ request, and wall-time budgets produce a structured incomplete gate result.
 | G20-AC04 | Predeclared-threshold and invalid-label tests |
 | G20-AC05 | Replay/invalidation and raw-content/privacy guards |
 | G20-AC06 | Focused suite, locked full suite, docs review, and diff check |
+
+## Completion evidence
+
+- `uv lock --check` completed successfully.
+- `uv run --locked pytest -q tests/test_calibration_release.py` completed
+  successfully: 6 tests passed.
+- `uv run --locked pytest -q` completed successfully (full suite green).
+- `git diff --check` completed successfully; tracked and untracked files were
+  inspected with `git status --short`.
+- [RELEASE.md](../RELEASE.md) records the threshold, coverage, and
+  non-authority limitations for calibration claims.
 
 Focused tests should be named `test_g20_ac01_case_integrity` through
 `test_g20_ac06_verification` (or recorded equivalent names).

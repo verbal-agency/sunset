@@ -1,0 +1,7 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {"case_id": "expired-1", "candidate_family": "disabled_test", "protected_condition": "upstream bug", "historical_outcome": "removed", "label": {"condition_state": "condition_likely_expired", "historical_outcome": "removed", "contradictions": [], "proof_obligations": ["customer inventory"], "evidence_scope": ["external", "operational"]}},
+    {"case_id": "active-1", "candidate_family": "version_guard", "protected_condition": "legacy runtime", "historical_outcome": "retained", "label": {"condition_state": "condition_likely_active", "historical_outcome": "retained", "contradictions": ["runtime telemetry"], "proof_obligations": [], "evidence_scope": ["operational"]}}
+  ]
+}
