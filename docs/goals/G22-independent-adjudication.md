@@ -1,6 +1,6 @@
 # G22 — Independent adjudication and evidence quality
 
-**Status:** proposed  
+**Status:** proposed
 **Dependencies:** G21 (complete) and recorded human review input
 
 ## Purpose

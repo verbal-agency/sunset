@@ -1,6 +1,6 @@
 # G25 — Maintainer pilot and product decision
 
-**Status:** proposed  
+**Status:** proposed
 **Dependencies:** G24 (complete) and explicit pilot authorization
 
 ## Purpose

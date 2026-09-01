@@ -27,6 +27,7 @@ from sunset.investigation_models import InvestigationError, InvestigationResult,
 from sunset.provenance import collect_compatibility_provenance, collect_provenance
 from sunset.provenance_models import ProvenanceError, ProvenanceResult
 from sunset.public_corpus import PublicCorpusError, PublicCorpusReport, load_public_corpus
+from sunset.validation_corpus import ValidationCorpusError, audit_validation_corpus, load_validation_corpus
 from sunset.release import ReleaseEvidenceError, validate_public_run
 from sunset.scanner import scan_repository
 from sunset.validation import ValidationConfig, validate_candidate
@@ -160,6 +161,14 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark_parser.add_argument("--langsmith-api-key", help="LangSmith API key used only with --publish-langsmith")
     corpus_parser = subparsers.add_parser("corpus", help="validate a saved public corpus without contacting target repositories")
     corpus_parser.add_argument("--manifest", required=True, help="saved public corpus JSON")
+    validation_corpus_parser = subparsers.add_parser(
+        "validation-corpus", help="audit a provenance-bound validation corpus offline"
+    )
+    validation_corpus_subparsers = validation_corpus_parser.add_subparsers(dest="validation_corpus_command", required=True)
+    validation_audit_parser = validation_corpus_subparsers.add_parser("audit", help="audit a saved validation corpus")
+    validation_audit_parser.add_argument("--manifest", required=True, help="saved validation corpus JSON")
+    validation_audit_parser.add_argument("--output", help="optional path for the JSON audit report")
+    validation_audit_parser.add_argument("--max-cases", type=int, help="optional positive case-processing budget")
     release_parser = subparsers.add_parser(
         "release-check", help="validate saved public-release evidence and immutable output digests"
     )
@@ -377,6 +386,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
         sys.stdout.write(result.to_json())
+        return 0
+
+    if args.command == "validation-corpus":
+        try:
+            result = audit_validation_corpus(
+                load_validation_corpus(args.manifest), max_cases=args.max_cases
+            )
+            rendered = result.to_json()
+            if args.output:
+                Path(args.output).write_text(rendered, encoding="utf-8")
+        except (ValidationCorpusError, OSError) as exc:
+            error = {"kind": exc.code, "message": exc.message} if isinstance(exc, ValidationCorpusError) else {
+                "kind": "validation_corpus_output_failed", "message": str(exc)
+            }
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(rendered)
         return 0
 
     if args.command == "release-check":

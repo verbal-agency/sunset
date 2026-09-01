@@ -1,6 +1,6 @@
 # G24 — Split-safe optimization and ablation
 
-**Status:** proposed  
+**Status:** proposed
 **Dependencies:** G23 (complete)
 
 ## Purpose

@@ -475,7 +475,7 @@ blocked rather than manufacture labels.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
-| [G21](goals/G21-validation-corpus-protocol.md) | proposed | Establish a provenance-bound validation-corpus protocol and offline audit | G20 |
+| [G21](goals/G21-validation-corpus-protocol.md) | complete | Establish a provenance-bound validation-corpus protocol and offline audit | G20 |
 | [G22](goals/G22-independent-adjudication.md) | proposed | Capture independently adjudicated protected-condition labels and disagreement | G21 + human review input |
 | [G23](goals/G23-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G22 |
 | [G24](goals/G24-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G23 |
@@ -504,7 +504,7 @@ collection, optimization, and any claim about Sunset quality.
 adjudicate without conflating provenance with ground truth.
 
 The [detailed G21 specification](goals/G21-validation-corpus-protocol.md) is
-proposed and may be activated by an explicit user-authorized Cycle.
+complete. G22 remains proposed and requires independent human review input.
 
 ### G22 — Independent adjudication and evidence quality
 

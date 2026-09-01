@@ -1,6 +1,6 @@
 # G21 — Validation corpus protocol and provenance audit
 
-**Status:** proposed  
+**Status:** complete
 **Dependencies:** G20 (complete)
 
 ## Purpose
@@ -240,3 +240,21 @@ git status --short
 - If source evidence becomes unavailable or contradicts the packet, retain the
   case with an explicit missing/contradictory requirement or exclude it with a
   reason; do not repair it with an inferred label.
+
+## Completion evidence
+
+- `uv lock --check` completed successfully.
+- `uv run --locked pytest -q tests/test_validation_corpus.py` completed
+  successfully: 6 tests passed.
+- `uv run --locked pytest -q` completed successfully: full suite green.
+- `.venv/bin/python -m sunset validation-corpus audit --manifest
+  tests/fixtures/validation_corpus/langchain-validation-v1.json` completed
+  successfully: 20 cases audited, 14 development, 6 holdout, 60 missing proof
+  obligations, and `gate_ready=false`.
+- `git diff --check` completed successfully.
+- The committed 20-case packet audits as 14 development and 6 holdout cases,
+  with `gate_ready=false` and missing condition-status proof obligations.
+
+All six goal criteria are satisfied by the named tests and artifacts above.
+The next eligible goal is G22, which remains proposed and is not started by
+this cycle.

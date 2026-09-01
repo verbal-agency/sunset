@@ -1,6 +1,6 @@
 # G23 — Frozen baseline evaluation
 
-**Status:** proposed  
+**Status:** proposed
 **Dependencies:** G22 (complete)
 
 ## Purpose
