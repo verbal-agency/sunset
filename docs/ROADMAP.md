@@ -468,17 +468,18 @@ independent adjudication, frozen comparison runs, split-safe optimization, and
 an explicitly limited maintainer pilot.
 
 G22 is complete as an implementation seam. G22a completed real pinned GitHub
-artifact capture and offline replay. G23 is now the next eligible proposal and
-requires human adjudication input; any Cycle reaching it without those inputs
-must stop as blocked rather than manufacture labels. G24--G26 remain scoped
-planning boundaries.
+artifact capture and offline replay. G22b completed a five-class
+declared-support bundle before adjudication while leaving actual deployment
+usage as a separate proof obligation. G23 remains blocked pending two
+independent human reviews. G24--G26 remain scoped planning boundaries.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G21](goals/G21-validation-corpus-protocol.md) | complete | Establish a provenance-bound validation-corpus protocol and offline audit | G20 |
 | [G22](goals/G22-pinned-git-evidence-ingestion.md) | complete | Retrieve pinned Git source and patches as replayable evidence | G21 |
 | [G22a](goals/G22a-real-github-artifact-capture.md) | complete | Prove real pinned GitHub artifact capture or document blocked connectivity | G22 + authorized network |
-| [G23](goals/G23-independent-adjudication.md) | proposed | Capture independently adjudicated protected-condition labels and disagreement | G22a + human review input |
+| [G22b](goals/G22b-current-support-evidence.md) | complete | Capture a declared-support evidence bundle without mutating G21 | G22a + owner-approved selections |
+| [G23](goals/G23-independent-adjudication.md) | blocked | Capture independently adjudicated protected-condition labels and disagreement | G22b + human review input |
 | [G24](goals/G24-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + pilot authorization |
@@ -558,9 +559,36 @@ SCN-09, and SCN-12.
 The [detailed G22a specification](goals/G22a-real-github-artifact-capture.md)
 is complete. Its real fixture and connectivity report are available to G23.
 
+### G22b — Declared-support evidence bundle
+
+**Dependencies:** G22a (complete) and owner-approved supplement selections
+
+**Purpose:** Capture a declared-support evidence bundle for adjudication
+without mutating the immutable G21 corpus or conflating declared support with
+actual deployment usage.
+
+**Objective:** Add a manifest-bound supplement, capture exact evidence from
+repository packaging, published artifacts, CI matrices, support documentation,
+and dependency/version markers, and replay it offline through G22.
+
+**Scope boundary:** Finite GitHub and public-registry pointers across the five
+support-evidence classes, bounded capture, diagnostics, fixture generation, and
+replay. Excludes broad search, telemetry, adjudication, execution, and
+mutation.
+
+**Advances:** OUT-02, OUT-05, OUT-08; SCN-01 through SCN-03, SCN-05, SCN-08,
+and SCN-09.
+
+**Unlocks:** A current declared-support evidence bundle for G23, while leaving
+actual deployment usage as a separate proof obligation.
+
+The [detailed G22b specification](goals/G22b-current-support-evidence.md) is
+complete. Its owner-approved selection, real capture fixture, and offline
+replay evidence are available to G23.
+
 ### G23 — Independent adjudication and evidence quality
 
-**Dependencies:** G22a (complete) and recorded human review input
+**Dependencies:** G22b (complete) and recorded human review input
 
 **Purpose:** Turn provenance-bound case packets into defensible evaluation
 labels without allowing the system under test to create its own ground truth.
@@ -578,7 +606,8 @@ optimization, live provider access, cleanup, and rewriting historical evidence.
 **Unlocks:** A human-grounded development/holdout corpus for G24.
 
 The [G23 outline](goals/G23-independent-adjudication.md) will be refined only
-after G22a supplies real inspectable evidence packets and human review input.
+after its review protocol and independent human review input are supplied; the
+G22b support bundle is now available.
 
 ### G24 — Frozen baseline evaluation
 

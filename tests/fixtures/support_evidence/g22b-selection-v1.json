@@ -1,0 +1,169 @@
+{
+  "supplement_id": "g22b-langchain-support-v1",
+  "schema_version": "1",
+  "selection_status": "owner_approved",
+  "owner_approval_required": false,
+  "selection_basis": "User approved the pinned package, PyPI, CI, and dependency selections; no canonical repository support-policy document was found, so that class is explicitly not applicable.",
+  "g21_manifest_id": "sunset-validation-v1",
+  "g21_manifest_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+  "repository": "langchain",
+  "repository_url": "https://github.com/langchain-ai/langchain.git",
+  "pinned_head": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+  "published_release": {
+    "distribution": "langchain-core",
+    "release_identity": "langchain-core==1.6.1",
+    "registry": "pypi",
+    "release_locator": "https://pypi.org/pypi/langchain-core/1.6.1/json",
+    "selection_basis": "Latest available langchain-core release at capture time; capture records its Requires-Python metadata and freshness scope."
+  },
+  "cases": [
+    {
+      "case_id": "lc-python39-removeprefix-shim",
+      "candidate_path": "libs/core/langchain_core/runnables/configurable.py",
+      "entries": [
+        {
+          "case_id": "lc-python39-removeprefix-shim",
+          "evidence_id": "lc-python39-removeprefix-shim:support-packaging",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "packaging_metadata",
+          "description": "Pinned core package metadata and declared Python requirement.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/libs/core/pyproject.toml",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": "libs/core/pyproject.toml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python39-removeprefix-shim",
+          "evidence_id": "lc-python39-removeprefix-shim:support-published-artifact",
+          "status": "capture",
+          "source_kind": "public_registry",
+          "evidence_class": "published_artifact",
+          "description": "Exact PyPI release metadata, including Requires-Python and release files.",
+          "locator": "https://pypi.org/pypi/langchain-core/1.6.1/json",
+          "release_identity": "langchain-core==1.6.1",
+          "freshness_scope": "published_release"
+        },
+        {
+          "case_id": "lc-python39-removeprefix-shim",
+          "evidence_id": "lc-python39-removeprefix-shim:support-ci",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "ci_support",
+          "description": "Pinned CI workflow and its Python-version test matrix.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/.github/workflows/_test.yml",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": ".github/workflows/_test.yml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python39-removeprefix-shim",
+          "evidence_id": "lc-python39-removeprefix-shim:support-docs",
+          "status": "not_applicable",
+          "evidence_class": "support_documentation",
+          "description": "No canonical repository support-policy or release-note document is present in the selected source tree.",
+          "reason": "Generic README files are not authoritative support policy; operational/support documentation must be supplied through a later evidence provider.",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python39-removeprefix-shim",
+          "evidence_id": "lc-python39-removeprefix-shim:support-dependencies",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "dependency_marker",
+          "description": "Pinned dependency metadata containing the compatibility workaround and Python markers.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/libs/langchain/pyproject.toml",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": "libs/langchain/pyproject.toml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python39-removeprefix-shim",
+          "evidence_id": "lc-python39-removeprefix-shim:support-dependencies-lock",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "dependency_marker",
+          "description": "Pinned lockfile dependency set showing the compatibility workaround dependency state.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/libs/langchain/uv.lock",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": "libs/langchain/uv.lock",
+          "freshness_scope": "repository_pinned_head"
+        }
+      ]
+    },
+    {
+      "case_id": "lc-python310-aiter-shim",
+      "candidate_path": "libs/core/langchain_core/utils/aiter.py",
+      "entries": [
+        {
+          "case_id": "lc-python310-aiter-shim",
+          "evidence_id": "lc-python310-aiter-shim:support-packaging",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "packaging_metadata",
+          "description": "Pinned core package metadata and declared Python requirement.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/libs/core/pyproject.toml",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": "libs/core/pyproject.toml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python310-aiter-shim",
+          "evidence_id": "lc-python310-aiter-shim:support-published-artifact",
+          "status": "capture",
+          "source_kind": "public_registry",
+          "evidence_class": "published_artifact",
+          "description": "Exact PyPI release metadata, including Requires-Python and release files.",
+          "locator": "https://pypi.org/pypi/langchain-core/1.6.1/json",
+          "release_identity": "langchain-core==1.6.1",
+          "freshness_scope": "published_release"
+        },
+        {
+          "case_id": "lc-python310-aiter-shim",
+          "evidence_id": "lc-python310-aiter-shim:support-ci",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "ci_support",
+          "description": "Pinned CI workflow and its Python-version test matrix.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/.github/workflows/_test.yml",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": ".github/workflows/_test.yml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python310-aiter-shim",
+          "evidence_id": "lc-python310-aiter-shim:support-docs",
+          "status": "not_applicable",
+          "evidence_class": "support_documentation",
+          "description": "No canonical repository support-policy or release-note document is present in the selected source tree.",
+          "reason": "Generic README files are not authoritative support policy; operational/support documentation must be supplied through a later evidence provider.",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python310-aiter-shim",
+          "evidence_id": "lc-python310-aiter-shim:support-dependencies",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "dependency_marker",
+          "description": "Pinned dependency metadata containing the compatibility workaround and Python markers.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/libs/langchain/pyproject.toml",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": "libs/langchain/pyproject.toml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lc-python310-aiter-shim",
+          "evidence_id": "lc-python310-aiter-shim:support-dependencies-lock",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "dependency_marker",
+          "description": "Pinned lockfile dependency set showing the compatibility workaround dependency state.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langchain/e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0/libs/langchain/uv.lock",
+          "commit_sha": "e92c8a08bf382121cc1e95f7e75ddc8cb9c01ab0",
+          "path": "libs/langchain/uv.lock",
+          "freshness_scope": "repository_pinned_head"
+        }
+      ]
+    }
+  ]
+}

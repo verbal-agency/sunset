@@ -1,7 +1,7 @@
 # G23 — Independent adjudication and evidence quality
 
-**Status:** proposed
-**Dependencies:** G22a (complete) and recorded human review input
+**Status:** blocked
+**Dependencies:** G22b (complete) and recorded human review input
 
 ## Purpose
 
@@ -9,7 +9,7 @@ Turn provenance-bound case packets into defensible evaluation labels without
 allowing the system under test to create its own ground truth.
 
 > Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G22a and
+> Cycle must replace it with a Luna-ready execution contract after G22b and
 > the stated human-review input are available.
 
 ## Objective
@@ -56,6 +56,17 @@ must not change any of them.
 
 ## Refinement trigger
 
-After G22a completes, incorporate its concrete evidence packet schema, audit output, and
+After G22b completes, incorporate its concrete evidence packet schema, audit output, and
 the owner-supplied review protocol into a Luna-ready execution contract with
 binary criteria and recorded-review fixtures.
+
+## Blocker
+
+Activation is blocked because the repository contains no owner-supplied review
+protocol, reviewer-authority record, or two independent recorded decisions for
+the eligible cases. It also awaits the declared-support evidence bundle from
+G22b.
+Unblock only when those inputs are provided as immutable,
+reviewer-pseudonymized artifacts bound to G22a/G22b evidence IDs. Luna may then
+refine this outline into the required execution contract; it must not create
+stand-in labels or treat historical outcomes as adjudication.

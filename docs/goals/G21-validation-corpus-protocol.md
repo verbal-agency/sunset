@@ -257,6 +257,7 @@ git status --short
   with `gate_ready=false` and missing condition-status proof obligations.
 
 All six goal criteria are satisfied by the named tests and artifacts above.
-G22 subsequently completed the pinned Git evidence-ingestion seam. G22a is now
-the next proposed goal; G23 follows it and requires recorded independent human
-review input before activation.
+G22 subsequently completed the pinned Git evidence-ingestion seam. G22a then
+completed real artifact capture. G22b completed the declared-support evidence
+bundle; G23 remains blocked until recorded independent human review input and
+its review protocol are supplied.

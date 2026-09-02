@@ -54,6 +54,32 @@ recorded alongside it in `g22a-langchain-real-v1.sha256`. The fixture is the
 offline handoff to later adjudication, not a claim that any protected condition
 has expired.
 
+## Declared-support evidence bundle
+
+G22b extends the same recorded-first boundary to an owner-approved bundle of
+package metadata, published artifact metadata, CI/version matrices, dependency
+markers, and any explicitly declared support documentation. It accepts only
+declared HTTPS locators on the GitHub and PyPI host allowlists; it does not
+search repositories or infer deployment usage. A support-documentation class
+may be explicitly `not_applicable` when no authoritative policy source exists.
+
+The captured LangChain bundle is replayable at
+`tests/fixtures/git_evidence/g22b-langchain-support-v1.json`, with its digest
+in `g22b-langchain-support-v1.sha256`. It contains pinned GitHub artifacts and
+`langchain-core==1.6.1` PyPI metadata for the two Python compatibility-shim
+cases. The bundle records declared support only; customer or deployment usage
+remains a separate operational evidence obligation.
+
+Capture it with an explicit live authorization and byte budget:
+
+```bash
+sunset support-evidence capture \
+  --manifest tests/fixtures/validation_corpus/langchain-validation-v1.json \
+  --supplement tests/fixtures/support_evidence/g22b-selection-v1.json \
+  --output-fixture tests/fixtures/git_evidence/g22b-langchain-support-v1.json \
+  --store /tmp/sunset-g22b-support --live --max-bytes 1200000
+```
+
 ## Receipts and artifacts
 
 Available bytes are written to the configured content-addressed artifact store

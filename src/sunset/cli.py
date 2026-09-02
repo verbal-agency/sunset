@@ -30,6 +30,7 @@ from sunset.provenance_models import ProvenanceError, ProvenanceResult
 from sunset.public_corpus import PublicCorpusError, PublicCorpusReport, load_public_corpus
 from sunset.validation_corpus import ValidationCorpusError, audit_validation_corpus, load_validation_corpus
 from sunset.git_evidence import GitEvidenceError, LiveGitEvidenceProvider, RecordedGitEvidenceProvider, capture_git_evidence, fetch_git_evidence
+from sunset.support_evidence import SupportEvidenceError, capture_support_evidence, load_support_selection
 from sunset.release import ReleaseEvidenceError, validate_public_run
 from sunset.scanner import scan_repository
 from sunset.validation import ValidationConfig, validate_candidate
@@ -192,6 +193,17 @@ def build_parser() -> argparse.ArgumentParser:
     git_capture_parser.add_argument("--max-bytes", type=int, default=65_536)
     git_capture_parser.add_argument("--timeout-seconds", type=int, default=10)
     git_capture_parser.add_argument("--diagnostic-output", help="optional JSON report path")
+    support_evidence_parser = subparsers.add_parser("support-evidence", help="capture declared-support evidence for selected cases")
+    support_evidence_subparsers = support_evidence_parser.add_subparsers(dest="support_evidence_command", required=True)
+    support_capture_parser = support_evidence_subparsers.add_parser("capture", help="capture a declared support-evidence bundle")
+    support_capture_parser.add_argument("--manifest", required=True, help="validation corpus JSON")
+    support_capture_parser.add_argument("--supplement", required=True, help="owner-approved support selection JSON")
+    support_capture_parser.add_argument("--output-fixture", required=True, help="fixture path written only after all captures succeed")
+    support_capture_parser.add_argument("--store", required=True, help="content-addressed artifact store")
+    support_capture_parser.add_argument("--live", action="store_true", required=True, help="explicitly authorize bounded public HTTPS reads")
+    support_capture_parser.add_argument("--max-bytes", type=int, default=65_536)
+    support_capture_parser.add_argument("--timeout-seconds", type=int, default=10)
+    support_capture_parser.add_argument("--diagnostic-output", help="optional JSON report path")
     release_parser = subparsers.add_parser(
         "release-check", help="validate saved public-release evidence and immutable output digests"
     )
@@ -461,6 +473,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         except (ValidationCorpusError, GitEvidenceError, OSError) as exc:
             error = {"kind": getattr(exc, "code", "git_capture_failed"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(json.dumps(report.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        return 0 if report.status == "verified" else 2
+
+    if args.command == "support-evidence" and args.support_evidence_command == "capture":
+        try:
+            corpus = load_validation_corpus(args.manifest)
+            selection = load_support_selection(args.supplement)
+            report = capture_support_evidence(
+                corpus,
+                selection,
+                ArtifactStore(args.store),
+                args.output_fixture,
+                max_bytes=args.max_bytes,
+                timeout_seconds=args.timeout_seconds,
+                diagnostic_output=args.diagnostic_output,
+            )
+        except (ValidationCorpusError, SupportEvidenceError, OSError) as exc:
+            error = {"kind": getattr(exc, "code", "support_capture_failed"), "message": getattr(exc, "message", str(exc))}
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
         sys.stdout.write(json.dumps(report.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
