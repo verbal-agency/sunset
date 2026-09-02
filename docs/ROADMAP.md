@@ -467,18 +467,17 @@ condition label is true. The phase requires provenance-bound evaluation cases,
 independent adjudication, frozen comparison runs, split-safe optimization, and
 an explicitly limited maintainer pilot.
 
-G22 is complete as an implementation seam. G22a is the next eligible proposal:
-it must prove real pinned GitHub artifact capture or produce an evidence-backed
-connectivity-blocked report before independent adjudication. G23 remains
-downstream and requires human adjudication input; any Cycle reaching it without
-those inputs must stop as blocked rather than manufacture labels. G24--G26
-remain scoped planning boundaries.
+G22 is complete as an implementation seam. G22a completed real pinned GitHub
+artifact capture and offline replay. G23 is now the next eligible proposal and
+requires human adjudication input; any Cycle reaching it without those inputs
+must stop as blocked rather than manufacture labels. G24--G26 remain scoped
+planning boundaries.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G21](goals/G21-validation-corpus-protocol.md) | complete | Establish a provenance-bound validation-corpus protocol and offline audit | G20 |
 | [G22](goals/G22-pinned-git-evidence-ingestion.md) | complete | Retrieve pinned Git source and patches as replayable evidence | G21 |
-| [G22a](goals/G22a-real-github-artifact-capture.md) | proposed | Prove real pinned GitHub artifact capture or document blocked connectivity | G22 + authorized network |
+| [G22a](goals/G22a-real-github-artifact-capture.md) | complete | Prove real pinned GitHub artifact capture or document blocked connectivity | G22 + authorized network |
 | [G23](goals/G23-independent-adjudication.md) | proposed | Capture independently adjudicated protected-condition labels and disagreement | G22a + human review input |
 | [G24](goals/G24-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
@@ -557,7 +556,7 @@ SCN-09, and SCN-12.
 **Unlocks:** Real inspectable evidence for G23's independent adjudication.
 
 The [detailed G22a specification](goals/G22a-real-github-artifact-capture.md)
-is the next eligible proposal and is Luna-ready for activation.
+is complete. Its real fixture and connectivity report are available to G23.
 
 ### G23 — Independent adjudication and evidence quality
 

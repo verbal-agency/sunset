@@ -31,6 +31,29 @@ provider, restricted to GitHub's allowlisted hosts, limited to one request and
 are discovered and no links are followed. A transport error, 404, rate limit,
 or oversized response never becomes a condition conclusion.
 
+For real corpus acquisition, use the G22a capture command with an explicit
+selection and live flag. It performs one request per pointer and writes the
+fixture atomically only when every selected response is available:
+
+```bash
+sunset git-evidence capture \
+  --manifest tests/fixtures/validation_corpus/langchain-validation-v1.json \
+  --selection lc-python39-removeprefix-shim:history,lc-stream-error-xfail:history \
+  --output-fixture tests/fixtures/git_evidence/g22a-langchain-real-v1.json \
+  --store /tmp/sunset-g22a-capture --live --max-bytes 262144
+```
+
+DNS, TLS, timeout, HTTP, redirect, decode, and budget failures are reported by
+phase. They leave the capture unverified and must be recorded as a blocked
+outcome rather than replaced with authored fixture content.
+
+The repository includes a real replay fixture captured from three pinned
+LangChain pointers at
+`tests/fixtures/git_evidence/g22a-langchain-real-v1.json`; its SHA-256 is
+recorded alongside it in `g22a-langchain-real-v1.sha256`. The fixture is the
+offline handoff to later adjudication, not a claim that any protected condition
+has expired.
+
 ## Receipts and artifacts
 
 Available bytes are written to the configured content-addressed artifact store

@@ -1,6 +1,6 @@
 # G22a — Real GitHub artifact capture and connectivity proof
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G22 (complete), an environment authorized for bounded public
 GitHub HTTPS reads
 
@@ -203,7 +203,7 @@ Luna in an authorized network environment, but CI remains replay-only.
 uv lock --check
 uv run --locked pytest -q tests/test_git_evidence_capture.py tests/test_git_evidence.py
 uv run --locked pytest -q
-uv run --locked sunset git-evidence capture --manifest tests/fixtures/validation_corpus/langchain-validation-v1.json --selection lc-python39-removeprefix-shim:history,lc-python310-aiter-shim:history,lc-stream-error-xfail:history --output-fixture tests/fixtures/git_evidence/g22a-langchain-real-v1.json --store /tmp/sunset-g22a-capture --live
+uv run --locked sunset git-evidence capture --manifest tests/fixtures/validation_corpus/langchain-validation-v1.json --selection lc-python39-removeprefix-shim:history,lc-python310-aiter-shim:history,lc-stream-error-xfail:history --output-fixture tests/fixtures/git_evidence/g22a-langchain-real-v1.json --store /tmp/sunset-g22a-capture --live --max-bytes 262144
 git diff --check
 git status --short
 ```
@@ -224,3 +224,24 @@ stop; do not rerun indefinitely or claim AC02 completion.
 - A verified artifact proves historical content at a pinned location only. G23
   still requires independent human condition adjudication and operational
   evidence.
+
+## Completion evidence
+
+- The bounded live capture fetched all three declared G21 pointers from public
+  GitHub with `--max-bytes 262144` and `--timeout-seconds 10`: two pinned
+  commit patches (7,719 bytes each) and one pinned LangChain blob (67,167
+  bytes). The report status was `verified`, with three requests and zero
+  diagnostics.
+- The committed fixture is
+  `tests/fixtures/git_evidence/g22a-langchain-real-v1.json` (82,605 captured
+  bytes) with manifest digest
+  `5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7` and
+  fixture digest
+  `153e250fb2e6115cf3806c7b88f3276911afd09cb23c3a705371ecebc2947d06`.
+  The digest is duplicated in the adjacent `.sha256` file.
+- `tests/test_git_evidence_capture.py` and `tests/test_git_evidence.py` pass;
+  the committed fixture replays through the recorded provider with socket
+  guards and matching artifact digests.
+- The full suite passes (201 collected tests), `uv lock --check`, JSON
+  validation, Python compilation, and `git diff --check` pass. No target
+  repository was cloned or modified.
