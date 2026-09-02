@@ -21,7 +21,8 @@ before any evaluation or optimization run.
 
 - Advances OUT-02, OUT-05, and OUT-08.
 - Advances SCN-01 through SCN-03 and SCN-12.
-- Unlocks G23's independent adjudication without conflating source provenance,
+- Unlocks G22a's real-artifact capture and G23's independent adjudication
+  without conflating source provenance,
   historical outcome, and protected-condition ground truth.
 
 ## Architecture constraints to preserve
@@ -256,6 +257,6 @@ git status --short
   with `gate_ready=false` and missing condition-status proof obligations.
 
 All six goal criteria are satisfied by the named tests and artifacts above.
-G22 subsequently completed the pinned Git evidence-ingestion prerequisite;
-G23 is now the next proposed goal and requires recorded independent human
+G22 subsequently completed the pinned Git evidence-ingestion seam. G22a is now
+the next proposed goal; G23 follows it and requires recorded independent human
 review input before activation.

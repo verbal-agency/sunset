@@ -1,7 +1,7 @@
 # G23 — Independent adjudication and evidence quality
 
 **Status:** proposed
-**Dependencies:** G21 (complete) and recorded human review input
+**Dependencies:** G22a (complete) and recorded human review input
 
 ## Purpose
 
@@ -9,7 +9,7 @@ Turn provenance-bound case packets into defensible evaluation labels without
 allowing the system under test to create its own ground truth.
 
 > Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G22 and
+> Cycle must replace it with a Luna-ready execution contract only after G22a and
 > the stated human-review input are available.
 
 ## Objective
@@ -56,6 +56,6 @@ must not change any of them.
 
 ## Refinement trigger
 
-After G22 completes, incorporate its concrete evidence packet schema, audit output, and
+After G22a completes, incorporate its concrete evidence packet schema, audit output, and
 the owner-supplied review protocol into a Luna-ready execution contract with
 binary criteria and recorded-review fixtures.

@@ -21,7 +21,8 @@ and an artifact ID, never raw bytes in agent state.
 
 - Advances OUT-02, OUT-05, OUT-06, and OUT-08.
 - Advances SCN-01 through SCN-03, SCN-04, SCN-05, SCN-08, and SCN-09.
-- Unlocks substantive G23 adjudication of protected-condition hypotheses and
+- Unlocks G22a's real-artifact capture prerequisite for G23 adjudication of
+  protected-condition hypotheses and
   proof obligations.
 
 ## Architecture constraints to preserve
