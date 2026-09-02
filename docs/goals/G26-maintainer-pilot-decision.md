@@ -1,7 +1,7 @@
-# G25 — Maintainer pilot and product decision
+# G26 — Maintainer pilot and product decision
 
 **Status:** proposed
-**Dependencies:** G24 (complete) and explicit pilot authorization
+**Dependencies:** G25 (complete) and explicit pilot authorization
 
 ## Purpose
 
@@ -10,7 +10,7 @@ real maintainer review, where operational evidence and missing context matter
 most.
 
 > Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G24 and
+> Cycle must replace it with a Luna-ready execution contract only after G25 and
 > explicit pilot authorization provide the required authority and risk limits.
 
 ## Objective
@@ -28,7 +28,7 @@ an evidence-bounded continue, revise, or stop decision.
 
 ## Scope boundary
 
-Use the G24 configuration within existing read-only investigation and
+Use the G25 configuration within existing read-only investigation and
 human-gated validation boundaries. Define participant consent, candidate count,
 data minimization/redaction, success and harm measures, retention, and an
 incident stop rule before the first pilot run. Publish aggregate and per-case
@@ -56,7 +56,7 @@ bounded continue/revise/stop recommendation. It is not a cleanup authorization.
 
 ## Refinement trigger
 
-After G24 completes and a pilot owner supplies authorization, replace this
+After G25 completes and a pilot owner supplies authorization, replace this
 outline with a Luna-ready execution contract containing the approved candidate
 list, privacy rules, stop thresholds, fixtures/simulation tests, and binary
 acceptance criteria.

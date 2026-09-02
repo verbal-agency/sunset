@@ -11,6 +11,7 @@ import sys
 
 from sunset.casefile import build_case_file
 from sunset.casefile_models import CaseFileError
+from sunset.artifact_store import ArtifactStore
 from sunset.benchmark import (
     BenchmarkError,
     evaluate_corpus,
@@ -28,6 +29,7 @@ from sunset.provenance import collect_compatibility_provenance, collect_provenan
 from sunset.provenance_models import ProvenanceError, ProvenanceResult
 from sunset.public_corpus import PublicCorpusError, PublicCorpusReport, load_public_corpus
 from sunset.validation_corpus import ValidationCorpusError, audit_validation_corpus, load_validation_corpus
+from sunset.git_evidence import GitEvidenceError, LiveGitEvidenceProvider, RecordedGitEvidenceProvider, fetch_git_evidence
 from sunset.release import ReleaseEvidenceError, validate_public_run
 from sunset.scanner import scan_repository
 from sunset.validation import ValidationConfig, validate_candidate
@@ -169,6 +171,18 @@ def build_parser() -> argparse.ArgumentParser:
     validation_audit_parser.add_argument("--manifest", required=True, help="saved validation corpus JSON")
     validation_audit_parser.add_argument("--output", help="optional path for the JSON audit report")
     validation_audit_parser.add_argument("--max-cases", type=int, help="optional positive case-processing budget")
+    git_evidence_parser = subparsers.add_parser("git-evidence", help="fetch one manifest-bound Git source or patch")
+    git_evidence_subparsers = git_evidence_parser.add_subparsers(dest="git_evidence_command", required=True)
+    git_fetch_parser = git_evidence_subparsers.add_parser("fetch", help="fetch one pinned Git evidence pointer")
+    git_fetch_parser.add_argument("--manifest", required=True, help="validation corpus JSON")
+    git_fetch_parser.add_argument("--case-id", required=True, help="case owning the evidence pointer")
+    git_fetch_parser.add_argument("--evidence-id", required=True, help="pointer ID from that case")
+    git_fetch_parser.add_argument("--store", required=True, help="content-addressed artifact store")
+    mode_group = git_fetch_parser.add_mutually_exclusive_group(required=True)
+    mode_group.add_argument("--fixture", help="recorded Git evidence fixture")
+    mode_group.add_argument("--live", action="store_true", help="explicitly fetch the pinned public URL")
+    git_fetch_parser.add_argument("--kind", choices=("blob", "patch"))
+    git_fetch_parser.add_argument("--max-bytes", type=int, default=65_536)
     release_parser = subparsers.add_parser(
         "release-check", help="validate saved public-release evidence and immutable output digests"
     )
@@ -404,6 +418,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         sys.stdout.write(rendered)
         return 0
+
+    if args.command == "git-evidence":
+        try:
+            corpus = load_validation_corpus(args.manifest)
+            case = next((item for item in corpus.cases if item.case_id == args.case_id), None)
+            if case is None:
+                raise GitEvidenceError("case_not_found", "case is not present in the supplied manifest")
+            pointer = next((item for item in case.evidence if item.evidence_id == args.evidence_id), None)
+            if pointer is None:
+                raise GitEvidenceError("evidence_not_found", "evidence pointer is not present on the selected case")
+            provider = RecordedGitEvidenceProvider(args.fixture) if args.fixture else LiveGitEvidenceProvider()
+            result = fetch_git_evidence(pointer, provider, ArtifactStore(args.store), kind=args.kind, max_bytes=args.max_bytes)
+        except (ValidationCorpusError, GitEvidenceError, OSError) as exc:
+            error = {"kind": getattr(exc, "code", "git_evidence_failed"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(json.dumps(result.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        return 0 if result.outcome in {"available", "missing"} else 2
 
     if args.command == "release-check":
         try:

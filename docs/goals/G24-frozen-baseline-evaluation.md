@@ -1,7 +1,7 @@
-# G23 — Frozen baseline evaluation
+# G24 — Frozen baseline evaluation
 
 **Status:** proposed
-**Dependencies:** G22 (complete)
+**Dependencies:** G23 (complete)
 
 ## Purpose
 
@@ -9,7 +9,7 @@ Measure Sunset's actual epistemic behavior on frozen, independently adjudicated
 cases before changing policies or prompts to improve a score.
 
 > Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G22
+> Cycle must replace it with a Luna-ready execution contract only after G23
 > freezes the corpus and label identities.
 
 ## Objective
@@ -23,11 +23,11 @@ latency results.
 
 - Advances OUT-03, OUT-05, OUT-06, and OUT-08.
 - Advances SCN-03, SCN-06, SCN-08 through SCN-10, and SCN-12.
-- Unlocks a pre-optimization baseline and measured error taxonomy for G24.
+- Unlocks a pre-optimization baseline and measured error taxonomy for G25.
 
 ## Scope boundary
 
-Use only recorded/offline evidence and the frozen G22 manifest. Evaluate the
+Use only recorded/offline evidence and the frozen G23 manifest. Evaluate the
 same case/trace contract for both modes; report every exclusion, incomplete
 run, disagreement, unsupported claim, and safety signal by case and aggregate.
 Evaluation identity includes corpus, split, evaluator, prompt/model, tool, and
@@ -48,6 +48,6 @@ only against development cases and must treat the holdout report as sealed.
 
 ## Refinement trigger
 
-After G22 completes, replace this outline with a Luna-ready execution contract
+After G23 completes, replace this outline with a Luna-ready execution contract
 that names the actual corpus and trace schemas, test fixtures, denominator and
 confidence rules, budget/stop rules, and binary acceptance criteria.

@@ -1,0 +1,49 @@
+# Pinned Git evidence
+
+Sunset can retrieve the source blob or commit patch referenced by an existing
+validation-corpus `EvidencePointer`. This is an evidence-ingestion capability,
+not a rationale or removability decision.
+
+## Recorded-first workflow
+
+Use a committed fixture for reproducible runs:
+
+```bash
+sunset git-evidence fetch \
+  --manifest tests/fixtures/validation_corpus/langchain-validation-v1.json \
+  --case-id CASE_ID \
+  --evidence-id EVIDENCE_ID \
+  --store /tmp/sunset-evidence \
+  --fixture tests/fixtures/git_evidence/g22-recorded.json
+```
+
+The pointer supplies the repository, full commit SHA, and path. A commit
+pointer resolves to a pinned `.patch`; a blob pointer resolves to the exact
+path at that SHA. The fixture provider performs no socket, Git, subprocess, or
+model operation. Missing, malformed, contradictory, and over-budget records
+remain structured uncertainty or errors.
+
+## Explicit live boundary
+
+`--live` is an opt-in read-only public GitHub GET. The URL is derived by the
+provider, restricted to GitHub's allowlisted hosts, limited to one request and
+64 KiB by default, and bounded by a ten-second timeout. No ambient credentials
+are discovered and no links are followed. A transport error, 404, rate limit,
+or oversized response never becomes a condition conclusion.
+
+## Receipts and artifacts
+
+Available bytes are written to the configured content-addressed artifact store
+and represented to callers by a SHA-256 digest, artifact ID, locator, byte
+length, provider identity, and freshness key. Receipt JSON does not contain raw
+source, patch bytes, credentials, or a cleanup recommendation. Cached receipts
+are reused only when the pointer, provider policy, fixture digest, freshness
+key, and byte budget match; the artifact is integrity-checked before reuse.
+
+## Non-authority boundary
+
+Retrieved source and patches answer only “what was recorded at this pinned
+location?” They do not establish that a protected condition has expired,
+validate a removal, or authorize a mutation. Adjudication must compare this
+evidence with operational/internal evidence, counter-evidence, and an explicit
+proof obligation in a later goal.

@@ -21,7 +21,7 @@ before any evaluation or optimization run.
 
 - Advances OUT-02, OUT-05, and OUT-08.
 - Advances SCN-01 through SCN-03 and SCN-12.
-- Unlocks G22's independent adjudication without conflating source provenance,
+- Unlocks G23's independent adjudication without conflating source provenance,
   historical outcome, and protected-condition ground truth.
 
 ## Architecture constraints to preserve
@@ -107,7 +107,7 @@ case; dangling evidence references; and a holdout case containing a prohibited
 evaluation/optimization field. A case missing a required requirement category
 is valid only as `unprepared`; a requirement with no evidence pointers remains
 an explicit proof obligation. Neither state is gate ready. `gate_ready` is
-always false in G21 because G22 has not independently adjudicated any
+always false in G21 because G23 has not independently adjudicated any
 protected-condition labels.
 
 ### Deterministic behavior matrix
@@ -232,7 +232,7 @@ git status --short
 ## Risks and carried-forward findings
 
 - The current G08a corpus demonstrates pinned historical outcomes, not the
-  condition labels needed for efficacy claims. G22 owns independent human
+  condition labels needed for efficacy claims. G23 owns independent human
   assessment; it must not treat G21 packet preparation as adjudication.
 - A 20-case starter packet supports protocol testing, not a statistically
   persuasive product conclusion. G22 and G23 must report coverage and any
@@ -256,5 +256,6 @@ git status --short
   with `gate_ready=false` and missing condition-status proof obligations.
 
 All six goal criteria are satisfied by the named tests and artifacts above.
-The next eligible goal is G22, which remains proposed and is not started by
-this cycle.
+G22 subsequently completed the pinned Git evidence-ingestion prerequisite;
+G23 is now the next proposed goal and requires recorded independent human
+review input before activation.

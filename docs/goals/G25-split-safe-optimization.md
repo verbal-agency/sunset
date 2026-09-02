@@ -1,7 +1,7 @@
-# G24 — Split-safe optimization and ablation
+# G25 — Split-safe optimization and ablation
 
 **Status:** proposed
-**Dependencies:** G23 (complete)
+**Dependencies:** G24 (complete)
 
 ## Purpose
 
@@ -9,7 +9,7 @@ Improve measurable decision quality without tuning against the same evidence
 used to make the product-quality claim.
 
 > Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G23
+> Cycle must replace it with a Luna-ready execution contract only after G24
 > supplies measured errors, budgets, and a sealed holdout identity.
 
 ## Objective
@@ -23,7 +23,7 @@ holdout split.
 
 - Advances OUT-03, OUT-05, OUT-06, and OUT-08.
 - Advances SCN-06, SCN-08 through SCN-10, and SCN-12.
-- Unlocks a reproducible candidate configuration and known regressions for G25.
+- Unlocks a reproducible candidate configuration and known regressions for G26.
 
 ## Scope boundary
 
@@ -48,6 +48,6 @@ handoff and must not be concealed.
 
 ## Refinement trigger
 
-After G23 completes, replace this outline with a Luna-ready execution contract
+After G24 completes, replace this outline with a Luna-ready execution contract
 derived from its actual error taxonomy, baseline budgets, metrics, and sealed
 holdout identity.

@@ -1,4 +1,4 @@
-# G22 — Independent adjudication and evidence quality
+# G23 — Independent adjudication and evidence quality
 
 **Status:** proposed
 **Dependencies:** G21 (complete) and recorded human review input
@@ -9,7 +9,7 @@ Turn provenance-bound case packets into defensible evaluation labels without
 allowing the system under test to create its own ground truth.
 
 > Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G21 and
+> Cycle must replace it with a Luna-ready execution contract only after G22 and
 > the stated human-review input are available.
 
 ## Objective
@@ -22,7 +22,7 @@ evaluation manifest for later offline evaluation.
 
 - Advances OUT-02, OUT-05, and OUT-08.
 - Advances SCN-01 through SCN-03 and SCN-12.
-- Unlocks an independently adjudicated development/holdout corpus for G23.
+- Unlocks an independently adjudicated development/holdout corpus for G24.
 
 ## Scope boundary
 
@@ -30,7 +30,7 @@ Create reviewer packets and import/validation contracts that bind each decision
 to G21 evidence IDs, a protocol version, reviewer identity pseudonym, and an
 adjudication outcome. Preserve individual decisions, agreement/disagreement,
 abstention, and unresolved proof obligations. Freeze the accepted corpus digest
-and split before G23 reads it.
+and split before G24 reads it.
 
 ## Explicit exclusions
 
@@ -56,6 +56,6 @@ must not change any of them.
 
 ## Refinement trigger
 
-After G21 completes, incorporate its concrete packet schema, audit output, and
+After G22 completes, incorporate its concrete evidence packet schema, audit output, and
 the owner-supplied review protocol into a Luna-ready execution contract with
 binary criteria and recorded-review fixtures.

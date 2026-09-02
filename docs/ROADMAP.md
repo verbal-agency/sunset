@@ -467,19 +467,20 @@ condition label is true. The phase requires provenance-bound evaluation cases,
 independent adjudication, frozen comparison runs, split-safe optimization, and
 an explicitly limited maintainer pilot.
 
-There is deliberately no active goal. G21 is the next eligible proposal and is
-fully Luna-ready; G22--G25 are scoped planning boundaries. A Cycle invocation
-may activate only G21 after explicit user authorization. G22 requires human
-adjudication input, and any Cycle reaching it without that input must stop as
-blocked rather than manufacture labels.
+G22 is complete. It resolves the evidence-retrieval gap before independent
+adjudication. G23 is the next eligible proposal and requires human
+adjudication input; any Cycle reaching it without that input must stop as
+blocked rather than manufacture labels. G24--G26 remain scoped planning
+boundaries.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
 | [G21](goals/G21-validation-corpus-protocol.md) | complete | Establish a provenance-bound validation-corpus protocol and offline audit | G20 |
-| [G22](goals/G22-independent-adjudication.md) | proposed | Capture independently adjudicated protected-condition labels and disagreement | G21 + human review input |
-| [G23](goals/G23-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G22 |
-| [G24](goals/G24-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G23 |
-| [G25](goals/G25-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G24 + pilot authorization |
+| [G22](goals/G22-pinned-git-evidence-ingestion.md) | complete | Retrieve pinned Git source and patches as replayable evidence | G21 |
+| [G23](goals/G23-independent-adjudication.md) | proposed | Capture independently adjudicated protected-condition labels and disagreement | G22 + human review input |
+| [G24](goals/G24-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G23 |
+| [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
+| [G26](goals/G26-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + pilot authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -504,14 +505,38 @@ collection, optimization, and any claim about Sunset quality.
 adjudicate without conflating provenance with ground truth.
 
 The [detailed G21 specification](goals/G21-validation-corpus-protocol.md) is
-complete. G22 remains proposed and requires independent human review input.
+complete. G22 completed the evidence-ingestion prerequisite for adjudication.
 
-### G22 — Independent adjudication and evidence quality
+### G22 — Pinned Git evidence ingestion
 
-**Dependencies:** G21 (complete) and recorded human review input
+**Dependencies:** G21 (complete)
+
+**Purpose:** Make corpus pointers inspectable by retrieving pinned source and
+diff artifacts instead of asking reviewers to trust commit subjects.
+
+**Objective:** Add a replaceable, recorded-first Git evidence provider with an
+explicit bounded live GitHub seam, artifact-backed receipts, replay identity,
+and a CLI for manifest-bound source/patch retrieval.
+
+**Scope boundary:** Pointer-derived blob/patch retrieval, fixture/live adapter,
+content-addressed persistence, CLI, and tests. Excludes adjudication labels,
+model behavior, general web search, clones, execution, and mutation.
+
+**Advances:** OUT-02, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-05,
+SCN-08, and SCN-09.
+
+**Unlocks:** Inspectable evidence packets for G23's independent adjudication.
+
+The [detailed G22 specification](goals/G22-pinned-git-evidence-ingestion.md) is
+complete. Its recorded-first provider and explicit live seam are now available
+to the adjudication packet workflow.
+
+### G23 — Independent adjudication and evidence quality
+
+**Dependencies:** G22 (complete) and recorded human review input
 
 **Purpose:** Turn provenance-bound case packets into defensible evaluation
-labels without allowing the model under test to create its own ground truth.
+labels without allowing the system under test to create its own ground truth.
 
 **Objective:** Record two independent protected-condition and proof-obligation
 assessments per eligible case, preserve disagreement and abstention, and freeze
@@ -523,21 +548,17 @@ optimization, live provider access, cleanup, and rewriting historical evidence.
 
 **Advances:** OUT-02, OUT-05, OUT-08; SCN-01 through SCN-03 and SCN-12.
 
-**Unlocks:** A human-grounded development/holdout corpus. If the required
-independent reviews are not supplied, the goal is blocked; it must not be
-completed with model-authored stand-in labels.
+**Unlocks:** A human-grounded development/holdout corpus for G24.
 
-The [G22 outline](goals/G22-independent-adjudication.md) will receive a full
-execution contract only after G21 supplies the packet schema and human review
-input is available.
+The [G23 outline](goals/G23-independent-adjudication.md) will be refined only
+after G22 supplies inspectable evidence packets and human review input.
 
-### G23 — Frozen baseline evaluation
+### G24 — Frozen baseline evaluation
 
-**Dependencies:** G22 (complete)
+**Dependencies:** G23 (complete)
 
 **Purpose:** Measure the system's actual epistemic behavior on frozen,
-independently adjudicated cases before changing policies or prompts to improve
-scores.
+independently adjudicated cases before changing policies or prompts.
 
 **Objective:** Execute heuristic-only and recorded-agentic baselines over the
 same frozen development and holdout corpus, then publish per-case traces,
@@ -551,39 +572,38 @@ partitions after outputs are known.
 **Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-03, SCN-06, SCN-08 through
 SCN-10, and SCN-12.
 
-**Unlocks:** A pre-optimization baseline and documented failure modes for G24.
+**Unlocks:** A pre-optimization baseline and documented failure modes for G25.
 
-The [G23 outline](goals/G23-frozen-baseline-evaluation.md) will be refined only
-after G22 freezes the corpus identities and adjudication coverage.
+The [G24 outline](goals/G24-frozen-baseline-evaluation.md) will be refined only
+after G23 freezes the corpus identities and adjudication coverage.
 
-### G24 — Split-safe optimization and ablation
+### G25 — Split-safe optimization and ablation
 
-**Dependencies:** G23 (complete)
+**Dependencies:** G24 (complete)
 
 **Purpose:** Improve measurable decision quality without tuning against the
 same evidence used to make the product-quality claim.
 
-**Objective:** Test predeclared, bounded changes to prompts, retrieval policy,
-tool policy, or deterministic thresholds on the development split; retain an
-optimization only when it meets safety and quality criteria, then measure it
-once on the untouched holdout split.
+**Objective:** Test predeclared, bounded changes on development data; retain a
+change only under declared safety and quality criteria, then measure it once on
+the untouched holdout split.
 
-**Scope boundary:** Versioned ablations and bounded policy changes. Excludes
-holdout-driven tuning, corpus relabeling, new authority, automatic cleanup, and
-claims that an aggregate score proves removability.
+**Scope boundary:** Versioned ablations, experiment ledger, split-safe selection,
+and final holdout report. Excludes holdout-driven tuning, relabeling, new
+authority, cleanup, and universal removability claims.
 
-**Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-06, SCN-08 through SCN-10,
+**Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-06 and SCN-08 through SCN-10,
 and SCN-12.
 
-**Unlocks:** A reproducible candidate configuration and known regressions for a
-limited maintainer pilot.
+**Unlocks:** A reproducible candidate configuration and known regressions for
+G26.
 
-The [G24 outline](goals/G24-split-safe-optimization.md) will be refined after
-G23 identifies concrete, measured error classes and baseline budgets.
+The [G25 outline](goals/G25-split-safe-optimization.md) will be refined after
+G24 identifies concrete, measured error classes and baseline budgets.
 
-### G25 — Maintainer pilot and product decision
+### G26 — Maintainer pilot and product decision
 
-**Dependencies:** G24 (complete) and explicit pilot authorization
+**Dependencies:** G25 (complete) and explicit pilot authorization
 
 **Purpose:** Test whether the validated workflow is useful and appropriately
 conservative in real maintainer review, where operational evidence and missing
@@ -604,6 +624,6 @@ through SCN-12.
 **Unlocks:** A product decision based on empirical results and maintainer
 feedback rather than architecture claims alone.
 
-The [G25 outline](goals/G25-maintainer-pilot-decision.md) will be refined only
-after G24 supplies the pilot configuration, risk limits, and measurable
+The [G26 outline](goals/G26-maintainer-pilot-decision.md) will be refined only
+after G25 supplies the pilot configuration, risk limits, and measurable
 success/failure criteria.
