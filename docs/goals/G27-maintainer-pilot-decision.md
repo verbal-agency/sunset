@@ -1,6 +1,6 @@
 # G27 — Maintainer pilot and product decision
 
-**Status:** proposed
+**Status:** active
 **Dependencies:** G25 (complete), G26 (complete), and explicit pilot authorization
 
 ## Purpose
@@ -36,6 +36,76 @@ bare UI capability method such as `.isEnabled()` as a lifecycle flag. The run
 must record its ref, commit, scope, configuration digest, candidate counts,
 false-positive exclusions, provenance completeness, errors, and runtime.
 
+### Declared OpenClaw candidate bundle
+
+The technical pilot is pinned to OpenClaw `v2026.8.2` at
+`0965053fe6b9341776df147a6934b7485c60b5ca`, scoped to `ui/`. The initial bundle
+contains four candidates selected to exercise distinct epistemic outcomes:
+
+| Candidate ID | Location | Protected-condition hypothesis | Pilot role |
+| --- | --- | --- | --- |
+| `sunset-broad-v2-15be1992b07e42a78f0c0b24` | `ui/src/e2e/activity-run-inspector.e2e.test.ts:22` | Chromium may be unavailable in the execution environment, so this lane is intentionally skipped. | Active/retained control; verify with and without Chromium and inspect CI setup. |
+| `sunset-broad-v2-a4ba4f78d9030728b801e465` | `ui/src/e2e/activity-session-feed.capture.e2e.test.ts:22` | A proof-phase label may be temporary instrumentation whose absence should not change test behavior. | Low-risk removal hypothesis; inspect all references and compare artifact output with the variable unset. |
+| `sunset-broad-v2-eac9359052efa9f30c01df81` | `ui/src/e2e/tool-titles.e2e.test.ts:199` | An exact-head value may be needed to make visual-test metrics reproducible, or may be unused metadata. | Unknown/reproducibility case; search consumers and verify metrics behavior. |
+| `sunset-broad-v2-ccb8a75b35e18dd8955874c5` | `ui/src/e2e/activity-answer-candidates.e2e.test.ts:16` | Screenshot/video capture is optional instrumentation shared across many E2E tests. | Repeated-condition case; test deduplication and scope reasoning, not immediate cleanup. |
+
+The bundle deliberately excludes the two remaining feature-family matches:
+`patternFlags` in `ui/src/lib/browser-redact.ts:14` is a regular-expression
+flag, and `dangerousConfigFlags` in `ui/src/pages/plugins/consent-dialog.ts:148`
+is configuration safety metadata. Neither is a product feature-lifecycle
+candidate. Their exclusion is recorded as a detector-quality finding for this
+goal, not as a removal conclusion.
+
+### Authorized disposable-clone validation (2026-09-03)
+
+The owner authorized bounded execution in a fresh clone at
+`/private/tmp/openclaw-g27-validation`. Node 24.15.0, pnpm 12.1.0, and the
+installed Google Chrome binary were used; the pinned checkout remained clean.
+The activity-run-inspector lane passed with Chromium (10/10) and skipped
+cleanly when Chromium was unavailable and the allow-missing gate was enabled
+(10 skipped). The session-feed capture lane passed with and without its proof
+phase value (1/1 each). The answer-candidates lane passed with and without
+capture enabled (1/1 each). The tool-titles lane passed 5/6 tests; its
+240-row video test was unavailable because Playwright ffmpeg is unsupported on
+macOS 13 arm64. These are validation observations, not removability proof; the
+per-command record is in the pilot fixture.
+
+## Goal-level acceptance criteria
+
+- **G27-AC01 — Technical run manifest:** A metadata-only report records the
+  pinned OpenClaw ref/head, `ui/` scope, collector schema/configuration, deferred
+  and enriched counts, runtime, errors, and target-mutated=`false`.
+- **G27-AC02 — Deferred/enriched behavior:** Deferred discovery performs no Git
+  history calls; selected enrichment produces complete provenance for the four
+  declared candidates, leaves non-selected candidates deferred, and replays
+  byte-identically from the cache.
+- **G27-AC03 — Candidate review packet:** Each declared candidate has a source
+  locator, introducing commit, protected-condition hypothesis, pilot role,
+  evidence scope, and at least one explicit proof obligation. Reviewer status
+  remains `pending` until the authorized reviewer records a decision.
+- **G27-AC04 — False-positive exclusions:** The packet records both excluded
+  feature-family matches and their exclusion reasons; neither is presented as a
+  lifecycle candidate.
+- **G27-AC05 — Side-effect boundary:** The collector and packet creation make
+  no model calls, live provider requests, target-repository writes, or cleanup
+  changes. Any separately authorized validation runs execute only in a fresh
+  disposable clone, record their commands/outcomes, and leave the pinned target
+  checkout unchanged.
+- **G27-AC06 — Single-reviewer handoff:** The packet is ready for one authorized
+  reviewer to classify each candidate as `retain`, `investigate`, or
+  `insufficient_evidence`; no second reviewer or consensus is implied.
+
+### Criterion-to-evidence map
+
+| Criterion | Evidence |
+| --- | --- |
+| G27-AC01 | `tests/fixtures/public_corpus/openclaw-g27-ui-run-v2.json` and regenerated CLI reports |
+| G27-AC02 | `tests/test_broad_collectors.py`, `tests/test_git_repository.py`, and deferred/selected/complete OpenClaw reports |
+| G27-AC03 | `tests/fixtures/public_corpus/openclaw-g27-pilot-review-v1.json` |
+| G27-AC04 | Pilot review fixture `exclusions` records both non-lifecycle matches |
+| G27-AC05 | Read-only command logs, unchanged target checkout snapshot, and no model/provider artifacts |
+| G27-AC06 | Pilot review fixture `review_protocol` and pending per-case reviewer fields |
+
 The maintainer pilot uses the G25 configuration and these G26 collectors within
 existing read-only investigation and human-gated validation boundaries. Define
 participant consent, candidate count, data minimization/redaction, success and
@@ -45,7 +115,8 @@ disclosure.
 
 ## Explicit exclusions
 
-- Automatic cleanup, changing a target repository, broad telemetry collection,
+- Automatic cleanup, changing a target repository, unbounded target-code
+  execution, broad telemetry collection,
   general-availability claims, or any use of pilot data beyond consent.
 - Treating maintainer approval, a passing test, or a small pilot as proof that a
   protected condition is absent everywhere.
@@ -108,9 +179,11 @@ condition are illegal and must be rejected deterministically.
 
 The technical pilot is read-only and limited to a detached/pinned checkout.
 Collectors may read committed blobs and invoke bounded local Git commands; they
-may not write the target, execute target code, access credentials, or make live
-network requests. Model calls, external providers, and sandbox validation remain
-disabled unless separately authorized by the maintainer-pilot protocol.
+may not write the target, access credentials, or make live network requests.
+Target-code execution and disposable-clone validation are separate capabilities:
+they remain disabled unless explicitly authorized by the maintainer-pilot
+protocol, must use a fresh clone, and must record environment, command, outcome,
+and any unavailable dependency. Cleanup changes remain prohibited.
 
 ### Verification evidence
 

@@ -497,7 +497,7 @@ contracts.
 | [G24](goals/G24-frozen-baseline-evaluation.md) | complete | Compare frozen heuristic and agentic traces on G23 cases plus pinned cross-repository lifecycle references | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | complete | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-broad-candidate-discovery.md) | complete | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
-| [G27](goals/G27-maintainer-pilot-decision.md) | proposed | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
+| [G27](goals/G27-maintainer-pilot-decision.md) | active | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -742,9 +742,15 @@ an evidence-bounded continue, revise, or stop decision.
 **Scope boundary:** Add deferred discovery, per-file/cached provenance
 enrichment, semantic feature-flag filtering, and a recorded real-repository run
 manifest before any agentic investigation. The technical run is read-only and
-pinned; maintainer investigations and validation remain human-gated. Excludes
-automatic cleanup, changes to target repositories, broad telemetry collection,
-and general availability claims.
+pinned to OpenClaw `v2026.8.2` `ui/` with a four-case candidate bundle covering
+an active Chromium gate, a low-risk proof-phase hypothesis, an exact-HEAD
+reproducibility case, and a repeated capture-instrumentation condition.
+Maintainer investigations and validation remain human-gated. Excludes automatic
+cleanup, changes to target repositories, unbounded target-code execution, broad
+telemetry collection, and general availability claims. The owner may separately
+authorize bounded tests in a fresh disposable clone; those runs must record
+commands, environment, outcomes, and unavailable dependencies while leaving the
+pinned checkout unchanged.
 
 **Advances:** OUT-04, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-03, SCN-07
 through SCN-12.
@@ -755,5 +761,8 @@ feedback rather than architecture claims alone.
 The [G27 execution contract](goals/G27-maintainer-pilot-decision.md) now makes
 the technical readiness gate explicit: no full-inventory model prompt, no
 per-match Git blame loop, no generic `.isEnabled()` feature-flag matches, and
-no removability claim from the real-repository run. Maintainer consent and the
-approved candidate list are still required before the agentic pilot phase.
+no removability claim from the real-repository run. The initial OpenClaw bundle
+and the two excluded non-lifecycle feature matches are declared in the detailed
+goal. The project owner authorized G27 activation on 2026-09-03; the
+single-reviewer candidate decisions remain an explicit handoff within the
+active goal.

@@ -1,0 +1,185 @@
+{
+  "schema_version": "1",
+  "run_id": "openclaw-v2026.8.2-ui-g27-pilot-v1",
+  "generated_on": "2026-09-03",
+  "repository_url": "https://github.com/openclaw/openclaw.git",
+  "ref": "v2026.8.2",
+  "repository_head": "0965053fe6b9341776df147a6934b7485c60b5ca",
+  "scope": "ui/",
+  "review_protocol": {
+    "reviewer_count": 1,
+    "reviewer_status": "pending",
+    "allowed_decisions": ["retain", "investigate", "insufficient_evidence"],
+    "cleanup_authority": false,
+    "second_review_required": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "sunset-broad-v2-15be1992b07e42a78f0c0b24",
+      "candidate_family": "environment_gate",
+      "path": "ui/src/e2e/activity-run-inspector.e2e.test.ts",
+      "line": 22,
+      "signal": "environment_gate",
+      "condition": "const allowMissingChromium = process.env.OPENCLAW_UI_E2E_ALLOW_MISSING_CHROMIUM === \"1\";",
+      "introducing_commit": "ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "source_locator": "https://github.com/openclaw/openclaw/blob/0965053fe6b9341776df147a6934b7485c60b5ca/ui/src/e2e/activity-run-inspector.e2e.test.ts#L22",
+      "history_locator": "https://github.com/openclaw/openclaw/commit/ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "protected_condition_hypothesis": "The Playwright Chromium executable may be unavailable in some test environments, so this E2E lane is intentionally skipped there.",
+      "pilot_role": "active_retained_control",
+      "evidence_scope": ["static", "historical"],
+      "proof_obligations": [
+        "Identify which CI or local environments intentionally set this variable.",
+        "Run the lane with Chromium available and unavailable, without changing the target checkout.",
+        "Do not remove the gate unless supported environments and skip semantics are documented."
+      ],
+      "reviewer": {"status": "pending", "decision": null, "notes": null}
+    },
+    {
+      "candidate_id": "sunset-broad-v2-a4ba4f78d9030728b801e465",
+      "candidate_family": "environment_gate",
+      "path": "ui/src/e2e/activity-session-feed.capture.e2e.test.ts",
+      "line": 22,
+      "signal": "environment_gate",
+      "condition": "const proofPhase = process.env.OPENCLAW_MENU_THEME_PROOF_PHASE;",
+      "introducing_commit": "ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "source_locator": "https://github.com/openclaw/openclaw/blob/0965053fe6b9341776df147a6934b7485c60b5ca/ui/src/e2e/activity-session-feed.capture.e2e.test.ts#L22",
+      "history_locator": "https://github.com/openclaw/openclaw/commit/ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "protected_condition_hypothesis": "A proof-phase label may be temporary screenshot instrumentation; when unset, test behavior should remain unchanged apart from the artifact filename.",
+      "pilot_role": "low_risk_removal_hypothesis",
+      "evidence_scope": ["static", "historical"],
+      "proof_obligations": [
+        "Confirm all references and whether any artifact consumer depends on the phase suffix.",
+        "Run the capture test with the variable unset and compare behavior and artifact paths.",
+        "Treat unchanged test behavior as validation-in-scope only, not proof of global removability."
+      ],
+      "reviewer": {"status": "pending", "decision": null, "notes": null}
+    },
+    {
+      "candidate_id": "sunset-broad-v2-eac9359052efa9f30c01df81",
+      "candidate_family": "environment_gate",
+      "path": "ui/src/e2e/tool-titles.e2e.test.ts",
+      "line": 199,
+      "signal": "environment_gate",
+      "condition": "exactHead: process.env.OPENCLAW_TOOL_TITLES_EXACT_HEAD?.trim() ?? null,",
+      "introducing_commit": "ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "source_locator": "https://github.com/openclaw/openclaw/blob/0965053fe6b9341776df147a6934b7485c60b5ca/ui/src/e2e/tool-titles.e2e.test.ts#L199",
+      "history_locator": "https://github.com/openclaw/openclaw/commit/ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "protected_condition_hypothesis": "An exact-HEAD value may make visual-test metrics reproducible, or may be unused metadata emitted only for optional diagnostics.",
+      "pilot_role": "unknown_reproducibility_case",
+      "evidence_scope": ["static", "historical"],
+      "proof_obligations": [
+        "Find consumers or upload/reporting paths that rely on the exact-head field.",
+        "Compare metrics output with the variable unset and set to the pinned head.",
+        "Preserve the field if it is part of reproducibility or audit provenance."
+      ],
+      "reviewer": {"status": "pending", "decision": null, "notes": null}
+    },
+    {
+      "candidate_id": "sunset-broad-v2-ccb8a75b35e18dd8955874c5",
+      "candidate_family": "environment_gate",
+      "path": "ui/src/e2e/activity-answer-candidates.e2e.test.ts",
+      "line": 16,
+      "signal": "environment_gate",
+      "condition": "const captureUiProof = process.env.OPENCLAW_CAPTURE_UI_PROOF === \"1\";",
+      "introducing_commit": "ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "source_locator": "https://github.com/openclaw/openclaw/blob/0965053fe6b9341776df147a6934b7485c60b5ca/ui/src/e2e/activity-answer-candidates.e2e.test.ts#L16",
+      "history_locator": "https://github.com/openclaw/openclaw/commit/ad6a81d540d899ca52f8eaabb42fdd87cd893ec3",
+      "protected_condition_hypothesis": "Screenshot and video capture are optional instrumentation shared across many E2E tests and may be required for visual proof or debugging artifacts.",
+      "pilot_role": "repeated_condition_case",
+      "evidence_scope": ["static", "historical"],
+      "proof_obligations": [
+        "Group all references and identify the owner or workflow that consumes captured artifacts.",
+        "Verify that unsetting the variable changes only optional artifacts, not assertions or test behavior.",
+        "Do not generalize one file's result to the shared condition without scope evidence."
+      ],
+      "reviewer": {"status": "pending", "decision": null, "notes": null}
+    }
+  ],
+  "exclusions": [
+    {
+      "condition": "patternFlags",
+      "location": "ui/src/lib/browser-redact.ts:14",
+      "reason": "Regular-expression flags, not a product feature lifecycle toggle."
+    },
+    {
+      "condition": "dangerousConfigFlags",
+      "location": "ui/src/pages/plugins/consent-dialog.ts:148",
+      "reason": "Configuration safety metadata, not a product feature lifecycle toggle."
+    }
+  ],
+  "validation": {
+    "authorization": "2026-09-03 explicit maintainer authorization for bounded disposable-clone test execution",
+    "clone_path": "/private/tmp/openclaw-g27-validation",
+    "clone_head": "0965053fe6b9341776df147a6934b7485c60b5ca",
+    "target_checkout_mutated": false,
+    "target_checkout_code_executed": false,
+    "disposable_clone_code_executed": true,
+    "toolchain": {
+      "node": "24.15.0",
+      "pnpm": "12.1.0",
+      "chromium": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "playwright_ffmpeg": "unavailable on mac13-arm64"
+    },
+    "common_environment": {
+      "OPENCLAW_UI_E2E_SKIP_REAL_GATEWAY": "1",
+      "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    },
+    "results": [
+      {
+        "candidate_id": "sunset-broad-v2-15be1992b07e42a78f0c0b24",
+        "environment": {"OPENCLAW_UI_E2E_ALLOW_MISSING_CHROMIUM": "1"},
+        "command": "node scripts/run-vitest.mjs run --config test/vitest/vitest.ui-e2e.config.ts --configLoader runner ui/src/e2e/activity-run-inspector.e2e.test.ts",
+        "status": "passed",
+        "tests": {"passed": 10, "failed": 0, "skipped": 0},
+        "duration_seconds": 18.61,
+        "comparison_unset": {"status": "passed", "tests": {"passed": 10, "failed": 0, "skipped": 0}, "duration_seconds": 17.60},
+        "missing_chromium_control": {"status": "skipped", "tests": {"passed": 0, "failed": 0, "skipped": 10}, "environment": {"PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH": "/nonexistent", "OPENCLAW_UI_E2E_ALLOW_MISSING_CHROMIUM": "1"}},
+        "interpretation": "The lane passes with Chromium available and cleanly skips all 10 tests when Chromium is unavailable and the allow-missing gate is enabled."
+      },
+      {
+        "candidate_id": "sunset-broad-v2-a4ba4f78d9030728b801e465",
+        "environment": {"OPENCLAW_MENU_THEME_PROOF_PHASE": "pilot"},
+        "command": "node scripts/run-vitest.mjs run --config test/vitest/vitest.ui-e2e.config.ts --configLoader runner ui/src/e2e/activity-session-feed.capture.e2e.test.ts",
+        "status": "passed",
+        "tests": {"passed": 1, "failed": 0, "skipped": 0},
+        "duration_seconds": 11.32,
+        "artifact": ".artifacts/control-ui-e2e/session-activity-feed-vqEgUv/05-people-menu-pilot.png",
+        "comparison_unset": {"status": "passed", "tests": {"passed": 1, "failed": 0, "skipped": 0}, "duration_seconds": 9.10, "artifact": ".artifacts/control-ui-e2e/session-activity-feed-VxGt3V/05-global-activity.png"},
+        "interpretation": "The proof-phase value affects the captured artifact name; the exercised assertions pass."
+      },
+      {
+        "candidate_id": "sunset-broad-v2-eac9359052efa9f30c01df81",
+        "environment": {"OPENCLAW_TOOL_TITLES_EXACT_HEAD": "0965053fe6b9341776df147a6934b7485c60b5ca"},
+        "command": "node scripts/run-vitest.mjs run --config test/vitest/vitest.ui-e2e.config.ts --configLoader runner ui/src/e2e/tool-titles.e2e.test.ts",
+        "status": "partial",
+        "tests": {"passed": 5, "failed": 1, "skipped": 0},
+        "duration_seconds": 20.53,
+        "comparison_unset": {"status": "not_run", "reason": "The same ffmpeg dependency blocks the video-producing test before metrics output."},
+        "failure": "The 240-row proof test requires Playwright ffmpeg; Playwright reports ffmpeg unsupported on mac13-arm64. The other five tests passed. No metrics.json was produced by the blocked test.",
+        "interpretation": "The exact-head field was not validated for the video-producing path; preserve the reproducibility question for review."
+      },
+      {
+        "candidate_id": "sunset-broad-v2-ccb8a75b35e18dd8955874c5",
+        "environment": {"OPENCLAW_CAPTURE_UI_PROOF": "1"},
+        "command": "node scripts/run-vitest.mjs run --config test/vitest/vitest.ui-e2e.config.ts --configLoader runner ui/src/e2e/activity-answer-candidates.e2e.test.ts",
+        "status": "passed",
+        "tests": {"passed": 1, "failed": 0, "skipped": 0},
+        "duration_seconds": 8.51,
+        "artifacts": [
+          ".artifacts/control-ui-e2e/codex-answer-candidates-GuQm94/01-before-empty-activity.png",
+          ".artifacts/control-ui-e2e/codex-answer-candidates-GuQm94/02-after-selected-answer.png"
+        ],
+        "comparison_unset": {"status": "passed", "tests": {"passed": 1, "failed": 0, "skipped": 0}, "duration_seconds": 6.94},
+        "interpretation": "Assertions pass and optional screenshots are emitted when capture is enabled."
+      }
+    ]
+  },
+  "authority": {
+    "target_mutated": false,
+    "target_code_executed": false,
+    "model_calls": 0,
+    "live_provider_requests": 0,
+    "validation_experiments": 8,
+    "cleanup_changes": 0
+  }
+}
