@@ -6,7 +6,11 @@ from dataclasses import dataclass
 from collections.abc import Callable
 import hashlib
 from pathlib import Path, PurePosixPath
+import re
 import subprocess
+
+
+_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
 EXCLUDED_PATH_PARTS = frozenset(
@@ -132,12 +136,19 @@ class GitRepository:
         return result.stdout
 
     def blame_commit(self, path: str, line: int) -> str:
+        commits = self.blame_file(path)
+        try:
+            return commits[line]
+        except KeyError as exc:
+            raise RepositoryError("git_blame_failed", f"Git blame returned no commit for line {line}") from exc
+
+    def blame_file(self, path: str) -> dict[int, str]:
+        """Return line-to-commit mappings with one porcelain blame invocation."""
+
         result = _run_git(
             self.root,
             "blame",
             "--line-porcelain",
-            "-L",
-            f"{line},{line}",
             self.head,
             "--",
             path,
@@ -145,11 +156,26 @@ class GitRepository:
         if result.returncode != 0:
             raise RepositoryError("git_blame_failed", _git_error(result))
 
-        first_line = _decode(result.stdout).splitlines()[0]
-        commit = first_line.split(" ", 1)[0].lstrip("^")
-        if not commit:
-            raise RepositoryError("git_blame_failed", "Git blame returned no commit")
-        return commit
+        mapping: dict[int, str] = {}
+        current_commit: str | None = None
+        current_line = 0
+        for raw_line in _decode(result.stdout).splitlines():
+            if raw_line.startswith("\t"):
+                if current_commit is not None and current_line:
+                    mapping[current_line] = current_commit
+                    current_line += 1
+                continue
+            parts = raw_line.split()
+            if len(parts) < 3 or not _SHA_RE.fullmatch(parts[0].lstrip("^")):
+                continue
+            current_commit = parts[0].lstrip("^")
+            try:
+                current_line = int(parts[2])
+            except ValueError:
+                current_line = 0
+        if not mapping:
+            raise RepositoryError("git_blame_failed", "Git blame returned no line mappings")
+        return mapping
 
     def history_bytes(self, path: str, *, max_count: int = 25) -> bytes:
         """Return bounded, rename-aware history for one repository path."""

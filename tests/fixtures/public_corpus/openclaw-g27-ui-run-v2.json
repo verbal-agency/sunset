@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "run_id": "openclaw-v2026.8.2-ui-broad-v2",
+  "repository_url": "https://github.com/openclaw/openclaw.git",
+  "ref": "v2026.8.2",
+  "repository_head": "0965053fe6b9341776df147a6934b7485c60b5ca",
+  "scope": "ui/",
+  "target_mutated": false,
+  "collector": "broad",
+  "collector_schema_version": "2",
+  "discovery": {
+    "provenance_mode": "deferred",
+    "candidate_count": 346,
+    "candidate_families": {
+      "environment_gate": 344,
+      "feature_flag": 2
+    },
+    "deferred_count": 346,
+    "errors": 0,
+    "runtime_seconds": 27.31
+  },
+  "selected_enrichment": {
+    "selected_count": 8,
+    "complete_count": 8,
+    "deferred_count": 338,
+    "errors": 0,
+    "runtime_seconds": 27.55
+  },
+  "complete_enrichment": {
+    "provenance_mode": "complete",
+    "candidate_count": 346,
+    "complete_count": 346,
+    "blame_commit_count": 5,
+    "errors": 0,
+    "runtime_seconds": 31.82
+  },
+  "quality_notes": [
+    "Generic .isEnabled() UI methods were excluded from feature_flag discovery.",
+    "No removability or protected-condition conclusion is asserted by this run."
+  ]
+}

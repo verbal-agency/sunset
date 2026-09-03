@@ -497,7 +497,7 @@ contracts.
 | [G24](goals/G24-frozen-baseline-evaluation.md) | complete | Compare frozen heuristic and agentic traces on G23 cases plus pinned cross-repository lifecycle references | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | complete | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-broad-candidate-discovery.md) | complete | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
-| [G27](goals/G27-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + G26 + pilot authorization |
+| [G27](goals/G27-maintainer-pilot-decision.md) | proposed | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -734,14 +734,17 @@ provenance. G27 remains proposed until explicit pilot authorization.
 conservative in real maintainer review, where operational evidence and missing
 context matter most.
 
-**Objective:** Run a consented, read-only pilot against a small declared set of
-maintainer-selected candidates, record review outcomes and failures, and publish
+**Objective:** Separate broad deterministic discovery from selected provenance
+enrichment, run a declared read-only pilot against a pinned public repository,
+then run a consented maintainer pilot against qualified candidates and publish
 an evidence-bounded continue, revise, or stop decision.
 
-**Scope boundary:** Read-only investigations and human-reviewed validation
-requests under the existing approval boundary. Excludes automatic cleanup,
-changes to target repositories, broad telemetry collection, and general
-availability claims.
+**Scope boundary:** Add deferred discovery, per-file/cached provenance
+enrichment, semantic feature-flag filtering, and a recorded real-repository run
+manifest before any agentic investigation. The technical run is read-only and
+pinned; maintainer investigations and validation remain human-gated. Excludes
+automatic cleanup, changes to target repositories, broad telemetry collection,
+and general availability claims.
 
 **Advances:** OUT-04, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-03, SCN-07
 through SCN-12.
@@ -749,6 +752,8 @@ through SCN-12.
 **Unlocks:** A product decision based on empirical results and maintainer
 feedback rather than architecture claims alone.
 
-The [G27 outline](goals/G27-maintainer-pilot-decision.md) will be refined only
-after G25 and G26 supply the pilot configuration, coverage limits, risk limits,
-and measurable success/failure criteria.
+The [G27 execution contract](goals/G27-maintainer-pilot-decision.md) now makes
+the technical readiness gate explicit: no full-inventory model prompt, no
+per-match Git blame loop, no generic `.isEnabled()` feature-flag matches, and
+no removability claim from the real-repository run. Maintainer consent and the
+approved candidate list are still required before the agentic pilot phase.
