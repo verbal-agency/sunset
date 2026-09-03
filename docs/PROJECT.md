@@ -40,10 +40,20 @@ evidence is insufficient or the condition is unvalidatable. It does not replace
 deterministic collectors, raw evidence, executable validation, or human
 approval. Heuristic-only operation remains supported as a safe baseline.
 
-Phase 2 initially remains focused on the same Python-maintainer workflow. New
-languages, generic dead-code detection, enterprise knowledge connectors,
-automatic cleanup, and automatic pull requests remain outside the planned
-agentic vertical slice.
+The current implementation is focused on the Python-maintainer workflow as a
+validated baseline, not as the product boundary. The intended product covers
+historically contingent code across languages and repository artifacts through
+additive, provenance-preserving collectors. Generic reachability/dead-code
+analysis, enterprise connectors, automatic cleanup, and automatic pull requests
+remain out of scope; breadth means more ways to observe temporal assumptions,
+not weaker evidence standards.
+
+The next breadth slices are repository-level version and dependency
+constraints, feature-flag lifecycle signals, deprecation and migration
+annotations, environment/configuration gates, and language adapters beginning
+with Python plus JavaScript/TypeScript. Each collector must emit the same
+language-neutral candidate/evidence contract and retain unsupported dynamic
+forms as explicit unknowns.
 
 ## Phase 3 validation direction
 
@@ -67,6 +77,11 @@ No Phase 3 result proves that removal is safe in every deployment. Its purpose
 is to measure whether Sunset produces better-calibrated condition hypotheses,
 proof obligations, and bounded validation requests than its baselines under a
 declared evaluation protocol.
+
+The narrow marker/shim corpus is a baseline for this measurement. It must not
+be used to claim broad repository coverage. Breadth work must add representative
+candidate families and languages, then measure per-family detection coverage and
+false-positive behavior before any maintainer-pilot claim.
 
 ### Temporal-condition vocabulary
 

@@ -1,0 +1,95 @@
+{
+  "supplement_id": "g22c-langgraph-support-v1",
+  "schema_version": "1",
+  "selection_status": "owner_approved",
+  "owner_approval_required": false,
+  "selection_basis": "User approved expanding the declared-support bundle with the retained LangGraph dataclass version shim.",
+  "g21_manifest_id": "sunset-validation-v1",
+  "g21_manifest_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+  "repository": "langgraph",
+  "repository_url": "https://github.com/langchain-ai/langgraph.git",
+  "pinned_head": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+  "published_release": {
+    "distribution": "langgraph",
+    "release_identity": "langgraph==1.2.11",
+    "registry": "pypi",
+    "release_locator": "https://pypi.org/pypi/langgraph/1.2.11/json",
+    "selection_basis": "Version declared by the pinned LangGraph package metadata."
+  },
+  "cases": [
+    {
+      "case_id": "lg-dataclass-version-shim",
+      "candidate_path": "libs/langgraph/langgraph/types.py",
+      "entries": [
+        {
+          "case_id": "lg-dataclass-version-shim",
+          "evidence_id": "lg-dataclass-version-shim:support-packaging",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "packaging_metadata",
+          "description": "Pinned LangGraph package metadata and declared Python requirement.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/libs/langgraph/pyproject.toml",
+          "commit_sha": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "path": "libs/langgraph/pyproject.toml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lg-dataclass-version-shim",
+          "evidence_id": "lg-dataclass-version-shim:support-published-artifact",
+          "status": "capture",
+          "source_kind": "public_registry",
+          "evidence_class": "published_artifact",
+          "description": "Exact PyPI release metadata for the pinned LangGraph package version.",
+          "locator": "https://pypi.org/pypi/langgraph/1.2.11/json",
+          "release_identity": "langgraph==1.2.11",
+          "freshness_scope": "published_release"
+        },
+        {
+          "case_id": "lg-dataclass-version-shim",
+          "evidence_id": "lg-dataclass-version-shim:support-ci",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "ci_support",
+          "description": "Pinned LangGraph CI workflow and Python-version matrix.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/.github/workflows/_test.yml",
+          "commit_sha": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "path": ".github/workflows/_test.yml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lg-dataclass-version-shim",
+          "evidence_id": "lg-dataclass-version-shim:support-docs",
+          "status": "not_applicable",
+          "evidence_class": "support_documentation",
+          "description": "No canonical repository support-policy or release-note document was selected.",
+          "reason": "Generic documentation is not authoritative support policy; an operational support source must be supplied separately.",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lg-dataclass-version-shim",
+          "evidence_id": "lg-dataclass-version-shim:support-dependencies",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "dependency_marker",
+          "description": "Pinned LangGraph package metadata containing Python markers and conditional dependencies.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/libs/langgraph/pyproject.toml",
+          "commit_sha": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "path": "libs/langgraph/pyproject.toml",
+          "freshness_scope": "repository_pinned_head"
+        },
+        {
+          "case_id": "lg-dataclass-version-shim",
+          "evidence_id": "lg-dataclass-version-shim:support-dependencies-lock",
+          "status": "capture",
+          "source_kind": "public_git",
+          "evidence_class": "dependency_marker",
+          "description": "Pinned LangGraph lockfile dependency markers across Python versions.",
+          "locator": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/libs/langgraph/uv.lock",
+          "commit_sha": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "path": "libs/langgraph/uv.lock",
+          "freshness_scope": "repository_pinned_head"
+        }
+      ]
+    }
+  ]
+}

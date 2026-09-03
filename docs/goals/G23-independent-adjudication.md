@@ -1,72 +1,100 @@
-# G23 — Independent adjudication and evidence quality
+# G23 — Single-reviewer adjudication and evidence quality
 
-**Status:** blocked
-**Dependencies:** G22b (complete) and recorded human review input
+**Status:** proposed
+**Dependencies:** G22b (complete), an owner-supplied review protocol, and one
+recorded human reviewer authority decision
 
 ## Purpose
 
-Turn provenance-bound case packets into defensible evaluation labels without
-allowing the system under test to create its own ground truth.
-
-> Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract after G22b and
-> the stated human-review input are available.
+Turn provenance-bound case packets into explicitly scoped, provisional
+evaluation labels without allowing the system under test to create its own
+ground truth. A second reviewer is a later strengthening step, not a
+precondition for this goal.
 
 ## Objective
 
-Record two independent protected-condition and proof-obligation assessments per
-eligible case, preserve disagreement and abstention, and freeze an adjudicated
-evaluation manifest for later offline evaluation.
+Record one owner-authorized human protected-condition and proof-obligation
+assessment per eligible case, preserve abstention and unresolved obligations,
+and freeze a single-reviewer provisional manifest for later offline evaluation.
 
 ## Project alignment
 
 - Advances OUT-02, OUT-05, and OUT-08.
 - Advances SCN-01 through SCN-03 and SCN-12.
-- Unlocks an independently adjudicated development/holdout corpus for G24.
+- Unlocks a single-reviewer provisional development/holdout corpus for
+  exploratory evaluation. It must not be described as independent ground
+  truth until a later second-review pass.
 
 ## Scope boundary
 
 Create reviewer packets and import/validation contracts that bind each decision
-to G21 evidence IDs, a protocol version, reviewer identity pseudonym, and an
-adjudication outcome. Preserve individual decisions, agreement/disagreement,
-abstention, and unresolved proof obligations. Freeze the accepted corpus digest
-and split before G24 reads it.
+to G21/G22a/G22b/G22c evidence IDs, a protocol version, and a reviewer identity
+pseudonym. Preserve the individual decision, abstention, unresolved proof
+obligations, validation scope, and the fact that the manifest is
+single-reviewer. Freeze the corpus digest and split before downstream goals
+read it. A later reviewer may append a decision but may not rewrite this
+record.
 
 ## Explicit exclusions
 
 - Model-authored, majority-by-model, or historical-outcome-derived labels.
-- Running baseline evaluations, optimization, live collection, cleanup, or
+- Running baseline evaluations, optimization, live provider access, cleanup, or
   target-repository mutation.
-- Removing contradictory or abstaining reviews to increase apparent coverage.
+- Claiming inter-reviewer agreement, general downstream safety, or universal
+  removability.
+- Removing abstaining or unresolved cases to increase apparent coverage.
 
 ## Authority and stop condition
 
-This goal needs supplied, recorded decisions from two independent human
-reviewers under an agreed review protocol. Luna may implement packet/import
-mechanics and validate supplied records, but may not fabricate reviewers or
-labels. If the decisions or review authority are unavailable, Cycle must mark
-the goal blocked with the missing-input list.
+The owner designates one human reviewer and supplies a protocol version and
+reviewer-authority record. Luna may prepare packets, inspect implementations,
+run bounded validation, and import/validate the supplied decision, but may not
+choose the label, fabricate reviewer identity, or infer a second review. If the
+protocol, authority record, or decision is unavailable, Cycle must mark the
+goal blocked with the missing-input list.
+
+## Luna-ready execution contract
+
+For every eligible case, the reviewer supplies exactly one decision containing:
+
+- `case_id`, `protocol_version`, pseudonymous `reviewer_id`, and the bound
+  evidence IDs;
+- a protected-condition hypothesis and status (`identified`, `active`,
+  `likely_expired`, `unknown`, or `contradictory`);
+- an evidence sufficiency decision and explicit proof obligations;
+- the validation scope and any abstention or exclusion reason.
+
+The importer rejects unknown case/evidence IDs, duplicate decisions, missing
+proof obligations for non-terminal statuses, malformed enum values, and labels
+derived from historical outcomes. It records `review_mode: single_reviewer`
+and `second_review_status: not_available` in the frozen manifest.
+
+## Acceptance criteria
+
+1. The owner-supplied protocol and reviewer-authority record identify the single
+   authorized human reviewer and the decision schema above.
+2. Every imported decision is bound to the eligible case and immutable G21,
+   G22a, G22b, or G22c evidence IDs; no model-authored or historical-outcome-derived
+   label is accepted.
+3. The validator preserves each condition status, abstention, contradiction,
+   and exclusion with reasons and rejects malformed or duplicate records.
+4. The frozen manifest includes its digest, corpus split identities, coverage
+   limits, `single_reviewer` mode, unavailable second-review status, and each
+   case's proof obligations.
+5. Focused importer/fixture tests, the locked full suite, `uv lock --check`,
+   documentation checks, and `git diff --check` pass.
 
 ## Outcomes and handoff
 
-The goal succeeds only with a frozen manifest that separates adjudicated,
-disagreed, abstained, and excluded cases with reasons. G23 receives the manifest
-digest, coverage limits, split identities, and per-case proof obligations; it
-must not change any of them.
+The goal succeeds with a frozen manifest that separates single-reviewer
+confirmed, abstained, contradictory, and excluded cases with reasons. G23
+receives the manifest digest, coverage limits, split identities, reviewer mode,
+and per-case proof obligations; downstream goals must not silently upgrade its
+labels to independent ground truth.
 
-## Refinement trigger
+## Single-reviewer limitation
 
-After G22b completes, incorporate its concrete evidence packet schema, audit output, and
-the owner-supplied review protocol into a Luna-ready execution contract with
-binary criteria and recorded-review fixtures.
-
-## Blocker
-
-Activation is blocked because the repository contains no owner-supplied review
-protocol, reviewer-authority record, or two independent recorded decisions for
-the eligible cases. It also awaits the declared-support evidence bundle from
-G22b.
-Unblock only when those inputs are provided as immutable,
-reviewer-pseudonymized artifacts bound to G22a/G22b evidence IDs. Luna may then
-refine this outline into the required execution contract; it must not create
-stand-in labels or treat historical outcomes as adjudication.
+This goal deliberately does not measure agreement or claim independent ground
+truth. A later goal may collect a second human review and append it as a new,
+provenance-bound record. Until then, G24 must report all evaluation results as
+conditioned on this single-reviewer provisional corpus.

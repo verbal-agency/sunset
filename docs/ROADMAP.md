@@ -464,14 +464,23 @@ contingent code path's protected condition, state what evidence is missing, and
 produce better-calibrated handoffs than deterministic baselines. It does not
 treat G20's calibration mechanics or historical outcomes as proof that a
 condition label is true. The phase requires provenance-bound evaluation cases,
-independent adjudication, frozen comparison runs, split-safe optimization, and
-an explicitly limited maintainer pilot.
+human adjudication with explicit reviewer-count limits, frozen comparison runs,
+split-safe optimization, and an explicitly limited maintainer pilot. A later
+second-review pass may strengthen, but is not required for the initial
+single-reviewer validation.
 
 G22 is complete as an implementation seam. G22a completed real pinned GitHub
 artifact capture and offline replay. G22b completed a five-class
 declared-support bundle before adjudication while leaving actual deployment
-usage as a separate proof obligation. G23 remains blocked pending two
-independent human reviews. G24--G26 remain scoped planning boundaries.
+usage as a separate proof obligation. G23 now uses one owner-authorized human
+reviewer and records its corpus as single-reviewer provisional; a second review
+is a later strengthening step. G24--G26 remain scoped planning boundaries.
+
+The current marker/compatibility slice is intentionally a baseline, not the
+product's coverage boundary. Before a maintainer pilot, Sunset must broaden
+candidate discovery across repository-level temporal signals and at least one
+additional language family while preserving the same provenance and uncertainty
+contracts.
 
 | Goal | Status | Objective | Dependencies |
 | --- | --- | --- | --- |
@@ -479,7 +488,8 @@ independent human reviews. G24--G26 remain scoped planning boundaries.
 | [G22](goals/G22-pinned-git-evidence-ingestion.md) | complete | Retrieve pinned Git source and patches as replayable evidence | G21 |
 | [G22a](goals/G22a-real-github-artifact-capture.md) | complete | Prove real pinned GitHub artifact capture or document blocked connectivity | G22 + authorized network |
 | [G22b](goals/G22b-current-support-evidence.md) | complete | Capture a declared-support evidence bundle without mutating G21 | G22a + owner-approved selections |
-| [G23](goals/G23-independent-adjudication.md) | blocked | Capture independently adjudicated protected-condition labels and disagreement | G22b + human review input |
+| [G22c](goals/G22c-retained-case-support-evidence.md) | complete | Capture declared-support evidence for a retained LangGraph compatibility shim | G22b + owner-approved retained-case selection |
+| [G23](goals/G23-independent-adjudication.md) | proposed | Capture single-reviewer provisional protected-condition labels and proof obligations | G22b/G22c + one owner-authorized human reviewer |
 | [G24](goals/G24-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + pilot authorization |
@@ -527,7 +537,7 @@ model behavior, general web search, clones, execution, and mutation.
 **Advances:** OUT-02, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-05,
 SCN-08, and SCN-09.
 
-**Unlocks:** Inspectable evidence packets for G23's independent adjudication.
+**Unlocks:** Inspectable evidence packets for G23's human adjudication.
 
 The [detailed G22 specification](goals/G22-pinned-git-evidence-ingestion.md) is
 complete. Its recorded-first provider and explicit live seam are now available
@@ -554,7 +564,7 @@ general GitHub search, credentials, adjudication, execution, and mutation.
 **Advances:** OUT-02, OUT-05, OUT-06, OUT-08; SCN-01 through SCN-05, SCN-08,
 SCN-09, and SCN-12.
 
-**Unlocks:** Real inspectable evidence for G23's independent adjudication.
+**Unlocks:** Real inspectable evidence for G23's human adjudication.
 
 The [detailed G22a specification](goals/G22a-real-github-artifact-capture.md)
 is complete. Its real fixture and connectivity report are available to G23.
@@ -586,16 +596,36 @@ The [detailed G22b specification](goals/G22b-current-support-evidence.md) is
 complete. Its owner-approved selection, real capture fixture, and offline
 replay evidence are available to G23.
 
-### G23 — Independent adjudication and evidence quality
+### G22c — Retained-case support evidence supplement
 
-**Dependencies:** G22b (complete) and recorded human review input
+**Dependencies:** G22b (complete) and owner-approved retained-case selection
 
-**Purpose:** Turn provenance-bound case packets into defensible evaluation
-labels without allowing the system under test to create its own ground truth.
+**Purpose:** Extend the declared-support bundle to a retained compatibility
+shim so Sunset can test refusal to remove code whose protected condition remains
+active in the declared support scope.
 
-**Objective:** Record two independent protected-condition and proof-obligation
-assessments per eligible case, preserve disagreement and abstention, and freeze
-an adjudicated evaluation manifest.
+**Objective:** Capture and freeze the five support-evidence classes for
+`lg-dataclass-version-shim` at its pinned LangGraph head and exact published
+release, without changing the validation corpus or claiming downstream safety.
+
+**Unlocks:** G23 review of a retained holdout case with current declared-support
+evidence.
+
+The [G22c specification](goals/G22c-retained-case-support-evidence.md) and
+verified fixture are complete.
+
+### G23 — Single-reviewer adjudication and evidence quality
+
+**Dependencies:** G22b/G22c (complete), an owner-supplied review protocol, and one
+recorded human reviewer authority decision
+
+**Purpose:** Turn provenance-bound case packets into explicitly scoped,
+single-reviewer provisional evaluation labels without allowing the system under
+test to create its own ground truth.
+
+**Objective:** Record one owner-authorized human protected-condition and
+proof-obligation assessment per eligible case, preserve abstention and
+unresolved obligations, and freeze a single-reviewer provisional manifest.
 
 **Scope boundary:** Review packets, label/import contracts, disagreement
 records, and provenance checks. Excludes automatic label generation, model
@@ -603,18 +633,21 @@ optimization, live provider access, cleanup, and rewriting historical evidence.
 
 **Advances:** OUT-02, OUT-05, OUT-08; SCN-01 through SCN-03 and SCN-12.
 
-**Unlocks:** A human-grounded development/holdout corpus for G24.
+**Unlocks:** A single-reviewer provisional development/holdout corpus for
+exploratory G24 evaluation; it cannot be called independent ground truth.
 
-The [G23 outline](goals/G23-independent-adjudication.md) will be refined only
-after its review protocol and independent human review input are supplied; the
-G22b support bundle is now available.
+The [G23 execution contract](goals/G23-independent-adjudication.md) is ready
+for one owner-authorized human reviewer. A later second-review pass may append
+independent decisions without rewriting the provisional manifest.
 
 ### G24 — Frozen baseline evaluation
 
 **Dependencies:** G23 (complete)
 
-**Purpose:** Measure the system's actual epistemic behavior on frozen,
-independently adjudicated cases before changing policies or prompts.
+**Purpose:** Measure the system's actual epistemic behavior on a frozen,
+explicitly labelled corpus before changing policies or prompts. If G23 has only
+single-reviewer labels, all results must carry that limitation; independent
+adjudication is a later strengthening path.
 
 **Objective:** Execute heuristic-only and recorded-agentic baselines over the
 same frozen development and holdout corpus, then publish per-case traces,

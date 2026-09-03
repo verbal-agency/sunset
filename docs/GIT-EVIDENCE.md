@@ -80,6 +80,15 @@ sunset support-evidence capture \
   --store /tmp/sunset-g22b-support --live --max-bytes 1200000
 ```
 
+G22c extends the bundle to the retained LangGraph case
+`lg-dataclass-version-shim`. Its owner-approved selection and verified fixture
+are `tests/fixtures/support_evidence/g22c-selection-v1.json` and
+`tests/fixtures/git_evidence/g22c-langgraph-support-v1.json`, respectively;
+the fixture digest is recorded in `g22c-langgraph-support-v1.sha256`. The
+bundle captures `langgraph==1.2.11` metadata, Python 3.10–3.14 CI coverage, and
+dependency markers. This establishes that Python 3.10 remains in the declared
+support scope; it is evidence for adjudication, not a removal recommendation.
+
 ## Receipts and artifacts
 
 Available bytes are written to the configured content-addressed artifact store
