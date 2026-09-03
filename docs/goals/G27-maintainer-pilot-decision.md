@@ -1,7 +1,7 @@
-# G26 — Maintainer pilot and product decision
+# G27 — Maintainer pilot and product decision
 
 **Status:** proposed
-**Dependencies:** G25 (complete) and explicit pilot authorization
+**Dependencies:** G25 (complete), G26 (complete), and explicit pilot authorization
 
 ## Purpose
 
@@ -9,15 +9,11 @@ Test whether the validated workflow is useful and appropriately conservative in
 real maintainer review, where operational evidence and missing context matter
 most.
 
-> Planning boundary: this is intentionally an outline, not an executable goal.
-> Cycle must replace it with a Luna-ready execution contract only after G25 and
-> explicit pilot authorization provide the required authority and risk limits.
-
 ## Objective
 
-Run a consented, read-only pilot against a small declared set of
-maintainer-selected candidates, record review outcomes and failures, and publish
-an evidence-bounded continue, revise, or stop decision.
+Run a consented, read-only pilot against a small declared set of candidates from
+the G26 coverage-qualified collector set, record review outcomes and failures,
+and publish an evidence-bounded continue, revise, or stop decision.
 
 ## Project alignment
 
@@ -28,11 +24,12 @@ an evidence-bounded continue, revise, or stop decision.
 
 ## Scope boundary
 
-Use the G25 configuration within existing read-only investigation and
-human-gated validation boundaries. Define participant consent, candidate count,
-data minimization/redaction, success and harm measures, retention, and an
-incident stop rule before the first pilot run. Publish aggregate and per-case
-evidence only with participant-approved disclosure.
+Use the G25 configuration and G26 collectors within existing read-only
+investigation and human-gated validation boundaries. Define participant
+consent, candidate count, data minimization/redaction, success and harm
+measures, retention, and an incident stop rule before the first pilot run.
+Publish aggregate and per-case evidence only with participant-approved
+disclosure.
 
 ## Explicit exclusions
 
@@ -56,7 +53,7 @@ bounded continue/revise/stop recommendation. It is not a cleanup authorization.
 
 ## Refinement trigger
 
-After G25 completes and a pilot owner supplies authorization, replace this
+After G26 completes and a pilot owner supplies authorization, replace this
 outline with a Luna-ready execution contract containing the approved candidate
 list, privacy rules, stop thresholds, fixtures/simulation tests, and binary
 acceptance criteria.

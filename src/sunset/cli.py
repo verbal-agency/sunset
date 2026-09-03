@@ -27,6 +27,7 @@ from sunset.benchmark import (
     load_corpus,
     publish_langsmith_export,
 )
+from sunset.baseline_evaluation import BaselineEvaluationError, evaluate_baseline
 from sunset.git_repository import RepositoryError
 from sunset.models import ScanError, ScanResult
 from sunset.compatibility import scan_compatibility_repository
@@ -170,6 +171,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="explicitly POST the export to LangSmith; requires --langsmith-api-key",
     )
     benchmark_parser.add_argument("--langsmith-api-key", help="LangSmith API key used only with --publish-langsmith")
+    baseline_parser = subparsers.add_parser(
+        "baseline-evaluation", help="evaluate frozen heuristic and recorded-agentic traces offline"
+    )
+    baseline_subparsers = baseline_parser.add_subparsers(dest="baseline_command", required=True)
+    baseline_run_parser = baseline_subparsers.add_parser("run", help="run the deterministic G24 baseline evaluator")
+    baseline_run_parser.add_argument("--manifest", required=True, help="frozen G23 adjudication manifest JSON")
+    baseline_run_parser.add_argument("--traces", required=True, help="recorded paired trace fixture JSON")
+    baseline_run_parser.add_argument("--references", help="optional pinned reference-only fixture JSON")
+    baseline_run_parser.add_argument("--output", help="optional report output path")
     corpus_parser = subparsers.add_parser("corpus", help="validate a saved public corpus without contacting target repositories")
     corpus_parser.add_argument("--manifest", required=True, help="saved public corpus JSON")
     validation_corpus_parser = subparsers.add_parser(
@@ -429,6 +439,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
         sys.stdout.write(result.to_markdown() if args.format == "markdown" else result.to_json())
+        return 0
+
+    if args.command == "baseline-evaluation" and args.baseline_command == "run":
+        try:
+            report = evaluate_baseline(args.manifest, args.traces, args.references)
+            rendered = report.to_json()
+            if args.output:
+                Path(args.output).write_text(rendered, encoding="utf-8")
+        except (BaselineEvaluationError, OSError) as exc:
+            error = {"kind": exc.code, "message": exc.message} if isinstance(exc, BaselineEvaluationError) else {"kind": "baseline_output_failed", "message": str(exc)}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(rendered)
         return 0
 
     if args.command == "corpus":

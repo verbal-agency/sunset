@@ -474,7 +474,10 @@ artifact capture and offline replay. G22b completed a five-class
 declared-support bundle before adjudication while leaving actual deployment
 usage as a separate proof obligation. G23 now uses one owner-authorized human
 reviewer and records its corpus as single-reviewer provisional; a second review
-is a later strengthening step. G24--G26 remain scoped planning boundaries.
+is a later strengthening step. G24 is complete with an offline baseline report
+and six non-authoritative cross-repository reference fixtures. G25 is the only
+next eligible proposal; G26 owns the required breadth expansion and G27 remains
+the pilot planning boundary.
 
 The current marker/compatibility slice is intentionally a baseline, not the
 product's coverage boundary. Before a maintainer pilot, Sunset must broaden
@@ -490,9 +493,10 @@ contracts.
 | [G22b](goals/G22b-current-support-evidence.md) | complete | Capture a declared-support evidence bundle without mutating G21 | G22a + owner-approved selections |
 | [G22c](goals/G22c-retained-case-support-evidence.md) | complete | Capture declared-support evidence for a retained LangGraph compatibility shim | G22b + owner-approved retained-case selection |
 | [G23](goals/G23-independent-adjudication.md) | complete | Capture single-reviewer provisional protected-condition labels and proof obligations | G22b/G22c + one owner-authorized human reviewer |
-| [G24](goals/G24-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G23 |
+| [G24](goals/G24-frozen-baseline-evaluation.md) | complete | Compare frozen heuristic and agentic traces on G23 cases plus pinned cross-repository lifecycle references | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
-| [G26](goals/G26-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + pilot authorization |
+| [G26](goals/G26-broad-candidate-discovery.md) | proposed | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
+| [G27](goals/G27-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + G26 + pilot authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -650,7 +654,8 @@ single-reviewer labels, all results must carry that limitation; independent
 adjudication is a later strengthening path.
 
 **Objective:** Execute heuristic-only and recorded-agentic baselines over the
-same frozen development and holdout corpus, then publish per-case traces,
+same frozen development and holdout corpus, validate pinned cross-repository
+lifecycle references as non-authoritative criterion fixtures, then publish per-case traces,
 coverage, calibration, unsupported-claim, proof-obligation, safety, cost, and
 latency results.
 
@@ -663,10 +668,11 @@ SCN-10, and SCN-12.
 
 **Unlocks:** A pre-optimization baseline and documented failure modes for G25.
 
-The [G24 execution contract](goals/G24-frozen-baseline-evaluation.md) is now
-ready for a user-authorized baseline cycle against the frozen single-reviewer
-manifest. G25 remains an outline until G24 supplies measured error classes and
-budgets.
+The [G24 execution contract](goals/G24-frozen-baseline-evaluation.md) is
+complete. Its report shows heuristic accuracy 1.0000 on four completed included
+cases and recorded-agentic accuracy 0.6667 on three, with explicit interrupted,
+malformed, contradictory, unsupported, and excluded outcomes. G25 is now the
+next proposed goal and must tune only against development data.
 
 ### G25 — Split-safe optimization and ablation
 
@@ -689,12 +695,37 @@ and SCN-12.
 **Unlocks:** A reproducible candidate configuration and known regressions for
 G26.
 
-The [G25 outline](goals/G25-split-safe-optimization.md) will be refined after
-G24 identifies concrete, measured error classes and baseline budgets.
+The [G25 execution contract](goals/G25-split-safe-optimization.md) is now
+refined from the G24 error taxonomy, budgets, and sealed holdout identity. It
+remains proposed until the user authorizes the next cycle.
 
-### G26 — Maintainer pilot and product decision
+### G26 — Broad candidate discovery
 
-**Dependencies:** G25 (complete) and explicit pilot authorization
+**Dependencies:** G25 (complete)
+
+**Purpose:** Broaden candidate observability before a maintainer pilot without
+weakening provenance or uncertainty boundaries.
+
+**Objective:** Add repository-level version/dependency, deprecation/migration,
+feature-flag, and environment/configuration signals plus a bounded
+JavaScript/TypeScript adapter, all using the existing candidate/evidence
+contract.
+
+**Scope boundary:** Additive deterministic collectors, registry/versioning,
+offline fixtures, and per-family coverage/false-positive measurement.
+
+**Exclusions:** Inference or optimization changes, arbitrary crawling,
+enterprise connectors, live access, cleanup, and removability claims.
+
+**Unlocks:** A coverage-qualified candidate set for the G27 pilot.
+
+The [G26 outline](goals/G26-broad-candidate-discovery.md) is proposed and will
+be refined into a Luna-ready execution contract after G25 supplies its final
+configuration and measured regressions.
+
+### G27 — Maintainer pilot and product decision
+
+**Dependencies:** G25 and G26 (complete), plus explicit pilot authorization
 
 **Purpose:** Test whether the validated workflow is useful and appropriately
 conservative in real maintainer review, where operational evidence and missing
@@ -715,6 +746,6 @@ through SCN-12.
 **Unlocks:** A product decision based on empirical results and maintainer
 feedback rather than architecture claims alone.
 
-The [G26 outline](goals/G26-maintainer-pilot-decision.md) will be refined only
-after G25 supplies the pilot configuration, risk limits, and measurable
-success/failure criteria.
+The [G27 outline](goals/G27-maintainer-pilot-decision.md) will be refined only
+after G25 and G26 supply the pilot configuration, coverage limits, risk limits,
+and measurable success/failure criteria.

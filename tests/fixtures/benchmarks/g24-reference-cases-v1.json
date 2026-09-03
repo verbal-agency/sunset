@@ -1,0 +1,62 @@
+{
+  "schema_version": "1",
+  "reference_corpus_id": "sunset-g24-reference-cases-v1",
+  "authority": "reference_only",
+  "description": "Pinned public repository documents used to exercise lifecycle and evidence-criterion handling; these are not Sunset ground-truth labels.",
+  "cases": [
+    {
+      "reference_id": "kubernetes-compatibility-version-lifecycle",
+      "repository": "kubernetes/enhancements",
+      "commit_sha": "e849163ac4a0a5241ba626bd9a99820bf1dcd279",
+      "path": "keps/sig-architecture/4330-compatibility-versions/README.md",
+      "source_url": "https://github.com/kubernetes/enhancements/blob/e849163ac4a0a5241ba626bd9a99820bf1dcd279/keps/sig-architecture/4330-compatibility-versions/README.md",
+      "reference_class": "compatibility_lifecycle",
+      "criteria": ["support_window", "emulation_window", "retained_code_counterexample"]
+    },
+    {
+      "reference_id": "cpython-deprecation-removal-path",
+      "repository": "python/cpython",
+      "commit_sha": "5056ac552a413b394fd189ac2c8b8a519a1c9580",
+      "path": "Doc/whatsnew/3.9.rst",
+      "source_url": "https://github.com/python/cpython/blob/5056ac552a413b394fd189ac2c8b8a519a1c9580/Doc/whatsnew/3.9.rst",
+      "reference_class": "deprecation_lifecycle",
+      "criteria": ["deprecation_date", "scheduled_removal", "replacement_path", "issue_link"]
+    },
+    {
+      "reference_id": "pydantic-ai-version-policy",
+      "repository": "pydantic/pydantic-ai",
+      "commit_sha": "e1357f6adb6a129ebb0228e803708ffd7d67354c",
+      "path": "docs/version-policy.md",
+      "source_url": "https://github.com/pydantic/pydantic-ai/blob/e1357f6adb6a129ebb0228e803708ffd7d67354c/docs/version-policy.md",
+      "reference_class": "project_policy",
+      "criteria": ["major_version_gate", "migration_grace_period", "support_window"]
+    },
+    {
+      "reference_id": "uber-piranha-stale-flag-cleanup",
+      "repository": "uber/piranha",
+      "commit_sha": "2c173203e61febd43ab75df277b978927f061f93",
+      "path": "README.md",
+      "source_url": "https://github.com/uber/piranha/blob/2c173203e61febd43ab75df277b978927f061f93/README.md",
+      "reference_class": "operational_flag_state",
+      "criteria": ["flag_identity", "expected_runtime_value", "deterministic_rewrite_boundary"]
+    },
+    {
+      "reference_id": "transformerlens-quarantine-reenable",
+      "repository": "TransformerLensOrg/TransformerLens",
+      "commit_sha": "2a05c15df238caf8b7869188ea27b5d39a903d35",
+      "path": "tests/QUARANTINES.md",
+      "source_url": "https://github.com/TransformerLensOrg/TransformerLens/blob/2a05c15df238caf8b7869188ea27b5d39a903d35/tests/QUARANTINES.md",
+      "reference_class": "test_quarantine",
+      "criteria": ["actionable_reason", "reenable_condition", "strict_xfail", "focused_regression"]
+    },
+    {
+      "reference_id": "spacy-xfail-xpass-guidance",
+      "repository": "explosion/spaCy",
+      "commit_sha": "26b4d1dc04a812f426e4bef3e8a1b6f159d6f048",
+      "path": "extra/DEVELOPER_DOCS/Code Conventions.md",
+      "source_url": "https://github.com/explosion/spaCy/blob/26b4d1dc04a812f426e4bef3e8a1b6f159d6f048/extra/DEVELOPER_DOCS/Code%20Conventions.md",
+      "reference_class": "xfail_semantics",
+      "criteria": ["expected_failure", "xpass_review", "flakiness_check"]
+    }
+  ]
+}
