@@ -1,6 +1,6 @@
 # G25 — Split-safe optimization and ablation
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G24 (complete)
 
 ## Purpose
@@ -114,3 +114,15 @@ G25 receives one digest-identified candidate configuration, its development
 selection evidence, the single holdout measurement, known failure classes, and
 safe operating budgets. A no-improvement or safety-regression result is a valid
 handoff and must not be concealed.
+
+## Completion evidence
+
+- `tests/test_optimization.py` passes all six focused acceptance tests.
+- `tests/fixtures/benchmarks/g25-experiments-v1.json` records four
+  preregistered candidates and exercises improvement, safety regression,
+  malformed, and budget-exhausted outcomes.
+- The offline CLI selects `g25-prompt-001`, rejects the other three candidates,
+  and seals one holdout report under digest
+  `ae8f4e372095e3dfb3cd73417945c4b3d3f21e486860fc52a55aec669f97c1bc`.
+- Full pytest, JSON, compilation, and `git diff --check` verification pass;
+  `uv lock --check` remains clean.

@@ -14,6 +14,7 @@ from sunset.calibration import CalibrationError, evaluate_release
 from sunset.adjudication import AdjudicationError, freeze_adjudication
 from sunset.adjudication_models import AdjudicationDecision, AdjudicationManifest, ReviewerAuthority
 from sunset.baseline_evaluation import BaselineEvaluationError, evaluate_baseline, load_recorded_traces, load_reference_cases
+from sunset.optimization import OptimizationError, load_experiments, run_optimization
 from sunset.calibration_models import BenchmarkCase as CalibrationCase, EvaluationRun, ExpectedConditionLabel, MetricRecord, ReleaseGateResult, ReleaseThreshold
 from sunset.temporal_epistemics_models import (
     ConditionHypothesis,
@@ -35,6 +36,7 @@ __all__ = [
     "AdjudicationDecision",
     "AdjudicationManifest",
     "BaselineEvaluationError",
+    "OptimizationError",
     "ReviewerAuthority",
     "Claim",
     "ConditionHypothesis",
@@ -82,6 +84,8 @@ __all__ = [
     "evaluate_baseline",
     "load_recorded_traces",
     "load_reference_cases",
+    "load_experiments",
+    "run_optimization",
     "scan_repository",
 ]
 __version__ = "0.1.0"

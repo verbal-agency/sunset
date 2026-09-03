@@ -475,9 +475,10 @@ declared-support bundle before adjudication while leaving actual deployment
 usage as a separate proof obligation. G23 now uses one owner-authorized human
 reviewer and records its corpus as single-reviewer provisional; a second review
 is a later strengthening step. G24 is complete with an offline baseline report
-and six non-authoritative cross-repository reference fixtures. G25 is the only
-next eligible proposal; G26 owns the required breadth expansion and G27 remains
-the pilot planning boundary.
+and six non-authoritative cross-repository reference fixtures. G25 is complete
+with a split-safe optimization report; G26 is the only next eligible proposal
+and owns the required breadth expansion. G27 remains the pilot planning
+boundary.
 
 The current marker/compatibility slice is intentionally a baseline, not the
 product's coverage boundary. Before a maintainer pilot, Sunset must broaden
@@ -494,7 +495,7 @@ contracts.
 | [G22c](goals/G22c-retained-case-support-evidence.md) | complete | Capture declared-support evidence for a retained LangGraph compatibility shim | G22b + owner-approved retained-case selection |
 | [G23](goals/G23-independent-adjudication.md) | complete | Capture single-reviewer provisional protected-condition labels and proof obligations | G22b/G22c + one owner-authorized human reviewer |
 | [G24](goals/G24-frozen-baseline-evaluation.md) | complete | Compare frozen heuristic and agentic traces on G23 cases plus pinned cross-repository lifecycle references | G23 |
-| [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
+| [G25](goals/G25-split-safe-optimization.md) | complete | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-broad-candidate-discovery.md) | proposed | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
 | [G27](goals/G27-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + G26 + pilot authorization |
 
@@ -695,9 +696,10 @@ and SCN-12.
 **Unlocks:** A reproducible candidate configuration and known regressions for
 G26.
 
-The [G25 execution contract](goals/G25-split-safe-optimization.md) is now
-refined from the G24 error taxonomy, budgets, and sealed holdout identity. It
-remains proposed until the user authorizes the next cycle.
+The [G25 execution contract](goals/G25-split-safe-optimization.md) is complete.
+Its offline runner selected one development candidate, rejected safety,
+malformed, and budget regressions, and sealed one holdout measurement without
+using it for selection. G26 is now the next proposed goal.
 
 ### G26 — Broad candidate discovery
 

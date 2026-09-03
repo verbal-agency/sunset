@@ -1,0 +1,159 @@
+{
+  "corpus_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+  "experiments": [
+    {
+      "budget": 1000,
+      "change_id": "require-counterevidence-v2",
+      "component": "prompt",
+      "corpus_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+      "development": {
+        "condition_accuracy": 0.8,
+        "input_tokens": 680,
+        "run_status": "completed",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "development_case_ids": [
+        "lc-python39-removeprefix-shim",
+        "lc-python310-aiter-shim",
+        "lc-stream-cache-xfail",
+        "lc-stream-error-xfail"
+      ],
+      "experiment_id": "g25-prompt-001",
+      "holdout": {
+        "condition_accuracy": 0.6667,
+        "input_tokens": 640,
+        "run_status": "completed",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "holdout_digest": "ae8f4e372095e3dfb3cd73417945c4b3d3f21e486860fc52a55aec669f97c1bc",
+      "metrics": {
+        "condition_accuracy": 0.8,
+        "input_tokens": 680,
+        "run_status": "completed",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "status": "selected"
+    },
+    {
+      "budget": 1000,
+      "change_id": "accept-unknown-as-expired",
+      "component": "threshold",
+      "corpus_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+      "development": {
+        "condition_accuracy": 0.8,
+        "input_tokens": 700,
+        "run_status": "completed",
+        "safety_signals": 1,
+        "unsupported_claim_rate": 0.5
+      },
+      "development_case_ids": [
+        "lc-python39-removeprefix-shim",
+        "lc-python310-aiter-shim",
+        "lc-stream-cache-xfail",
+        "lc-stream-error-xfail"
+      ],
+      "experiment_id": "g25-threshold-002",
+      "holdout_digest": "ae8f4e372095e3dfb3cd73417945c4b3d3f21e486860fc52a55aec669f97c1bc",
+      "metrics": {
+        "condition_accuracy": 0.8,
+        "input_tokens": 700,
+        "run_status": "completed",
+        "safety_signals": 1,
+        "unsupported_claim_rate": 0.5
+      },
+      "rejection_reason": "safety_or_budget_regression",
+      "status": "rejected"
+    },
+    {
+      "budget": 1000,
+      "change_id": "expand-cross-repo-context",
+      "component": "retrieval",
+      "corpus_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+      "development": {
+        "condition_accuracy": 0.0,
+        "input_tokens": 620,
+        "run_status": "malformed_trace",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "development_case_ids": [
+        "lc-python39-removeprefix-shim",
+        "lc-python310-aiter-shim",
+        "lc-stream-cache-xfail",
+        "lc-stream-error-xfail"
+      ],
+      "experiment_id": "g25-retrieval-003",
+      "holdout_digest": "ae8f4e372095e3dfb3cd73417945c4b3d3f21e486860fc52a55aec669f97c1bc",
+      "metrics": {
+        "condition_accuracy": 0.0,
+        "input_tokens": 620,
+        "run_status": "malformed_trace",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "rejection_reason": "malformed_trace",
+      "status": "rejected"
+    },
+    {
+      "budget": 1000,
+      "change_id": "allow-unbounded-provider-retry",
+      "component": "tool_policy",
+      "corpus_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+      "development": {
+        "condition_accuracy": 0.8,
+        "input_tokens": 1200,
+        "run_status": "budget_exhausted",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "development_case_ids": [
+        "lc-python39-removeprefix-shim",
+        "lc-python310-aiter-shim",
+        "lc-stream-cache-xfail",
+        "lc-stream-error-xfail"
+      ],
+      "experiment_id": "g25-tool-004",
+      "holdout_digest": "ae8f4e372095e3dfb3cd73417945c4b3d3f21e486860fc52a55aec669f97c1bc",
+      "metrics": {
+        "condition_accuracy": 0.8,
+        "input_tokens": 1200,
+        "run_status": "budget_exhausted",
+        "safety_signals": 0,
+        "unsupported_claim_rate": 0.0
+      },
+      "rejection_reason": "budget_exhausted",
+      "status": "rejected"
+    }
+  ],
+  "holdout": {
+    "case_ids": [
+      "lc-openai-embedding-skip",
+      "lg-dataclass-version-shim",
+      "ls-promise-error-shim",
+      "ls-prompt-test-skip",
+      "ls-type-alias-version-shim",
+      "ls-union-version-shim"
+    ],
+    "experiment_id": "g25-prompt-001",
+    "metrics": {
+      "condition_accuracy": 0.6667,
+      "input_tokens": 640,
+      "run_status": "completed",
+      "safety_signals": 0,
+      "unsupported_claim_rate": 0.0
+    },
+    "status": "holdout_sealed"
+  },
+  "holdout_digest": "ae8f4e372095e3dfb3cd73417945c4b3d3f21e486860fc52a55aec669f97c1bc",
+  "limitations": [
+    "Development selection is descriptive and bounded by recorded G24 traces.",
+    "Holdout is sealed once and cannot select, reject, or retune a change.",
+    "No experiment establishes production removability or authorizes cleanup."
+  ],
+  "optimization_id": "e9a6249adff44ba4b5c56c948b25ec018cb1435de8762872def973104a43695d",
+  "schema_version": "1",
+  "selected_experiment_id": "g25-prompt-001"
+}
