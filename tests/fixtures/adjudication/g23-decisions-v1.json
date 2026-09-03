@@ -1,0 +1,79 @@
+{
+  "schema_version": "1",
+  "protocol_version": "sunset-g23-single-reviewer-v1",
+  "reviewer_id": "owner-reviewer",
+  "decisions": [
+    {
+      "case_id": "lc-python39-removeprefix-shim",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "evidence_ids": ["lc-python39-removeprefix-shim:history", "lc-python39-removeprefix-shim:support-packaging", "lc-python39-removeprefix-shim:support-ci"],
+      "protected_condition_hypothesis": "The helper protected support for Python versions before str.removeprefix was available; the current package declares Python >=3.10.",
+      "condition_status": "likely_expired",
+      "evidence_sufficiency": "sufficient",
+      "proof_obligations": ["Confirm downstream deployments do not still require Python 3.8 or 3.9."],
+      "validation_scope": ["Pinned LangChain source and declared package/CI support; downstream deployments are not observed." ]
+    },
+    {
+      "case_id": "lc-python310-aiter-shim",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "evidence_ids": ["lc-python310-aiter-shim:history", "lc-python310-aiter-shim:support-packaging", "lc-python310-aiter-shim:support-ci"],
+      "protected_condition_hypothesis": "The helper protected runtimes where the builtin aiter function was unavailable; Python 3.9 behavior was not directly validated.",
+      "condition_status": "unknown",
+      "evidence_sufficiency": "insufficient",
+      "proof_obligations": ["Execute the target behavior under Python 3.9 or obtain equivalent authoritative runtime evidence."],
+      "validation_scope": ["Python 3.10 and 3.7 probes plus declared package/CI support; Python 3.9 remains unvalidated." ]
+    },
+    {
+      "case_id": "lc-stream-error-xfail",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "evidence_ids": ["lc-stream-error-xfail:history"],
+      "protected_condition_hypothesis": "The xfail protects against a defect in the test harness rather than an obsolete product behavior.",
+      "condition_status": "unknown",
+      "evidence_sufficiency": "insufficient",
+      "proof_obligations": ["Run the test with xfail enforcement removed and inspect the testing-code defect before changing the marker."],
+      "validation_scope": ["Pinned test source and marker rationale; the unmasked test has not yet been executed." ]
+    },
+    {
+      "case_id": "lg-dataclass-version-shim",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "evidence_ids": ["lg-dataclass-version-shim:history", "lg-dataclass-version-shim:support-packaging", "lg-dataclass-version-shim:support-ci", "lg-dataclass-version-shim:support-dependencies"],
+      "protected_condition_hypothesis": "The dataclass keyword split protects Python 3.10, where weakref_slot is unsupported, while the package declares Python >=3.10.",
+      "condition_status": "active",
+      "evidence_sufficiency": "sufficient",
+      "proof_obligations": ["Do not remove the branch until the declared minimum Python support is >=3.11 or an equivalent compatibility implementation preserves supported behavior."],
+      "validation_scope": ["Pinned LangGraph source, package metadata, CI matrix, dependency markers, and direct Python 3.10/3.11 probes." ]
+    },
+    {
+      "case_id": "lc-stream-cache-xfail",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "evidence_ids": ["lc-stream-cache-xfail:history"],
+      "protected_condition_hypothesis": "The xfail records an unsupported streaming-cache capability and remains expected to fail in the pinned implementation.",
+      "condition_status": "active",
+      "evidence_sufficiency": "sufficient",
+      "proof_obligations": ["Obtain maintainer/product intent before changing or removing the aspirational test; passing unrelated tests would not establish removability."],
+      "validation_scope": ["Pinned LangChain test under Python 3.10 and 3.14; xfail and unmasked executions reproduce the underlying assertion failure." ]
+    }
+  ],
+  "excluded_cases": [
+    {"case_id": "lc-stale-xfail", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-perplexity-xfail", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-openai-image-xfail", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-async-context-skipif-one", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-async-context-skipif-two", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-groq-standard-xfail", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lg-async-context-skipif", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-upstage-tool-xfail", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lg-ci-timeout-skip", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lg-type-checking-skip", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "lc-openai-embedding-skip", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "ls-prompt-test-skip", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "ls-promise-error-shim", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "ls-union-version-shim", "reason": "not_adjudicated_in_this_pass"},
+    {"case_id": "ls-type-alias-version-shim", "reason": "not_adjudicated_in_this_pass"}
+  ]
+}

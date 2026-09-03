@@ -108,8 +108,8 @@ case; dangling evidence references; and a holdout case containing a prohibited
 evaluation/optimization field. A case missing a required requirement category
 is valid only as `unprepared`; a requirement with no evidence pointers remains
 an explicit proof obligation. Neither state is gate ready. `gate_ready` is
-always false in G21 because G23 has not independently adjudicated any
-protected-condition labels.
+always false in G21 because G23 has not yet frozen a single-reviewer
+provisional adjudication manifest for protected-condition labels.
 
 ### Deterministic behavior matrix
 

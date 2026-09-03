@@ -11,6 +11,14 @@ import sys
 
 from sunset.casefile import build_case_file
 from sunset.casefile_models import CaseFileError
+from sunset.adjudication import (
+    AdjudicationError,
+    evidence_ids_from_files,
+    freeze_adjudication,
+    load_authority,
+    load_decisions,
+    load_exclusions,
+)
 from sunset.artifact_store import ArtifactStore
 from sunset.benchmark import (
     BenchmarkError,
@@ -204,6 +212,16 @@ def build_parser() -> argparse.ArgumentParser:
     support_capture_parser.add_argument("--max-bytes", type=int, default=65_536)
     support_capture_parser.add_argument("--timeout-seconds", type=int, default=10)
     support_capture_parser.add_argument("--diagnostic-output", help="optional JSON report path")
+    adjudication_parser = subparsers.add_parser(
+        "adjudication", help="freeze owner-supplied protected-condition decisions"
+    )
+    adjudication_subparsers = adjudication_parser.add_subparsers(dest="adjudication_command", required=True)
+    freeze_parser = adjudication_subparsers.add_parser("freeze", help="validate and freeze a single-reviewer manifest")
+    freeze_parser.add_argument("--manifest", required=True, help="G21 validation corpus JSON")
+    freeze_parser.add_argument("--authority", required=True, help="reviewer authority JSON")
+    freeze_parser.add_argument("--decisions", required=True, help="decision packet JSON")
+    freeze_parser.add_argument("--evidence-fixture", action="append", default=[], help="recorded G22/G22a/G22b/G22c fixture; repeatable")
+    freeze_parser.add_argument("--output", required=True, help="frozen adjudication manifest JSON")
     release_parser = subparsers.add_parser(
         "release-check", help="validate saved public-release evidence and immutable output digests"
     )
@@ -497,6 +515,28 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         sys.stdout.write(json.dumps(report.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
         return 0 if report.status == "verified" else 2
+
+    if args.command == "adjudication" and args.adjudication_command == "freeze":
+        try:
+            corpus = load_validation_corpus(args.manifest)
+            authority = load_authority(args.authority)
+            decisions = load_decisions(args.decisions)
+            exclusions = load_exclusions(args.decisions)
+            frozen = freeze_adjudication(
+                corpus,
+                authority,
+                decisions,
+                excluded_cases=exclusions,
+                evidence_ids=evidence_ids_from_files(args.evidence_fixture),
+            )
+            rendered = frozen.to_json()
+            Path(args.output).write_text(rendered, encoding="utf-8")
+        except (ValidationCorpusError, AdjudicationError, OSError) as exc:
+            error = {"kind": getattr(exc, "code", "adjudication_failed"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(rendered)
+        return 0
 
     if args.command == "release-check":
         try:

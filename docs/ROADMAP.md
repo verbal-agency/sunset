@@ -489,7 +489,7 @@ contracts.
 | [G22a](goals/G22a-real-github-artifact-capture.md) | complete | Prove real pinned GitHub artifact capture or document blocked connectivity | G22 + authorized network |
 | [G22b](goals/G22b-current-support-evidence.md) | complete | Capture a declared-support evidence bundle without mutating G21 | G22a + owner-approved selections |
 | [G22c](goals/G22c-retained-case-support-evidence.md) | complete | Capture declared-support evidence for a retained LangGraph compatibility shim | G22b + owner-approved retained-case selection |
-| [G23](goals/G23-independent-adjudication.md) | proposed | Capture single-reviewer provisional protected-condition labels and proof obligations | G22b/G22c + one owner-authorized human reviewer |
+| [G23](goals/G23-independent-adjudication.md) | complete | Capture single-reviewer provisional protected-condition labels and proof obligations | G22b/G22c + one owner-authorized human reviewer |
 | [G24](goals/G24-frozen-baseline-evaluation.md) | proposed | Compare frozen heuristic and agentic traces on adjudicated development and holdout cases | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | proposed | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + pilot authorization |
@@ -636,8 +636,8 @@ optimization, live provider access, cleanup, and rewriting historical evidence.
 **Unlocks:** A single-reviewer provisional development/holdout corpus for
 exploratory G24 evaluation; it cannot be called independent ground truth.
 
-The [G23 execution contract](goals/G23-independent-adjudication.md) is ready
-for one owner-authorized human reviewer. A later second-review pass may append
+The [G23 execution contract](goals/G23-independent-adjudication.md) and frozen
+single-reviewer manifest are complete. A later second-review pass may append
 independent decisions without rewriting the provisional manifest.
 
 ### G24 — Frozen baseline evaluation
@@ -663,8 +663,10 @@ SCN-10, and SCN-12.
 
 **Unlocks:** A pre-optimization baseline and documented failure modes for G25.
 
-The [G24 outline](goals/G24-frozen-baseline-evaluation.md) will be refined only
-after G23 freezes the corpus identities and adjudication coverage.
+The [G24 execution contract](goals/G24-frozen-baseline-evaluation.md) is now
+ready for a user-authorized baseline cycle against the frozen single-reviewer
+manifest. G25 remains an outline until G24 supplies measured error classes and
+budgets.
 
 ### G25 — Split-safe optimization and ablation
 

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "protocol_version": "sunset-g23-single-reviewer-v1",
+  "reviewer_id": "owner-reviewer",
+  "authority_basis": "The project owner authorized one human reviewer for this provisional validation pass in the review session.",
+  "review_mode": "single_reviewer",
+  "second_review_status": "not_available"
+}

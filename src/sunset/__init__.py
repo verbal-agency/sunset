@@ -11,6 +11,8 @@ from sunset.operational_evidence_models import FreshnessMetadata, OperationalEvi
 from sunset.casefile_finalizer import finalize_case_file, review_graph
 from sunset.review_models import CaseFile, CaseFileError, ClaimVerification, ReviewFinding, ReviewRequest, ReviewResult
 from sunset.calibration import CalibrationError, evaluate_release
+from sunset.adjudication import AdjudicationError, freeze_adjudication
+from sunset.adjudication_models import AdjudicationDecision, AdjudicationManifest, ReviewerAuthority
 from sunset.calibration_models import BenchmarkCase as CalibrationCase, EvaluationRun, ExpectedConditionLabel, MetricRecord, ReleaseGateResult, ReleaseThreshold
 from sunset.temporal_epistemics_models import (
     ConditionHypothesis,
@@ -28,6 +30,10 @@ __all__ = [
     "CaseFileError",
     "CalibrationCase",
     "CalibrationError",
+    "AdjudicationError",
+    "AdjudicationDecision",
+    "AdjudicationManifest",
+    "ReviewerAuthority",
     "Claim",
     "ConditionHypothesis",
     "ContextExpansionContext",
@@ -70,6 +76,7 @@ __all__ = [
     "finalize_case_file",
     "review_graph",
     "evaluate_release",
+    "freeze_adjudication",
     "scan_repository",
 ]
 __version__ = "0.1.0"

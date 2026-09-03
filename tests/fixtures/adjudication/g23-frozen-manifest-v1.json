@@ -1,0 +1,195 @@
+{
+  "coverage_limit": "Five owner-reviewed cases; all remaining corpus cases explicitly excluded from this pass.",
+  "decisions": [
+    {
+      "case_id": "lc-python310-aiter-shim",
+      "condition_status": "unknown",
+      "evidence_ids": [
+        "lc-python310-aiter-shim:history",
+        "lc-python310-aiter-shim:support-packaging",
+        "lc-python310-aiter-shim:support-ci"
+      ],
+      "evidence_sufficiency": "insufficient",
+      "proof_obligations": [
+        "Execute the target behavior under Python 3.9 or obtain equivalent authoritative runtime evidence."
+      ],
+      "protected_condition_hypothesis": "The helper protected runtimes where the builtin aiter function was unavailable; Python 3.9 behavior was not directly validated.",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "validation_scope": [
+        "Python 3.10 and 3.7 probes plus declared package/CI support; Python 3.9 remains unvalidated."
+      ]
+    },
+    {
+      "case_id": "lc-python39-removeprefix-shim",
+      "condition_status": "likely_expired",
+      "evidence_ids": [
+        "lc-python39-removeprefix-shim:history",
+        "lc-python39-removeprefix-shim:support-packaging",
+        "lc-python39-removeprefix-shim:support-ci"
+      ],
+      "evidence_sufficiency": "sufficient",
+      "proof_obligations": [
+        "Confirm downstream deployments do not still require Python 3.8 or 3.9."
+      ],
+      "protected_condition_hypothesis": "The helper protected support for Python versions before str.removeprefix was available; the current package declares Python >=3.10.",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "validation_scope": [
+        "Pinned LangChain source and declared package/CI support; downstream deployments are not observed."
+      ]
+    },
+    {
+      "case_id": "lc-stream-cache-xfail",
+      "condition_status": "active",
+      "evidence_ids": [
+        "lc-stream-cache-xfail:history"
+      ],
+      "evidence_sufficiency": "sufficient",
+      "proof_obligations": [
+        "Obtain maintainer/product intent before changing or removing the aspirational test; passing unrelated tests would not establish removability."
+      ],
+      "protected_condition_hypothesis": "The xfail records an unsupported streaming-cache capability and remains expected to fail in the pinned implementation.",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "validation_scope": [
+        "Pinned LangChain test under Python 3.10 and 3.14; xfail and unmasked executions reproduce the underlying assertion failure."
+      ]
+    },
+    {
+      "case_id": "lc-stream-error-xfail",
+      "condition_status": "unknown",
+      "evidence_ids": [
+        "lc-stream-error-xfail:history"
+      ],
+      "evidence_sufficiency": "insufficient",
+      "proof_obligations": [
+        "Run the test with xfail enforcement removed and inspect the testing-code defect before changing the marker."
+      ],
+      "protected_condition_hypothesis": "The xfail protects against a defect in the test harness rather than an obsolete product behavior.",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "validation_scope": [
+        "Pinned test source and marker rationale; the unmasked test has not yet been executed."
+      ]
+    },
+    {
+      "case_id": "lg-dataclass-version-shim",
+      "condition_status": "active",
+      "evidence_ids": [
+        "lg-dataclass-version-shim:history",
+        "lg-dataclass-version-shim:support-packaging",
+        "lg-dataclass-version-shim:support-ci",
+        "lg-dataclass-version-shim:support-dependencies"
+      ],
+      "evidence_sufficiency": "sufficient",
+      "proof_obligations": [
+        "Do not remove the branch until the declared minimum Python support is >=3.11 or an equivalent compatibility implementation preserves supported behavior."
+      ],
+      "protected_condition_hypothesis": "The dataclass keyword split protects Python 3.10, where weakref_slot is unsupported, while the package declares Python >=3.10.",
+      "protocol_version": "sunset-g23-single-reviewer-v1",
+      "reviewer_id": "owner-reviewer",
+      "validation_scope": [
+        "Pinned LangGraph source, package metadata, CI matrix, dependency markers, and direct Python 3.10/3.11 probes."
+      ]
+    }
+  ],
+  "excluded_cases": [
+    {
+      "case_id": "lc-async-context-skipif-one",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-async-context-skipif-two",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-groq-standard-xfail",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-openai-embedding-skip",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-openai-image-xfail",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-perplexity-xfail",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-stale-xfail",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lc-upstage-tool-xfail",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lg-async-context-skipif",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lg-ci-timeout-skip",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "lg-type-checking-skip",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "ls-promise-error-shim",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "ls-prompt-test-skip",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "ls-type-alias-version-shim",
+      "reason": "not_adjudicated_in_this_pass"
+    },
+    {
+      "case_id": "ls-union-version-shim",
+      "reason": "not_adjudicated_in_this_pass"
+    }
+  ],
+  "manifest_digest": "626d7356f20f8b0948e3450ea5c6b02988601a83685bf7670ca3cd70b751f648",
+  "manifest_id": "sunset-g23-single-reviewer-v1",
+  "protocol_version": "sunset-g23-single-reviewer-v1",
+  "review_mode": "single_reviewer",
+  "reviewer_id": "owner-reviewer",
+  "schema_version": "1",
+  "second_review_status": "not_available",
+  "source_corpus_digest": "5b379fe73ef3530a515b7d4aca5e557fd23d26acfbd56785b206cf85a4c4eeb7",
+  "source_corpus_id": "sunset-validation-v1",
+  "split_identities": {
+    "development": [
+      "lc-async-context-skipif-one",
+      "lc-async-context-skipif-two",
+      "lc-groq-standard-xfail",
+      "lc-openai-image-xfail",
+      "lc-perplexity-xfail",
+      "lc-python310-aiter-shim",
+      "lc-python39-removeprefix-shim",
+      "lc-stale-xfail",
+      "lc-stream-cache-xfail",
+      "lc-stream-error-xfail",
+      "lc-upstage-tool-xfail",
+      "lg-async-context-skipif",
+      "lg-ci-timeout-skip",
+      "lg-type-checking-skip"
+    ],
+    "excluded": [],
+    "holdout": [
+      "lc-openai-embedding-skip",
+      "lg-dataclass-version-shim",
+      "ls-promise-error-shim",
+      "ls-prompt-test-skip",
+      "ls-type-alias-version-shim",
+      "ls-union-version-shim"
+    ]
+  }
+}

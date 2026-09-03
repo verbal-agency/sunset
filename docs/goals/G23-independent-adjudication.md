@@ -1,6 +1,6 @@
 # G23 — Single-reviewer adjudication and evidence quality
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G22b (complete), an owner-supplied review protocol, and one
 recorded human reviewer authority decision
 
@@ -53,7 +53,28 @@ choose the label, fabricate reviewer identity, or infer a second review. If the
 protocol, authority record, or decision is unavailable, Cycle must mark the
 goal blocked with the missing-input list.
 
+## Resolved input gate
+
+The owner supplied `sunset-g23-single-reviewer-v1`, designated
+`owner-reviewer`, and approved a five-case review set with explicit
+`not_adjudicated_in_this_pass` exclusions for the remaining corpus cases.
+
 ## Luna-ready execution contract
+
+### Implementation surface
+
+- `src/sunset/adjudication_models.py`: versioned authority, decision, and
+  frozen-manifest contracts.
+- `src/sunset/adjudication.py`: deterministic validation, evidence binding,
+  coverage checks, and digest freezing.
+- `src/sunset/cli.py`: `sunset adjudication freeze` entry point.
+- `tests/fixtures/adjudication/`: authority, five decisions, and frozen
+  manifest fixtures.
+- `tests/test_adjudication.py`: focused acceptance and illegal-state tests.
+
+The importer is offline and read-only. It accepts only the G21 corpus plus
+recorded G22/G22a/G22b/G22c evidence fixtures; it never calls a model, network,
+subprocess, or target repository.
 
 For every eligible case, the reviewer supplies exactly one decision containing:
 
@@ -87,10 +108,23 @@ and `second_review_status: not_available` in the frozen manifest.
 ## Outcomes and handoff
 
 The goal succeeds with a frozen manifest that separates single-reviewer
-confirmed, abstained, contradictory, and excluded cases with reasons. G23
+condition-status decisions, abstentions, contradictions, and exclusions with
+reasons. G23
 receives the manifest digest, coverage limits, split identities, reviewer mode,
 and per-case proof obligations; downstream goals must not silently upgrade its
 labels to independent ground truth.
+
+## Completion evidence
+
+- Authority: `tests/fixtures/adjudication/g23-authority-v1.json`.
+- Decisions and explicit exclusions: `tests/fixtures/adjudication/g23-decisions-v1.json`.
+- Frozen manifest: `tests/fixtures/adjudication/g23-frozen-manifest-v1.json`.
+- Focused verification: `tests/test_adjudication.py` (8 passed), including
+  duplicate, unknown-evidence, cross-case, missing-obligation, historical-field,
+  incomplete-coverage, contradiction, and exclusion checks.
+- The manifest contains five owner-reviewed cases and fifteen explicit
+  exclusions, with development/holdout split identities and
+  `single_reviewer`/`not_available` metadata.
 
 ## Single-reviewer limitation
 

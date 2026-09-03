@@ -8,7 +8,8 @@ development or holdout split.
 The corpus does not contain protected-condition ground truth. A historical
 removal is evidence that a change occurred, not proof that the condition behind
 similar code is absent or that removal is safe. Cases remain non-authoritative
-and `gate_ready` is false until G22 records independent human adjudication.
+and `gate_ready` is false until G23 records a frozen, single-reviewer
+provisional adjudication manifest.
 
 Audit the committed packet locally:
 
@@ -23,7 +24,8 @@ requirements, exclusions, stable corpus identity, processed/unprocessed case
 IDs, and the explicit non-authority limitation. A bounded `--max-cases` run is
 reported as incomplete rather than being treated as full coverage.
 
-G22 is responsible for independent condition and proof-obligation review. G23
-may evaluate only a frozen adjudicated manifest, and G24 may optimize only on
-its development partition; holdout results remain sealed until the declared
-release decision.
+G23 is responsible for explicitly scoped condition and proof-obligation review.
+Its initial manifest is single-reviewer provisional, not independent ground
+truth. G24 may evaluate only a frozen manifest and G25 may optimize only on its
+development partition; holdout results remain sealed until the declared release
+decision.

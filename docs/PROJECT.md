@@ -67,7 +67,8 @@ corpus, a held-out evaluation, or a maintainer pilot.
 Phase 3 tests the product thesis rather than adding more agency. It first makes
 each evaluation case traceable to immutable historical evidence and separates
 historical outcomes from claims about a protected condition. It then requires
-independent human adjudication for condition labels, evaluates frozen
+explicitly scoped human adjudication for condition labels (with reviewer-count
+limits), evaluates frozen
 heuristic-only and recorded-agentic traces, optimizes only against a development
 split, and reports a held-out result plus any pilot evidence. A failed,
 inconclusive, contradictory, or unvalidatable result is useful validation data;
