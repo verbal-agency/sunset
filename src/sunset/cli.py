@@ -29,6 +29,7 @@ from sunset.benchmark import (
 )
 from sunset.baseline_evaluation import BaselineEvaluationError, evaluate_baseline
 from sunset.optimization import OptimizationError, run_optimization
+from sunset.broad_collectors import scan_broad_repository
 from sunset.git_repository import RepositoryError
 from sunset.models import ScanError, ScanResult
 from sunset.compatibility import scan_compatibility_repository
@@ -83,7 +84,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     collect_parser.add_argument("repository", help="repository root or subdirectory")
     collect_parser.add_argument(
-        "--collector", choices=("compatibility",), default="compatibility",
+        "--collector", choices=("compatibility", "broad"), default="compatibility",
         help="collector family (default: compatibility)",
     )
     collect_parser.add_argument(
@@ -285,7 +286,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "collect":
         try:
-            result = scan_compatibility_repository(args.repository)
+            result = scan_compatibility_repository(args.repository) if args.collector == "compatibility" else scan_broad_repository(args.repository)
         except RepositoryError as exc:
             result = CompatibilityScanResult(
                 repository_head=None,

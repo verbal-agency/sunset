@@ -496,7 +496,7 @@ contracts.
 | [G23](goals/G23-independent-adjudication.md) | complete | Capture single-reviewer provisional protected-condition labels and proof obligations | G22b/G22c + one owner-authorized human reviewer |
 | [G24](goals/G24-frozen-baseline-evaluation.md) | complete | Compare frozen heuristic and agentic traces on G23 cases plus pinned cross-repository lifecycle references | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | complete | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
-| [G26](goals/G26-broad-candidate-discovery.md) | proposed | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
+| [G26](goals/G26-broad-candidate-discovery.md) | complete | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
 | [G27](goals/G27-maintainer-pilot-decision.md) | proposed | Run a limited maintainer pilot and publish an evidence-bounded product decision | G25 + G26 + pilot authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
@@ -721,9 +721,10 @@ enterprise connectors, live access, cleanup, and removability claims.
 
 **Unlocks:** A coverage-qualified candidate set for the G27 pilot.
 
-The [G26 outline](goals/G26-broad-candidate-discovery.md) is proposed and will
-be refined into a Luna-ready execution contract after G25 supplies its final
-configuration and measured regressions.
+The [G26 execution contract](goals/G26-broad-candidate-discovery.md) is
+complete. It adds four bounded signal families across Python, JavaScript, and
+TypeScript, preserves dynamic forms as unsupported, and verifies committed-HEAD
+provenance. G27 remains proposed until explicit pilot authorization.
 
 ### G27 — Maintainer pilot and product decision
 
