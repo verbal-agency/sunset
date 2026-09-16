@@ -1,0 +1,72 @@
+{
+  "case_names": {
+    "misleading-temp": "misleading-temp ('safe to remove' but still fails)",
+    "platform-active": "platform-active (windows file locking)",
+    "upstream-fixed": "upstream-fixed (dep bumped past buggy version)"
+  },
+  "cases": [
+    {
+      "agent_correct": true,
+      "agent_status": "likely_expired",
+      "approved": true,
+      "case_id": "upstream-fixed",
+      "disagreement": true,
+      "empirical_status": "likely_expired",
+      "escalation": "escalation_requested",
+      "escalation_reason": "disagreement",
+      "escalation_resolved": true,
+      "heuristic_correct": false,
+      "heuristic_status": "likely_active",
+      "validation_outcome": "confirmed"
+    },
+    {
+      "agent_correct": null,
+      "agent_status": "likely_active",
+      "approved": false,
+      "case_id": "platform-active",
+      "disagreement": false,
+      "empirical_status": "not_adjudicated",
+      "escalation": "no_escalation",
+      "escalation_reason": "agreement",
+      "escalation_resolved": false,
+      "heuristic_correct": null,
+      "heuristic_status": "likely_active",
+      "validation_outcome": null
+    },
+    {
+      "agent_correct": false,
+      "agent_status": "likely_expired",
+      "approved": true,
+      "case_id": "misleading-temp",
+      "disagreement": true,
+      "empirical_status": "likely_active",
+      "escalation": "escalation_requested",
+      "escalation_reason": "disagreement",
+      "escalation_resolved": true,
+      "heuristic_correct": true,
+      "heuristic_status": "likely_active",
+      "validation_outcome": "still_failing"
+    }
+  ],
+  "execution": "executed",
+  "generated_on": "2026-09-16",
+  "ground_truth": "empirical_validation",
+  "metrics": {
+    "adjudicated_disagreements": 2,
+    "agent_wins_on_disagreements": 1,
+    "case_count": 3,
+    "error_catches": 1,
+    "escalation_rate": 0.6667,
+    "escalation_resolution_rate": 1.0,
+    "escalations": 2,
+    "escalations_resolved": 2,
+    "heuristic_wins_on_disagreements": 1,
+    "recall_note": "agreements are not validated by design; escalation recall is not computed",
+    "resolved_unknowns": 0
+  },
+  "mode": "recorded",
+  "model": "claude-sonnet-4-5",
+  "non_authority": true,
+  "run_id": "g30-escalation-report-v1",
+  "schema_version": "1"
+}

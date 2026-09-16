@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "source": "offline replay of the live run g30-live-loop-run-v1 (Claude Sonnet); agent statuses and clone outcomes recorded so the report is reproducible in CI without live calls or real clones",
+  "model": "claude-sonnet-4-5",
+  "heuristic": "conservative (likely_active)",
+  "cases": [
+    {
+      "case_id": "upstream-fixed",
+      "agent_status": "likely_expired",
+      "validation_outcome": "confirmed"
+    },
+    {
+      "case_id": "platform-active",
+      "agent_status": "likely_active",
+      "validation_outcome": null
+    },
+    {
+      "case_id": "misleading-temp",
+      "agent_status": "likely_expired",
+      "validation_outcome": "still_failing"
+    }
+  ]
+}

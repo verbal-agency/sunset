@@ -51,8 +51,23 @@ full reason→escalate→run→re-weigh loop has never been exercised end-to-end
   Claude Sonnet and gpt-4.1 — identical statuses across models, uniformly
   conservative, and `unknown` (→ escalate) exactly where static evidence is thin.
   Recorded in [`docs/research/G30-live-reasoning-v1.md`](../research/G30-live-reasoning-v1.md).
-- **Remaining:** a paired report + fixture (AC03/AC05) and a clone-runnable live
-  loop that combines live reasoning with empirical adjudication. 284 pass / 1 skip.
+- **End-to-end live loop (clone-runnable):** ran the full loop with a live model
+  and real clones over three pytest cases — agent right where the heuristic missed
+  expiry, no clone spent on agreement, and an overconfident agent error caught by
+  the clone. Recorded in
+  [`docs/research/G30-live-loop-run-v1.md`](../research/G30-live-loop-run-v1.md) and
+  `tests/fixtures/benchmarks/g30-live-loop-run-v1.json`.
+- **Report (AC03/AC05):** `src/sunset/escalation_report.py` computes empirical
+  metrics (escalation rate/resolution, agent-vs-heuristic wins on adjudicated
+  disagreements, error catches, resolved unknowns; recall explicitly not computed)
+  and renders JSON + Markdown. The canonical report
+  (`tests/fixtures/benchmarks/g30-escalation-report-v1.json`,
+  [`docs/research/G30-escalation-report-v1.md`](../research/G30-escalation-report-v1.md))
+  is regenerated deterministically from recorded inputs and verified offline by
+  `tests/test_escalation_report.py`. 287 pass / 1 skip.
+- **Remaining:** a live reasoner wired through the G11 `model_runtime` receipts
+  (currently a bounded standalone classifier), and a larger clone-runnable case set
+  before any aggregate quality claim.
 
 ## Objective
 
