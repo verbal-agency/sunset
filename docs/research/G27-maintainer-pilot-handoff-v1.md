@@ -25,24 +25,26 @@ outcome artifact.
 
 ---
 
-## Part A — Maintainer-pilot protocol (owner to complete)
+## Part A — Maintainer-pilot protocol ✅ APPROVED (owner, 2026-09-15)
 
 The technical pilot needed no protocol because it was read-only against a pinned
 public checkout. A **maintainer pilot involves a consenting person and their
-judgment about their own repository**, so the following must be fixed *before* the
-first maintainer run. Leaving any field as `[TBD]` blocks the run.
+judgment about their own repository**, so the following is fixed *before* the
+first maintainer run. Every field is owner-declared except **participant identity
+and consent**, which requires a real recruited maintainer and is the one remaining
+gate before a run may start.
 
 | Protocol element | Declared value |
 | --- | --- |
-| Participant(s) and consent record | `[TBD — named maintainer(s); how consent is captured and where stored]` |
-| Candidate count per participant | `[TBD — small, e.g. ≤ the 4 declared OpenClaw candidates; no full-inventory dump]` |
-| Repository scope | `[TBD — pinned ref + path scope, mirroring the read-only technical pilot's discipline]` |
-| Data minimization / redaction | `[TBD — what leaves the participant's environment; default: only candidate locators, hypotheses, and decisions, never raw source or secrets]` |
-| Success measures | `[TBD — e.g. reviewer finds the proof-obligations actionable; hypotheses judged fair; no over-confident "safe to remove" framing]` |
-| Harm measures | `[TBD — e.g. any candidate a reviewer flags as misleading, any pressure toward unsafe removal, any privacy leak]` |
-| Retention | `[TBD — how long per-case notes are kept; deletion trigger]` |
-| Incident stop rule | `[TBD — concrete threshold that halts new runs, per spec "Authority and stop condition"]` |
-| Disclosure | `[TBD — aggregate + per-case evidence published only with participant-approved disclosure]` |
+| Participant(s) and consent record | **[TBD — real maintainer, required before the run]**; written consent captured in the pilot record; participant approves any disclosure before it is published |
+| Candidate count per participant | **≤ 4 per participant per round**; a small, deliberately curated set spanning distinct epistemic outcomes — never a full-inventory dump |
+| Repository scope | **one pinned ref + a narrow path scope per participant**, read-only, mirroring the technical pilot's discipline |
+| Data minimization / redaction | **only candidate locators, hypotheses, and decisions leave the participant's environment** — never raw source or secrets |
+| Success measures | reviewer finds the proof-obligations actionable; hypotheses judged fair; no over-confident "safe to remove" framing |
+| Harm measures | any candidate a reviewer flags as misleading; any pressure toward unsafe removal; any privacy leak |
+| Retention | per-case notes kept until the decision is published plus a participant-approved window, then deleted |
+| Incident stop rule | any privacy incident, unapproved side-effect request, or a participant flagging a misleading recommendation halts new runs while preserving already-authorized evidence |
+| Disclosure | aggregate and per-case evidence published only with participant-approved disclosure |
 
 **Guardrails carried from the goal spec (non-negotiable, do not edit):**
 
@@ -57,7 +59,18 @@ first maintainer run. Leaving any field as `[TBD]` blocks the run.
 
 ---
 
-## Part B — Single-reviewer decision worksheet (reviewer to complete)
+## Part B — Single-reviewer decision worksheet ✅ COMPLETE (2026-09-15)
+
+Recorded by the owner-authorized single reviewer (seth@verbalagency.com) into
+`openclaw-g27-pilot-review-v1.json` (`reviewer_status: complete`). Decisions:
+**Candidate 1 (Chromium gate) → retain; Candidate 2 (proof-phase) → investigate;
+Candidate 3 (exact-HEAD) → insufficient_evidence; Candidate 4 (capture) →
+investigate.** Rationale is stored per candidate in the fixture. Candidate 3 was
+recorded `insufficient_evidence` (not investigate) because its deciding validation
+could not run (ffmpeg unavailable), so no lead was established. The worksheet
+below is retained for reference.
+
+
 
 One owner-authorized reviewer. No second reviewer or consensus is implied
 (`second_review_required: false`). For each candidate, choose exactly one decision

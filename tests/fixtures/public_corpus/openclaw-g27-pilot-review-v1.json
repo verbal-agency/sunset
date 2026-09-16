@@ -8,14 +8,16 @@
   "scope": "ui/",
   "review_protocol": {
     "reviewer_count": 1,
-    "reviewer_status": "pending",
+    "reviewer_status": "complete",
     "allowed_decisions": [
       "retain",
       "investigate",
       "insufficient_evidence"
     ],
     "cleanup_authority": false,
-    "second_review_required": false
+    "second_review_required": false,
+    "reviewer_identity": "owner-authorized single reviewer (seth@verbalagency.com)",
+    "decided_on": "2026-09-15"
   },
   "candidates": [
     {
@@ -40,9 +42,9 @@
         "Do not remove the gate unless supported environments and skip semantics are documented."
       ],
       "reviewer": {
-        "status": "pending",
-        "decision": null,
-        "notes": null
+        "status": "complete",
+        "decision": "retain",
+        "notes": "Active, working environment gate: the suite skips only when Chromium is unavailable AND the flag is set; disposable-clone validation passed 10/10 with Chromium and skipped 10/10 without. Not a removal candidate at this scope."
       },
       "provenance_status": "complete"
     },
@@ -68,9 +70,9 @@
         "Treat unchanged test behavior as validation-in-scope only, not proof of global removability."
       ],
       "reviewer": {
-        "status": "pending",
-        "decision": null,
-        "notes": null
+        "status": "complete",
+        "decision": "investigate",
+        "notes": "Low-risk removal hypothesis. Tests pass with and without the value (only the captured artifact filename changes). Proceed only after confirming no artifact consumer depends on the phase suffix."
       },
       "provenance_status": "complete"
     },
@@ -96,9 +98,9 @@
         "Preserve the field if it is part of reproducibility or audit provenance."
       ],
       "reviewer": {
-        "status": "pending",
-        "decision": null,
-        "notes": null
+        "status": "complete",
+        "decision": "insufficient_evidence",
+        "notes": "Insufficient evidence: the deciding validation (the exact-HEAD/metrics path) could not run because Playwright ffmpeg is unavailable on the mac13-arm64 host, and the field's purpose (reproducibility provenance vs. unused metadata) is unresolved. Parked pending a supported-host re-run and a consumer search; not treated as a lead."
       },
       "provenance_status": "complete"
     },
@@ -124,9 +126,9 @@
         "Do not generalize one file's result to the shared condition without scope evidence."
       ],
       "reviewer": {
-        "status": "pending",
-        "decision": null,
-        "notes": null
+        "status": "complete",
+        "decision": "investigate",
+        "notes": "Shared capture-instrumentation condition; only one of many E2E tests was exercised. Investigate the workflow that consumes captured artifacts and verify that unsetting affects only optional output across the shared set before treating as removable."
       },
       "provenance_status": "complete"
     }

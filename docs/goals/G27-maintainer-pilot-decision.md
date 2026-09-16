@@ -201,6 +201,26 @@ supplies authorization, freeze the approved candidate list, privacy rules, stop
 thresholds, fixtures/simulation tests, and maintainer-review protocol before
 any agentic or validation run.
 
+## Progress (2026-09-15)
+
+- **AC03 / AC06 satisfied:** the owner-authorized single reviewer recorded a
+  decision for each of the four candidates in
+  `tests/fixtures/public_corpus/openclaw-g27-pilot-review-v1.json`
+  (`reviewer_status: complete`): retain (Chromium gate), investigate (proof-phase
+  label), insufficient_evidence (exact-HEAD; deciding validation could not run),
+  investigate (capture instrumentation). Provenance verified via
+  `sunset blame-evidence verify` (4/4).
+- **Part A protocol approved** (owner, 2026-09-15): candidate count ≤ 4 per
+  participant per round, one pinned ref + narrow read-only path scope, strict data
+  minimization (only locators/hypotheses/decisions leave the environment),
+  declared success/harm measures, retention, incident stop rule, and
+  consent-gated disclosure. Recorded in the handoff doc Part A.
+- **Still blocking (single external gate):** a **recruited, consenting maintainer
+  participant** — the one field that cannot be produced without a real person.
+  Once recruited, the run may start under the approved protocol; the Part C
+  continue/revise/stop decision depends on that run's outcomes. The technical
+  pilot and its single-reviewer handoff are complete.
+
 ## Carried-forward risk (2026-09-15)
 
 A GitHub-direct verification found the pilot fixture's `introducing_commit` for
