@@ -130,6 +130,58 @@ def recorded_reasoner(mapping: dict[str, ConditionStatus]) -> Reasoner:
     return reason
 
 
+def conservative_heuristic_reasoner() -> Reasoner:
+    """A deterministic baseline: absent evidence, assume the condition still holds.
+
+    This is the precision-over-recall default (do not treat code as removable
+    without evidence). A richer static heuristic is out of scope for the loop; the
+    point of the loop is that empirical validation, not this baseline, decides.
+    """
+
+    def reason(_case_id: str) -> ConditionStatus:
+        return "likely_active"
+
+    return reason
+
+
+def build_g06_validator(
+    resolve: Callable[[str], tuple[object, str]],
+    store_path: object,
+    *,
+    collector: str = "pytest",
+    config: object | None = None,
+    command_runner: object | None = None,
+) -> EscalationValidator:
+    """Adapt the G06 disposable-clone validator to the loop's validator interface.
+
+    ``resolve`` maps a case id to ``(target_repo, candidate_id)``. The loop only
+    calls this after its approval gate returns True, so the adapter invokes G06
+    with ``approved=True``; G06 still creates the disposable clone, removes only the
+    one marker, runs the tests, and never mutates the target. Any status outside the
+    five outcome classes (e.g. an unexpected ``approval_required``) maps to
+    ``inconclusive`` rather than a guessed conclusion.
+    """
+
+    from sunset.validation import validate_candidate  # local import: heavy, live-only path
+
+    valid = {"confirmed", "still_failing", "flaky", "environment_error", "inconclusive"}
+
+    def validate(case_id: str) -> ValidationOutcome:
+        target, candidate_id = resolve(case_id)
+        result = validate_candidate(
+            target,  # type: ignore[arg-type]
+            store_path=store_path,  # type: ignore[arg-type]
+            candidate_id=candidate_id,
+            approved=True,
+            collector=collector,  # type: ignore[arg-type]
+            config=config,  # type: ignore[arg-type]
+            command_runner=command_runner,  # type: ignore[arg-type]
+        )
+        return result.status if result.status in valid else "inconclusive"  # type: ignore[return-value]
+
+    return validate
+
+
 def approval_set(approved_case_ids: frozenset[str] | set[str]) -> ApprovalGate:
     """An approval gate that approves exactly the listed cases (stand-in for G14)."""
 
@@ -146,6 +198,8 @@ __all__ = [
     "EscalationValidator",
     "Reasoner",
     "approval_set",
+    "build_g06_validator",
+    "conservative_heuristic_reasoner",
     "decide_escalation",
     "recorded_reasoner",
     "run_escalation_case",

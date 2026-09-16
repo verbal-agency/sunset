@@ -29,6 +29,26 @@ deterministic heuristic. Every "agentic" number to date is a replayed authored
 fixture; no live model has ever weighed evidence against this corpus, and the
 full reason→escalate→run→re-weigh loop has never been exercised end-to-end.
 
+## Progress (2026-09-15)
+
+- **Loop core (AC01/AC02):** `src/sunset/escalation_loop.py` +
+  `escalation_loop_models.py` — escalation decision, fail-closed approval gate,
+  and empirical adjudication (`confirmed→likely_expired`,
+  `still_failing→likely_active`, else `not_adjudicated`), with per-case
+  agent/heuristic correctness and empirically-grounded aggregates. Recorded
+  reasoner runs offline/deterministically.
+- **Live plumbing:** `src/sunset/live_model.py` builds an injectable
+  `ChatAnthropic`/`ChatOpenAI` from an explicitly named env var (optional `live`
+  extra; installed). `.env` gitignored; `.env.example` added.
+- **Real validator wiring + end-to-end demo (AC06):** `build_g06_validator`
+  adapts the G06 disposable-clone validator; `tests/test_escalation_end_to_end.py`
+  runs real clones and shows empirical adjudication both ways (agent right on an
+  expired case, heuristic right on an active case), denied approval runs no clone,
+  and the target repos stay unchanged.
+- **Remaining:** the live agent reasoner (wire `model_runtime` live via
+  `live_model`, needs a host-supplied key), a paired report + fixture (AC03/AC05),
+  and the gated live run. 277 pass / 1 skip.
+
 ## Objective
 
 Compose the existing live reasoning (G11), bounded loop (G12), human-gated
