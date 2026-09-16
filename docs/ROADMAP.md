@@ -502,6 +502,7 @@ contracts.
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
 | [G30](goals/G30-live-agentic-escalation-evaluation.md) | active | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
 | [G31](goals/G31-empirical-feedback-loop.md) | proposed | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
+| [G32](goals/G32-natural-clone-runnable-corpus.md) | proposed | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -912,6 +913,36 @@ path.
 The [G31 outline](goals/G31-empirical-feedback-loop.md) is proposed and remains an
 exploration until G30 has produced enough adjudicated cases and it is explicitly
 authorized.
+
+### G32 — Natural clone-runnable evaluation corpus
+
+**Dependencies:** G30, G06, G22, G28, G25
+
+**Purpose:** Enable the first *honest* measurement of the escalation loop. G30's
+results are either replayed fixtures or constructed demonstrations whose evidence
+and ground truth were author-coupled; a real agent-accuracy estimate needs cases
+where the evidence is the real marker context and the ground truth is the real
+clone outcome — independent, not authored.
+
+**Objective:** Mine real xfail/skip markers from pinned public Python repos, pair
+each with recorded real evidence (G22/G28) and a reproducible disposable-clone
+recipe (G06), fix dev/holdout splits (G25), then run the G30 loop and report an
+agent-vs-heuristic result with characterized selection bias and a recall audit.
+
+**Scope boundary:** Pinned public repos; read-only discovery + bounded
+disposable-clone execution; a bounded candidate set with reproducible environments.
+Must solve, not assume: reproducible environments, safe execution of third-party
+test code (G06 is not a security sandbox — vet or sandbox), selection bias,
+non-conclusive outcomes, and the recall gap.
+
+**Advances:** OUT-04, OUT-05, OUT-08; SCN-01 through SCN-03, SCN-06, SCN-12.
+
+**Unlocks:** A measurement (not a demonstration) for a continue/revise/stop
+decision, and the real adjudicated cases G31 would learn from.
+
+The [G32 outline](goals/G32-natural-clone-runnable-corpus.md) is proposed. The
+third-party-code execution boundary should be settled before the first candidate
+runs; a small vetted-repo pilot is the natural first slice.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 
