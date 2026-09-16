@@ -1,9 +1,22 @@
 # G30 — Live agentic escalation loop and evaluation
 
-**Status:** proposed
+**Status:** active
 **Dependencies:** G06, G11, G12, G14 (complete), G24 + G25 (frozen splits and
 evaluator, complete), G29 (corrected provenance, complete), plus explicit
 live-model authorization for the live run.
+
+## Grounding principle (owner steer, 2026-09-15)
+
+Ground truth is **empirical, not asserted.** The human-approved disposable-clone
+result — the tested outcome of actually removing the marker and running the code —
+is the adjudicating fact for a case. Single-reviewer condition labels are treated
+as "assertions that aren't tested" and are **not** the evaluation's ground truth;
+they are at most a weak prior. G30 therefore *bootstraps a corpus of empirically-
+adjudicated cases from validation results* rather than depending on more human
+labels. **Strengthening the corpus with additional human adjudication is
+explicitly NOT a prerequisite** for this goal. The headline output is the set of
+empirically-adjudicated cases (especially agent-vs-heuristic disagreements), never
+an aggregate accuracy claim over a handful of asserted labels.
 
 ## Purpose
 

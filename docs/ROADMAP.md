@@ -500,7 +500,7 @@ contracts.
 | [G27](goals/G27-maintainer-pilot-decision.md) | blocked | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
 | [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
-| [G30](goals/G30-live-agentic-escalation-evaluation.md) | proposed | Run a live agent that weighs evidence and escalates to disposable-clone validation, and score it against the heuristic | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
+| [G30](goals/G30-live-agentic-escalation-evaluation.md) | active | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
 
