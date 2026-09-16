@@ -45,9 +45,14 @@ full reason→escalate→run→re-weigh loop has never been exercised end-to-end
   runs real clones and shows empirical adjudication both ways (agent right on an
   expired case, heuristic right on an active case), denied approval runs no clone,
   and the target repos stay unchanged.
-- **Remaining:** the live agent reasoner (wire `model_runtime` live via
-  `live_model`, needs a host-supplied key), a paired report + fixture (AC03/AC05),
-  and the gated live run. 277 pass / 1 skip.
+- **Live agent reasoner + first live run:** `src/sunset/live_reasoner.py`
+  (`LiveAgentReasoner`, bounded, fail-safe to `unknown`) + `live_model.load_env_file`.
+  First real live reasoning executed on the four OpenClaw candidates with **both**
+  Claude Sonnet and gpt-4.1 — identical statuses across models, uniformly
+  conservative, and `unknown` (→ escalate) exactly where static evidence is thin.
+  Recorded in [`docs/research/G30-live-reasoning-v1.md`](../research/G30-live-reasoning-v1.md).
+- **Remaining:** a paired report + fixture (AC03/AC05) and a clone-runnable live
+  loop that combines live reasoning with empirical adjudication. 284 pass / 1 skip.
 
 ## Objective
 
