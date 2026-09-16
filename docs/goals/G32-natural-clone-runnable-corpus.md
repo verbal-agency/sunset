@@ -23,6 +23,36 @@ recipe, with fixed development/holdout splits. Then run the G30 loop over it and
 publish the first agent-vs-heuristic result whose bias is characterized rather than
 baked in.
 
+## Chosen corpus: langchain-core (decided 2026-09-16)
+
+The pilot corpus is **`langchain-ai/langchain`, package `langchain-core`
+(`libs/core`)**, using its `tests/unit_tests` markers. It is pure-Python with light
+deps, so clones are fast, deterministic, and cheap; its markers are real temporal
+debt that can genuinely be expired or active; and it reconnects to the G08a/G21
+pinned LangChain corpus. **OpenClaw is explicitly out of scope for measurement** —
+its markers are heavy TS/E2E environment gates (browser, ffmpeg) that are expensive
+to run, environment-sensitive (more `not_adjudicated`), and skewed toward "active";
+it remains the G27 maintainer-pilot/demonstration repo only.
+
+**Reproducible-environment recipe (pinned):** sparse-checkout `libs/core` at the
+pinned commit, create a venv, `pip install -e libs/core` plus the declared `test`
+dependency group, then run the marker's test with `--runxfail` (or AST marker
+removal) in the disposable clone. Recorded in
+[`docs/research/G30-real-case-langchain-core-v1.md`](../research/G30-real-case-langchain-core-v1.md).
+
+**First real case captured** (pilot, N=1): `test_merge_dicts_0_3`
+(`xfail "Refactors to make in 0.3"`) at langchain-core 1.6.3 — the live agent said
+`likely_expired` (misled by the version signal), the clone still fails
+(`likely_active`), the agent was wrong and the clone caught it. This is the first
+non-author-coupled adjudicated case. Fixture:
+`tests/fixtures/benchmarks/g30-real-cases-v1.json`.
+
+Candidate markers already located in `libs/core/tests/unit_tests` include
+`test_utils.py::test_merge_dicts_0_3`, `test_function_calling.py` (two pydantic-v2
+xfails), `test_cache.py` ("caching for streaming yet"), the RunnableSequence
+callback-order xfails, and several `IS_GTE_3_11` / pydantic-v1/v2 `skipif` version
+guards.
+
 ## Project alignment
 
 - Advances OUT-04, OUT-05, OUT-08.

@@ -107,3 +107,25 @@ def test_metrics_count_error_catches_and_resolved_unknowns() -> None:
     m = escalation_metrics(report)
     assert m["resolved_unknowns"] == 1   # 'uncertain' abstention -> empirical fact
     assert m["error_catches"] == 1       # 'wrong' definite-wrong -> clone caught it
+
+
+def test_real_langchain_core_case_adjudication() -> None:
+    """G32 first natural case: the agent, misled by the version signal, said
+    likely_expired; the real langchain-core clone still fails, so the heuristic
+    was right and the clone caught the agent error. Reproduced offline from the
+    recorded real agent status + real clone outcome."""
+    from sunset.escalation_loop import run_escalation_case
+
+    data = json.loads(Path("tests/fixtures/benchmarks/g30-real-cases-v1.json").read_text(encoding="utf-8"))
+    case = data["cases"][0]
+    result = run_escalation_case(
+        case["case_id"],
+        case["heuristic_status"],
+        case["agent_status"],
+        validator=lambda _c: case["validation_outcome"],
+        approve=lambda _c: True,
+    )
+    assert result.escalation_reason == "disagreement"
+    assert result.empirical_status == "likely_active"
+    assert result.agent_correct is False        # agent fooled by the version hint
+    assert result.heuristic_correct is True      # conservative heuristic held

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "source": "First natural (non-author-coupled) clone-runnable case: a real langchain-core marker, a real live-model judgment, and a real disposable-clone outcome. The maintainers wrote the marker; merge_dicts's actual 1.6.3 behavior is the ground truth; nothing here was authored to produce a result.",
+  "cases": [
+    {
+      "case_id": "lc-merge-dicts-0_3",
+      "repository": "https://github.com/langchain-ai/langchain",
+      "commit": "5c1f28271295bb13034f4cf8964f74c117357d40",
+      "package": "langchain-core",
+      "package_version": "1.6.3",
+      "path": "libs/core/tests/unit_tests/utils/test_utils.py",
+      "test": "test_merge_dicts_0_3",
+      "marker": "pytest.mark.xfail",
+      "marker_reason": "Refactors to make in 0.3",
+      "model": "claude-sonnet-4-5",
+      "heuristic_status": "likely_active",
+      "agent_status": "likely_expired",
+      "validation_command": "python -m pytest libs/core/tests/unit_tests/utils/test_utils.py::test_merge_dicts_0_3 --runxfail (langchain-core 1.6.3 + test group installed in a disposable venv)",
+      "validation_outcome": "still_failing",
+      "empirical_status": "likely_active",
+      "note": "The agent was misled by the version signal (0.3 long past, now 1.6.3) into likely_expired; the test still fails, so the condition is active. Clone caught the agent error."
+    }
+  ]
+}
