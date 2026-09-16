@@ -1,0 +1,66 @@
+{
+  "aggregates": {
+    "adjudicated_disagreements": 2,
+    "agent_correct_on_adjudicated_disagreements": 1,
+    "case_count": 3,
+    "disagreements": 2,
+    "escalations": 2,
+    "escalations_resolved": 2,
+    "heuristic_correct_on_adjudicated_disagreements": 1
+  },
+  "case_names": {
+    "sunset-v1-13637ee2b4ae671015080ab5": "upstream-fixed",
+    "sunset-v1-5706a092c457ea95b035425d": "platform-active",
+    "sunset-v1-d58c443eb277e59e58991d38": "misleading-temp"
+  },
+  "cases": [
+    {
+      "agent_correct": true,
+      "agent_status": "likely_expired",
+      "approved": true,
+      "case_id": "sunset-v1-13637ee2b4ae671015080ab5",
+      "disagreement": true,
+      "empirical_status": "likely_expired",
+      "escalation": "escalation_requested",
+      "escalation_reason": "disagreement",
+      "escalation_resolved": true,
+      "heuristic_correct": false,
+      "heuristic_status": "likely_active",
+      "validation_outcome": "confirmed"
+    },
+    {
+      "agent_correct": null,
+      "agent_status": "likely_active",
+      "approved": false,
+      "case_id": "sunset-v1-5706a092c457ea95b035425d",
+      "disagreement": false,
+      "empirical_status": "not_adjudicated",
+      "escalation": "no_escalation",
+      "escalation_reason": "agreement",
+      "escalation_resolved": false,
+      "heuristic_correct": null,
+      "heuristic_status": "likely_active",
+      "validation_outcome": null
+    },
+    {
+      "agent_correct": false,
+      "agent_status": "likely_expired",
+      "approved": true,
+      "case_id": "sunset-v1-d58c443eb277e59e58991d38",
+      "disagreement": true,
+      "empirical_status": "likely_active",
+      "escalation": "escalation_requested",
+      "escalation_reason": "disagreement",
+      "escalation_resolved": true,
+      "heuristic_correct": true,
+      "heuristic_status": "likely_active",
+      "validation_outcome": "still_failing"
+    }
+  ],
+  "date": "2026-09-16",
+  "ground_truth": "empirical_validation",
+  "model": "claude-sonnet-4-5",
+  "non_authority": true,
+  "run_id": "g30-live-loop-v1",
+  "schema_version": "1"
+}
