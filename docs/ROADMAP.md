@@ -500,6 +500,7 @@ contracts.
 | [G27](goals/G27-maintainer-pilot-decision.md) | blocked | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
 | [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
+| [G30](goals/G30-live-agentic-escalation-evaluation.md) | proposed | Run a live agent that weighs evidence and escalates to disposable-clone validation, and score it against the heuristic | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -845,6 +846,40 @@ deterministic enrichment path never produced the defect.
 the human-gated maintainer pilot (single-reviewer decisions and the consented
 run); per `AGENTS.md`, activating any further goal requires explicit
 authorization and, for the pilot, maintainer participation.
+
+### G30 — Live agentic escalation loop and evaluation
+
+**Dependencies:** G06, G11, G12, G14, G24, G25, G29 (complete), plus explicit
+live-model authorization
+
+**Purpose:** Test the project's central bet, which is currently *untested* rather
+than tested-and-worse: that a live model weighing evidence and choosing when to
+escalate to empirical validation beats the deterministic heuristic. Every
+"agentic" number to date is a replayed authored fixture; no live model has ever
+weighed evidence against the corpus, and the full reason → escalate → run → re-weigh
+loop has never been exercised end-to-end. Evidence is recorded in
+[`docs/research/agentic-evaluation-gap-v1.md`](research/agentic-evaluation-gap-v1.md).
+
+**Objective:** Compose G11 live reasoning, G12 loop, G14 human-gated validation,
+and G06 disposable-clone execution into one resumable escalation loop; evaluate it
+against the heuristic on the frozen corpus, scoring escalation appropriateness and
+using the human-approved clone result to adjudicate agent-vs-heuristic
+disagreements in scope. Recorded-first for tests; the live run is explicit and
+gated.
+
+**Scope boundary:** Compose existing components (no new execution adapter or
+authority); development-split tuning only with the holdout sealed; demonstrate
+end-to-end on at least one real, already-validated OpenClaw candidate. Excludes
+autonomous execution, cleanup, holdout tuning, removability claims, and any
+unauthorized live-model run.
+
+**Advances:** OUT-03, OUT-04, OUT-05, OUT-06, OUT-08; SCN-06, SCN-08 through SCN-12.
+
+**Unlocks:** The first empirical answer to whether agency earns its complexity,
+and a reusable live-loop harness for later pilots.
+
+The [G30 execution contract](goals/G30-live-agentic-escalation-evaluation.md) is
+proposed and remains proposed until explicit live-model authorization.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 
