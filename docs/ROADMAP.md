@@ -497,7 +497,9 @@ contracts.
 | [G24](goals/G24-frozen-baseline-evaluation.md) | complete | Compare frozen heuristic and agentic traces on G23 cases plus pinned cross-repository lifecycle references | G23 |
 | [G25](goals/G25-split-safe-optimization.md) | complete | Optimize declared bounded components on development data and measure regressions on holdout data | G24 |
 | [G26](goals/G26-broad-candidate-discovery.md) | complete | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
-| [G27](goals/G27-maintainer-pilot-decision.md) | active | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
+| [G27](goals/G27-maintainer-pilot-decision.md) | blocked | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
+| [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
+| [G29](goals/G29-pilot-provenance-correction.md) | proposed | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -766,3 +768,84 @@ and the two excluded non-lifecycle feature matches are declared in the detailed
 goal. The project owner authorized G27 activation on 2026-09-03; the
 single-reviewer candidate decisions remain an explicit handoff within the
 active goal.
+
+**Carried-forward finding (2026-09-15):** a GitHub-direct fidelity probe of the
+G27 handoff found that the pilot fixture records an identical, unrelated
+`introducing_commit` (`ad6a81d5…`) for all four candidates; authenticated
+line-level blame gives four distinct, line-accurate commits. This provenance
+defect is recorded in
+[`docs/research/G27-provenance-defect-v1.md`](research/G27-provenance-defect-v1.md)
+and routed to G29 (correction), which depends on G28 (access). The confirmed
+source lines, validation observations, and exclusions are unaffected; only the
+`introducing_commit`/`history_locator` values are wrong.
+
+### G28 — Authenticated exact-SHA Git evidence access
+
+**Dependencies:** G22 (complete), G27 (active), plus explicit host authorization
+to use a credential
+
+**Purpose:** Give Sunset a host-authorized, exact-SHA provenance path so
+real-repository blame is verified line-level Git data rather than a guess. The
+credential and network already exist in the operator's shell (`gh` authenticated,
+GitHub egress working); the in-app browser path cannot do authenticated code
+search or scripted fetch, so provenance must run through the shell/API seam.
+
+**Objective:** Add an authenticated exact-SHA Git evidence adapter (authenticated
+`gh`/GraphQL blame and/or bounded shallow clone) behind the existing G22 provider
+seam, returning line-accurate blame and bounded reference results at a pinned
+commit, or `incomplete` with an explicit obligation when access is unavailable.
+
+**Scope boundary:** Host-supplied, allowlisted credential with no silent
+discovery; exact-`oid` reads only; recorded-fixture replay; read-only. Excludes
+storing/transmitting the credential, browser scraping as a provenance source,
+target mutation, and removability inference.
+
+**Advances:** OUT-02, OUT-05, OUT-07, OUT-08; SCN-01 through SCN-05, SCN-08,
+SCN-09.
+
+**Unlocks:** G29's provenance correction and any later real-repository pilot that
+must cite line-accurate history.
+
+The [G28 specification](goals/G28-authenticated-git-evidence-access.md) is
+**complete** (2026-09-15). It adds a recorded-first blame-evidence capability
+(`src/sunset/blame_evidence.py`) with an explicit, host-supplied-credential
+GitHub GraphQL live seam that never discovers an ambient token, never persists
+it, and fails closed to `incomplete` (never a guessed commit). A live capture as
+the authenticated `verbal-agency` account produced the verified fixture
+`tests/fixtures/blame_evidence/openclaw-g27-blame-v1.json` (four distinct,
+line-accurate commits). See [`docs/BLAME-EVIDENCE.md`](BLAME-EVIDENCE.md).
+`sunset blame-evidence {fetch,capture}` exposes it. 20 named tests in
+`tests/test_blame_evidence.py` and `tests/test_cli.py` cover recorded replay,
+per-line range selection, credential-absent fail-closed (with a guard that env is
+not read), host allowlisting, byte-identical replay, and token non-serialization.
+
+**G27 is reclassified `blocked`** (2026-09-15): its remaining acceptance criteria
+(AC03/AC06 single-reviewer decisions and the consented maintainer pilot) require
+human inputs that cannot be produced by implementation, and its provenance must
+be corrected by G29 first. The technical pilot artifacts remain valid.
+
+### G29 — Pilot provenance correction and enrichment hardening
+
+**Dependencies:** G28 (proposed), G27 (active)
+
+**Purpose:** Correct the recorded provenance defect and remove its root cause so
+the pipeline cannot present a guessed introduction point as historical fact again.
+
+**Objective:** Replace the four candidates' `introducing_commit`/`history_locator`
+with G28-verified line-accurate commits, change the broad-collector enrichment
+path to mark unestablished provenance `incomplete` rather than assign a
+placeholder or shared value, and add a regression guard rejecting an unverified
+shared `introducing_commit` across distinct candidate lines.
+
+**Scope boundary:** The four fixture records, the enrichment provenance path, and
+the regression guard. Excludes removability inference, reviewer-decision changes
+(the `reviewer` fields stay `pending`), candidate-ID changes, and browser-scraped
+provenance.
+
+**Advances:** OUT-02, OUT-05, OUT-08; SCN-01 through SCN-03.
+
+**Unlocks:** A trustworthy provenance substrate before the G27 single-reviewer
+handoff proceeds.
+
+The [G29 outline](goals/G29-pilot-provenance-correction.md) is proposed. The
+correct blame values are recorded in the finding and the goal spec.

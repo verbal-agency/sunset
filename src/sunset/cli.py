@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from collections.abc import Sequence
 import json
+import os
 from pathlib import Path
 import shlex
 import sys
@@ -41,6 +42,8 @@ from sunset.provenance_models import ProvenanceError, ProvenanceResult
 from sunset.public_corpus import PublicCorpusError, PublicCorpusReport, load_public_corpus
 from sunset.validation_corpus import ValidationCorpusError, audit_validation_corpus, load_validation_corpus
 from sunset.git_evidence import GitEvidenceError, LiveGitEvidenceProvider, RecordedGitEvidenceProvider, capture_git_evidence, fetch_git_evidence
+from sunset.blame_evidence import BlameEvidenceError, RecordedBlameProvider, capture_blame_evidence, fetch_blame_evidence
+from sunset.blame_evidence_models import BlameRequest
 from sunset.support_evidence import SupportEvidenceError, capture_support_evidence, load_support_selection
 from sunset.release import ReleaseEvidenceError, validate_public_run
 from sunset.scanner import scan_repository
@@ -227,6 +230,22 @@ def build_parser() -> argparse.ArgumentParser:
     git_capture_parser.add_argument("--max-bytes", type=int, default=65_536)
     git_capture_parser.add_argument("--timeout-seconds", type=int, default=10)
     git_capture_parser.add_argument("--diagnostic-output", help="optional JSON report path")
+    blame_parser = subparsers.add_parser("blame-evidence", help="resolve authenticated exact-SHA line blame (recorded-first)")
+    blame_subparsers = blame_parser.add_subparsers(dest="blame_command", required=True)
+    blame_fetch_parser = blame_subparsers.add_parser("fetch", help="replay one recorded blame line (offline)")
+    blame_fetch_parser.add_argument("--fixture", required=True, help="recorded blame fixture JSON")
+    blame_fetch_parser.add_argument("--repository", required=True, help="https://github.com/OWNER/NAME repository URL")
+    blame_fetch_parser.add_argument("--commit", required=True, help="exact 40-hex committed head")
+    blame_fetch_parser.add_argument("--path", required=True, help="repository-relative file path")
+    blame_fetch_parser.add_argument("--line", type=int, required=True, help="1-based line number")
+    blame_fetch_parser.add_argument("--subject-id", default="cli", help="candidate/subject identifier for the receipt")
+    blame_capture_parser = blame_subparsers.add_parser("capture", help="capture authenticated blame for a declared request set")
+    blame_capture_parser.add_argument("--requests", required=True, help="JSON list of {subject_id,repository_url,commit_sha,path,line}")
+    blame_capture_parser.add_argument("--output-fixture", required=True, help="fixture path written only when every request resolves complete")
+    blame_capture_parser.add_argument("--live", action="store_true", required=True, help="explicitly authorize bounded authenticated GitHub GraphQL reads")
+    blame_capture_parser.add_argument("--token-env", required=True, help="name of the env var the host has placed the credential in (never auto-discovered)")
+    blame_capture_parser.add_argument("--timeout-seconds", type=int, default=10)
+    blame_capture_parser.add_argument("--diagnostic-output", help="optional JSON report path")
     support_evidence_parser = subparsers.add_parser("support-evidence", help="capture declared-support evidence for selected cases")
     support_evidence_subparsers = support_evidence_parser.add_subparsers(dest="support_evidence_command", required=True)
     support_capture_parser = support_evidence_subparsers.add_parser("capture", help="capture a declared support-evidence bundle")
@@ -551,6 +570,42 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         except (ValidationCorpusError, GitEvidenceError, OSError) as exc:
             error = {"kind": getattr(exc, "code", "git_capture_failed"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(json.dumps(report.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        return 0 if report.status == "verified" else 2
+
+    if args.command == "blame-evidence" and args.blame_command == "fetch":
+        try:
+            provider = RecordedBlameProvider(args.fixture)
+            request = BlameRequest(args.subject_id, args.repository, args.commit, args.path, args.line)
+            receipt = fetch_blame_evidence(request, provider)
+        except (BlameEvidenceError, OSError) as exc:
+            error = {"kind": getattr(exc, "code", "blame_fetch_failed"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(json.dumps(receipt.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        return 0 if receipt.outcome in {"complete", "missing", "incomplete", "unsupported"} else 2
+
+    if args.command == "blame-evidence" and args.blame_command == "capture":
+        try:
+            raw = json.loads(Path(args.requests).read_text(encoding="utf-8"))
+            if not isinstance(raw, list) or not raw:
+                raise BlameEvidenceError("requests_invalid", "requests file must be a non-empty JSON list")
+            requests = tuple(
+                BlameRequest(str(item["subject_id"]), str(item["repository_url"]), str(item["commit_sha"]), str(item["path"]), int(item["line"]))
+                for item in raw
+            )
+            token = os.environ.get(args.token_env)
+            report = capture_blame_evidence(
+                requests,
+                token,
+                args.output_fixture,
+                timeout_seconds=args.timeout_seconds,
+                diagnostic_output=args.diagnostic_output,
+            )
+        except (BlameEvidenceError, OSError, KeyError, TypeError, ValueError) as exc:
+            error = {"kind": getattr(exc, "code", "blame_capture_failed"), "message": getattr(exc, "message", str(exc))}
             sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
             return 2
         sys.stdout.write(json.dumps(report.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")

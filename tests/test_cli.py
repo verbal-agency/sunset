@@ -178,3 +178,46 @@ def test_investigate_cli_exposes_explicit_recorded_evidence_mode(
     assert exit_code == 0
     assert payload["assumption_status"] == "unknown"
     assert payload["status"] == "inconclusive"
+
+
+def test_blame_evidence_fetch_cli_replays_recorded_line(capsys) -> None:
+    fixture = Path("tests/fixtures/blame_evidence/openclaw-g27-blame-v1.json")
+    exit_code = main([
+        "blame-evidence", "fetch",
+        "--fixture", str(fixture),
+        "--repository", "https://github.com/openclaw/openclaw",
+        "--commit", "0965053fe6b9341776df147a6934b7485c60b5ca",
+        "--path", "ui/src/e2e/activity-run-inspector.e2e.test.ts",
+        "--line", "22",
+    ])
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["outcome"] == "complete"
+    assert payload["provenance_status"] == "complete"
+    assert payload["introducing_commit"] == "7ab5d99a6c3c2bd72a23b08cb0a7a6ad7b68899d"
+
+
+def test_blame_evidence_capture_cli_fails_closed_without_credential(tmp_path: Path, capsys) -> None:
+    requests = tmp_path / "req.json"
+    requests.write_text(json.dumps([
+        {
+            "subject_id": "s",
+            "repository_url": "https://github.com/openclaw/openclaw",
+            "commit_sha": "0965053fe6b9341776df147a6934b7485c60b5ca",
+            "path": "ui/src/e2e/tool-titles.e2e.test.ts",
+            "line": 199,
+        }
+    ]), encoding="utf-8")
+    out = tmp_path / "out.json"
+    exit_code = main([
+        "blame-evidence", "capture",
+        "--requests", str(requests),
+        "--output-fixture", str(out),
+        "--live",
+        "--token-env", "SUNSET_DEFINITELY_UNSET_TOKEN",
+    ])
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 2
+    assert payload["status"] == "blocked"
+    assert payload["receipts"][0]["error_kind"] == "credential_absent"
+    assert not out.exists()

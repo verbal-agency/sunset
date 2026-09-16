@@ -200,3 +200,14 @@ After the technical pilot satisfies its acceptance criteria and a pilot owner
 supplies authorization, freeze the approved candidate list, privacy rules, stop
 thresholds, fixtures/simulation tests, and maintainer-review protocol before
 any agentic or validation run.
+
+## Carried-forward risk (2026-09-15)
+
+A GitHub-direct verification found the pilot fixture's `introducing_commit` for
+all four candidates is a single unrelated value (`ad6a81d5…`); true line-level
+blame gives four distinct commits. This provenance defect is recorded in
+[`docs/research/G27-provenance-defect-v1.md`](../research/G27-provenance-defect-v1.md)
+and routed to G29 (correction) / G28 (access). Source lines, validation
+observations, and exclusions are unaffected; the single-reviewer handoff should
+proceed only after G29 corrects the provenance so a reviewer is not shown a
+guessed introduction point.
