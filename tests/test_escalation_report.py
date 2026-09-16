@@ -73,6 +73,28 @@ def test_recorded_validator_only_called_on_escalation() -> None:
     assert by_id["platform-active"].validation_outcome is None
 
 
+def test_v2_report_reproduces_8_case_metrics() -> None:
+    data = json.loads(Path("tests/fixtures/benchmarks/g30-escalation-cases-v2.json").read_text(encoding="utf-8"))
+    ids = tuple(c["case_id"] for c in data["cases"])
+    agent = {c["case_id"]: c["agent_status"] for c in data["cases"]}
+    outcomes = {c["case_id"]: c["validation_outcome"] for c in data["cases"] if c["validation_outcome"] is not None}
+    report = evaluate(
+        ids, conservative_heuristic_reasoner(), recorded_reasoner(agent),
+        validator=recorded_validator(outcomes), approve=approval_set(set(ids)),
+        run_id="g30-escalation-report-v2", mode="recorded", model="claude-sonnet-4-5",
+        execution="executed", generated_on="2026-09-16",
+    )
+    m = report.metrics()
+    assert m["case_count"] == 8
+    assert m["escalations"] == 6
+    assert m["escalations_resolved"] == 6
+    assert m["adjudicated_disagreements"] == 5
+    assert m["agent_wins_on_disagreements"] == 4
+    assert m["heuristic_wins_on_disagreements"] == 1
+    assert m["error_catches"] == 1        # temp-migration: agent fooled, clone caught
+    assert m["resolved_unknowns"] == 1    # windows-lock: abstention resolved empirically
+
+
 def test_metrics_count_error_catches_and_resolved_unknowns() -> None:
     # synthetic: one abstention resolved, one definite-wrong caught
     report = run_escalation_evaluation(

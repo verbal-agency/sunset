@@ -1,0 +1,56 @@
+{
+  "schema_version": "1",
+  "source": "offline replay of live run g30-live-loop-v2 (Claude Sonnet). Agent statuses and clone outcomes recorded for CI reproducibility. 'truth' is the AUTHOR-SET empirical ground truth (the test body), included for transparency; it is not used by the report (the clone outcome is).",
+  "model": "claude-sonnet-4-5",
+  "heuristic": "conservative (likely_active)",
+  "cases": [
+    {
+      "case_id": "requests-shim",
+      "truth": "expired",
+      "agent_status": "likely_expired",
+      "validation_outcome": "confirmed"
+    },
+    {
+      "case_id": "py38-skip",
+      "truth": "expired",
+      "agent_status": "likely_expired",
+      "validation_outcome": "confirmed"
+    },
+    {
+      "case_id": "windows-lock",
+      "truth": "active",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing"
+    },
+    {
+      "case_id": "temp-migration",
+      "truth": "active",
+      "agent_status": "likely_expired",
+      "validation_outcome": "still_failing"
+    },
+    {
+      "case_id": "numpy-api",
+      "truth": "active",
+      "agent_status": "likely_active",
+      "validation_outcome": null
+    },
+    {
+      "case_id": "deprecation-migrated",
+      "truth": "expired",
+      "agent_status": "likely_expired",
+      "validation_outcome": "confirmed"
+    },
+    {
+      "case_id": "legacy-format",
+      "truth": "active",
+      "agent_status": "likely_active",
+      "validation_outcome": null
+    },
+    {
+      "case_id": "perf-234",
+      "truth": "expired",
+      "agent_status": "likely_expired",
+      "validation_outcome": "confirmed"
+    }
+  ]
+}
