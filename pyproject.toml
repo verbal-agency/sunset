@@ -18,6 +18,14 @@ dependencies = [
     "pydantic>=2.7,<3",
 ]
 
+[project.optional-dependencies]
+# Live model providers for the G30 escalation loop's live agent reasoner.
+# Optional: the core, tests, and recorded modes never import these.
+live = [
+    "langchain-anthropic>=1,<2",
+    "langchain-openai>=1,<2",
+]
+
 [project.scripts]
 sunset = "sunset.cli:entrypoint"
 
