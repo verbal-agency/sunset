@@ -44,6 +44,7 @@ from sunset.validation_corpus import ValidationCorpusError, audit_validation_cor
 from sunset.git_evidence import GitEvidenceError, LiveGitEvidenceProvider, RecordedGitEvidenceProvider, capture_git_evidence, fetch_git_evidence
 from sunset.blame_evidence import BlameEvidenceError, RecordedBlameProvider, capture_blame_evidence, fetch_blame_evidence
 from sunset.blame_evidence_models import BlameRequest
+from sunset.provenance_integrity import verify_review_packet
 from sunset.support_evidence import SupportEvidenceError, capture_support_evidence, load_support_selection
 from sunset.release import ReleaseEvidenceError, validate_public_run
 from sunset.scanner import scan_repository
@@ -246,6 +247,9 @@ def build_parser() -> argparse.ArgumentParser:
     blame_capture_parser.add_argument("--token-env", required=True, help="name of the env var the host has placed the credential in (never auto-discovered)")
     blame_capture_parser.add_argument("--timeout-seconds", type=int, default=10)
     blame_capture_parser.add_argument("--diagnostic-output", help="optional JSON report path")
+    blame_verify_parser = blame_subparsers.add_parser("verify", help="verify a review packet's introducing commits against recorded blame")
+    blame_verify_parser.add_argument("--review", required=True, help="review packet JSON with candidate path/line/introducing_commit")
+    blame_verify_parser.add_argument("--fixture", required=True, help="recorded blame fixture JSON")
     support_evidence_parser = subparsers.add_parser("support-evidence", help="capture declared-support evidence for selected cases")
     support_evidence_subparsers = support_evidence_parser.add_subparsers(dest="support_evidence_command", required=True)
     support_capture_parser = support_evidence_subparsers.add_parser("capture", help="capture a declared support-evidence bundle")
@@ -610,6 +614,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         sys.stdout.write(json.dumps(report.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
         return 0 if report.status == "verified" else 2
+
+    if args.command == "blame-evidence" and args.blame_command == "verify":
+        try:
+            packet = json.loads(Path(args.review).read_text(encoding="utf-8"))
+            provider = RecordedBlameProvider(args.fixture)
+            check = verify_review_packet(packet, provider)
+        except (BlameEvidenceError, OSError, ValueError) as exc:
+            error = {"kind": getattr(exc, "code", "blame_verify_failed"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(json.dumps(check.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+        return 0 if check.ok else 2
 
     if args.command == "support-evidence" and args.support_evidence_command == "capture":
         try:

@@ -499,7 +499,7 @@ contracts.
 | [G26](goals/G26-broad-candidate-discovery.md) | complete | Broaden repository-level temporal signals and add a bounded JavaScript/TypeScript adapter | G25 |
 | [G27](goals/G27-maintainer-pilot-decision.md) | blocked | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
 | [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
-| [G29](goals/G29-pilot-provenance-correction.md) | proposed | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
+| [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -823,6 +823,28 @@ not read), host allowlisting, byte-identical replay, and token non-serialization
 (AC03/AC06 single-reviewer decisions and the consented maintainer pilot) require
 human inputs that cannot be produced by implementation, and its provenance must
 be corrected by G29 first. The technical pilot artifacts remain valid.
+
+### G29 — Pilot provenance correction and enrichment hardening
+
+**Dependencies:** G28 (complete)
+
+**Purpose:** Correct the recorded provenance defect and remove its root cause so
+the pipeline cannot present a guessed introduction point as historical fact again.
+
+The [G29 specification](goals/G29-pilot-provenance-correction.md) is **complete**
+(2026-09-15). The pilot review fixture now carries four distinct, line-accurate
+`introducing_commit` values derived by replaying the G28 blame fixture (with a
+`provenance_correction` audit record superseding the shared `ad6a81d5`). A
+regression test locks the enrichment fail-closed behavior (`incomplete`, empty
+`blame_commit`, explicit obligation), and `src/sunset/provenance_integrity.py`
+adds a cross-file shared-commit guard exposed as `sunset blame-evidence verify`.
+Root cause: the review packet was hand-authored with a placeholder; the
+deterministic enrichment path never produced the defect.
+
+**With G28 and G29 complete, no goal is `active`.** The only remaining G27 work is
+the human-gated maintainer pilot (single-reviewer decisions and the consented
+run); per `AGENTS.md`, activating any further goal requires explicit
+authorization and, for the pilot, maintainer participation.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 

@@ -221,3 +221,15 @@ def test_blame_evidence_capture_cli_fails_closed_without_credential(tmp_path: Pa
     assert payload["status"] == "blocked"
     assert payload["receipts"][0]["error_kind"] == "credential_absent"
     assert not out.exists()
+
+
+def test_blame_evidence_verify_cli_passes_on_corrected_packet(capsys) -> None:
+    exit_code = main([
+        "blame-evidence", "verify",
+        "--review", "tests/fixtures/public_corpus/openclaw-g27-pilot-review-v1.json",
+        "--fixture", "tests/fixtures/blame_evidence/openclaw-g27-blame-v1.json",
+    ])
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["ok"] is True
+    assert payload["verified_count"] == payload["record_count"] == 4

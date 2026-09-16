@@ -1,13 +1,36 @@
 # G29 — Pilot provenance correction and enrichment hardening
 
-**Status:** proposed (next eligible; unblocked by G28)
-**Dependencies:** G28 (authenticated exact-SHA Git evidence access, **complete**),
+**Status:** complete (2026-09-15)
+**Dependencies:** G28 (authenticated exact-SHA Git evidence access, complete),
 G27 (pilot fixture under correction, blocked)
 
-> G28 is complete: the verified line-accurate commits are captured in
-> `tests/fixtures/blame_evidence/openclaw-g27-blame-v1.json` and can be replayed
-> offline via `RecordedBlameProvider` / `sunset blame-evidence fetch`. G29 applies
-> those values to the pilot review fixture and hardens the enrichment path.
+## Completion evidence
+
+1. **Fixture corrected, provenance-backed.** The four candidates in
+   `tests/fixtures/public_corpus/openclaw-g27-pilot-review-v1.json` now carry the
+   distinct, line-accurate commits (`7ab5d99a`, `9b1c4bb3`, `3f1c84c7`,
+   `fbfad6eb`), each with a corrected `history_locator` and
+   `provenance_status: "complete"`. The values were derived by replaying the G28
+   blame fixture through `RecordedBlameProvider` (not re-typed). A top-level
+   `provenance_correction` record documents the method, the blame-fixture digest,
+   and the superseded `ad6a81d5` value.
+2. **Enrichment fail-closed locked in.** `enrich_broad_provenance` already emits
+   `incomplete` (never a guessed commit) when blame is unavailable;
+   `test_enrichment_fails_closed_when_blame_unavailable` is a regression test
+   asserting `provenance_status == "incomplete"`, `blame_commit == ""`, and an
+   explicit `git_blame_failed` obligation.
+3. **Cross-file shared-commit guard.** `src/sunset/provenance_integrity.py`
+   verifies each recorded `introducing_commit` against authenticated blame and
+   flags any commit shared across distinct files that is not individually
+   verified (legitimate same-file sharing is not flagged). Exposed as
+   `sunset blame-evidence verify --review <packet> --fixture <blame>`.
+
+Root cause confirmed: the pipeline never produced the defect — the review packet
+was hand-authored with a placeholder. The guard makes that class of hand-authored
+or mis-resolved provenance detectable.
+
+Tests: `tests/test_provenance_integrity.py` (7), the enrichment regression test,
+and a CLI verify test; full suite 259 passed.
 
 ## Purpose
 

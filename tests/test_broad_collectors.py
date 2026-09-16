@@ -81,3 +81,26 @@ def test_dynamic_forms_are_explicit_and_committed_snapshot_only(tmp_path: Path) 
     assert first.to_json() == second.to_json()
     after = repository_snapshot(repo)
     assert before == {key: value for key, value in after.items() if key != "src/untracked.py"}
+
+
+def test_enrichment_fails_closed_when_blame_unavailable(tmp_path: Path, monkeypatch) -> None:
+    """G29 regression: a candidate whose blame cannot be established is marked
+    incomplete with no guessed commit and an explicit error obligation."""
+    from sunset.git_repository import RepositoryError
+
+    repo = _repository(tmp_path)
+    broad_collectors._BLAME_CACHE.clear()
+
+    def failing(self: GitRepository, path: str):
+        raise RepositoryError("git_blame_failed", "blame unavailable (simulated shallow history)")
+
+    monkeypatch.setattr(GitRepository, "blame_file", failing)
+    discovered = discover_broad_repository(repo)
+    enriched = enrich_broad_provenance(repo, discovered)
+
+    assert enriched.provenance_mode == "deferred"  # nothing reached complete
+    assert enriched.candidates
+    for candidate in enriched.candidates:
+        assert candidate.provenance_status == "incomplete"
+        assert candidate.blame_commit == ""  # never a guessed commit
+    assert any(err.get("kind") == "git_blame_failed" for err in enriched.errors)

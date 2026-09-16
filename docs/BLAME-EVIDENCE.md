@@ -50,5 +50,13 @@ SUNSET_GH_TOKEN="$(gh auth token)" sunset blame-evidence capture \
 Blame is read-only metadata retrieval. It runs no target code, resolves no
 dependency graph, and is not a removability signal. A `complete` blame result
 establishes *when a line was introduced*, not *why the protected condition
-exists* or whether removal is safe. Wiring this provider into broad-collector
-provenance enrichment (and correcting the G27 fixture) is G29.
+exists* or whether removal is safe.
+
+## Verifying a review packet (G29)
+
+`sunset blame-evidence verify --review <packet> --fixture <blame>` checks every
+recorded `introducing_commit` in a review packet against authenticated blame and
+flags any commit shared across distinct files that is not individually verified
+(`src/sunset/provenance_integrity.py`). This is the guard that catches the class
+of defect where a review packet is hand-authored with a placeholder or
+mis-resolved commit. G29 used it to correct the G27 pilot fixture.

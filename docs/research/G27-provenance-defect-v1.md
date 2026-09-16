@@ -6,9 +6,10 @@ maintainer-pilot handoff.
 incomplete provenance must not be presented as historical fact).
 **Routed to:** [G29 — Pilot provenance correction](../goals/G29-pilot-provenance-correction.md)
 (depends on [G28 — Authenticated Git evidence access](../goals/G28-authenticated-git-evidence-access.md), **complete**).
-**Status:** recorded; correct values captured by G28 in
-`tests/fixtures/blame_evidence/openclaw-g27-blame-v1.json`; correction not yet
-applied to the pilot review fixture (G29).
+**Status:** RESOLVED (2026-09-15). Correct values captured by G28 in
+`tests/fixtures/blame_evidence/openclaw-g27-blame-v1.json` and applied to the pilot
+review fixture by G29, which also added the cross-file shared-commit guard
+(`sunset blame-evidence verify`) and an enrichment fail-closed regression test.
 
 ## What is wrong
 
