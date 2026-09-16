@@ -501,6 +501,7 @@ contracts.
 | [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
 | [G30](goals/G30-live-agentic-escalation-evaluation.md) | active | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
+| [G31](goals/G31-empirical-feedback-loop.md) | proposed | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -879,7 +880,38 @@ unauthorized live-model run.
 and a reusable live-loop harness for later pilots.
 
 The [G30 execution contract](goals/G30-live-agentic-escalation-evaluation.md) is
-proposed and remains proposed until explicit live-model authorization.
+**active**; its recorded-first core, live-model plumbing, and real-clone end-to-end
+adjudication are built (277 pass / 1 skip), with the live agent reasoner and paired
+report remaining.
+
+### G31 — Empirical feedback loop for agent judgment (exploration)
+
+**Dependencies:** G30, G25
+
+**Purpose:** Explore whether and how to use G30's empirically-adjudicated outcomes
+(the disposable-clone ground truth of who was right on a disagreement) to improve
+the agent's future judgments — safe to explore precisely because the signal is
+tested, not asserted, but constrained by a scarce, biased sample and the G25
+leakage rules.
+
+**Objective:** An exploration/spike — survey mechanisms (few-shot exemplar memory,
+confidence calibration, retrieval, G25-style optimization; explicitly not weight
+fine-tuning), define a leakage-safe improvement-and-measurement protocol, enumerate
+risks (tiny N, selection bias, self-reinforcement, perverse escalation incentives),
+and recommend whether/what to build. No production learning system.
+
+**Scope boundary:** Design plus at most one small offline prototype on the G25
+development split; holdout sealed; human approval and precision-over-recall
+guarantees unchanged.
+
+**Advances:** OUT-03, OUT-05, OUT-06, OUT-08; SCN-06, SCN-12.
+
+**Unlocks:** A bounded, evidence-based decision on a safe continual-improvement
+path.
+
+The [G31 outline](goals/G31-empirical-feedback-loop.md) is proposed and remains an
+exploration until G30 has produced enough adjudicated cases and it is explicitly
+authorized.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 
