@@ -31,6 +31,33 @@ class LiveModelError(RuntimeError):
         self.message = message
 
 
+def load_env_file(path: str | os.PathLike[str] = ".env", *, override: bool = False) -> tuple[str, ...]:
+    """Load KEY=VALUE lines from a .env file into os.environ (explicit boundary).
+
+    Dependency-free. Existing environment values win unless ``override``. Returns
+    the names of the keys it set (never their values). No-op if the file is absent.
+    """
+
+    file_path = os.fspath(path)
+    if not os.path.exists(file_path):
+        return ()
+    set_names: list[str] = []
+    with open(file_path, encoding="utf-8") as handle:
+        for raw in handle:
+            line = raw.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            name, _, value = line.partition("=")
+            name = name.strip()
+            value = value.strip().strip('"').strip("'")
+            if not name or not value:
+                continue
+            if override or name not in os.environ:
+                os.environ[name] = value
+                set_names.append(name)
+    return tuple(set_names)
+
+
 def supported_providers() -> tuple[str, ...]:
     return tuple(sorted(_PROVIDERS))
 
@@ -70,4 +97,4 @@ def build_chat_model(
     return chat_class(model=model, api_key=api_key, **model_kwargs)
 
 
-__all__ = ["LiveModelError", "build_chat_model", "supported_providers"]
+__all__ = ["LiveModelError", "build_chat_model", "load_env_file", "supported_providers"]
