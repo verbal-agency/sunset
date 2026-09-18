@@ -57,9 +57,17 @@ and the clone caught it, and it agreed-no-clone on one. Artifacts:
 `tests/fixtures/benchmarks/g30-natural-{cases,report}-v1.json`, writeup
 [`docs/research/G30-natural-report-v1.md`](../research/G30-natural-report-v1.md),
 reproduced offline by `test_natural_report_reproduces_metrics`. Still N=9/one
-model/one run — a first natural measurement, not a verdict; the obvious next
-enrichment is richer evidence (test body, G28 blame, linked-issue resolution) to
-reduce evidence-starved abstentions.
+model/one run — a first natural measurement, not a verdict.
+
+**Evidence-enrichment result (2026-09-17):** feeding the agent richer static
+evidence — the full test source + the marker's blame — did **not** improve
+discrimination (abstention 7/9 unchanged, definite-call accuracy 1-right/1-wrong
+unchanged, the one genuinely expired marker still undetected by the agent). Static
+text says what is asserted, not whether the code currently behaves that way; only
+the clone reveals that. This strengthens the escalation-loop design and cautions
+against a G31 that tries to teach static classification. Capability lives in
+`src/sunset/evidence_enrichment.py`; finding in
+[`docs/research/G30-evidence-enrichment-v1.md`](../research/G30-evidence-enrichment-v1.md).
 
 Candidate markers already located in `libs/core/tests/unit_tests` include
 `test_utils.py::test_merge_dicts_0_3`, `test_function_calling.py` (two pydantic-v2

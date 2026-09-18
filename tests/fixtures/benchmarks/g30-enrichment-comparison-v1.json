@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "source": "Thin vs enriched agent judgment on the 9 real langchain-core 1.6.3 xfail markers. Thin evidence = marker reason + version. Rich evidence = reason + version + blame + full test source. Empirical = real clone outcome (unchanged). Model: claude-sonnet-4-5.",
+  "model": "claude-sonnet-4-5",
+  "commit": "5c1f28271295bb13034f4cf8964f74c117357d40",
+  "cases": [
+    {"case_id": "stream-error-cb", "thin": "unknown", "rich": "unknown", "empirical": "likely_active"},
+    {"case_id": "cache-stream", "thin": "unknown", "rich": "unknown", "empirical": "likely_active"},
+    {"case_id": "chat-tmpl-dict", "thin": "likely_active", "rich": "unknown", "empirical": "likely_active"},
+    {"case_id": "chain-order-v1", "thin": "unknown", "rich": "unknown", "empirical": "likely_active"},
+    {"case_id": "sync-in-async", "thin": "unknown", "rich": "likely_active", "empirical": "likely_active"},
+    {"case_id": "chain-order-v2", "thin": "unknown", "rich": "unknown", "empirical": "likely_active"},
+    {"case_id": "pydantic-v2-nested", "thin": "unknown", "rich": "unknown", "empirical": "likely_expired"},
+    {"case_id": "optional-param", "thin": "unknown", "rich": "likely_expired", "empirical": "likely_active"},
+    {"case_id": "merge-dicts-0_3", "thin": "likely_expired", "rich": "unknown", "empirical": "likely_active"}
+  ]
+}
