@@ -129,3 +129,30 @@ def test_real_langchain_core_case_adjudication() -> None:
     assert result.empirical_status == "likely_active"
     assert result.agent_correct is False        # agent fooled by the version hint
     assert result.heuristic_correct is True      # conservative heuristic held
+
+
+def test_natural_report_reproduces_metrics() -> None:
+    """G32 first natural report: 9 real langchain-core xfail markers, real live
+    agent statuses + real clone outcomes. Reproduced offline from recorded inputs."""
+    data = json.loads(Path("tests/fixtures/benchmarks/g30-natural-cases-v1.json").read_text(encoding="utf-8"))
+    ids = tuple(c["case_id"] for c in data["cases"])
+    agent = {c["case_id"]: c["agent_status"] for c in data["cases"]}
+    outcomes = {c["case_id"]: c["validation_outcome"] for c in data["cases"]}
+    report = evaluate(
+        ids, conservative_heuristic_reasoner(), recorded_reasoner(agent),
+        validator=recorded_validator(outcomes), approve=approval_set(set(ids)),
+        run_id="g30-natural-report-v1", mode="recorded", model="claude-sonnet-4-5",
+        execution="executed", generated_on="2026-09-17",
+    )
+    m = report.metrics()
+    assert m["case_count"] == 9
+    assert m["escalations"] == 8
+    assert m["escalations_resolved"] == 8
+    assert m["resolved_unknowns"] == 7
+    assert m["adjudicated_disagreements"] == 1
+    assert m["agent_wins_on_disagreements"] == 0
+    assert m["heuristic_wins_on_disagreements"] == 1
+    assert m["error_catches"] == 1
+    # exactly one marker empirically expired (the genuinely stale pydantic-v2 xfail)
+    expired = [c for c in report.report.cases if c.empirical_status == "likely_expired"]
+    assert len(expired) == 1

@@ -1,0 +1,81 @@
+{
+  "schema_version": "1",
+  "source": "first NATURAL small report: real langchain-core 1.6.3 xfail markers, real live Sonnet judgments, real clone outcomes (--runxfail). commit 5c1f2827.",
+  "model": "claude-sonnet-4-5",
+  "commit": "5c1f28271295bb13034f4cf8964f74c117357d40",
+  "package_version": "1.6.3",
+  "cases": [
+    {
+      "case_id": "stream-error-cb",
+      "node": "language_models/chat_models/test_base.py::test_stream_error_callback",
+      "marker_reason": "This test is failing due to a bug in the testing code",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "cache-stream",
+      "node": "language_models/chat_models/test_cache.py::test_global_cache_stream",
+      "marker_reason": "Abstraction does not support caching for streaming yet.",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "chat-tmpl-dict",
+      "node": "prompts/test_chat.py::test_chat_tmpl_dict_msg",
+      "marker_reason": "In a breaking release, we can update _convert_to_message_template to use DictPromptTemplate for all dict inputs...",
+      "agent_status": "likely_active",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "chain-order-v1",
+      "node": "runnables/test_runnable_events_v1.py::test_chain_ordering",
+      "marker_reason": "Fix order of callback invocations in RunnableSequence",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "sync-in-async",
+      "node": "runnables/test_runnable_events_v1.py::test_sync_in_async_stream_lambdas",
+      "marker_reason": "This test is failing due to missing functionality. Need to implement logic in _transform_stream_with_config...",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "chain-order-v2",
+      "node": "runnables/test_runnable_events_v2.py::test_chain_ordering",
+      "marker_reason": "Fix order of callback invocations in RunnableSequence",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "pydantic-v2-nested",
+      "node": "utils/test_function_calling.py::test_convert_to_openai_function_nested_v2",
+      "marker_reason": "Direct pydantic v2 models not yet supported",
+      "agent_status": "unknown",
+      "validation_outcome": "confirmed",
+      "empirical_passed": true
+    },
+    {
+      "case_id": "optional-param",
+      "node": "utils/test_function_calling.py::test_function_optional_param",
+      "marker_reason": "Pydantic converts str | None to str in .model_json_schema()",
+      "agent_status": "unknown",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    },
+    {
+      "case_id": "merge-dicts-0_3",
+      "node": "utils/test_utils.py::test_merge_dicts_0_3",
+      "marker_reason": "Refactors to make in 0.3",
+      "agent_status": "likely_expired",
+      "validation_outcome": "still_failing",
+      "empirical_passed": false
+    }
+  ]
+}

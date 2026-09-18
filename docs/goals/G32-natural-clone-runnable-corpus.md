@@ -47,6 +47,20 @@ removal) in the disposable clone. Recorded in
 non-author-coupled adjudicated case. Fixture:
 `tests/fixtures/benchmarks/g30-real-cases-v1.json`.
 
+**First natural report captured (2026-09-17, N=9).** All nine `xfail` markers in
+`libs/core/tests/unit_tests` run through the full live loop (Sonnet + real clones).
+Empirically **8 still active, 1 genuinely expired** (the pydantic-v2-nested xfail,
+now supported but never removed — a real stale marker Sunset surfaced by running
+the code). The agent abstained (`unknown`) on 7/9 given thin evidence (reason +
+version only), escalation resolved all 7, its one confident expiry call was wrong
+and the clone caught it, and it agreed-no-clone on one. Artifacts:
+`tests/fixtures/benchmarks/g30-natural-{cases,report}-v1.json`, writeup
+[`docs/research/G30-natural-report-v1.md`](../research/G30-natural-report-v1.md),
+reproduced offline by `test_natural_report_reproduces_metrics`. Still N=9/one
+model/one run — a first natural measurement, not a verdict; the obvious next
+enrichment is richer evidence (test body, G28 blame, linked-issue resolution) to
+reduce evidence-starved abstentions.
+
 Candidate markers already located in `libs/core/tests/unit_tests` include
 `test_utils.py::test_merge_dicts_0_3`, `test_function_calling.py` (two pydantic-v2
 xfails), `test_cache.py` ("caching for streaming yet"), the RunnableSequence
