@@ -502,7 +502,7 @@ contracts.
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
 | [G30](goals/G30-live-agentic-escalation-evaluation.md) | complete | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
 | [G31](goals/G31-empirical-feedback-loop.md) | complete | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
-| [G32](goals/G32-natural-clone-runnable-corpus.md) | proposed | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
+| [G32](goals/G32-natural-clone-runnable-corpus.md) | complete | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 | [G33](goals/G33-unified-orchestration-api.md) | proposed | Expose one high-level repository investigation run instead of requiring frontends to compose internal Sunset commands | G30 + G32 |
 
 ### G21 — Validation corpus protocol and provenance audit
@@ -943,10 +943,11 @@ non-conclusive outcomes, and the recall gap.
 **Unlocks:** A measurement (not a demonstration) for a continue/revise/stop
 decision, and the real adjudicated cases G31 would learn from.
 
-The [G32 specification](goals/G32-natural-clone-runnable-corpus.md) is proposed
-and now includes a Luna-ready execution contract. The existing LangChain natural
-run is its development baseline; activation must preserve the vetted-repository,
-disposable-clone, and split-sealing boundaries.
+The [G32 specification](goals/G32-natural-clone-runnable-corpus.md) is complete
+(2026-10-10). It freezes a nine-case LangChain corpus with exact refs, recorded
+environment/evidence recipes, fixed splits, a recorded G30 report, and one
+executed agreement-case recall audit. The result is a first natural measurement,
+not a broad quality claim; the corpus remains selected and one-repository.
 
 ### G33 — Unified repository investigation orchestration API
 
@@ -1011,11 +1012,11 @@ contradictory, environment-error, and unvalidatable outcomes.
 can call Sunset as one bounded investigation capability, while low-level
 commands remain available only for debugging and development.
 
-The [G33 outline](goals/G33-unified-orchestration-api.md) is proposed. It must
-not be activated until G30 supplies a stable escalation result contract and G32
-demonstrates a reproducible runtime/dependency recipe; promotion requires an
-execution contract naming the service modules, transport, fixtures, approval
-store, and terminal/stop conditions.
+The [G33 specification](goals/G33-unified-orchestration-api.md) remains proposed
+and is now Luna-ready: it names the service modules, CLI transport, fixtures,
+approval-token store, typed contracts, binary criteria, and terminal/stop
+conditions. It may be activated in the next cycle; no implementation starts in
+this cycle.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 

@@ -1,0 +1,22 @@
+{
+  "schema_version": "2",
+  "environments": [
+    {
+      "environment_id": "langchain-core-py312-v1",
+      "repository_url": "https://github.com/langchain-ai/langchain",
+      "pinned_ref": "5c1f28271295bb13034f4cf8964f74c117357d40",
+      "python": "CPython 3.12.8",
+      "install_commands": [
+        ["python", "-m", "pip", "install", "-e", "libs/core[test]"]
+      ],
+      "test_command": ["python", "-m", "pytest", "{candidate_path}::{test}", "--runxfail", "-q"],
+      "dependency_digest": "284ae0a6653bca3a084407a09b61b410da43447cc5f9fd9589fac2fe79f9f4c0",
+      "packages": {
+        "langchain-core": "1.6.3",
+        "pydantic": "2.14.0",
+        "pytest": "9.1.1"
+      },
+      "budgets": {"max_network_bytes": 200000000, "max_packages": 80, "timeout_seconds": 120}
+    }
+  ]
+}

@@ -17,6 +17,20 @@ from sunset.baseline_evaluation import BaselineEvaluationError, evaluate_baselin
 from sunset.optimization import OptimizationError, load_experiments, run_optimization
 from sunset.feedback_loop import FeedbackError, audit_feedback_packet, load_feedback_packet, run_feedback_comparison
 from sunset.feedback_models import FeedbackAudit, FeedbackCase, FeedbackComparisonReport, FeedbackPacket
+from sunset.natural_corpus import (
+    CandidateSelector,
+    EnvironmentRecipe,
+    NaturalAudit,
+    NaturalCase,
+    NaturalCorpusError,
+    NaturalManifest,
+    assemble_natural_report,
+    audit_natural_corpus,
+    load_environment_recipes,
+    load_evidence_records,
+    load_natural_manifest,
+    load_natural_report,
+)
 from sunset.broad_collectors import discover_broad_repository, enrich_broad_provenance, scan_broad_repository
 from sunset.broad_collectors_models import BroadCandidate, BroadScanResult
 from sunset.calibration_models import BenchmarkCase as CalibrationCase, EvaluationRun, ExpectedConditionLabel, MetricRecord, ReleaseGateResult, ReleaseThreshold
@@ -46,6 +60,12 @@ __all__ = [
     "FeedbackCase",
     "FeedbackComparisonReport",
     "FeedbackPacket",
+    "CandidateSelector",
+    "EnvironmentRecipe",
+    "NaturalAudit",
+    "NaturalCase",
+    "NaturalCorpusError",
+    "NaturalManifest",
     "BroadCandidate",
     "BroadScanResult",
     "ReviewerAuthority",
@@ -100,6 +120,12 @@ __all__ = [
     "audit_feedback_packet",
     "load_feedback_packet",
     "run_feedback_comparison",
+    "assemble_natural_report",
+    "audit_natural_corpus",
+    "load_environment_recipes",
+    "load_evidence_records",
+    "load_natural_manifest",
+    "load_natural_report",
     "scan_broad_repository",
     "discover_broad_repository",
     "enrich_broad_provenance",

@@ -1,6 +1,6 @@
 # G32 — Natural clone-runnable evaluation corpus
 
-**Status:** proposed
+**Status:** complete
 **Dependencies:** G30 (loop + report), G06 (disposable-clone validation), G22 + G28
 (recorded/authenticated evidence), G25 (split discipline), G21 (corpus protocol)
 
@@ -246,6 +246,40 @@ maintainer-facing quality claim.
 
 ## Note
 
-Remains proposed until explicitly activated. The existing LangChain natural run
-is the development baseline; the next execution should expand the manifest and
-recall-audit sample without treating the current N=9 report as a quality verdict.
+The goal is complete. The existing LangChain natural run is now a frozen
+development/holdout corpus and first measurement; later work may expand the
+manifest and recall-audit sample without treating the current N=9 report as a
+quality verdict.
+
+## Completion evidence (2026-10-10)
+
+- **G32-AC01:** `g32-natural-manifest-v2.json` binds nine cases to the full
+  LangChain commit SHA, derived case IDs, candidate selectors, evidence digests,
+  and fixed development/holdout assignments. `test_manifest_binds_exact_refs_and_ids`
+  rejects a moving ref before any clone.
+- **G32-AC02:** `g32-natural-environment-v2.json` records CPython 3.12.8,
+  declared package installation, package versions, dependency digest, test
+  command, and budgets. `test_environment_recipe_is_recorded_or_excluded`
+  passes and missing recipes are rejected.
+- **G32-AC03:** The manifest allowlist and budget audit are read-only; the
+  agreement-case disposable run recorded `target_unchanged: true`. The
+  `test_vetted_disposable_boundary` socket/subprocess guards prove corpus audit
+  and replay do not clone, network, or execute code.
+- **G32-AC04:** `g32-natural-report-v2.json` records `confirmed` and
+  `still_failing` outcomes as empirical statuses and preserves the unadjudicated
+  agreement case. `test_non_conclusive_outcomes_are_not_labels` rejects a flaky
+  result coerced into a condition label.
+- **G32-AC05:** The split commitment is recorded in the manifest; holdout case
+  IDs and artifacts are rejected as tuning inputs by
+  `test_split_audit_rejects_holdout_tuning`. The report has no tuning inputs.
+- **G32-AC06:** The report includes per-case heuristic/agent statuses,
+  escalation, clone outcome, empirical status, unsupported claims, selection
+  bias, and an executed one-case agreement recall audit. The audit documents
+  that this is a sample, not a recall estimate.
+- **G32-AC07:** `test_recorded_report_replays_byte_identically` and the locked
+  suite pass without model, network, subprocess, or target-repository access;
+  the manifest audit digest is
+  `590647846374a91baf6f8a92c8ceccca9b0e07653ca086e67260b6fc25d39650`.
+
+Focused verification: `.venv/bin/python -m pytest -q tests/test_natural_corpus.py`.
+The full locked suite and `git diff --check` are required before commit.

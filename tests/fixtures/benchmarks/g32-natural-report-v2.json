@@ -1,0 +1,39 @@
+{
+  "schema_version": "2",
+  "run_id": "g32-natural-report-v2",
+  "manifest_digest": "590647846374a91baf6f8a92c8ceccca9b0e07653ca086e67260b6fc25d39650",
+  "source_report_digest": "85a513bc37c63528c0d584ada2bf8c0dd7adafd6b8e19baac504d99fff7a842d",
+  "mode": "live",
+  "model": "claude-sonnet-4-5",
+  "execution": "executed",
+  "ground_truth": "empirical_validation",
+  "cases": [
+    {"case_id":"g32-0f5d22fbff2e3d5d","source_case_id":"chain-order-v1","split":"development","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-18eba80e3c3f2fd3","source_case_id":"merge-dicts-0_3","split":"holdout","heuristic_status":"likely_active","agent_status":"likely_expired","escalation":"escalation_requested","escalation_reason":"disagreement","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-589db1fd98e48fd5","source_case_id":"stream-error-cb","split":"development","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-83ad2c68381b36e9","source_case_id":"chat-tmpl-dict","split":"development","heuristic_status":"likely_active","agent_status":"likely_active","escalation":"no_escalation","escalation_reason":"agreement","validation_outcome":null,"empirical_status":"not_adjudicated"},
+    {"case_id":"g32-8fa7c7a8fa1515cc","source_case_id":"cache-stream","split":"development","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-9754e34f461b4196","source_case_id":"sync-in-async","split":"development","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-ade9eeb4893103a0","source_case_id":"optional-param","split":"holdout","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-b4235cfbec97b741","source_case_id":"chain-order-v2","split":"development","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"still_failing","empirical_status":"likely_active"},
+    {"case_id":"g32-cce056b765e66a08","source_case_id":"pydantic-v2-nested","split":"holdout","heuristic_status":"likely_active","agent_status":"unknown","escalation":"escalation_requested","escalation_reason":"agent_uncertain","validation_outcome":"confirmed","empirical_status":"likely_expired"}
+  ],
+  "metrics": {"case_count":9,"escalations":8,"escalation_rate":0.8889,"escalations_resolved":8,"escalation_resolution_rate":1.0,"resolved_unknowns":7,"adjudicated_disagreements":1,"agent_wins_on_disagreements":0,"heuristic_wins_on_disagreements":1,"error_catches":1},
+  "selection_bias": [
+    "The corpus includes only public, clone-runnable markers from the vetted LangChain repository.",
+    "Dependency-installable and deterministic tests are not representative of all temporal debt.",
+    "One repository, one model, one recorded run; metrics are not a general quality claim."
+  ],
+  "unsupported_claims": [
+    "A passing disposable clone does not prove removal safe for every deployment.",
+    "The report does not estimate recall outside the declared audit sample."
+  ],
+  "recall_audit": {
+    "status":"executed",
+    "sample_case_ids":["g32-83ad2c68381b36e9"],
+    "cases":[{"case_id":"g32-83ad2c68381b36e9","reason":"agreement","approved":true,"validation_outcome":"still_failing","empirical_status":"likely_active","target_unchanged":true,"environment_id":"langchain-core-py312-v1","command":["python","-m","pytest","libs/core/tests/unit_tests/prompts/test_chat.py::test_chat_tmpl_dict_msg","--runxfail","-q"]}],
+    "limitations":["One agreement case was sampled; this is a recall audit sample, not a recall estimate."]
+  },
+  "tuning_case_ids": [],
+  "non_authority": true
+}
