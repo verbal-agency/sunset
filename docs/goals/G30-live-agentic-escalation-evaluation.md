@@ -1,6 +1,6 @@
 # G30 — Live agentic escalation loop and evaluation
 
-**Status:** active
+**Status:** complete
 **Dependencies:** G06, G11, G12, G14 (complete), G24 + G25 (frozen splits and
 evaluator, complete), G29 (corrected provenance, complete), plus explicit
 live-model authorization for the live run.
@@ -20,14 +20,14 @@ an aggregate accuracy claim over a handful of asserted labels.
 
 ## Purpose
 
-Test the project's central bet, which is currently **untested** rather than
+Tested the project's central bet, which was previously **untested** rather than
 tested-and-worse (see
 [agentic-evaluation-gap-v1](../research/agentic-evaluation-gap-v1.md)): that a
 live model weighing evidence and choosing *when to escalate to empirical
-validation* produces better-calibrated protected-condition decisions than the
-deterministic heuristic. Every "agentic" number to date is a replayed authored
-fixture; no live model has ever weighed evidence against this corpus, and the
-full reason→escalate→run→re-weigh loop has never been exercised end-to-end.
+validation* can produce better-calibrated protected-condition decisions than the
+deterministic heuristic. The recorded live traces and natural LangChain run now
+exercise the full reason→escalate→run→re-weigh loop, while retaining the
+small-sample and selection-bias limitations documented below.
 
 ## Progress (2026-09-15)
 
@@ -51,6 +51,10 @@ full reason→escalate→run→re-weigh loop has never been exercised end-to-end
   Claude Sonnet and gpt-4.1 — identical statuses across models, uniformly
   conservative, and `unknown` (→ escalate) exactly where static evidence is thin.
   Recorded in [`docs/research/G30-live-reasoning-v1.md`](../research/G30-live-reasoning-v1.md).
+- **G11 runtime seam:** `ModelRuntimeReasoner` now adapts receipt-backed G11
+  `ReasoningRequest`/`ReasoningResult` values into the G30 status vocabulary,
+  preserves per-case runtime results for audit, and fails closed to `unknown` on
+  runtime, schema, or budget failures. Covered by `tests/test_live_reasoner.py`.
 - **End-to-end live loop (clone-runnable):** ran the full loop with a live model
   and real clones over three pytest cases — agent right where the heuristic missed
   expiry, no clone spent on agreement, and an overconfident agent error caught by
@@ -65,9 +69,10 @@ full reason→escalate→run→re-weigh loop has never been exercised end-to-end
   [`docs/research/G30-escalation-report-v1.md`](../research/G30-escalation-report-v1.md))
   is regenerated deterministically from recorded inputs and verified offline by
   `tests/test_escalation_report.py`. 287 pass / 1 skip.
-- **Remaining:** a live reasoner wired through the G11 `model_runtime` receipts
-  (currently a bounded standalone classifier), and a larger clone-runnable case set
-  before any aggregate quality claim.
+- **Completion boundary:** the G32 natural LangChain report supplies the real
+  clone-runnable end-to-end case set and empirical outcomes. Larger-corpus
+  measurement and recall auditing remain G32 work; G30 does not claim general
+  accuracy from the small demonstration.
 
 ## Objective
 
@@ -92,8 +97,10 @@ recorded-first for tests.
 
 Compose existing components; add no new execution adapter and no new authority.
 The loop is evaluated on the frozen G23/G24 corpus and demonstrated end-to-end on
-at least one real, already-validated candidate (an OpenClaw G27 candidate). Any
-tuning uses the development split only; the holdout stays sealed (G25 discipline).
+at least one real, already-validated clone-runnable candidate from G32 (the
+LangChain pydantic-v2-nested marker). Any tuning uses the development split only;
+the holdout stays sealed (G25 discipline). OpenClaw remains a static live-reasoning
+demonstration, not a required third-party-code execution target for this goal.
 
 ## Key design constraints (from the charter)
 
@@ -143,9 +150,10 @@ tuning uses the development split only; the holdout stays sealed (G25 discipline
 - **G30-AC05 — Paired comparison:** A paired agent-vs-heuristic report over the
   frozen development split (and a single sealed holdout read) is produced; a live
   run is gated and reported as `executed` or `not_executed`.
-- **G30-AC06 — End-to-end demonstration:** At least one real candidate (an OpenClaw
-  G27 candidate) is carried through reason → escalate → human-approve → clone-run →
-  re-weigh, recorded as a trace, with the pinned target checkout unchanged.
+- **G30-AC06 — End-to-end demonstration:** At least one real, clone-runnable
+  candidate from G32 (the LangChain pydantic-v2-nested marker) is carried through
+  reason → escalate → human-approve → clone-run → re-weigh, recorded as a trace,
+  with the pinned target checkout unchanged.
 - **G30-AC07 — Side-effect boundary:** No autonomous execution, target mutation,
   holdout tuning, or fabricated live result; recorded default makes no model or
   network call; live model/network only under explicit enablement.
@@ -159,7 +167,7 @@ tuning uses the development split only; the holdout stays sealed (G25 discipline
 | G30-AC03 | escalation metric in the evaluation report + test |
 | G30-AC04 | per-case disagreement/adjudication fields in the report fixture |
 | G30-AC05 | paired report fixture under `tests/fixtures/benchmarks/` |
-| G30-AC06 | recorded end-to-end trace fixture for one OpenClaw candidate |
+| G30-AC06 | `tests/fixtures/benchmarks/g30-natural-{cases,report}-v1.json` and `docs/research/G30-natural-report-v1.md` |
 | G30-AC07 | boundary tests (no-live-call default, no-mutation, gated live) |
 
 ## Explicit exclusions
@@ -182,6 +190,9 @@ analyzed/target repository is never modified.
 - `src/sunset/escalation_loop.py`: compose `model_runtime` (G11), `agent_loop`
   (G12), `agent_validation` (G14), and `validation` (G06) into one resumable loop
   with a typed escalation decision and recorded-first replay.
+- `src/sunset/live_reasoner.py`: adapt receipt-backed G11 `ModelRuntime` results
+  into the loop's conservative status vocabulary without bypassing budgets,
+  citations, or runtime error states.
 - `src/sunset/baseline_evaluation.py` (or a new `escalation_evaluation.py`): add
   the escalation-appropriateness and disagreement-adjudication metrics to the
   report without breaking the G24 report schema (additive, versioned).
@@ -194,7 +205,10 @@ analyzed/target repository is never modified.
 The loop's terminal states are the existing conservative outcomes plus an explicit
 `escalation_requested` / `escalation_denied` / `validated_in_scope` /
 `not_adjudicated`. A divergence with no approved run is `not_adjudicated`, never a
-resolved status. A live result is `executed`; its absence is `not_executed`.
+resolved status. A live result is `executed`; its absence is `not_executed`. The
+G11 adapter maps `active` → `likely_active`, `expired` → `likely_expired`, and
+`unknown`, invalid, disabled, error, or budget-exhausted runtime results →
+`unknown`; it never fabricates a `contradictory` or definite status.
 
 ### Behavior matrix
 
@@ -213,3 +227,22 @@ Named tests for approval gating, recorded determinism/replay, the escalation
 metric, disagreement adjudication, the no-live-call default, and the gated live
 path, plus a saved paired report and one end-to-end recorded trace. A passing loop
 is evidence of behavior only; it is never a removability conclusion.
+
+## Completion evidence (2026-10-10)
+
+- **G30-AC01:** approval-gated loop and denied/approved validator behavior pass in
+  `tests/test_escalation_loop.py` and `tests/test_escalation_end_to_end.py`.
+- **G30-AC02:** recorded loop/report replay is byte-stable and offline in
+  `tests/test_escalation_report.py` and the recorded runtime tests.
+- **G30-AC03/AC04/AC05:** paired escalation metrics and empirical disagreement
+  adjudication are reproduced by `tests/test_escalation_report.py` from the
+  versioned G30/G32 fixtures.
+- **G30-AC06:** the natural LangChain report records the real pydantic-v2-nested
+  candidate's live reason → approval → disposable-clone result and preserves the
+  pinned target checkout (`docs/research/G30-natural-report-v1.md`).
+- **G30-AC07:** focused boundary tests pass; runtime errors and unavailable
+  validation remain `unknown`/`not_adjudicated` rather than fabricated claims.
+
+The remaining larger-corpus and recall-audit work is explicitly carried by G32;
+this goal makes no aggregate accuracy or removability claim beyond its recorded
+empirical demonstrations.

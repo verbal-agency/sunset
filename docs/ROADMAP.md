@@ -500,9 +500,10 @@ contracts.
 | [G27](goals/G27-maintainer-pilot-decision.md) | blocked | Make discovery/provenance scale-safe, run a pinned real-repository pilot, then publish an evidence-bounded maintainer decision | G25 + G26 + explicit technical/pilot authorization |
 | [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
-| [G30](goals/G30-live-agentic-escalation-evaluation.md) | active | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
+| [G30](goals/G30-live-agentic-escalation-evaluation.md) | complete | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
 | [G31](goals/G31-empirical-feedback-loop.md) | proposed | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | proposed | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
+| [G33](goals/G33-unified-orchestration-api.md) | proposed | Expose one high-level repository investigation run instead of requiring frontends to compose internal Sunset commands | G30 + G32 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -854,12 +855,11 @@ authorization and, for the pilot, maintainer participation.
 **Dependencies:** G06, G11, G12, G14, G24, G25, G29 (complete), plus explicit
 live-model authorization
 
-**Purpose:** Test the project's central bet, which is currently *untested* rather
-than tested-and-worse: that a live model weighing evidence and choosing when to
-escalate to empirical validation beats the deterministic heuristic. Every
-"agentic" number to date is a replayed authored fixture; no live model has ever
-weighed evidence against the corpus, and the full reason → escalate → run → re-weigh
-loop has never been exercised end-to-end. Evidence is recorded in
+**Purpose:** Test the project's central bet, which was previously *untested*
+rather than tested-and-worse: that a live model weighing evidence and choosing
+when to escalate to empirical validation can improve on the deterministic
+heuristic in scope. The recorded live traces and natural LangChain run exercise
+the full reason → escalate → run → re-weigh loop. Evidence is recorded in
 [`docs/research/agentic-evaluation-gap-v1.md`](research/agentic-evaluation-gap-v1.md).
 
 **Objective:** Compose G11 live reasoning, G12 loop, G14 human-gated validation,
@@ -871,9 +871,10 @@ gated.
 
 **Scope boundary:** Compose existing components (no new execution adapter or
 authority); development-split tuning only with the holdout sealed; demonstrate
-end-to-end on at least one real, already-validated OpenClaw candidate. Excludes
-autonomous execution, cleanup, holdout tuning, removability claims, and any
-unauthorized live-model run.
+end-to-end on at least one real, already-validated clone-runnable LangChain
+candidate from G32. Excludes autonomous execution, cleanup, holdout tuning,
+removability claims, and any unauthorized live-model run. OpenClaw remains a
+static live-reasoning demonstration only.
 
 **Advances:** OUT-03, OUT-04, OUT-05, OUT-06, OUT-08; SCN-06, SCN-08 through SCN-12.
 
@@ -881,9 +882,10 @@ unauthorized live-model run.
 and a reusable live-loop harness for later pilots.
 
 The [G30 execution contract](goals/G30-live-agentic-escalation-evaluation.md) is
-**active**; its recorded-first core, live-model plumbing, and real-clone end-to-end
-adjudication are built (277 pass / 1 skip), with the live agent reasoner and paired
-report remaining.
+**complete** (2026-10-10). Its recorded-first core, live-model plumbing, G11
+runtime adapter, paired report, and real LangChain clone-runnable adjudication
+are covered by the goal evidence. The larger natural corpus and recall audit
+remain G32 work.
 
 ### G31 — Empirical feedback loop for agent judgment (exploration)
 
@@ -943,6 +945,75 @@ decision, and the real adjudicated cases G31 would learn from.
 The [G32 outline](goals/G32-natural-clone-runnable-corpus.md) is proposed. The
 third-party-code execution boundary should be settled before the first candidate
 runs; a small vetted-repo pilot is the natural first slice.
+
+### G33 — Unified repository investigation orchestration API
+
+**Dependencies:** G30 (bounded agentic escalation loop) and G32 (natural
+clone-runnable corpus), with G06/G22/G28/G29 inherited through those goals.
+
+**Purpose:** Make Sunset usable as a product rather than a bag of internal
+commands. A frontend should submit one repository/candidate investigation
+request and receive one resumable case-file result; it must not know or compose
+the `scan → provenance → investigate → validate → casefile` plumbing.
+
+**Objective:** Add a canonical typed orchestration service, exposed through at
+least one supported transport (the first transport should be the CLI
+`pilot/run` surface), that owns pinned checkout, supported-runtime selection,
+isolated dependency setup, candidate resolution, evidence collection, bounded
+investigation, approval issuance, disposable validation, artifact storage, and
+case-file finalization. MCP or HTTP adapters may be thin projections of the same
+service; they must not reimplement the workflow.
+
+**Scope boundary:** A versioned request/response contract for repository URL and
+ref, scope, candidate locator, recorded/live mode, and validation intent; a
+run-state machine with resumable `approval_required`, `running`, `completed`,
+`inconclusive`, and failure states; deterministic candidate lookup with
+ambiguity and not-found errors; runtime/dependency environment manifests;
+approval tokens bound to the pinned repository, candidate, configuration, and
+run; and one case-file response containing status, hypothesis, evidence IDs,
+artifact IDs, validation outcome, unresolved obligations, and next action.
+The canonical path must work for the LangChain pydantic-v2-nested case and the
+G32 environment recipe without frontend command composition.
+
+**Exclusions:** Removing or weakening the existing low-level commands;
+autonomous approval, cleanup, target-repository mutation, arbitrary shell or
+filesystem access, unbounded dependency installation, hidden live-network use,
+multi-repository investigations, or a frontend-specific orchestration graph.
+Runtime setup may install only declared dependencies inside an isolated,
+recorded environment and must fail closed when the environment cannot be
+reproduced.
+
+**Advances:** OUT-02, OUT-03, OUT-04, OUT-06, OUT-07, and OUT-08; SCN-01,
+SCN-03, SCN-04, SCN-05, SCN-07, SCN-09, and SCN-11.
+
+**Expected product contract:** A request such as
+
+```json
+{
+  "repository": {"url": "https://github.com/langchain-ai/langchain", "ref": "5c1f28271295bb13034f4cf8964f74c117357d40"},
+  "scope": "libs/core/tests/unit_tests",
+  "candidate": {"path": "utils/test_function_calling.py", "test": "test_convert_to_openai_function_nested_v2"},
+  "mode": "recorded",
+  "validation": {"requested": true}
+}
+```
+
+must yield one run identifier and a structured result. When validation is
+requested but not yet approved, the result is `approval_required` with an
+approval token and the next action `Approve disposable validation`; approval
+resumes the same run and never causes the frontend to invoke a second internal
+command. A terminal result must distinguish completed, inconclusive,
+contradictory, environment-error, and unvalidatable outcomes.
+
+**Capability unlocked:** A maintainer-facing pilot and future MCP/HTTP clients
+can call Sunset as one bounded investigation capability, while low-level
+commands remain available only for debugging and development.
+
+The [G33 outline](goals/G33-unified-orchestration-api.md) is proposed. It must
+not be activated until G30 supplies a stable escalation result contract and G32
+demonstrates a reproducible runtime/dependency recipe; promotion requires an
+execution contract naming the service modules, transport, fixtures, approval
+store, and terminal/stop conditions.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 

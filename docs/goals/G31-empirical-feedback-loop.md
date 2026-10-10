@@ -36,6 +36,141 @@ Design and analysis, plus at most one small offline prototype evaluated only on 
 G25 development split. No production/online learning, no change to the
 human-approval boundary or the conservatism guarantees.
 
+## Architecture constraints to preserve
+
+1. Empirical clone outcomes are evidence about the tested scope, not removal
+   authority. Feedback may change a hypothesis or escalation policy only.
+2. The G25 holdout is read-only and sealed until the final measurement. No
+   exemplar, calibration parameter, retrieval index, or prompt choice may be
+   derived from holdout data.
+3. Recorded/offline execution is the default. No model, network, subprocess,
+   target-repository mutation, cleanup, or approval side effect is permitted.
+4. Non-conclusive validation and asserted human labels are excluded from the
+   learning signal but remain visible as exclusions and limitations.
+5. The feedback mechanism is replaceable and additive. Existing G11/G12/G14/G30
+   contracts and low-level CLIs remain backward compatible.
+
+## In-scope work
+
+- Define a versioned empirical-feedback packet that selects only development-split
+  cases with `confirmed` or `still_failing` clone outcomes.
+- Compare at least two bounded mechanisms from the exploration set (for example,
+  adjudicated exemplars and a deterministic confidence/calibration rule).
+- Specify a leakage audit that rejects holdout-derived inputs, labels, or tuning
+  parameters before a prototype can run.
+- Implement at most one small offline prototype behind a replaceable interface,
+  and report per-case changes, escalation changes, and cost/latency deltas.
+- Produce a recommendation to build, defer, or reject production feedback.
+
+## Explicit deliverables
+
+1. A versioned feedback schema and development-only packet under
+   `tests/fixtures/benchmarks/`.
+2. A leakage/eligibility audit with deterministic JSON output.
+3. A comparison report covering the selected mechanisms and the no-feedback
+   baseline, including exclusions and small-sample limitations.
+4. If the audit passes, one offline prototype and replay fixture; otherwise an
+   explicit blocked recommendation with no prototype.
+5. Documentation recording the recommendation, risks, and why no production
+   learning or authority was introduced.
+
+## Goal-level acceptance criteria
+
+- **G31-AC01 — Signal eligibility:** The feedback packet includes only
+  development-split cases with empirical status `likely_active` or
+  `likely_expired` derived from `confirmed` or `still_failing`; non-conclusive
+  outcomes and asserted labels are rejected or recorded as excluded.
+- **G31-AC02 — Leakage gate:** The audit deterministically rejects any packet,
+  mechanism, or parameter containing a holdout case ID, holdout-derived artifact,
+  or holdout-derived tuning value, with a named diagnostic and no prototype run.
+- **G31-AC03 — Mechanism comparison:** At least two bounded mechanisms and the
+  no-feedback baseline produce a versioned, per-case comparison on the
+  development split; the report includes escalation, status, token/cost, and
+  latency deltas or explicit unavailable values.
+- **G31-AC04 — Authority preservation:** Prototype output can only alter a
+  model hypothesis or escalation request; tests prove it cannot approve
+  validation, mutate a target, perform cleanup, or turn a passing clone into a
+  removal recommendation.
+- **G31-AC05 — Replayability:** Recorded feedback input, audit, and comparison
+  report reproduce byte-identically without model, network, subprocess, or target
+  repository access.
+- **G31-AC06 — Recommendation:** The final artifact chooses `build`, `defer`, or
+  `reject`, cites the measured comparison and exclusions, and states that the
+  G25 holdout remains sealed.
+
+## Criterion-to-evidence map
+
+| Criterion | Required evidence |
+| --- | --- |
+| G31-AC01 | `tests/test_feedback_loop.py::test_eligibility_excludes_non_conclusive` and the versioned development packet |
+| G31-AC02 | `tests/test_feedback_loop.py::test_leakage_gate_rejects_holdout` plus audit JSON |
+| G31-AC03 | `tests/test_feedback_loop.py::test_mechanism_report_compares_baselines` and comparison report fixture |
+| G31-AC04 | `tests/test_feedback_loop.py::test_feedback_cannot_authorize_or_mutate` |
+| G31-AC05 | `tests/test_feedback_loop.py::test_recorded_feedback_replays_byte_identically` with socket/subprocess/target guards |
+| G31-AC06 | `docs/research/G31-feedback-decision-v1.md` and its cited report digest |
+
+## Required verification commands
+
+```bash
+uv run --locked pytest -q tests/test_feedback_loop.py
+uv run --locked pytest -q tests/test_feedback_loop.py tests/test_optimization.py tests/test_escalation_report.py
+git diff --check
+```
+
+## Execution contract
+
+### Expected implementation surface
+
+- `src/sunset/feedback_models.py`: versioned eligibility, packet, mechanism,
+  comparison, audit, and recommendation contracts.
+- `src/sunset/feedback_loop.py`: deterministic packet audit and at most one
+  injected offline mechanism prototype; no model/network/subprocess calls.
+- `tests/test_feedback_loop.py`: the named acceptance and side-effect tests.
+- `tests/fixtures/benchmarks/g31-feedback-{development,holdout-invalid,report}-v1.json`:
+  positive, excluded, malformed, and leakage cases.
+- `docs/research/G31-feedback-decision-v1.md`: recommendation and limitations.
+
+Equivalent modules are allowed only if the same public contracts, fixture paths,
+authority boundaries, and acceptance evidence remain available.
+
+### Canonical contracts and invariants
+
+The feedback packet schema version is `1` and includes `source_report_digest`,
+`development_case_ids`, `excluded_case_ids`, `empirical_status`,
+`validation_outcome`, and `mechanism_inputs`. Eligible cases must have a
+development split and validation outcome `confirmed` or `still_failing`; every
+other case is excluded with a reason. A recommendation is one of `build`,
+`defer`, or `reject` and is non-authoritative. A packet containing a holdout ID,
+holdout artifact digest, or unsealed tuning value is an invalid packet.
+
+### Deterministic behavior matrix
+
+| Input | Required result |
+| --- | --- |
+| Eligible development cases only | audit passes; comparison may run |
+| `flaky`, `environment_error`, or `inconclusive` case | excluded; no inferred label |
+| asserted human label without empirical outcome | excluded; diagnostic names unsupported source |
+| holdout case/artifact/parameter present | audit fails; prototype does not run |
+| malformed packet or unknown mechanism | structured error; no side effect |
+| valid recorded replay | byte-identical audit/report |
+
+### Authority, side effects, and stop conditions
+
+The goal may read committed fixtures and G25/G30 report artifacts and write only
+new local report artifacts. It must not access the network, credentials, target
+repositories, subprocesses, model providers, validation runners, or approval
+stores. Stop after the leakage audit fails, a configured development budget is
+exhausted, or one prototype has completed; never silently retry a rejected or
+completed experiment.
+
+### Replay and budget rules
+
+Packet identity includes source report digest, split, mechanism ID, and all
+parameters. Replaying the same identity reuses the immutable report. Mechanisms
+have explicit case, token, and output-size budgets; a budget exhaustion is a
+recorded non-result, not a substituted score. Holdout access is never a cache
+fallback.
+
 ## Key exploration questions
 
 1. **Learning signal.** Only empirical adjudication (`confirmed → likely_expired`,

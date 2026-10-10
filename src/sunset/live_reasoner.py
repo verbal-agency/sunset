@@ -16,9 +16,12 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from sunset.escalation_loop_models import ConditionStatus
+from sunset.model_runtime import ModelRuntime
+from sunset.model_runtime_models import ReasoningRequest, ReasoningResult
 
 # Per-case evidence: case_id -> compact evidence text (e.g. marker reason + context).
 EvidenceProvider = Callable[[str], str]
+RuntimeRequestProvider = Callable[[str], ReasoningRequest]
 
 _SYSTEM = (
     "You assess whether the protected condition behind a disabled test or "
@@ -85,6 +88,44 @@ class LiveAgentReasoner:
         return parse_status(_content(response))
 
 
+class ModelRuntimeReasoner:
+    """Adapt the G11 structured runtime to the G30 condition-status contract.
+
+    The request provider is responsible for supplying G10 receipts. Raw evidence
+    is therefore never smuggled into the loop as an untracked string: the model
+    runtime receives the same bounded, receipt-backed request used elsewhere in
+    Sunset. Runtime failures, malformed hypotheses, disabled mode, and unsupported
+    statuses all become ``unknown`` so the escalation loop can request empirical
+    validation rather than infer authority from a failed model call.
+    """
+
+    def __init__(self, runtime: ModelRuntime, requests: RuntimeRequestProvider) -> None:
+        self._runtime = runtime
+        self._requests = requests
+        self._results: dict[str, ReasoningResult] = {}
+
+    @property
+    def results(self) -> dict[str, ReasoningResult]:
+        """Return the per-case runtime results for a report/audit layer."""
+
+        return dict(self._results)
+
+    def __call__(self, case_id: str) -> ConditionStatus:
+        try:
+            request = self._requests(case_id)
+            result = self._runtime.run(request)
+        except Exception:  # noqa: BLE001 - runtime/provider failures are fail-closed
+            return "unknown"
+        self._results[case_id] = result
+        if result.status != "success" or result.hypothesis is None:
+            return "unknown"
+        return {
+            "active": "likely_active",
+            "expired": "likely_expired",
+            "unknown": "unknown",
+        }.get(result.hypothesis.assumption_status, "unknown")  # type: ignore[return-value]
+
+
 def recorded_evidence(mapping: dict[str, str]) -> EvidenceProvider:
     def provide(case_id: str) -> str:
         return mapping.get(case_id, "")
@@ -95,6 +136,8 @@ def recorded_evidence(mapping: dict[str, str]) -> EvidenceProvider:
 __all__ = [
     "EvidenceProvider",
     "LiveAgentReasoner",
+    "ModelRuntimeReasoner",
+    "RuntimeRequestProvider",
     "build_prompt",
     "parse_status",
     "recorded_evidence",
