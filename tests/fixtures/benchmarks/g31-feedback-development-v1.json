@@ -1,0 +1,89 @@
+{
+  "schema_version": "1",
+  "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+  "development_case_ids": [
+    "pydantic-v2-nested",
+    "optional-param",
+    "stream-error-cb",
+    "cache-stream",
+    "inconclusive-case"
+  ],
+  "excluded_case_ids": ["inconclusive-case"],
+  "mechanism_inputs": {
+    "allowed": ["baseline", "exemplar_memory", "calibration_guard"],
+    "development_only": true,
+    "selection": "leave_one_out"
+  },
+  "cases": [
+    {
+      "case_id": "pydantic-v2-nested",
+      "split": "development",
+      "candidate_family": "pydantic_marker",
+      "baseline_status": "likely_active",
+      "heuristic_status": "likely_active",
+      "validation_outcome": "confirmed",
+      "empirical_status": "likely_expired",
+      "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+      "input_tokens": 420,
+      "output_tokens": 72,
+      "cost_usd": 0.0012,
+      "latency_ms": 840
+    },
+    {
+      "case_id": "optional-param",
+      "split": "development",
+      "candidate_family": "pydantic_marker",
+      "baseline_status": "unknown",
+      "heuristic_status": "likely_active",
+      "validation_outcome": "still_failing",
+      "empirical_status": "likely_active",
+      "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+      "input_tokens": 390,
+      "output_tokens": 68,
+      "cost_usd": 0.0011,
+      "latency_ms": 790
+    },
+    {
+      "case_id": "stream-error-cb",
+      "split": "development",
+      "candidate_family": "stream_marker",
+      "baseline_status": "unknown",
+      "heuristic_status": "likely_active",
+      "validation_outcome": "still_failing",
+      "empirical_status": "likely_active",
+      "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+      "input_tokens": 300,
+      "output_tokens": 55,
+      "cost_usd": 0.0009,
+      "latency_ms": 610
+    },
+    {
+      "case_id": "cache-stream",
+      "split": "development",
+      "candidate_family": "stream_marker",
+      "baseline_status": "unknown",
+      "heuristic_status": "likely_active",
+      "validation_outcome": "still_failing",
+      "empirical_status": "likely_active",
+      "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+      "input_tokens": 305,
+      "output_tokens": 56,
+      "cost_usd": 0.0009,
+      "latency_ms": 620
+    },
+    {
+      "case_id": "inconclusive-case",
+      "split": "development",
+      "candidate_family": "pytest_marker",
+      "baseline_status": "unknown",
+      "heuristic_status": "likely_active",
+      "validation_outcome": "inconclusive",
+      "empirical_status": "not_adjudicated",
+      "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": null,
+      "latency_ms": null
+    }
+  ]
+}

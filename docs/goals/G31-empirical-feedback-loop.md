@@ -1,6 +1,6 @@
 # G31 — Empirical feedback loop for agent judgment (exploration)
 
-**Status:** proposed (exploration / spike)
+**Status:** complete (exploration / spike)
 **Dependencies:** G30 (produces empirically-adjudicated cases), G25 (split-safe
 optimization discipline)
 
@@ -210,8 +210,21 @@ or a passing validation become cleanup authority; removing the human approval ga
 A bounded recommendation and design for a safe empirical continual-improvement
 loop — or a documented, evidence-based decision to defer it.
 
-## Note
+## Completion evidence (2026-10-10)
 
-Remains an exploration outline until G30 has produced enough empirically-adjudicated
-cases to make the exploration meaningful, and until explicitly authorized. It does
-not change the human-gated, precision-over-recall guarantees.
+- **G31-AC01:** `g31-feedback-development-v1.json` contains four eligible
+  development cases and one explicitly excluded inconclusive control;
+  `test_eligibility_excludes_non_conclusive` passes.
+- **G31-AC02:** the holdout-bearing fixture is rejected before any mechanism runs;
+  `test_leakage_gate_rejects_holdout_without_running_prototype` passes.
+- **G31-AC03:** the report compares no-feedback, leave-one-out exemplar, and
+  calibration-guard mechanisms with per-case status, escalation, token, cost,
+  and latency fields; `test_mechanism_report_compares_baselines` passes.
+- **G31-AC04:** socket/subprocess guards and report inspection prove the prototype
+  cannot authorize validation, mutate a target, or perform cleanup.
+- **G31-AC05:** recorded comparison replay is byte-identical and the full locked
+  suite passes with one pre-existing skip.
+- **G31-AC06:** [`G31-feedback-decision-v1.md`](../research/G31-feedback-decision-v1.md)
+  records the evidence-bounded `defer` recommendation and sealed-holdout limit.
+
+The exploration does not change the human-gated, precision-over-recall guarantees.

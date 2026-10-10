@@ -89,6 +89,123 @@ execution. A deliberately bounded candidate set with reproducible test
 environments. Excludes cleanup, unbounded execution, and any claim beyond the
 corpus.
 
+## Architecture constraints to preserve
+
+1. Candidate evidence and empirical outcomes remain independently recorded;
+   author-set labels cannot substitute for clone results.
+2. Third-party execution is limited to an explicitly vetted repository set,
+   disposable clones, declared dependency installs, and configured wall/time,
+   byte, and package budgets.
+3. Non-conclusive, unavailable, flaky, and unsafe environments are excluded or
+   marked `not_adjudicated`; they are never forced into a verdict.
+4. Development and holdout partitions are fixed before agent evaluation; no
+   holdout result tunes a prompt, policy, exemplar, or threshold.
+5. The G30 loop, G06 validator, and G22/G28 evidence contracts remain additive
+   and replaceable; no target repository is mutated.
+
+## Deliverables
+
+1. A versioned natural-corpus manifest with pinned repository URLs, exact refs,
+   candidate selectors, split assignments, and evidence/artifact digests.
+2. A reproducible per-repository environment manifest recording Python runtime,
+   dependency installation inputs, package versions, and command budgets.
+3. Recorded evidence and validation traces for every included candidate, plus
+   explicit exclusion records for candidates that cannot be safely reproduced.
+4. A G30 report over the frozen development and holdout partitions, including
+   selection bias, non-conclusive counts, and a recall-audit sample.
+5. A documented corpus and security audit with no cleanup or target mutation.
+
+## Goal-level acceptance criteria
+
+- **G32-AC01 — Provenance-bound manifest:** Every included case has an exact
+  repository ref, candidate selector, source evidence digest, split, and a
+  deterministic case ID; duplicate or moving refs are rejected.
+- **G32-AC02 — Reproducible environments:** Every included case has a recorded
+  supported runtime and dependency manifest, and the declared narrow test command
+  can be replayed in a disposable clone or the case is explicitly excluded with
+  a structured reason.
+- **G32-AC03 — Safe execution:** The vetted-repository allowlist, disposable
+  clone, package/network budgets, timeout, and target snapshot guard are enforced;
+  tests prove the pinned source checkout is unchanged.
+- **G32-AC04 — Honest outcomes:** Every attempted case records `confirmed`,
+  `still_failing`, `flaky`, `environment_error`, or `inconclusive`; only the
+  first two derive an empirical condition status.
+- **G32-AC05 — Split discipline:** Development/holdout assignments are fixed
+  before the G30 run, and an audit rejects holdout-derived tuning or evidence.
+- **G32-AC06 — Natural evaluation:** A recorded G30 run reports per-case agent
+  and heuristic statuses, escalation, clone outcome, empirical adjudication,
+  unsupported claims, and selection-bias limitations, plus a declared recall
+  audit over agreement cases.
+- **G32-AC07 — Replayability:** Recorded corpus audit and report reproduce
+  byte-identically without live model calls, network reads, or target mutation.
+
+## Criterion-to-evidence map
+
+| Criterion | Required evidence |
+| --- | --- |
+| G32-AC01 | `tests/test_natural_corpus.py::test_manifest_binds_exact_refs_and_ids` |
+| G32-AC02 | `tests/test_natural_corpus.py::test_environment_recipe_is_recorded_or_excluded` and environment fixtures |
+| G32-AC03 | `tests/test_natural_corpus.py::test_vetted_disposable_boundary` and target snapshot evidence |
+| G32-AC04 | `tests/test_natural_corpus.py::test_non_conclusive_outcomes_are_not_labels` |
+| G32-AC05 | `tests/test_natural_corpus.py::test_split_audit_rejects_holdout_tuning` |
+| G32-AC06 | `tests/fixtures/benchmarks/g32-natural-report-v2.json` and `docs/research/G32-natural-report-v2.md` |
+| G32-AC07 | `tests/test_natural_corpus.py::test_recorded_report_replays_byte_identically` |
+
+## Execution contract
+
+### Expected implementation surface
+
+- `src/sunset/natural_corpus.py`: manifest loading, exact-ref audit, split and
+  environment validation, and recorded report assembly.
+- Existing `src/sunset/git_evidence.py`, `src/sunset/blame_evidence.py`,
+  `src/sunset/validation.py`, and `src/sunset/escalation_report.py`: reuse these
+  provider seams; do not add a second clone or evidence implementation.
+- `tests/test_natural_corpus.py` and
+  `tests/fixtures/benchmarks/g32-natural-{manifest,environment,report}-v2.json`.
+- `docs/research/G32-natural-report-v2.md` and this goal specification.
+
+Equivalent modules are allowed only when the exact-ref, environment, split,
+side-effect, and report contracts remain unchanged.
+
+### Canonical contracts and invariants
+
+Manifest schema version `2` contains `case_id`, `repository_url`, `pinned_ref`,
+`candidate_selector`, `split`, `evidence_digests`, `environment_id`, and
+`status`. A case is runnable only when `status` is `ready`, its ref is a full
+40-character SHA, its split is `development` or `holdout`, and its evidence
+digests are present. Validation outcomes use the G06 five-value vocabulary;
+empirical status is absent for non-conclusive outcomes. Case IDs are derived
+from the pinned ref and selector, not from a mutable branch name.
+
+### Deterministic behavior matrix
+
+| Input | Required result |
+| --- | --- |
+| full SHA, recorded evidence, pinned environment | case is eligible for replay |
+| branch/tag ref or missing evidence digest | manifest rejected; no clone |
+| missing dependency lock/runtime | case excluded with structured reason |
+| vetted clone passes without marker | `confirmed` → `likely_expired` |
+| vetted clone still fails without marker | `still_failing` → `likely_active` |
+| flaky, timeout, unsafe, or unavailable environment | `not_adjudicated`; no inferred label |
+| agreement audit sample | bounded validation may run under approval; result remains empirical |
+
+### Authority, network, and stop conditions
+
+Discovery and evidence are read-only. Clone execution requires an explicit
+vetted-repository policy and human approval, writes only disposable temporary
+directories and the external artifact store, and never writes the target
+checkout. Stop after the configured case, package, byte, network, or wall-time
+budget; a missing dependency or failed clone is a recorded exclusion, not a
+retry loop. Live model calls are separate from recorded corpus construction.
+
+### Replay, cache, and split rules
+
+Manifest identity includes the exact ref, selector, environment digest, split,
+and G30 configuration. Replaying the identity reuses immutable artifacts. A
+changed ref or environment invalidates only affected validation results. Holdout
+artifacts are readable only for the final sealed report and cannot feed tuning,
+exemplar construction, or mechanism selection.
+
 ## The hard problems (this goal must solve them, not assume them away)
 
 1. **Reproducible environments.** Running a real marker requires the repo's
@@ -129,6 +246,6 @@ maintainer-facing quality claim.
 
 ## Note
 
-Remains proposed until authorized. The security boundary for executing third-party
-test code (problem 2) should be decided before the first candidate is run; a small
-vetted-repo pilot is the natural first slice.
+Remains proposed until explicitly activated. The existing LangChain natural run
+is the development baseline; the next execution should expand the manifest and
+recall-audit sample without treating the current N=9 report as a quality verdict.

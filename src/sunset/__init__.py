@@ -15,6 +15,8 @@ from sunset.adjudication import AdjudicationError, freeze_adjudication
 from sunset.adjudication_models import AdjudicationDecision, AdjudicationManifest, ReviewerAuthority
 from sunset.baseline_evaluation import BaselineEvaluationError, evaluate_baseline, load_recorded_traces, load_reference_cases
 from sunset.optimization import OptimizationError, load_experiments, run_optimization
+from sunset.feedback_loop import FeedbackError, audit_feedback_packet, load_feedback_packet, run_feedback_comparison
+from sunset.feedback_models import FeedbackAudit, FeedbackCase, FeedbackComparisonReport, FeedbackPacket
 from sunset.broad_collectors import discover_broad_repository, enrich_broad_provenance, scan_broad_repository
 from sunset.broad_collectors_models import BroadCandidate, BroadScanResult
 from sunset.calibration_models import BenchmarkCase as CalibrationCase, EvaluationRun, ExpectedConditionLabel, MetricRecord, ReleaseGateResult, ReleaseThreshold
@@ -39,6 +41,11 @@ __all__ = [
     "AdjudicationManifest",
     "BaselineEvaluationError",
     "OptimizationError",
+    "FeedbackError",
+    "FeedbackAudit",
+    "FeedbackCase",
+    "FeedbackComparisonReport",
+    "FeedbackPacket",
     "BroadCandidate",
     "BroadScanResult",
     "ReviewerAuthority",
@@ -90,6 +97,9 @@ __all__ = [
     "load_reference_cases",
     "load_experiments",
     "run_optimization",
+    "audit_feedback_packet",
+    "load_feedback_packet",
+    "run_feedback_comparison",
     "scan_broad_repository",
     "discover_broad_repository",
     "enrich_broad_provenance",

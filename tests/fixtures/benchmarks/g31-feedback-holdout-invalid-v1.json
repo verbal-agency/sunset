@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb",
+  "development_case_ids": ["development-case"],
+  "excluded_case_ids": [],
+  "holdout_case_ids": ["holdout-secret"],
+  "mechanism_inputs": {
+    "development_only": true,
+    "holdout_case_ids": ["holdout-secret"]
+  },
+  "cases": [
+    {
+      "case_id": "development-case",
+      "split": "development",
+      "candidate_family": "pytest_marker",
+      "baseline_status": "likely_active",
+      "heuristic_status": "likely_active",
+      "validation_outcome": "confirmed",
+      "empirical_status": "likely_expired",
+      "source_report_digest": "4b12698934f358ab40b945b4f812b204d8888b444cfe480b2a89c077142867fb"
+    }
+  ]
+}

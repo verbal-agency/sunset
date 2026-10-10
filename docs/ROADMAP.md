@@ -501,7 +501,7 @@ contracts.
 | [G28](goals/G28-authenticated-git-evidence-access.md) | complete | Give provenance a host-authorized, exact-SHA Git evidence path (authenticated blame/clone) instead of guessing | G22 + G27 + explicit credential authorization |
 | [G29](goals/G29-pilot-provenance-correction.md) | complete | Correct the spurious pilot `introducing_commit` values and harden enrichment to fail closed to `incomplete` | G28 |
 | [G30](goals/G30-live-agentic-escalation-evaluation.md) | complete | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
-| [G31](goals/G31-empirical-feedback-loop.md) | proposed | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
+| [G31](goals/G31-empirical-feedback-loop.md) | complete | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | proposed | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 | [G33](goals/G33-unified-orchestration-api.md) | proposed | Expose one high-level repository investigation run instead of requiring frontends to compose internal Sunset commands | G30 + G32 |
 
@@ -912,9 +912,10 @@ guarantees unchanged.
 **Unlocks:** A bounded, evidence-based decision on a safe continual-improvement
 path.
 
-The [G31 outline](goals/G31-empirical-feedback-loop.md) is proposed and remains an
-exploration until G30 has produced enough adjudicated cases and it is explicitly
-authorized.
+The [G31 exploration](goals/G31-empirical-feedback-loop.md) is **complete**
+(2026-10-10). Its development-only comparison found a promising exemplar signal
+on a tiny selected sample but recommends `defer` for production feedback; the
+G25 holdout remains sealed.
 
 ### G32 — Natural clone-runnable evaluation corpus
 
@@ -942,9 +943,10 @@ non-conclusive outcomes, and the recall gap.
 **Unlocks:** A measurement (not a demonstration) for a continue/revise/stop
 decision, and the real adjudicated cases G31 would learn from.
 
-The [G32 outline](goals/G32-natural-clone-runnable-corpus.md) is proposed. The
-third-party-code execution boundary should be settled before the first candidate
-runs; a small vetted-repo pilot is the natural first slice.
+The [G32 specification](goals/G32-natural-clone-runnable-corpus.md) is proposed
+and now includes a Luna-ready execution contract. The existing LangChain natural
+run is its development baseline; activation must preserve the vetted-repository,
+disposable-clone, and split-sealing boundaries.
 
 ### G33 — Unified repository investigation orchestration API
 

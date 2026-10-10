@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "packet_digest": "504fed18e6d91ed12870bed8cc7ea4cc52ed2223e32ec58aaf30f71d956bd98b",
+  "audit": {
+    "status": "passed",
+    "eligible_case_ids": ["cache-stream", "optional-param", "pydantic-v2-nested", "stream-error-cb"],
+    "excluded_case_ids": ["inconclusive-case"]
+  },
+  "recommendation": "defer",
+  "mechanisms": {
+    "baseline": {"accuracy": 0.0, "escalation_rate": 0.75, "case_count": 4},
+    "exemplar_memory": {"accuracy": 0.5, "escalation_rate": 0.25, "case_count": 4},
+    "calibration_guard": {"accuracy": 0.0, "escalation_rate": 0.75, "case_count": 4}
+  },
+  "limitations": [
+    "The empirical signal is a selected, small, clone-runnable subset.",
+    "Development-only leave-one-out comparison; no holdout score was read.",
+    "Mechanisms change hypotheses/escalation requests only and cannot authorize cleanup."
+  ]
+}
