@@ -480,6 +480,11 @@ with a split-safe optimization report; G26 is the only next eligible proposal
 and owns the required breadth expansion. G27 remains the pilot planning
 boundary.
 
+G37 is an independent validation lane for the case where a consenting
+maintainer is unavailable. It can measure reproducibility, evidence quality,
+and historical agreement without human-confirmed condition labels; it cannot
+replace G27 or support a claim that cleanup is safe for production users.
+
 The current marker/compatibility slice is intentionally a baseline, not the
 product's coverage boundary. Before a maintainer pilot, Sunset must broaden
 candidate discovery across repository-level temporal signals and at least one
@@ -505,6 +510,7 @@ contracts.
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | complete | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 | [G33](goals/G33-unified-orchestration-api.md) | complete | Expose one high-level repository investigation run and execute it through a bounded pinned-clone backend | G30 + G32 |
 | [G34](goals/G34-historical-removal-backtest.md) | complete | Measure Sunset against real maintainer removal history, with lead time and characterized label bias | G30 + G32 + G33 + G25 + live-model authorization |
+| [G37](goals/G37-maintainer-independent-validation-benchmark.md) | active | Measure the full investigation pipeline on pinned public repositories without claiming human-confirmed condition labels | G33 + G34 |
 | [G35](goals/G35-pilot-readiness-gap-closure.md) | proposed | Close the unexercised exact-HEAD validation gap, audit docs for overclaims, and reconcile stale statuses | G27 + G33 |
 | [G36](goals/G36-maintainer-pilot-recruitment-kit.md) | proposed | Prepare screening, outreach, consent, and run-packet materials so the G27 participant gate can be cleared | G27 + G33 |
 
@@ -708,7 +714,8 @@ G26.
 The [G25 execution contract](goals/G25-split-safe-optimization.md) is complete.
 Its offline runner selected one development candidate, rejected safety,
 malformed, and budget regressions, and sealed one holdout measurement without
-using it for selection. G26 is now the next proposed goal.
+using it for selection. G26 was completed, and later validation goals extended
+its candidate-discovery work.
 
 ### G26 — Broad candidate discovery
 
@@ -788,7 +795,7 @@ source lines, validation observations, and exclusions are unaffected; only the
 
 ### G28 — Authenticated exact-SHA Git evidence access
 
-**Dependencies:** G22 (complete), G27 (active), plus explicit host authorization
+**Dependencies:** G22 (complete), G27 (blocked), plus explicit host authorization
 to use a credential
 
 **Purpose:** Give Sunset a host-authorized, exact-SHA provenance path so
@@ -848,10 +855,10 @@ adds a cross-file shared-commit guard exposed as `sunset blame-evidence verify`.
 Root cause: the review packet was hand-authored with a placeholder; the
 deterministic enrichment path never produced the defect.
 
-**With G28 and G29 complete, no goal is `active`.** The only remaining G27 work is
-the human-gated maintainer pilot (single-reviewer decisions and the consented
-run); per `AGENTS.md`, activating any further goal requires explicit
-authorization and, for the pilot, maintainer participation.
+**With G28 and G29 complete, the remaining G27 work is blocked on the
+human-gated maintainer pilot** (single-reviewer decisions and the consented
+run). G37 is now the explicitly authorized active goal; it does not replace
+the G27 participation requirement.
 
 ### G30 — Live agentic escalation loop and evaluation
 
@@ -1047,7 +1054,7 @@ languages; maintainer contact; agent tuning on the holdout; autonomous cleanup.
 
 **Unlocks:** A maintainer-independent answer to whether Sunset would have said
 something true and early, feeding the G27 decision. The recorded report is
-complete; G35 is the next proposed goal and has its execution contract.
+complete; G37 is now the active maintainer-independent validation goal.
 
 ### G35 — Pilot readiness gap closure
 
@@ -1091,7 +1098,7 @@ G27 run.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 
-**Dependencies:** G28 (proposed), G27 (active)
+**Dependencies:** G28 (complete), G27 (blocked)
 
 **Purpose:** Correct the recorded provenance defect and remove its root cause so
 the pipeline cannot present a guessed introduction point as historical fact again.
