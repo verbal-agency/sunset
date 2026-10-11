@@ -1,6 +1,6 @@
 # G34 — Historical removal backtest
 
-**Status:** proposed
+**Status:** active (activated 2026-10-10 by owner authorization)
 **Dependencies:** G30 (escalation loop), G32 (natural corpus + recorded recipes),
 G33 (pinned-clone executable backend), G06 (disposable-clone validation), G22 +
 G28 (exact-SHA Git evidence), G25 (split discipline), live-model authorization
@@ -106,6 +106,18 @@ a declared time budget, and at least thirty qualifying events across the set. If
 fewer than twenty qualifying events exist, stop and report inconclusive
 (see stop conditions).
 
+This cycle selected three repositories before mining:
+
+| Name | Public URL | Pinned head | Included cases |
+| --- | --- | --- | ---: |
+| `pytest` | `https://github.com/pytest-dev/pytest.git` | `4e64e831268758cf0040c52c144e0f09f46cd8a3` | 31 |
+| `attrs` | `https://github.com/python-attrs/attrs.git` | `644b4e165bfbeee7e127de6fcbda08b64014316f` | 16 |
+| `click` | `https://github.com/pallets/click.git` | `2247b35ea1c47c727d7a06e51fa280e12a863ff6` | 7 |
+
+The run declared a 25% case-level environment-failure stop threshold before
+clone execution. This is a history-rich convenience sample, not a
+representative sample of Python repositories.
+
 ### Canonical contracts and invariants
 
 - Every event and case carries the exact parent SHA, child SHA, and class;
@@ -196,3 +208,26 @@ shows whether a larger natural corpus (or a maintainer pilot) is worth the cost.
 - Easy-to-detect events are over-represented; results will not generalize to
   all libraries.
 - Third-party test execution cost and flakiness may shrink the included set.
+
+## Cycle execution evidence (2026-10-10)
+
+- **G34-AC01:** `backtest mine` reproduced `g34-events-v1.json` byte-for-byte;
+  included plus excluded counts reconcile for all three repositories.
+- **G34-AC02:** synthetic classification and exclusion tests pass in
+  `tests/test_history_backtest.py`.
+- **G34-AC03:** parent-bound evidence and deliberate leakage rejection tests
+  pass.
+- **G34-AC04:** the frozen development/holdout manifest reproduced byte-for-byte
+  and the single-read holdout ledger test passes.
+- **G34-AC05/G34-AC06:** the recorded report contains per-class/per-split
+  baseline fields, explicit zero live-agent counts, unknowns, bias limits, and
+  the 61.1% environment-error stop. It is inconclusive, not an accuracy claim.
+- **G34-AC07:** authority and cost-guard tests pass; the live agent was not run
+  without a model identifier, call cap, and explicit authorization.
+- **G34-AC08:** the frozen report reproduces offline in
+  `test_backtest_report_reproduces_offline`; focused tests pass.
+
+The cycle does not mark G34 complete: the clone failure rate exceeded the
+declared threshold, and the paired live-agent measurement remains unexecuted.
+The frozen report and run artifacts are evidence for the next decision, not a
+successful product measurement.

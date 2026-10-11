@@ -18,7 +18,7 @@ from sunset.history_backtest import (
     require_manifest_before_run,
     split_manifest,
 )
-from sunset.history_backtest_models import BacktestError, CaseRun, EvidenceItem, digest
+from sunset.history_backtest_models import BacktestCase, BacktestError, CaseRun, EvidenceItem, digest
 
 
 def _git(repo: Path, *args: str, date: str | None = None) -> str:
@@ -208,3 +208,22 @@ def test_report_states_bias_and_label_limits(repo):
     text = " ".join(report["limitations"])
     assert "retained means not_removed" in text and "not representative" in text and "fix_with_removal" in text
     assert report["non_authority"] is True
+
+
+def test_backtest_report_reproduces_offline():
+    root = Path(__file__).parent / "fixtures" / "backtest"
+    cases_doc = json.loads((root / "g34-cases-v1.json").read_text(encoding="utf-8"))
+    manifest = json.loads((root / "g34-split-manifest-v1.json").read_text(encoding="utf-8"))
+    runs_doc = json.loads((root / "g34-runs-v1.json").read_text(encoding="utf-8"))
+    expected = json.loads((root / "g34-report-v1.json").read_text(encoding="utf-8"))
+    rebuilt = build_report(
+        [BacktestCase.from_dict(case) for case in cases_doc["cases"]],
+        [CaseRun.from_dict(run) for run in runs_doc["runs"]],
+        run_id=expected["run_id"],
+        mode=expected["mode"],
+        model=expected["model"],
+        generated_on=expected["generated_on"],
+        manifest_digest=manifest["manifest_digest"],
+        mining_counts=cases_doc["mining_counts"],
+    )
+    assert rebuilt == expected

@@ -1,0 +1,196 @@
+{
+  "generated_on": "2026-10-11",
+  "ground_truth": {
+    "class_labels": "git history (maintainer behavior)",
+    "empirical": "disposable-clone outcome at the as-of commit"
+  },
+  "limitations": [
+    "removal is weak evidence of expiry: fix_with_removal is split out because a fix often ships with the removal",
+    "retained means not_removed, not active; retained markers may be stale but unremoved",
+    "function-level markers only; class-level markers and pytestmark are not modelled",
+    "selected repositories are not representative; easy-to-detect events are over-represented",
+    "lead time is unknown unless a lookback clone check recorded a lower bound"
+  ],
+  "manifest_digest": "67c2a72245a87f718d02b78b20a04eef0eaf66f646bfc798004c95f2c5a44a29",
+  "mining_counts": {
+    "attrs": {
+      "by_class": {
+        "fix_with_removal": 10,
+        "marker_only_removal": 0,
+        "retained": 6
+      },
+      "by_exclusion": {
+        "marker_changed_by_head": 2,
+        "marker_edited": 7,
+        "not_sampled": 15,
+        "partial_marker_removal": 2,
+        "test_missing_at_child": 9,
+        "test_missing_at_head": 1,
+        "test_modified": 4
+      },
+      "excluded": 40,
+      "included": 16,
+      "mined_total": 56
+    },
+    "click": {
+      "by_class": {
+        "fix_with_removal": 2,
+        "marker_only_removal": 0,
+        "retained": 5
+      },
+      "by_exclusion": {
+        "marker_changed_by_head": 1,
+        "marker_edited": 6,
+        "outside_eligibility_window": 1,
+        "test_missing_at_child": 11,
+        "test_missing_at_head": 9,
+        "test_modified": 5
+      },
+      "excluded": 33,
+      "included": 7,
+      "mined_total": 40
+    },
+    "pytest": {
+      "by_class": {
+        "fix_with_removal": 10,
+        "marker_only_removal": 13,
+        "retained": 8
+      },
+      "by_exclusion": {
+        "marker_changed_by_head": 5,
+        "marker_edited": 69,
+        "not_sampled": 43,
+        "outside_eligibility_window": 83,
+        "parse_error": 505,
+        "partial_marker_removal": 2,
+        "test_missing_at_child": 59,
+        "test_missing_at_head": 1,
+        "test_modified": 30
+      },
+      "excluded": 797,
+      "included": 31,
+      "mined_total": 828
+    }
+  },
+  "mode": "recorded",
+  "model": "none",
+  "non_authority": true,
+  "run_id": "g34-recorded-20261010-v3",
+  "schema_version": "1",
+  "strata": {
+    "development/fix_with_removal": {
+      "agent_abstention_rate": null,
+      "agent_abstentions": 0,
+      "agent_definite_adjudicated": 0,
+      "agent_definite_calls": 0,
+      "agent_definite_correct_vs_clone": 0,
+      "agent_false_expire": 0,
+      "agent_matches_maintainer_expectation": 0,
+      "agent_missed_expire": 0,
+      "agent_runs": 0,
+      "clone_active": 0,
+      "clone_adjudicated": 8,
+      "clone_expired": 8,
+      "clone_not_adjudicated": 6,
+      "heuristic_agrees_with_clone": 0,
+      "lookback_lower_bounds_days": [],
+      "maintainer_expectation": "likely_active",
+      "n": 14
+    },
+    "development/marker_only_removal": {
+      "agent_abstention_rate": null,
+      "agent_abstentions": 0,
+      "agent_definite_adjudicated": 0,
+      "agent_definite_calls": 0,
+      "agent_definite_correct_vs_clone": 0,
+      "agent_false_expire": 0,
+      "agent_matches_maintainer_expectation": 0,
+      "agent_missed_expire": 0,
+      "agent_runs": 0,
+      "clone_active": 0,
+      "clone_adjudicated": 0,
+      "clone_expired": 0,
+      "clone_not_adjudicated": 8,
+      "heuristic_agrees_with_clone": 0,
+      "lookback_lower_bounds_days": [],
+      "maintainer_expectation": "likely_expired",
+      "n": 8
+    },
+    "development/retained": {
+      "agent_abstention_rate": null,
+      "agent_abstentions": 0,
+      "agent_definite_adjudicated": 0,
+      "agent_definite_calls": 0,
+      "agent_definite_correct_vs_clone": 0,
+      "agent_false_expire": 0,
+      "agent_matches_maintainer_expectation": null,
+      "agent_missed_expire": 0,
+      "agent_runs": 0,
+      "clone_active": 0,
+      "clone_adjudicated": 5,
+      "clone_expired": 5,
+      "clone_not_adjudicated": 7,
+      "heuristic_agrees_with_clone": 0,
+      "lookback_lower_bounds_days": [],
+      "maintainer_expectation": null,
+      "n": 12
+    },
+    "holdout/fix_with_removal": {
+      "agent_abstention_rate": null,
+      "agent_abstentions": 0,
+      "agent_definite_adjudicated": 0,
+      "agent_definite_calls": 0,
+      "agent_definite_correct_vs_clone": 0,
+      "agent_false_expire": 0,
+      "agent_matches_maintainer_expectation": 0,
+      "agent_missed_expire": 0,
+      "agent_runs": 0,
+      "clone_active": 1,
+      "clone_adjudicated": 5,
+      "clone_expired": 4,
+      "clone_not_adjudicated": 3,
+      "heuristic_agrees_with_clone": 1,
+      "lookback_lower_bounds_days": [],
+      "maintainer_expectation": "likely_active",
+      "n": 8
+    },
+    "holdout/marker_only_removal": {
+      "agent_abstention_rate": null,
+      "agent_abstentions": 0,
+      "agent_definite_adjudicated": 0,
+      "agent_definite_calls": 0,
+      "agent_definite_correct_vs_clone": 0,
+      "agent_false_expire": 0,
+      "agent_matches_maintainer_expectation": 0,
+      "agent_missed_expire": 0,
+      "agent_runs": 0,
+      "clone_active": 0,
+      "clone_adjudicated": 0,
+      "clone_expired": 0,
+      "clone_not_adjudicated": 5,
+      "heuristic_agrees_with_clone": 0,
+      "lookback_lower_bounds_days": [],
+      "maintainer_expectation": "likely_expired",
+      "n": 5
+    },
+    "holdout/retained": {
+      "agent_abstention_rate": null,
+      "agent_abstentions": 0,
+      "agent_definite_adjudicated": 0,
+      "agent_definite_calls": 0,
+      "agent_definite_correct_vs_clone": 0,
+      "agent_false_expire": 0,
+      "agent_matches_maintainer_expectation": null,
+      "agent_missed_expire": 0,
+      "agent_runs": 0,
+      "clone_active": 1,
+      "clone_adjudicated": 3,
+      "clone_expired": 2,
+      "clone_not_adjudicated": 4,
+      "heuristic_agrees_with_clone": 1,
+      "lookback_lower_bounds_days": [],
+      "maintainer_expectation": null,
+      "n": 7
+    }
+  }
+}

@@ -1,0 +1,1158 @@
+{
+  "manifest_digest": "67c2a72245a87f718d02b78b20a04eef0eaf66f646bfc798004c95f2c5a44a29",
+  "runs": [
+    {
+      "agent_status": null,
+      "case_id": "bt-0261763bd51c87a3cbba5b50",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-135e0adbeec188cb7fc9308a",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-16ad51efffbf6eca589d0753",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "exclude_newer": "2024-09-01",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "29864e33ee7696f6763da464b6986f839bd128d2f2d13ae59cbdca6a6b3b918d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-1a0e0307eb2262e5d62383be",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "exclude_newer": "2024-10-04",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "c85300a8809e1b8cc7599e558946f78318d856083f8d79860c0aff721799c4a3",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-26236f5c7a008db03007f023",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-2e73b270048a07521ee778ae",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-2fd7e628a0b2e4ac48dff204",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "exclude_newer": "2025-10-06",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0228e78bd1b46e7c856abd49a2c2cff85a3e3052f9e848bb797f63ee46c47468",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-3d0f59db307dd3680b03e253",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-40cc238db3e046d57ddbde21",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-4813f3a0c4cc8cdc10149528",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-4994cb18b8f9b320c66020dc",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "exclude_newer": "2024-09-01",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "29864e33ee7696f6763da464b6986f839bd128d2f2d13ae59cbdca6a6b3b918d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-4e77d0023b6ed7b2582c5351",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-564f711f4c6c3afaa5c4c52b",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "d5a0057ee69107c86096078347a6fed3a9cef1ef",
+          "exclude_newer": "2025-10-25",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "23acb775e37a3be199a2de3174e6909ee112c2558443a2f4559d639a76b0f028",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-595b394086ef9e365a183170",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "exclude_newer": "2024-09-01",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "29864e33ee7696f6763da464b6986f839bd128d2f2d13ae59cbdca6a6b3b918d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-6345e8b2cba738b66e9ee591",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-6369d65f14db6d4ba933e67c",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-63e7783ad4b6aaa532e9c42a",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-6798fa1f780cd98dfdec6613",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "exclude_newer": "2023-06-28",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "b94370fbf51b5da36edeb937aeb0f48202bbf6a685b2f7cee389df013d2e61ba",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-67c1a23219f2b156b773a314",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-6caa7ff37de3b1082dbf348a",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-743c4c3c6c3d23ee5ad7f8bb",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-7660a9a2a5b155111a7f0f41",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-835d3abd0b93bb2251be8773",
+      "clone_note": "dependency_setup_failed: .build_meta.build_editable` failed (exit status: 1)\n\n[stderr]\nTraceback (most recent call last):\n  File \"<string>\", line 11, in <module>\nAttributeError: module 'setuptools.bui",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-8bd7073c937df4663b639c85",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-8c7e45f45ec483c74d44d417",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+          "exclude_newer": "2024-05-21",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "79a2ea4faa7c787f20ee9fe24e84d0b07b7cc406a6b6cf56ddddb29683c4625a",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-8e8e4f799124c1bb1c96c357",
+      "clone_note": "dependency_setup_failed: .build_meta.build_editable` failed (exit status: 1)\n\n[stderr]\nTraceback (most recent call last):\n  File \"<string>\", line 11, in <module>\nAttributeError: module 'setuptools.bui",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-92e59f6e29aa282d546258b2",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "exclude_newer": "2024-10-04",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "c85300a8809e1b8cc7599e558946f78318d856083f8d79860c0aff721799c4a3",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-9499994e1a8eb7337b4eaac4",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-a1c5207ce7866f3cb94e48f1",
+      "clone_note": "fail,fail",
+      "clone_outcome": "still_failing",
+      "extras": {
+        "environment": {
+          "as_of_commit": "189ada2ddbec2bfe3a684faccf0ba484a24aeb7a",
+          "exclude_newer": "2026-09-01",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "33819b33be6750a5e6c9e6575ba92d2b5f339e39a445696537344855fa6ca347",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-a251da245316b36b0e136d3e",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "05ed0d0f943ce25b635e92e4e166524435386018",
+          "exclude_newer": "2024-11-25",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "2adda106826a7be9b3769d27b81c071e294ff3ccb007e58472c2ccaf48869c38",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-a405629f4b3a539af91b2f0a",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-a4b327547cb6bae9f85441be",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-a72f2de4e01072d8418ba5a0",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "exclude_newer": "2024-10-04",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "c85300a8809e1b8cc7599e558946f78318d856083f8d79860c0aff721799c4a3",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-a9c7a326ff7b34e956fda4ba",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-afa5ae517edb2d7792c41f58",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-b128c34ab599fa8715492f34",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "exclude_newer": "2024-10-04",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "c85300a8809e1b8cc7599e558946f78318d856083f8d79860c0aff721799c4a3",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-ba7dba1b90aa3a824b0b04dc",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-bff48ed84e76b6c175b37a87",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "exclude_newer": "2025-10-06",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0228e78bd1b46e7c856abd49a2c2cff85a3e3052f9e848bb797f63ee46c47468",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-c167bb1654c8dafd627b9dce",
+      "clone_note": "fail,fail",
+      "clone_outcome": "still_failing",
+      "extras": {
+        "environment": {
+          "as_of_commit": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "exclude_newer": "2024-10-04",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "c85300a8809e1b8cc7599e558946f78318d856083f8d79860c0aff721799c4a3",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-c35809136132604cc035fccd",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-c4cfcfa2c91bf1baa0e903cb",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "exclude_newer": "2024-09-01",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "29864e33ee7696f6763da464b6986f839bd128d2f2d13ae59cbdca6a6b3b918d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-c5e39b75f57afbe8893aa450",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-ccf91b51652bdb34fcde2a0e",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "exclude_newer": "2023-06-28",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "b94370fbf51b5da36edeb937aeb0f48202bbf6a685b2f7cee389df013d2e61ba",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-cd08e98f64ce890b55c5c498",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-cf713d54a311906911a7f66c",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-d68375a315bcb3ffdca62b44",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-d9972bdb313e23876795152b",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "exclude_newer": "2024-08-26",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "1bc5d27dbfe5a8c748941f3d878cf9ad2fa74be28ef38d2a93ef6a83e6864b4f",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-e3358dcfe26656b702b6475f",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-eb5eaeb1bd7325de5668f368",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "exclude_newer": "2024-09-01",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "29864e33ee7696f6763da464b6986f839bd128d2f2d13ae59cbdca6a6b3b918d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-ebd2305eb3563f04648998f0",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "c4e38858817b02b33aec103e049b16630449c46f",
+          "exclude_newer": "2026-04-08",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "b3a56ea99da2d2c361e100c9d59adc01155730d56da617034dd07abb1d60a0b0",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-f49d84ab6fa1706732d762ec",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+          "exclude_newer": "2024-11-30",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest"
+          ],
+          "packages_digest": "5dc4723b652f4b602b84febb32ab095b66b19bc06bfd9b8f2e00fef68f7ec450",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-fa32e5d4200512737d22ab3d",
+      "clone_note": "dependency_setup_failed: tatus: 1)\n\n      [stderr]\n      Traceback (most recent call last):\n        File \"<string>\", line 11, in <module>\n      AttributeError: module 'setuptools.build_meta' has no at",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {}
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-fbc61aede931e17be41c685a",
+      "clone_note": "pass,pass",
+      "clone_outcome": "confirmed",
+      "extras": {
+        "environment": {
+          "as_of_commit": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "exclude_newer": "2024-10-04",
+          "install_args": [
+            "-e",
+            ".",
+            "pytest",
+            "hypothesis",
+            "zope.interface",
+            "cloudpickle",
+            "pympler"
+          ],
+          "packages_digest": "c85300a8809e1b8cc7599e558946f78318d856083f8d79860c0aff721799c4a3",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    },
+    {
+      "agent_status": null,
+      "case_id": "bt-fbdc4177f3d85317a7426e4e",
+      "clone_note": "error,error",
+      "clone_outcome": "environment_error",
+      "extras": {
+        "environment": {
+          "as_of_commit": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "exclude_newer": "2024-10-10",
+          "install_args": [
+            "-e",
+            ".",
+            "hypothesis",
+            "pygments",
+            "attrs",
+            "xmlschema",
+            "mock",
+            "argcomplete",
+            "requests",
+            "setuptools",
+            "pexpect"
+          ],
+          "packages_digest": "0edc5ce53f60dba94143f8cc0a5925cb1aaf0ce61cfd29144b620d14ea71022d",
+          "python": "3.12"
+        }
+      },
+      "heuristic_status": "likely_active",
+      "lookback_days_still_stale": null
+    }
+  ],
+  "schema_version": "1",
+  "splits": [
+    "development",
+    "holdout"
+  ]
+}
