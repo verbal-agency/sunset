@@ -147,4 +147,11 @@ def report_command(cases_path: str, runs_paths: list[str], manifest_path: str, o
 
 
 def recipes_from_json(path: str) -> dict[str, RepoRecipe]:
-    return {name: RepoRecipe(tuple(v["install_args"]), tuple(v.get("test_args", ()))) for name, v in read_json(path).items()}
+    return {
+        name: RepoRecipe(
+            tuple(v["install_args"]),
+            tuple(v.get("test_args", ())),
+            bool(v.get("allow_noneditable_fallback", True)),
+        )
+        for name, v in read_json(path).items()
+    }

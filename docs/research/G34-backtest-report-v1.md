@@ -1,6 +1,6 @@
 # G34 historical-removal backtest report
 
-**Run:** `g34-recorded-20261010-v3`
+**Run:** `g34-recorded-20261011-v6`
 **Mode:** recorded heuristic baseline; no live-model call
 **Manifest:** `67c2a72245a87f718d02b78b20a04eef0eaf66f646bfc798004c95f2c5a44a29`
 **Authority:** non-authoritative; no target repository was modified
@@ -31,16 +31,14 @@ The disposable-clone run attempted all 54 cases. It produced:
 
 | Outcome | Cases |
 | --- | ---: |
-| `confirmed` (unmarked test passed twice) | 19 |
-| `still_failing` (unmarked test failed twice) | 2 |
-| `environment_error` | 33 |
+| `confirmed` (unmarked test passed twice) | 40 |
+| `still_failing` (unmarked test failed twice) | 12 |
+| `environment_error` | 2 |
 
 The declared case-level environment-failure stop threshold for this run was
-25%; the observed rate was 61.1%. The result is therefore **inconclusive** and
-must not be used as an accuracy, removability, or generalization claim. The
-main failures were historical packaging incompatibilities in old editable
-builds and a small number of test execution errors. Those failures remain
-recorded rather than converted into condition labels.
+25%; the observed rate was 3.7% for the two cases that could not be matched to
+a runnable test node. The run cleared the environment stop rule. Those cases
+remain recorded as unknown rather than converted into condition labels.
 
 The report distinguishes maintainer-derived classes from clone outcomes:
 removal is corroboration, not proof; `retained` means only `not_removed`; and a
@@ -64,4 +62,6 @@ The frozen artifacts are:
 
 The locked focused tests and offline report-replay test pass. The report is
 non-authoritative and does not authorize cleanup, approval, or a claim that
-Sunset's protected-condition inference is accurate outside this sample.
+Sunset's protected-condition inference is accurate outside this sample. It is
+a heuristic-only measurement because no live model credential, model
+identifier, or call cap was authorized for this run.

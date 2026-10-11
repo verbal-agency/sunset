@@ -504,7 +504,7 @@ contracts.
 | [G31](goals/G31-empirical-feedback-loop.md) | complete | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | complete | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 | [G33](goals/G33-unified-orchestration-api.md) | complete | Expose one high-level repository investigation run and execute it through a bounded pinned-clone backend | G30 + G32 |
-| [G34](goals/G34-historical-removal-backtest.md) | active | Measure Sunset against real maintainer removal history, with lead time and characterized label bias | G30 + G32 + G33 + G25 + live-model authorization |
+| [G34](goals/G34-historical-removal-backtest.md) | complete | Measure Sunset against real maintainer removal history, with lead time and characterized label bias | G30 + G32 + G33 + G25 + live-model authorization |
 | [G35](goals/G35-pilot-readiness-gap-closure.md) | proposed | Close the unexercised exact-HEAD validation gap, audit docs for overclaims, and reconcile stale statuses | G27 + G33 |
 | [G36](goals/G36-maintainer-pilot-recruitment-kit.md) | proposed | Prepare screening, outreach, consent, and run-packet materials so the G27 participant gate can be cleared | G27 + G33 |
 
@@ -1046,8 +1046,8 @@ languages; maintainer contact; agent tuning on the holdout; autonomous cleanup.
 **Advances:** OUT-04, OUT-05, OUT-08; SCN-01, SCN-02, SCN-03, SCN-12.
 
 **Unlocks:** A maintainer-independent answer to whether Sunset would have said
-something true and early, feeding the G27 decision. This is the next goal and
-the only one with an execution contract.
+something true and early, feeding the G27 decision. The recorded report is
+complete; G35 is the next proposed goal and has its execution contract.
 
 ### G35 — Pilot readiness gap closure
 

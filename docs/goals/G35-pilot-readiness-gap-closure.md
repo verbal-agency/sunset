@@ -50,3 +50,80 @@ control).
 A pilot or backtest report can cite a pilot fixture with no known unexercised
 path and documentation that does not overclaim, so a reader's trust is not
 spent on avoidable errors.
+
+## Execution contract
+
+### Expected implementation surface
+
+- `tests/fixtures/public_corpus/openclaw-g27-pilot-review-v1.json`: append the
+  candidate-3 validation receipt and preserve the prior reviewer decision.
+- `tests/fixtures/pilot/g35-openclaw-validation-v1.json`: record the exact
+  source SHA, test selector, runtime, command, outcome, and failure reason.
+- `docs/research/G35-pilot-readiness-report-v1.md`: claims-audit table and
+  validation result.
+- `docs/ROADMAP.md`, `docs/BACKLOG.md`, and
+  `docs/research/G27-maintainer-pilot-handoff-v1.md`: status-only corrections.
+- `tests/test_pilot_readiness.py`: fixture integrity, claims-audit, and
+  status-reconciliation tests.
+
+Equivalent paths are allowed only if they preserve the same immutable receipt,
+reviewer-boundary, and documentation contracts.
+
+### Contracts and invariants
+
+- `ValidationReceipt` has schema version, repository URL, exact source SHA,
+  candidate path and selector, runtime identity, command argv, network mode,
+  start/end timestamps, outcome (`confirmed`, `still_failing`, `flaky`,
+  `environment_error`, or `unvalidatable`), artifact IDs, and unresolved
+  obligations.
+- A successful receipt proves only the declared test scope; it never changes a
+  reviewer decision or grants cleanup authority.
+- An unvalidatable receipt must include a stable failure code and a bounded
+  reproduction command; it cannot be represented as `confirmed`.
+- Existing reviewer fields remain byte-for-byte unchanged except for an
+  explicitly owner-authorized re-offer marker.
+
+### Behavior matrix
+
+| Condition | Required result |
+| --- | --- |
+| Exact SHA, ffmpeg available, test passes twice | `confirmed` receipt; reviewer decision unchanged |
+| Exact SHA, ffmpeg unavailable or setup fails | `unvalidatable`/`environment_error` receipt with reason and reproduction; no guessed result |
+| Moving ref or missing source SHA | reject before execution; no artifact |
+| Reviewer absent or not authorized | no decision update; record `reviewer_reoffer_required` |
+| Claims statement lacks supporting artifact | mark `unsubstantiated` and correct or remove the statement |
+| Existing blocked status has been cleared by evidence | update only the status text; do not reorder goals |
+
+### Authority, network, and stop rules
+
+- Only the declared OpenClaw public clone and disposable validation clone may
+  be accessed. Network-enabled dependency installation requires explicit
+  authorization; no credentials are copied into the child environment.
+- Commands are argv-only, bounded by timeout, and run outside the target
+  checkout. No target mutation, cleanup, pull request, maintainer contact, or
+  reviewer decision is permitted.
+- Stop immediately on a moving ref, missing receipt field, target snapshot
+  change, credential exposure, or any attempt to write a reviewer decision.
+- Stop with `unvalidatable` after the declared Linux/ffmpeg recipe fails twice;
+  do not keep changing environments until a desired result appears.
+
+### Fixtures, replay, and acceptance map
+
+Record positive, unavailable-ffmpeg, malformed-receipt, moving-ref, and
+reviewer-absent fixtures. Replaying the report must not clone, install, execute
+third-party code, or call a model. The goal-level checks are:
+
+- **G35-AC01:** candidate-3 validation is either reproduced at the exact SHA or
+  recorded as `unvalidatable` with a stable reason and command.
+- **G35-AC02:** the pilot review fixture retains the reviewer decision and
+  records any re-offer as a separate pending action.
+- **G35-AC03:** the claims audit lists every checked claim, artifact support,
+  and correction; no unsupported accuracy/safety/deletion claim remains.
+- **G35-AC04:** roadmap, backlog, and handoff statuses contain no stale blocker
+  for supplied evidence, with a regression test for the corrected status.
+- **G35-AC05:** malformed, moving-ref, unavailable-runtime, and reviewer-absent
+  cases fail closed and replay byte-identically.
+
+Evidence mapping: `tests/test_pilot_readiness.py` covers AC01, AC02, AC04, and
+AC05; the claims-audit report covers AC03; `uv run --locked pytest -q` and
+`git diff --check` are required before completion.

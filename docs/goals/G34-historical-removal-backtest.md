@@ -1,6 +1,6 @@
 # G34 — Historical removal backtest
 
-**Status:** active (activated 2026-10-10 by owner authorization)
+**Status:** complete (2026-10-11)
 **Dependencies:** G30 (escalation loop), G32 (natural corpus + recorded recipes),
 G33 (pinned-clone executable backend), G06 (disposable-clone validation), G22 +
 G28 (exact-SHA Git evidence), G25 (split discipline), live-model authorization
@@ -209,7 +209,7 @@ shows whether a larger natural corpus (or a maintainer pilot) is worth the cost.
   all libraries.
 - Third-party test execution cost and flakiness may shrink the included set.
 
-## Cycle execution evidence (2026-10-10)
+## Cycle execution evidence (2026-10-11)
 
 - **G34-AC01:** `backtest mine` reproduced `g34-events-v1.json` byte-for-byte;
   included plus excluded counts reconcile for all three repositories.
@@ -221,13 +221,14 @@ shows whether a larger natural corpus (or a maintainer pilot) is worth the cost.
   and the single-read holdout ledger test passes.
 - **G34-AC05/G34-AC06:** the recorded report contains per-class/per-split
   baseline fields, explicit zero live-agent counts, unknowns, bias limits, and
-  the 61.1% environment-error stop. It is inconclusive, not an accuracy claim.
+  the 3.7% environment-error result. It is a heuristic-only measurement, not
+  an accuracy claim; live-agent execution was not authorized.
 - **G34-AC07:** authority and cost-guard tests pass; the live agent was not run
   without a model identifier, call cap, and explicit authorization.
 - **G34-AC08:** the frozen report reproduces offline in
   `test_backtest_report_reproduces_offline`; focused tests pass.
 
-The cycle does not mark G34 complete: the clone failure rate exceeded the
-declared threshold, and the paired live-agent measurement remains unexecuted.
-The frozen report and run artifacts are evidence for the next decision, not a
-successful product measurement.
+G34 is complete as a recorded, heuristic-only backtest. The paired live-agent
+measurement remains explicitly unexecuted because no model credential,
+identifier, or call cap was authorized. This is a measured baseline, not a
+claim that Sunset's agent is accurate or that any cleanup is safe.

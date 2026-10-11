@@ -46,6 +46,15 @@ def test_classify_runs_matches_g06_outcome_classes():
     assert classify_runs(["pass", "error"]) == "environment_error"
 
 
+def test_single_run_accepts_parameterized_pytest_counts():
+    from sunset.history_backtest_runner import _single_run
+
+    assert _single_run(Execution(0, "3 passed in 0.02s", "")) == "pass"
+    assert _single_run(Execution(1, "2 failed, 1 passed in 0.02s", "")) == "fail"
+    assert _single_run(Execution(1, "AttributeError: platform detail\n3 failed in 0.02s", "")) == "fail"
+    assert _single_run(Execution(4, "no tests ran", "ERROR: not found")) == "error"
+
+
 def test_scrubbed_env_never_carries_credentials(tmp_path, monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "secret")
     monkeypatch.setenv("GITHUB_TOKEN", "secret")

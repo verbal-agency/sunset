@@ -24,7 +24,10 @@ from typing import Any, Callable, Mapping
 from sunset.history_backtest_models import BacktestCase, BacktestError, CaseRun, digest
 
 _MARKERS = ("xfail", "skip", "skipif")
-_ENV_ERROR_PATTERNS = re.compile(r"ModuleNotFoundError|ImportError|No module named|error: |INTERNALERROR", re.IGNORECASE)
+_ENV_ERROR_PATTERNS = re.compile(
+    r"ModuleNotFoundError|ImportError|No module named|INTERNALERROR|no tests ran|ERROR collecting",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -70,6 +73,7 @@ class RepoRecipe:
 
     install_args: tuple[str, ...]
     test_args: tuple[str, ...] = ()
+    allow_noneditable_fallback: bool = True
 
 
 @dataclass(frozen=True, slots=True)
@@ -149,9 +153,9 @@ def _single_run(execution: Execution) -> str:
     text = execution.stdout + "\n" + execution.stderr
     if execution.timed_out or execution.return_code is None:
         return "error"
-    if execution.return_code == 0 and re.search(r"\b1 passed\b", text):
+    if execution.return_code == 0 and re.search(r"\b\d+ passed\b", text):
         return "pass"
-    if execution.return_code == 1 and re.search(r"\b1 failed\b", text):
+    if execution.return_code == 1 and re.search(r"\b\d+ failed\b", text):
         return "error" if _ENV_ERROR_PATTERNS.search(text) else "fail"
     return "error"
 
@@ -235,6 +239,18 @@ class CloneChecker:
             "--exclude-newer", as_of_date[:10] + "T23:59:59Z", *recipe.install_args,
         )
         done = self.runner(install, checkout, policy.setup_timeout, self._env())
+        install_mode = "editable"
+        if done.return_code != 0 and recipe.allow_noneditable_fallback and "-e" in recipe.install_args:
+            # PEP 660 editable installs are unavailable in older pinned
+            # repositories. Retry the same declared dependency set as a
+            # regular wheel install; never broaden packages or paths.
+            fallback_args = tuple("." if arg == "-e" else arg for arg in recipe.install_args)
+            fallback = (
+                "uv", "pip", "install", "--quiet", "--python", str(venv_python),
+                "--exclude-newer", as_of_date[:10] + "T23:59:59Z", *fallback_args,
+            )
+            done = self.runner(fallback, checkout, policy.setup_timeout, self._env())
+            install_mode = "noneditable_fallback"
         if done.return_code != 0:
             raise BacktestError("dependency_setup_failed", done.stderr.strip()[-300:])
         frozen = self.runner(("uv", "pip", "freeze", "--python", str(venv_python)), checkout, 120, self._env()).stdout
@@ -245,6 +261,7 @@ class CloneChecker:
             "as_of_commit": case.as_of_sha,
             "exclude_newer": as_of_date[:10],
             "install_args": list(recipe.install_args),
+            "install_mode": install_mode,
             "packages_digest": digest(sorted(frozen.splitlines())),
         }
 
