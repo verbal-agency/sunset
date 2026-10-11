@@ -1,0 +1,6 @@
+{
+  "schema_version": "1",
+  "mode": "live",
+  "expected_status_before_approval": "approval_required",
+  "expected_terminal_statuses": ["completed", "inconclusive", "environment_error", "unvalidatable"]
+}

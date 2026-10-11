@@ -31,6 +31,18 @@ from sunset.natural_corpus import (
     load_natural_manifest,
     load_natural_report,
 )
+from sunset.pilot_models import PilotApprovalToken, PilotCaseFile, PilotRequest, PilotResult, PilotSetupReceipt
+from sunset.pilot_service import (
+    CandidateResolution,
+    InvestigationSummary,
+    PilotConfig,
+    PilotPreparation,
+    PilotService,
+    PilotServiceError,
+    RecordedPilotBackend,
+    ValidationSummary,
+)
+from sunset.pilot_runtime import LivePilotBackend, PilotRuntimeError, RuntimePolicy
 from sunset.broad_collectors import discover_broad_repository, enrich_broad_provenance, scan_broad_repository
 from sunset.broad_collectors_models import BroadCandidate, BroadScanResult
 from sunset.calibration_models import BenchmarkCase as CalibrationCase, EvaluationRun, ExpectedConditionLabel, MetricRecord, ReleaseGateResult, ReleaseThreshold
@@ -126,6 +138,22 @@ __all__ = [
     "load_evidence_records",
     "load_natural_manifest",
     "load_natural_report",
+    "PilotApprovalToken",
+    "PilotCaseFile",
+    "PilotRequest",
+    "PilotResult",
+    "PilotSetupReceipt",
+    "CandidateResolution",
+    "InvestigationSummary",
+    "PilotConfig",
+    "PilotPreparation",
+    "PilotService",
+    "PilotServiceError",
+    "RecordedPilotBackend",
+    "ValidationSummary",
+    "LivePilotBackend",
+    "PilotRuntimeError",
+    "RuntimePolicy",
     "scan_broad_repository",
     "discover_broad_repository",
     "enrich_broad_provenance",

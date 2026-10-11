@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "approval_required": {
+    "status": "approval_required",
+    "next_action": "Approve disposable validation",
+    "candidate_id": "g32-cce056b765e66a08"
+  },
+  "completed": {
+    "status": "completed",
+    "validation_outcome": "confirmed",
+    "non_authority": true
+  }
+}

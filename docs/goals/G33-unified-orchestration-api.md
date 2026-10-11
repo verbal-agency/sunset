@@ -1,6 +1,6 @@
 # G33 — Unified repository investigation orchestration API
 
-**Status:** proposed  
+**Status:** complete
 **Dependencies:** G30 (bounded agentic escalation loop), G32 (natural
 clone-runnable corpus), with G06/G22/G28/G29 inherited through those goals
 
@@ -203,15 +203,207 @@ outcomes.
 
 ## Capability unlocked
 
-Once promoted and completed, a maintainer-facing pilot and future MCP/HTTP
-clients can call Sunset as one bounded investigation capability. Low-level
-commands remain available for debugging and development only.
+A maintainer-facing pilot and future MCP/HTTP clients can call Sunset as one
+bounded investigation capability. Low-level commands remain available for
+debugging and development only.
 
-## Promotion requirements
+## Completion evidence
 
-This proposal must not be activated until G30 supplies a stable escalation
-result contract and G32 demonstrates a reproducible runtime/dependency recipe.
-Promotion requires a Luna-ready execution contract naming the service modules,
-transport, fixtures, approval store, authority/network/side-effect boundaries,
-and terminal/stop conditions, plus binary acceptance criteria and a
-criterion-to-evidence map.
+The recorded orchestration tranche completed on 2026-10-10. The typed service and CLI transport are implemented
+in `src/sunset/pilot_models.py`, `src/sunset/pilot_service.py`, and
+`src/sunset/cli.py`. Recorded request, run, and case-file fixtures live under
+`tests/fixtures/pilot/`; focused acceptance evidence is in
+`tests/test_pilot_run.py`; and the bounded product-path findings are recorded in
+`docs/research/G33-orchestration-report-v1.md`.
+
+The original G33-AC01 through G33-AC08 criteria cover the recorded contract and
+remain verified by the focused suite, the locked full suite, and
+`git diff --check`. The executable extension below is now complete and supplies
+the pinned-clone and environment path required by the original objective.
+
+## G33 extension — executable bounded backend
+
+### Purpose
+
+Close the gap between a recorded orchestration facade and a usable maintainer
+pilot. The service must execute the existing deterministic pipeline against an
+exact pinned checkout in a declared disposable environment, while preserving
+the recorded path, approval boundary, and non-authority contract.
+
+### Objective
+
+Add a replaceable execution backend behind `PilotService` that clones and pins a
+repository by full SHA, selects a matching G32-style environment recipe,
+creates an isolated runtime, installs only declared dependencies, resolves the
+candidate, composes the existing evidence/investigation/validation components,
+and returns the same resumable case-file contract through `pilot run` and
+`pilot approve`.
+
+### Scope boundary
+
+- exact-SHA clone preparation with an explicit vetted-repository and network
+  policy;
+- deterministic environment-recipe selection and isolated runtime creation;
+- declared argv-only dependency installation with package, byte, and time
+  budgets;
+- candidate discovery and evidence collection against the pinned clone;
+- adapter calls into the existing G30 investigation and G06 disposable
+  validator, with approval still required before validation;
+- environment, clone, command, and artifact receipts attached to the existing
+  `PilotResult`/case-file response; and
+- recorded fixtures and an end-to-end LangChain acceptance run using the same
+  frontend request shape.
+
+### Explicit exclusions
+
+- arbitrary shell strings, unbounded package installation, or implicit network
+  access;
+- mutation of the source checkout, automatic cleanup, code deletion, or pull
+  requests;
+- autonomous approval or validation outside G14/G06;
+- multi-repository workflows, MCP/HTTP-specific orchestration, or tournament
+  ranking of models; and
+- changing the recorded contract or weakening any G33-AC01 through G33-AC08
+  invariant.
+
+### Execution contract
+
+#### Expected implementation surface
+
+- `src/sunset/pilot_runtime.py`: pinned clone preparation, environment recipe
+  selection, isolated runtime provisioning, declared-command runner, and
+  receipt contracts.
+- `src/sunset/pilot_service.py`: inject the runtime backend without moving
+  sequencing into the CLI; persist setup receipts and resume from checkpoints.
+- `src/sunset/pilot_models.py`: add additive environment/setup receipt fields
+  and structured setup errors without invalidating schema-1 recorded fixtures.
+- `src/sunset/cli.py`: select recorded or explicitly authorized live backend;
+  retain `pilot run`/`pilot approve` as the only product transport.
+- `tests/test_pilot_runtime.py` and `tests/test_pilot_run_live_fixture.py`:
+  exact-ref, recipe, budget, authority, checkpoint, and end-to-end tests.
+- `tests/fixtures/pilot/g33-{runtime,live-run,failures}-v1.json` and the
+  existing G32 environment recipe fixture.
+- `docs/research/G33-executable-backend-report-v1.md`.
+
+Equivalent modules are allowed only when these contracts, fixture boundaries,
+and authority rules remain unchanged.
+
+#### Canonical contracts and invariants
+
+`PinnedCheckoutReceipt` contains the repository URL, requested SHA, observed
+HEAD SHA, source policy ID, clone artifact ID, and target snapshot digest.
+`EnvironmentReceipt` contains the selected environment ID, Python executable
+identity, dependency digest, declared install argv, package budget, and
+artifact ID. Setup is valid only when the observed HEAD exactly equals the
+requested SHA and the recipe repository/ref identity matches. A missing recipe,
+moving ref, failed install, budget exhaustion, or digest mismatch is a
+structured terminal setup result; it never falls through to investigation.
+
+The live backend may execute only declared argv vectors from the selected recipe
+inside its disposable environment. It may not accept shell metacharacters,
+undeclared commands, arbitrary paths, or package names outside the recipe.
+`PilotResult` remains non-authoritative, and approval tokens remain bound to the
+request, pinned SHA, candidate, recipe digest, validator configuration, and
+run.
+
+#### Deterministic behavior matrix
+
+| Input | Required result |
+| --- | --- |
+| Allowed URL + full SHA + matching recipe | Clone, verify HEAD, record setup receipts, then continue to candidate resolution. |
+| Branch/tag/missing object/wrong observed HEAD | `environment_error`; no install, model, investigation, or validation. |
+| Missing or mismatched recipe | `environment_error` with recipe error; no fallback runtime or dependency guess. |
+| Declared install succeeds within budgets | Record environment receipt and continue once. |
+| Install command, package, byte, or time budget fails | Structured setup failure; preserve clone/evidence artifacts and do not retry implicitly. |
+| Candidate absent or ambiguous in pinned clone | `candidate_not_found`/`candidate_ambiguous`; no investigation or validation. |
+| Investigation requests validation before approval | `approval_required`; no disposable validation clone. |
+| Valid approval | Resume the same run and invoke G06 only in a disposable clone. |
+| Replay of compatible live run | Reuse setup/evidence artifacts; do not reclone, reinstall, or repeat completed stages. |
+
+#### Authority, network, and stop conditions
+
+The host must explicitly authorize the repository host, credential identity (if
+needed), network budget, and vetted-repository policy. The source checkout is
+read-only. Network is permitted only for the pinned clone and declared package
+installation; model calls use the existing G30 provider budgets. Stop on any
+identity, recipe, budget, checkpoint, approval, or validator error, preserve
+successful artifacts, and return the structured reason. Cleanup is limited to
+disposable runtime directories owned by the backend and is never applied to the
+target repository.
+
+#### Replay and cache rules
+
+The live run identity includes repository URL/SHA, candidate selector,
+environment recipe and dependency digests, provider/model identity, validator
+configuration, and budget ledger. Setup receipts are immutable. A changed SHA,
+recipe, provider, budget, or approval token creates a new run identity; it may
+not reuse incompatible setup or evidence. Recorded mode remains byte-identical
+and offline.
+
+### Extension acceptance criteria
+
+- **G33-AC09 — Exact pinned setup:** An authorized live backend clones the
+  requested repository, verifies the exact SHA, records a checkout receipt, and
+  fails closed on branches, missing objects, or mismatched HEADs.
+- **G33-AC10 — Reproducible environment:** The backend selects the matching G32
+  recipe, creates an isolated runtime, executes only declared argv installs
+  within budgets, records an environment receipt, and fails closed on missing or
+  failed setup.
+- **G33-AC11 — Real stage composition:** One `pilot run` request drives the
+  pinned clone through deterministic discovery, provenance/evidence,
+  investigation, approval, G06 validation, and case-file finalization without
+  frontend phase commands.
+- **G33-AC12 — Approval and target safety:** Approval is required before
+  validation; approved validation runs only in a disposable clone; source
+  checkout snapshots and working trees are unchanged for approve, deny, expiry,
+  mismatch, and failure paths.
+- **G33-AC13 — Failure and resume safety:** Setup, install, model, validator,
+  interruption, and budget failures preserve completed artifacts, return typed
+  reasons, and do not repeat completed clone/install/evidence stages on replay.
+- **G33-AC14 — Authority and network boundary:** Tests prove only configured
+  hosts, declared commands, credentials, budgets, and disposable paths are
+  reachable; arbitrary shell, undeclared installs, hidden network, cleanup of
+  the target, and autonomous approval are rejected.
+
+### Extension criterion-to-evidence map
+
+| Criterion | Required evidence |
+| --- | --- |
+| G33-AC09 | `tests/test_pilot_runtime.py::test_exact_sha_checkout_and_fail_closed_refs` |
+| G33-AC10 | `test_recipe_selection_and_isolated_install_receipt` plus runtime fixture |
+| G33-AC11 | `tests/test_pilot_run_live_fixture.py::test_single_request_drives_real_pipeline` |
+| G33-AC12 | `test_approval_required_before_disposable_validation` and target snapshot fixture |
+| G33-AC13 | `test_setup_failure_checkpoint_and_replay` plus failure fixture |
+| G33-AC14 | `test_declared_command_and_network_authority` |
+
+### Extension verification commands
+
+```bash
+.venv/bin/python -m pytest -q tests/test_pilot_runtime.py tests/test_pilot_run_live_fixture.py
+uv run --locked pytest -q
+git diff --check
+```
+
+## Extension completion evidence
+
+G33-AC09 through G33-AC14 completed on 2026-10-10. The executable backend is
+implemented in `src/sunset/pilot_runtime.py`, wired through `pilot run` and
+`pilot approve`, and covered by `tests/test_pilot_runtime.py` and
+`tests/test_pilot_run_live_fixture.py`. The canonical LangChain run is recorded
+in `docs/research/G33-executable-backend-report-v1.md`: it verified the exact
+commit, selected `langchain-core-py312-v1`, collected provenance, paused for
+approval, resumed from a separate process, and returned `completed` with a
+`confirmed` disposable validation outcome.
+
+All extension acceptance criteria have named test or run evidence. The focused
+runtime, live-pipeline, and recorded-pipeline tests pass; the locked full suite
+passes; and `git diff --check` passes. No source checkout was mutated, and the
+agent tournament remains explicitly outside G33.
+
+## Promotion requirements satisfied
+
+G30 supplied the stable escalation result contract and G32 supplied the
+reproducible recorded runtime/dependency recipe. The implementation preserved
+the Luna-ready execution contract, transport, fixtures, approval store,
+authority/network/side-effect boundaries, terminal/stop conditions, binary
+acceptance criteria, and criterion-to-evidence map.

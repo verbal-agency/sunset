@@ -35,6 +35,7 @@ class ValidationConfig:
     repeat_count: int = 2
     broader_commands: tuple[tuple[str, ...], ...] = ()
     timeout_seconds: int = 60
+    python_executable: str | None = None
 
     def __post_init__(self) -> None:
         if self.repeat_count < 1:
@@ -49,6 +50,7 @@ class ValidationConfig:
             "repeat_count": self.repeat_count,
             "broader_commands": [list(command) for command in self.broader_commands],
             "timeout_seconds": self.timeout_seconds,
+            "python_executable": self.python_executable,
         }
 
 
@@ -316,7 +318,8 @@ def _run_tests(
     run_id: str,
 ) -> tuple[CommandRun, ...]:
     target = "::".join((candidate.path, *candidate.qualified_name.split(".")))
-    narrow = (sys.executable, "-m", "pytest", "-q", target)
+    python_executable = config.python_executable or sys.executable
+    narrow = (python_executable, "-m", "pytest", "-q", target)
     scheduled: list[tuple[Literal["narrow", "broader"], int, tuple[str, ...]]] = [
         ("narrow", attempt, narrow) for attempt in range(1, config.repeat_count + 1)
     ]

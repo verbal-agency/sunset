@@ -503,7 +503,7 @@ contracts.
 | [G30](goals/G30-live-agentic-escalation-evaluation.md) | complete | Run a live agent that weighs evidence and escalates to disposable-clone validation; adjudicate with empirical results, not asserted labels | G06 + G11 + G12 + G14 + G24 + G25 + G29 + live-model authorization |
 | [G31](goals/G31-empirical-feedback-loop.md) | complete | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | complete | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
-| [G33](goals/G33-unified-orchestration-api.md) | proposed | Expose one high-level repository investigation run instead of requiring frontends to compose internal Sunset commands | G30 + G32 |
+| [G33](goals/G33-unified-orchestration-api.md) | complete | Expose one high-level repository investigation run and execute it through a bounded pinned-clone backend | G30 + G32 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -1012,11 +1012,12 @@ contradictory, environment-error, and unvalidatable outcomes.
 can call Sunset as one bounded investigation capability, while low-level
 commands remain available only for debugging and development.
 
-The [G33 specification](goals/G33-unified-orchestration-api.md) remains proposed
-and is now Luna-ready: it names the service modules, CLI transport, fixtures,
-approval-token store, typed contracts, binary criteria, and terminal/stop
-conditions. It may be activated in the next cycle; no implementation starts in
-this cycle.
+The [G33 specification](goals/G33-unified-orchestration-api.md) is complete
+(2026-10-10). It adds a single `pilot run` product path with immutable run
+revisions, exact-SHA clone and environment receipts, approval-gated disposable
+validation, replay across CLI processes, and a non-authoritative case file. The
+canonical LangChain run completed without mutating the source checkout or
+granting autonomous cleanup authority.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 

@@ -52,6 +52,9 @@ from sunset.validation import ValidationConfig, validate_candidate
 from sunset.validation_models import ValidationError, ValidationResult
 from sunset import __version__
 from sunset.agent_tools import tool_catalog_json
+from sunset.pilot_models import PilotRequest
+from sunset.pilot_runtime import LivePilotBackend, RuntimePolicy
+from sunset.pilot_service import PilotService, PilotServiceError, RecordedPilotBackend
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -71,6 +74,36 @@ def build_parser() -> argparse.ArgumentParser:
         default="json",
         help="output format (default: json)",
     )
+    pilot_parser = subparsers.add_parser(
+        "pilot",
+        help="run one high-level repository investigation without composing internal commands",
+    )
+    pilot_subparsers = pilot_parser.add_subparsers(dest="pilot_command", required=True)
+    pilot_run_parser = pilot_subparsers.add_parser("run", help="start or replay one investigation run")
+    pilot_run_parser.add_argument("--request", required=True, help="canonical pilot request JSON")
+    pilot_run_parser.add_argument("--store", required=True, help="external run/artifact store")
+    pilot_run_parser.add_argument("--manifest", required=True, help="recorded natural-corpus manifest")
+    pilot_run_parser.add_argument("--evidence", required=True, help="recorded natural-corpus evidence fixture")
+    pilot_run_parser.add_argument("--report", required=True, help="recorded G30/G32 report fixture")
+    pilot_run_parser.add_argument("--environment", required=True, help="recorded environment recipe fixture")
+    pilot_run_parser.add_argument("--source-checkout", help="explicit local checkout for offline live-mode cloning")
+    pilot_run_parser.add_argument("--network-enabled", action="store_true", help="authorize network clone/package access for live mode")
+    pilot_run_parser.add_argument("--python-executable", help="pre-provisioned isolated Python executable for live mode")
+    pilot_run_parser.add_argument("--format", choices=("json",), default="json")
+    pilot_approve_parser = pilot_subparsers.add_parser("approve", help="approve or deny a pending disposable validation")
+    pilot_approve_parser.add_argument("--run-id", required=True)
+    pilot_approve_parser.add_argument("--approval-token", required=True)
+    pilot_approve_parser.add_argument("--decision", choices=("approve", "deny"), required=True)
+    pilot_approve_parser.add_argument("--store", required=True, help="external run/artifact store")
+    pilot_approve_parser.add_argument("--manifest", required=True)
+    pilot_approve_parser.add_argument("--evidence", required=True)
+    pilot_approve_parser.add_argument("--report", required=True)
+    pilot_approve_parser.add_argument("--environment", required=True)
+    pilot_approve_parser.add_argument("--mode", choices=("recorded", "live"), default="recorded")
+    pilot_approve_parser.add_argument("--source-checkout")
+    pilot_approve_parser.add_argument("--network-enabled", action="store_true")
+    pilot_approve_parser.add_argument("--python-executable")
+    pilot_approve_parser.add_argument("--format", choices=("json",), default="json")
     scan_parser = subparsers.add_parser(
         "scan",
         help="scan a committed Git snapshot for supported pytest markers",
@@ -294,6 +327,24 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "tools":
         sys.stdout.write(tool_catalog_json())
         return 0
+
+    if args.command == "pilot":
+        try:
+            store = ArtifactStore(args.store)
+            if args.pilot_command == "run":
+                request_value = _load_saved_json(args.request)
+                request = PilotRequest.from_dict(request_value)
+                backend = _pilot_backend(args, store, request.mode)
+                result = PilotService(backend, store=store).run(request)
+            else:
+                backend = _pilot_backend(args, store, args.mode)
+                result = PilotService(backend, store=store).approve(args.run_id, args.approval_token, decision=args.decision)
+        except (PilotServiceError, OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+            error = {"kind": getattr(exc, "code", "pilot_request_invalid"), "message": getattr(exc, "message", str(exc))}
+            sys.stdout.write(json.dumps({"error": error}, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 2
+        sys.stdout.write(result.to_json())
+        return 0 if result.status not in {"error", "environment_error"} else 2
 
     if args.command == "scan":
         try:
@@ -704,3 +755,17 @@ def _load_saved_json(path: str) -> dict[str, object]:
     if not isinstance(value, dict):
         raise ValueError("saved result must be a JSON object")
     return value
+
+
+def _pilot_backend(args: argparse.Namespace, store: ArtifactStore, mode: str):
+    if mode == "recorded":
+        return RecordedPilotBackend.from_paths(args.manifest, args.evidence, args.report, args.environment)
+    return LivePilotBackend(
+        environment_path=args.environment,
+        store=store,
+        policy=RuntimePolicy(
+            network_enabled=bool(args.network_enabled),
+            source_checkout=Path(args.source_checkout).expanduser() if args.source_checkout else None,
+            python_executable=args.python_executable,
+        ),
+    )

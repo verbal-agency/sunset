@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "failure_kinds": [
+    "repository_host_denied",
+    "network_not_authorized",
+    "environment_recipe_missing",
+    "dependency_setup_failed",
+    "setup_output_budget_exhausted",
+    "candidate_not_found"
+  ],
+  "retry_completed_stages": false
+}

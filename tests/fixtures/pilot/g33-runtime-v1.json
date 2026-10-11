@@ -1,0 +1,7 @@
+{
+  "schema_version": "1",
+  "policy_id": "g33-v1",
+  "allowed_hosts": ["github.com"],
+  "required_receipts": ["checkout", "environment"],
+  "forbidden": ["shell_string", "undeclared_install", "target_mutation", "implicit_network"]
+}

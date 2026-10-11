@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "required_fields": [
+    "hypothesis",
+    "evidence_ids",
+    "artifact_ids",
+    "validation_outcome",
+    "unresolved_obligations",
+    "next_action",
+    "non_authority"
+  ],
+  "non_authority": true
+}
