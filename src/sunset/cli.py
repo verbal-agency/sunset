@@ -104,6 +104,47 @@ def build_parser() -> argparse.ArgumentParser:
     pilot_approve_parser.add_argument("--network-enabled", action="store_true")
     pilot_approve_parser.add_argument("--python-executable")
     pilot_approve_parser.add_argument("--format", choices=("json",), default="json")
+    backtest_parser = subparsers.add_parser("backtest", help="G34 historical removal backtest (mine, cases, run, report)")
+    backtest_subparsers = backtest_parser.add_subparsers(dest="backtest_command", required=True)
+    bt_mine = backtest_subparsers.add_parser("mine", help="mine marker removal/retention events from local clones")
+    bt_mine.add_argument("--repo", action="append", required=True, help="name=path to a local clone (repeatable)")
+    bt_mine.add_argument("--out", required=True)
+    bt_mine.add_argument("--min-as-of-date", help="eligibility window start (YYYY-MM-DD)")
+    bt_mine.add_argument("--fix-limit", type=int)
+    bt_mine.add_argument("--retained-limit", type=int, default=20)
+    bt_mine.add_argument("--horizon-days", type=int, default=730)
+    bt_cases = backtest_subparsers.add_parser("cases", help="build parent-bound cases, splits, and the declared manifest")
+    bt_cases.add_argument("--events", required=True)
+    bt_cases.add_argument("--repo", action="append", required=True)
+    bt_cases.add_argument("--cases-out", required=True)
+    bt_cases.add_argument("--manifest-out", required=True)
+    bt_cases.add_argument("--declared-on", required=True)
+    bt_run = backtest_subparsers.add_parser("run", help="clone-check and reason over declared cases")
+    bt_run.add_argument("--cases", required=True)
+    bt_run.add_argument("--manifest", required=True)
+    bt_run.add_argument("--repo", action="append", required=True)
+    bt_run.add_argument("--recipes", required=True, help="JSON: repo -> {install_args, test_args}")
+    bt_run.add_argument("--work-root", required=True)
+    bt_run.add_argument("--out", required=True)
+    bt_run.add_argument("--ledger", required=True, help="holdout single-read ledger path")
+    bt_run.add_argument("--split", action="append", choices=("development", "holdout"), required=True)
+    bt_run.add_argument("--python310", required=True)
+    bt_run.add_argument("--python312", required=True)
+    bt_run.add_argument("--network-enabled", action="store_true", help="authorize pinned dependency installation")
+    bt_run.add_argument("--no-clone", action="store_true", help="skip clone checks (reasoners only)")
+    bt_run.add_argument("--live-model", help="authorize live model calls with this model id")
+    bt_run.add_argument("--max-calls", type=int, help="hard cap on live model calls")
+    bt_run.add_argument("--granted-by", help="who authorized the live run")
+    bt_run.add_argument("--workers", type=int, default=3)
+    bt_report = backtest_subparsers.add_parser("report", help="assemble the stratified report offline")
+    bt_report.add_argument("--cases", required=True)
+    bt_report.add_argument("--runs", action="append", required=True)
+    bt_report.add_argument("--manifest", required=True)
+    bt_report.add_argument("--out", required=True)
+    bt_report.add_argument("--run-id", required=True)
+    bt_report.add_argument("--mode", choices=("live", "recorded", "heuristic"), required=True)
+    bt_report.add_argument("--model")
+
     scan_parser = subparsers.add_parser(
         "scan",
         help="scan a committed Git snapshot for supported pytest markers",
@@ -345,6 +386,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         sys.stdout.write(result.to_json())
         return 0 if result.status not in {"error", "environment_error"} else 2
+
+    if args.command == "backtest":
+        return _backtest_main(args)
 
     if args.command == "scan":
         try:
@@ -769,3 +813,63 @@ def _pilot_backend(args: argparse.Namespace, store: ArtifactStore, mode: str):
             python_executable=args.python_executable,
         ),
     )
+
+
+def _backtest_main(args: argparse.Namespace) -> int:
+    from sunset import history_backtest_pipeline as pipeline
+    from sunset.history_backtest_models import BacktestError
+    from sunset.history_backtest_runner import LiveAuthorization, RunnerPolicy
+
+    try:
+        if args.backtest_command == "mine":
+            document = pipeline.mine_command(
+                pipeline.parse_repo_map(args.repo), args.out, min_as_of_date=args.min_as_of_date,
+                fix_limit=args.fix_limit, retained_limit=args.retained_limit, horizon_days=args.horizon_days,
+            )
+            result: object = {r["repository"]: r["counts"] for r in document["repositories"]}
+        elif args.backtest_command == "cases":
+            result = pipeline.cases_command(
+                args.events, pipeline.parse_repo_map(args.repo), args.cases_out, args.manifest_out, declared_on=args.declared_on
+            )
+        elif args.backtest_command == "run":
+            repos = pipeline.parse_repo_map(args.repo)
+            policy = RunnerPolicy(
+                work_root=Path(args.work_root), source_repos=repos, recipes=pipeline.recipes_from_json(args.recipes),
+                pythons={"3.10": args.python310, "3.12": args.python312},
+                network_enabled=bool(args.network_enabled), workers=args.workers,
+            )
+            authorization = None
+            agent_factory = None
+            if args.live_model:
+                if not args.max_calls or not args.granted_by:
+                    raise BacktestError("live_not_authorized", "--live-model requires --max-calls and --granted-by")
+                authorization = LiveAuthorization(args.live_model, args.max_calls, args.granted_by)
+
+                def agent_factory(cases_by_id, guard):  # noqa: ANN001
+                    from sunset.history_backtest_runner import guarded_reasoner
+                    from sunset.live_model import build_chat_model, load_env_file
+                    from sunset.live_reasoner import LiveAgentReasoner
+
+                    load_env_file(".env")
+                    model = build_chat_model("anthropic", args.live_model)
+                    inner = LiveAgentReasoner(model, lambda cid: cases_by_id[cid].evidence_text)
+                    return guarded_reasoner(inner, guard)
+
+            runs = pipeline.run_command(
+                args.cases, args.manifest, args.out, policy=policy, ledger_path=args.ledger, splits=tuple(args.split),
+                heuristic=lambda _cid: "likely_active", agent_factory=agent_factory, authorization=authorization,
+                skip_clone=bool(args.no_clone),
+            )
+            result = {"runs": len(runs)}
+        else:
+            result = pipeline.report_command(
+                args.cases, args.runs, args.manifest, args.out, run_id=args.run_id, mode=args.mode, model=args.model
+            )
+    except BacktestError as exc:
+        sys.stdout.write(json.dumps({"error": {"kind": exc.code, "message": exc.message}}, indent=2, sort_keys=True) + "\n")
+        return 2
+    except (OSError, KeyError, ValueError, json.JSONDecodeError) as exc:
+        sys.stdout.write(json.dumps({"error": {"kind": "backtest_failed", "message": str(exc)}}, indent=2, sort_keys=True) + "\n")
+        return 2
+    sys.stdout.write(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+    return 0

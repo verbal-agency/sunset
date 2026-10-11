@@ -504,6 +504,9 @@ contracts.
 | [G31](goals/G31-empirical-feedback-loop.md) | complete | Explore a leakage-safe feedback loop that improves the agent's judgment from empirically-adjudicated outcomes | G30 + G25 |
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | complete | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 | [G33](goals/G33-unified-orchestration-api.md) | complete | Expose one high-level repository investigation run and execute it through a bounded pinned-clone backend | G30 + G32 |
+| [G34](goals/G34-historical-removal-backtest.md) | proposed | Measure Sunset against real maintainer removal history, with lead time and characterized label bias | G30 + G32 + G33 + G25 + live-model authorization |
+| [G35](goals/G35-pilot-readiness-gap-closure.md) | proposed | Close the unexercised exact-HEAD validation gap, audit docs for overclaims, and reconcile stale statuses | G27 + G33 |
+| [G36](goals/G36-maintainer-pilot-recruitment-kit.md) | proposed | Prepare screening, outreach, consent, and run-packet materials so the G27 participant gate can be cleared | G27 + G33 |
 
 ### G21 — Validation corpus protocol and provenance audit
 
@@ -1018,6 +1021,73 @@ revisions, exact-SHA clone and environment receipts, approval-gated disposable
 validation, replay across CLI processes, and a non-authoritative case file. The
 canonical LangChain run completed without mutating the source checkout or
 granting autonomous cleanup authority.
+
+### G34 — Historical removal backtest
+
+**Dependencies:** G30, G32, G33, G06, G22, G28, G25; live-model authorization for the agent run.
+
+**Purpose:** Get the first measurement against independent, real maintainer
+behavior. Existing results are graded against authored fixtures or Sunset's own
+clone runs; repository history records what maintainers actually did with
+markers and can supply labels Sunset did not produce.
+
+**Objective:** Mine pinned public Python repositories for marker removal and
+retention events, replay Sunset as of the commit before each, and report
+class-stratified agreement and lead time with bias and label weakness stated.
+
+**Scope boundary:** Git-only deterministic mining; event classes
+`marker_only_removal`, `fix_with_removal`, `retained`, plus recorded exclusions;
+parent-commit-bound evidence with a leakage guard; clone check at the parent;
+pre-declared development/holdout splits.
+
+**Exclusions:** Treating removal as proof of expiry; new collectors or
+languages; maintainer contact; agent tuning on the holdout; autonomous cleanup.
+
+**Advances:** OUT-04, OUT-05, OUT-08; SCN-01, SCN-02, SCN-03, SCN-12.
+
+**Unlocks:** A maintainer-independent answer to whether Sunset would have said
+something true and early, feeding the G27 decision. This is the next goal and
+the only one with an execution contract.
+
+### G35 — Pilot readiness gap closure
+
+**Dependencies:** G27, G33.
+
+**Purpose:** Remove known weaknesses (an unexercised validation path and
+possible documentation overclaims) before any pilot or backtest result is shown.
+
+**Objective:** Exercise or formally record as unvalidatable the OpenClaw
+exact-HEAD path, audit docs for overstated accuracy/safety claims, and reconcile
+stale statuses.
+
+**Scope boundary / exclusions:** See the outline in
+[G35](goals/G35-pilot-readiness-gap-closure.md); no new features, no fabricated
+results, no reviewer decisions recorded without the reviewer.
+
+**Advances:** OUT-05, OUT-08; SCN-03, SCN-07.
+
+**Unlocks:** A pilot fixture with no known unexercised path and honest
+documentation.
+
+### G36 — Maintainer pilot recruitment kit
+
+**Dependencies:** G27 Part A protocol, G33.
+
+**Purpose:** The G27 participant gate is the last external blocker; ready,
+protocol-faithful materials make it clearable.
+
+**Objective:** Pre-screen target libraries and produce outreach, consent,
+disclosure-approval, and a per-participant run-packet template, rehearsed on a
+public library without contact.
+
+**Scope boundary / exclusions:** See the outline in
+[G36](goals/G36-maintainer-pilot-recruitment-kit.md); Sunset never contacts
+anyone, no fabricated participants, no pilot on the owner's own repositories.
+
+**Advances:** OUT-04, OUT-05, OUT-08; SCN-07.
+
+**Unlocks:** The owner can recruit; a consenting maintainer moves straight to a
+G27 run.
 
 ### G29 — Pilot provenance correction and enrichment hardening
 

@@ -1,0 +1,5 @@
+{
+  "pytest": {"install_args": ["-e", ".", "hypothesis", "pygments", "attrs", "xmlschema", "mock", "argcomplete", "requests", "setuptools", "pexpect"]},
+  "attrs": {"install_args": ["-e", ".", "pytest", "hypothesis", "zope.interface", "cloudpickle", "pympler"]},
+  "click": {"install_args": ["-e", ".", "pytest"]}
+}

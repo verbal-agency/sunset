@@ -1,0 +1,2066 @@
+{
+  "as_of_dates": {
+    "bt-0261763bd51c87a3cbba5b50": "2021-12-28T10:11:45+01:00",
+    "bt-135e0adbeec188cb7fc9308a": "2024-08-26T07:09:33+02:00",
+    "bt-16ad51efffbf6eca589d0753": "2024-09-01T09:04:14-07:00",
+    "bt-1a0e0307eb2262e5d62383be": "2024-10-04T05:12:03+00:00",
+    "bt-26236f5c7a008db03007f023": "2024-10-10T14:50:57+02:00",
+    "bt-2e73b270048a07521ee778ae": "2021-12-28T10:11:45+01:00",
+    "bt-2fd7e628a0b2e4ac48dff204": "2025-10-06T10:33:05+03:00",
+    "bt-3d0f59db307dd3680b03e253": "2021-12-30T08:18:44-03:00",
+    "bt-40cc238db3e046d57ddbde21": "2021-12-30T12:22:13+02:00",
+    "bt-4813f3a0c4cc8cdc10149528": "2024-10-10T14:50:57+02:00",
+    "bt-4994cb18b8f9b320c66020dc": "2024-09-01T09:04:14-07:00",
+    "bt-4e77d0023b6ed7b2582c5351": "2021-12-30T08:18:44-03:00",
+    "bt-564f711f4c6c3afaa5c4c52b": "2025-10-25T19:29:22+03:00",
+    "bt-595b394086ef9e365a183170": "2024-09-01T09:04:14-07:00",
+    "bt-6345e8b2cba738b66e9ee591": "2024-10-10T14:50:57+02:00",
+    "bt-6369d65f14db6d4ba933e67c": "2024-08-26T07:09:33+02:00",
+    "bt-63e7783ad4b6aaa532e9c42a": "2021-12-28T10:11:45+01:00",
+    "bt-6798fa1f780cd98dfdec6613": "2023-06-28T09:28:46+03:00",
+    "bt-67c1a23219f2b156b773a314": "2024-10-10T14:50:57+02:00",
+    "bt-6caa7ff37de3b1082dbf348a": "2021-12-30T08:18:44-03:00",
+    "bt-743c4c3c6c3d23ee5ad7f8bb": "2021-12-30T08:18:44-03:00",
+    "bt-7660a9a2a5b155111a7f0f41": "2021-12-30T08:18:44-03:00",
+    "bt-835d3abd0b93bb2251be8773": "2022-03-20T09:48:55+01:00",
+    "bt-8bd7073c937df4663b639c85": "2024-10-10T14:50:57+02:00",
+    "bt-8c7e45f45ec483c74d44d417": "2024-05-21T18:24:08-04:00",
+    "bt-8e8e4f799124c1bb1c96c357": "2022-03-20T09:48:55+01:00",
+    "bt-92e59f6e29aa282d546258b2": "2024-10-04T05:12:03+00:00",
+    "bt-9499994e1a8eb7337b4eaac4": "2024-10-10T14:50:57+02:00",
+    "bt-a1c5207ce7866f3cb94e48f1": "2026-09-01T11:48:48+02:00",
+    "bt-a251da245316b36b0e136d3e": "2024-11-25T20:11:19+01:00",
+    "bt-a405629f4b3a539af91b2f0a": "2021-12-30T12:22:13+02:00",
+    "bt-a4b327547cb6bae9f85441be": "2024-08-26T07:09:33+02:00",
+    "bt-a72f2de4e01072d8418ba5a0": "2024-10-04T05:12:03+00:00",
+    "bt-a9c7a326ff7b34e956fda4ba": "2024-10-10T14:50:57+02:00",
+    "bt-afa5ae517edb2d7792c41f58": "2021-12-30T08:18:44-03:00",
+    "bt-b128c34ab599fa8715492f34": "2024-10-04T05:12:03+00:00",
+    "bt-ba7dba1b90aa3a824b0b04dc": "2024-08-26T07:09:33+02:00",
+    "bt-bff48ed84e76b6c175b37a87": "2025-10-06T10:33:05+03:00",
+    "bt-c167bb1654c8dafd627b9dce": "2024-10-04T05:12:03+00:00",
+    "bt-c35809136132604cc035fccd": "2024-08-26T07:09:33+02:00",
+    "bt-c4cfcfa2c91bf1baa0e903cb": "2024-09-01T09:04:14-07:00",
+    "bt-c5e39b75f57afbe8893aa450": "2024-08-26T07:09:33+02:00",
+    "bt-ccf91b51652bdb34fcde2a0e": "2023-06-28T09:28:46+03:00",
+    "bt-cd08e98f64ce890b55c5c498": "2021-12-28T10:11:45+01:00",
+    "bt-cf713d54a311906911a7f66c": "2021-12-30T12:22:13+02:00",
+    "bt-d68375a315bcb3ffdca62b44": "2024-08-26T07:09:33+02:00",
+    "bt-d9972bdb313e23876795152b": "2024-08-26T07:09:33+02:00",
+    "bt-e3358dcfe26656b702b6475f": "2021-12-30T08:18:44-03:00",
+    "bt-eb5eaeb1bd7325de5668f368": "2024-09-01T09:04:14-07:00",
+    "bt-ebd2305eb3563f04648998f0": "2026-04-08T15:17:50+03:00",
+    "bt-f49d84ab6fa1706732d762ec": "2024-11-30T01:45:28+01:00",
+    "bt-fa32e5d4200512737d22ab3d": "2021-12-30T08:18:44-03:00",
+    "bt-fbc61aede931e17be41c685a": "2024-10-04T05:12:03+00:00",
+    "bt-fbdc4177f3d85317a7426e4e": "2024-10-10T14:50:57+02:00"
+  },
+  "case_build_skipped": [],
+  "cases": [
+    {
+      "as_of_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+      "case_id": "bt-0261763bd51c87a3cbba5b50",
+      "event_class": "marker_only_removal",
+      "event_id": "0261763bd51c87a3cbba5b50",
+      "evidence": [
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "marker",
+          "text": "Test: testing/test_debugging.py::TestDebuggingBreakpoints::test_environ_custom_class. Markers: pytest.mark.skipif(not SUPPORTS_BREAKPOINT_BUILTIN, reason='Requires breakpoint() builtin')."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.parametrize(\"arg\", [\"--pdb\", \"\"])\n    @pytest.mark.skipif(\n        not SUPPORTS_BREAKPOINT_BUILTIN, reason=\"Requires breakpoint() builtin\"\n    )\n    def test_environ_custom_class(\n        self, pytester: Pytester, custom_debugger_hook, arg: str\n    ) -> None:\n        pytester.makeconftest(\n            \"\"\"\n            import os\n            import sys\n\n            os.environ['PYTHONBREAKPOINT'] = '_pytest._CustomDebugger.set_trace'\n\n            def pytest_configure(config):\n                config.add_cleanup(check_restored)\n\n            def check_restored():\n                assert sys.breakpointhook == sys.__breakpointhook__\n\n            def test_check():\n                import _pytest\n                assert sys.breakpointhook is _pytest._CustomDebugger.set_trace\n        \"\"\"\n        )\n        pytester.makepyfile(\n            \"\"\"\n            def test_nothing(): pass\n        \"\"\"\n        )\n        args = (arg,) if arg else ()\n        result = pytester.runpytest_subprocess(*args)\n        result.stdout.fnmatch_lines([\"*1 passed in *\"])"
+        },
+        {
+          "derived_from_sha": "703e4b11ba76171eccd3f13e723c47b810ded7ef",
+          "kind": "blame",
+          "text": "Marker introduced by commit 703e4b11ba: 2018-05-23 run black."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-28. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "8724ebb00329d46de1001d5a79f9ef3e005aeac1764af424a1bf43347a367e24",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_debugging.py",
+      "test_qualname": "TestDebuggingBreakpoints::test_environ_custom_class"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-135e0adbeec188cb7fc9308a",
+      "event_class": "fix_with_removal",
+      "event_id": "135e0adbeec188cb7fc9308a",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_getattr_in_subclass_gets_superclass_cached_property. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_getattr_in_subclass_gets_superclass_cached_property():\n    \"\"\"\n    Ensure super() in __getattr__ is not broken through cached_property re-write.\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        @functools.cached_property\n        def f(self):\n            return self.x\n\n        def __getattr__(self, item):\n            return item\n\n    @attr.s(slots=True)\n    class B(A):\n        @functools.cached_property\n        def g(self):\n            return self.x\n\n        def __getattr__(self, item):\n            return super().__getattr__(item)\n\n    b = B(1)\n    assert b.f == 1\n    assert b.z == \"z\""
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "5ce27cf9a102c0c4ef008013863826d43c3b706e9c35699e31a127a46e8413cf",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_getattr_in_subclass_gets_superclass_cached_property"
+    },
+    {
+      "as_of_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+      "case_id": "bt-16ad51efffbf6eca589d0753",
+      "event_class": "retained",
+      "event_id": "16ad51efffbf6eca589d0753",
+      "evidence": [
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "marker",
+          "text": "Test: tests/test_termui.py::test_getchar_special_key_windows. Markers: pytest.mark.skipif(not WIN, reason='Tests special character inputs using the msvcrt module.')."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.parametrize(\n    \"special_key_char, key_char\", [(\"\\x00\", \"a\"), (\"\\x00\", \"b\"), (\"\\xe0\", \"c\")]\n)\n@pytest.mark.skipif(\n    not WIN, reason=\"Tests special character inputs using the msvcrt module.\"\n)\ndef test_getchar_special_key_windows(runner, monkeypatch, special_key_char, key_char):\n    ordered_inputs = [key_char, special_key_char]\n    monkeypatch.setattr(\n        click._termui_impl.msvcrt, \"getwch\", lambda: ordered_inputs.pop()\n    )\n    monkeypatch.setattr(click.termui, \"_getchar\", None)\n    assert click.getchar() == f\"{special_key_char}{key_char}\""
+        },
+        {
+          "derived_from_sha": "93ba3ba112d2f8ba7bdd8b231e510f74dd0b037e",
+          "kind": "blame",
+          "text": "Marker introduced by commit 93ba3ba112: 2020-03-06 apply black."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-09-01. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "12c25d6458e4d5ea55b7f35aabaeabb5107cf6a7bb905e5dadc5b5991b26e5a9",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "click",
+      "split": "development",
+      "test_path": "tests/test_termui.py",
+      "test_qualname": "test_getchar_special_key_windows"
+    },
+    {
+      "as_of_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+      "case_id": "bt-1a0e0307eb2262e5d62383be",
+      "event_class": "retained",
+      "event_id": "1a0e0307eb2262e5d62383be",
+      "evidence": [
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_implicitly_weakrefable. Markers: pytest.mark.skipif(not PYPY, reason='slots without weakref_slot should only work on PyPy')."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(\n    not PYPY, reason=\"slots without weakref_slot should only work on PyPy\"\n)\ndef test_implicitly_weakrefable():\n    \"\"\"\n    Instance is weak-referenceable even when `weakref_slot=False` in PyPy.\n    \"\"\"\n\n    @attr.s(slots=True, weakref_slot=False)\n    class C:\n        pass\n\n    c = C()\n    w = weakref.ref(c)\n\n    assert c is w()"
+        },
+        {
+          "derived_from_sha": "7fe111cbe288603c730d777cb4f28dff4b8b921a",
+          "kind": "blame",
+          "text": "Marker introduced by commit 7fe111cbe2: 2018-08-25 T325 weakref with slots (#420)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-04. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "6998a984eb1f775b3e110204b52c38f7b61fc51f97b0aa786be0c9840c2c1cb9",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_implicitly_weakrefable"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-26236f5c7a008db03007f023",
+      "event_class": "retained",
+      "event_id": "26236f5c7a008db03007f023",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/test_debugging.py::TestPDB::test_pdb_interaction_capturing_twice. Markers: pytest.mark.xfail(reason='#10042', strict=False)."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.xfail(reason=\"#10042\", strict=False)\n    def test_pdb_interaction_capturing_twice(self, pytester: Pytester) -> None:\n        p1 = pytester.makepyfile(\n            \"\"\"\n            import pytest\n            def test_1():\n                i = 0\n                print(\"hello17\")\n                pytest.set_trace()\n                x = 3\n                print(\"hello18\")\n                pytest.set_trace()\n                x = 4\n                assert 0\n        \"\"\"\n        )\n        child = pytester.spawn_pytest(str(p1))\n        child.expect(r\"PDB set_trace \\(IO-capturing turned off\\)\")\n        child.expect(\"test_1\")\n        child.expect(\"x = 3\")\n        child.expect(\"Pdb\")\n        child.sendline(\"c\")\n        child.expect(r\"PDB continue \\(IO-capturing resumed\\)\")\n        child.expect(r\"PDB set_trace \\(IO-capturing turned off\\)\")\n        child.expect(\"x = 4\")\n        child.expect(\"Pdb\")\n        child.sendline(\"c\")\n        child.expect(\"_ test_1 _\")\n        child.expect(\"def test_1\")\n        rest = child.read().decode(\"utf8\")\n        assert \"Captured stdout call\" in rest\n        assert \"hello17\" in rest  # out is captured\n        assert \"hello18\" in rest  # out is captured\n        assert \"1 failed\" in rest\n        self.flush(child)"
+        },
+        {
+          "derived_from_sha": "44bf7a2ec0b52b60089ebd8439f64487df079214",
+          "kind": "blame",
+          "text": "Marker introduced by commit 44bf7a2ec0: 2024-01-22 Mark some xfails from #10042 as non-strict (#11832)."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "c587a3ae5f3a7aa8a3cec047649a0d52544cceeb6038490652740cf3f63ceb7e",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_debugging.py",
+      "test_qualname": "TestPDB::test_pdb_interaction_capturing_twice"
+    },
+    {
+      "as_of_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+      "case_id": "bt-2e73b270048a07521ee778ae",
+      "event_class": "marker_only_removal",
+      "event_id": "2e73b270048a07521ee778ae",
+      "evidence": [
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "marker",
+          "text": "Test: testing/test_debugging.py::TestDebuggingBreakpoints::test_sys_breakpointhook_configure_and_unconfigure. Markers: pytest.mark.skipif(not SUPPORTS_BREAKPOINT_BUILTIN, reason='Requires breakpoint() builtin')."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        not SUPPORTS_BREAKPOINT_BUILTIN, reason=\"Requires breakpoint() builtin\"\n    )\n    @pytest.mark.parametrize(\"arg\", [\"--pdb\", \"\"])\n    def test_sys_breakpointhook_configure_and_unconfigure(\n        self, pytester: Pytester, arg: str\n    ) -> None:\n        \"\"\"\n        Test that sys.breakpointhook is set to the custom Pdb class once configured, test that\n        hook is reset to system value once pytest has been unconfigured\n        \"\"\"\n        pytester.makeconftest(\n            \"\"\"\n            import sys\n            from pytest import hookimpl\n            from _pytest.debugging import pytestPDB\n\n            def pytest_configure(config):\n                config.add_cleanup(check_restored)\n\n            def check_restored():\n                assert sys.breakpointhook == sys.__breakpointhook__\n\n            def test_check():\n                assert sys.breakpointhook == pytestPDB.set_trace\n        \"\"\"\n        )\n        pytester.makepyfile(\n            \"\"\"\n            def test_nothing(): pass\n        \"\"\"\n        )\n        args = (arg,) if arg else ()\n        result = pytester.runpytest_subprocess(*args)\n        result.stdout.fnmatch_lines([\"*1 passed in *\"])"
+        },
+        {
+          "derived_from_sha": "703e4b11ba76171eccd3f13e723c47b810ded7ef",
+          "kind": "blame",
+          "text": "Marker introduced by commit 703e4b11ba: 2018-05-23 run black."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-28. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "19ca73924b06524c864669587d95cd303652b003e6bd778eeeb0bcba69b65a5c",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_debugging.py",
+      "test_qualname": "TestDebuggingBreakpoints::test_sys_breakpointhook_configure_and_unconfigure"
+    },
+    {
+      "as_of_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+      "case_id": "bt-2fd7e628a0b2e4ac48dff204",
+      "event_class": "fix_with_removal",
+      "event_id": "2fd7e628a0b2e4ac48dff204",
+      "evidence": [
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "marker",
+          "text": "Test: testing/python/fixtures.py::test_fixture_closure_with_complex_override_and_shared_deps. Markers: pytest.mark.xfail(reason='not currently handled correctly')."
+        },
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.xfail(reason=\"not currently handled correctly\")\ndef test_fixture_closure_with_complex_override_and_shared_deps(\n    pytester: Pytester,\n) -> None:\n    \"\"\"Test that shared dependencies in override chains are processed only once.\"\"\"\n    pytester.makeconftest(\n        \"\"\"\n        import pytest\n\n        @pytest.fixture\n        def db(): pass\n\n        @pytest.fixture\n        def cache(): pass\n\n        @pytest.fixture\n        def settings(): pass\n\n        @pytest.fixture\n        def app(db, cache, settings): pass\n        \"\"\"\n    )\n    pytester.makepyfile(\n        \"\"\"\n        import pytest\n\n        # Override app, but also directly use cache and settings.\n        # This creates multiple paths to the same fixtures.\n        @pytest.fixture\n        def app(app, cache, settings): pass\n\n        class TestClass:\n            # Another override that uses both app and cache.\n            @pytest.fixture\n            def app(self, app, cache): pass\n\n            def test_shared_deps(self, request, app):\n                assert request.node.fixturenames == [\"request\", \"app\", \"db\", \"cache\", \"settings\"]\n        \"\"\"\n    )\n    result = pytester.runpytest(\"-v\")\n    result.assert_outcomes(passed=1)"
+        },
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "blame",
+          "text": "Marker introduced by commit 8606fdcd3b: 2025-10-06 testing: add some more tests for fixture closure."
+        },
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2025-10-06. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "1607c58a377623d4cf4e22840ef0f84c2eccaab12fe41e2ec4762bee519c7bc1",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/python/fixtures.py",
+      "test_qualname": "test_fixture_closure_with_complex_override_and_shared_deps"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-3d0f59db307dd3680b03e253",
+      "event_class": "marker_only_removal",
+      "event_id": "3d0f59db307dd3680b03e253",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_dataclasses_with_attribute_comparison_off. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_dataclasses_with_attribute_comparison_off(\n        self, pytester: Pytester\n    ) -> None:\n        p = pytester.copy_example(\n            \"dataclasses/test_compare_dataclasses_field_comparison_off.py\"\n        )\n        result = pytester.runpytest(p, \"-vv\")\n        result.assert_outcomes(failed=0, passed=1)"
+        },
+        {
+          "derived_from_sha": "1184db827373822863fe936b3027b225cb77ed02",
+          "kind": "blame",
+          "text": "Marker introduced by commit 1184db8273: 2018-11-12 cleaning up."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "b2dd9933726eb3bac398081447839dfb9abfb66dd6f4e97ac5e34a71192874f5",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_dataclasses_with_attribute_comparison_off"
+    },
+    {
+      "as_of_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+      "case_id": "bt-40cc238db3e046d57ddbde21",
+      "event_class": "fix_with_removal",
+      "event_id": "40cc238db3e046d57ddbde21",
+      "evidence": [
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "marker",
+          "text": "Test: testing/test_pathlib.py::TestImportLibMode::test_importmode_importlib_with_dataclass. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_importmode_importlib_with_dataclass(self, tmp_path: Path) -> None:\n        \"\"\"Ensure that importlib mode works with a module containing dataclasses (#7856).\"\"\"\n        fn = tmp_path.joinpath(\"_src/tests/test_dataclass.py\")\n        fn.parent.mkdir(parents=True)\n        fn.write_text(\n            dedent(\n                \"\"\"\n                from dataclasses import dataclass\n\n                @dataclass\n                class Data:\n                    value: str\n                \"\"\"\n            )\n        )\n\n        module = import_path(fn, mode=\"importlib\", root=tmp_path)\n        Data: Any = getattr(module, \"Data\")\n        data = Data(value=\"foo\")\n        assert data.value == \"foo\"\n        assert data.__module__ == \"_src.tests.test_dataclass\""
+        },
+        {
+          "derived_from_sha": "b706a2c04840a8057610f41071fbcf3da1290eb5",
+          "kind": "blame",
+          "text": "Marker introduced by commit b706a2c048: 2021-04-05 Fix error with --import-mode=importlib and modules containing dataclasses or pickle (#7870)."
+        },
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "af8a5d4d608b58e187263e7f90e36a98eb3b58c339bf7cf1303e5a9ab564faf6",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_pathlib.py",
+      "test_qualname": "TestImportLibMode::test_importmode_importlib_with_dataclass"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-4813f3a0c4cc8cdc10149528",
+      "event_class": "retained",
+      "event_id": "4813f3a0c4cc8cdc10149528",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/test_debugging.py::TestPDB::test_pdb_with_injected_do_debug. Markers: pytest.mark.xfail(reason='#10042', strict=False)."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.xfail(reason=\"#10042\", strict=False)\n    def test_pdb_with_injected_do_debug(self, pytester: Pytester) -> None:\n        \"\"\"Simulates pdbpp, which injects Pdb into do_debug, and uses\n        self.__class__ in do_continue.\n        \"\"\"\n        p1 = pytester.makepyfile(\n            mytest=\"\"\"\n            import pdb\n            import pytest\n\n            count_continue = 0\n\n            class CustomPdb(pdb.Pdb, object):\n                def do_debug(self, arg):\n                    import sys\n                    import types\n\n                    do_debug_func = pdb.Pdb.do_debug\n\n                    newglobals = do_debug_func.__globals__.copy()\n                    newglobals['Pdb'] = self.__class__\n                    orig_do_debug = types.FunctionType(\n                        do_debug_func.__code__, newglobals,\n                        do_debug_func.__name__, do_debug_func.__defaults__,\n                    )\n                    return orig_do_debug(self, arg)\n                do_debug.__doc__ = pdb.Pdb.do_debug.__doc__\n\n                def do_continue(self, *args, **kwargs):\n                    global count_continue\n                    count_continue += 1\n                    return super(CustomPdb, self).do_continue(*args, **kwargs)\n\n            def foo():\n                print(\"print_from_foo\")\n\n            def test_1():\n                i = 0\n                print(\"hello17\")\n                pytest.set_trace()\n                x = 3\n                print(\"hello18\")\n\n                assert count_continue == 2, \"unexpected_failure: %d != 2\" % count_continue\n            "
+        },
+        {
+          "derived_from_sha": "44bf7a2ec0b52b60089ebd8439f64487df079214",
+          "kind": "blame",
+          "text": "Marker introduced by commit 44bf7a2ec0: 2024-01-22 Mark some xfails from #10042 as non-strict (#11832)."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "772e608bed7a84c4c9a38e3d63bb71abb58d8c1c9b95341248ac07a9b1d55c86",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_debugging.py",
+      "test_qualname": "TestPDB::test_pdb_with_injected_do_debug"
+    },
+    {
+      "as_of_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+      "case_id": "bt-4994cb18b8f9b320c66020dc",
+      "event_class": "retained",
+      "event_id": "4994cb18b8f9b320c66020dc",
+      "evidence": [
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "marker",
+          "text": "Test: tests/test_chain.py::test_group_chaining. Markers: pytest.mark.xfail."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.xfail\ndef test_group_chaining(runner):\n    @click.group(chain=True)\n    def cli():\n        debug()\n\n    @cli.group()\n    def l1a():\n        debug()\n\n    @l1a.command()\n    def l2a():\n        debug()\n\n    @l1a.command()\n    def l2b():\n        debug()\n\n    @cli.command()\n    def l1b():\n        debug()\n\n    result = runner.invoke(cli, [\"l1a\", \"l2a\", \"l1b\"])\n    assert not result.exception\n    assert result.output.splitlines() == [\"cli=\", \"l1a=\", \"l2a=\", \"l1b=\"]"
+        },
+        {
+          "derived_from_sha": "cc6fec29a27831dd65055fab8dd947eab8137bdf",
+          "kind": "blame",
+          "text": "Marker introduced by commit cc6fec29a2: 2015-11-27 Disable chain commands."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-09-01. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "dd68fd2ed4f3b0a714101df7b0ee156e6d5c3e80e69ef2e2409d5e456506b47a",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "click",
+      "split": "development",
+      "test_path": "tests/test_chain.py",
+      "test_qualname": "test_group_chaining"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-4e77d0023b6ed7b2582c5351",
+      "event_class": "marker_only_removal",
+      "event_id": "4e77d0023b6ed7b2582c5351",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_recursive_dataclasses_verbose. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_recursive_dataclasses_verbose(self, pytester: Pytester) -> None:\n        p = pytester.copy_example(\"dataclasses/test_compare_recursive_dataclasses.py\")\n        result = pytester.runpytest(p, \"-vv\")\n        result.assert_outcomes(failed=1, passed=0)\n        result.stdout.fnmatch_lines(\n            [\n                \"E         Matching attributes:\",\n                \"E         ['i']\",\n                \"E         Differing attributes:\",\n                \"E         ['g', 'h', 'j']\",\n                \"E         \",\n                \"E         Drill down into differing attribute g:\",\n                \"E           g: S(a=10, b='ten') != S(a=20, b='xxx')\",\n                \"E           \",\n                \"E           Differing attributes:\",\n                \"E           ['a', 'b']\",\n                \"E           \",\n                \"E           Drill down into differing attribute a:\",\n                \"E             a: 10 != 20\",\n                \"E             +10\",\n                \"E             -20\",\n                \"E           \",\n                \"E           Drill down into differing attribute b:\",\n                \"E             b: 'ten' != 'xxx'\",\n                \"E             - xxx\",\n                \"E             + ten\",\n                \"E         \",\n                \"E         Drill down into differing attribute h:\",\n            ],\n            consecutive=True,\n        )"
+        },
+        {
+          "derived_from_sha": "e2e7f15b719f480c4d2a3aea028c55f2dc3f0b75",
+          "kind": "blame",
+          "text": "Marker introduced by commit e2e7f15b71: 2020-06-09 Make dataclasses/attrs comparison recursive, fixes #4675."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "c8a9bf4b1a1967d3a5b5810dac21e4a0360c0d1d64b6fa5a9cd0b4d954d0faa2",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_recursive_dataclasses_verbose"
+    },
+    {
+      "as_of_sha": "d5a0057ee69107c86096078347a6fed3a9cef1ef",
+      "case_id": "bt-564f711f4c6c3afaa5c4c52b",
+      "event_class": "marker_only_removal",
+      "event_id": "564f711f4c6c3afaa5c4c52b",
+      "evidence": [
+        {
+          "derived_from_sha": "d5a0057ee69107c86096078347a6fed3a9cef1ef",
+          "kind": "marker",
+          "text": "Test: testing/_py/test_local.py::CommonFSTests::test_fspath_fsencode. Markers: pytest.mark.skip('sys.version_info < (3,6)')."
+        },
+        {
+          "derived_from_sha": "d5a0057ee69107c86096078347a6fed3a9cef1ef",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skip(\"sys.version_info < (3,6)\")\n    def test_fspath_fsencode(self, path1):\n        from os import fsencode\n\n        assert fsencode(path1) == fsencode(path1.strpath)"
+        },
+        {
+          "derived_from_sha": "82344ba4f8e6bd49afd52235385a105890dc3d88",
+          "kind": "blame",
+          "text": "Marker introduced by commit 82344ba4f8: 2022-10-19 add py.path.local tests."
+        },
+        {
+          "derived_from_sha": "d5a0057ee69107c86096078347a6fed3a9cef1ef",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2025-10-25. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "a5da5c15be03a83e5f441093741143df11335ac8d73cac4ed58ed79ff8e1cc54",
+      "marker_kinds": [
+        "skip"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/_py/test_local.py",
+      "test_qualname": "CommonFSTests::test_fspath_fsencode"
+    },
+    {
+      "as_of_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+      "case_id": "bt-595b394086ef9e365a183170",
+      "event_class": "retained",
+      "event_id": "595b394086ef9e365a183170",
+      "evidence": [
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "marker",
+          "text": "Test: tests/test_termui.py::test_getchar_windows. Markers: pytest.mark.skipif(not WIN, reason='Tests user-input using the msvcrt module.')."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.parametrize(\"key_char\", (\"h\", \"H\", \"é\", \"À\", \" \", \"字\", \"àH\", \"àR\"))\n@pytest.mark.parametrize(\"echo\", [True, False])\n@pytest.mark.skipif(not WIN, reason=\"Tests user-input using the msvcrt module.\")\ndef test_getchar_windows(runner, monkeypatch, key_char, echo):\n    monkeypatch.setattr(click._termui_impl.msvcrt, \"getwche\", lambda: key_char)\n    monkeypatch.setattr(click._termui_impl.msvcrt, \"getwch\", lambda: key_char)\n    monkeypatch.setattr(click.termui, \"_getchar\", None)\n    assert click.getchar(echo) == key_char"
+        },
+        {
+          "derived_from_sha": "93ba3ba112d2f8ba7bdd8b231e510f74dd0b037e",
+          "kind": "blame",
+          "text": "Marker introduced by commit 93ba3ba112: 2020-03-06 apply black."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-09-01. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "6bcafa795abf486f8e82d2c812110224031a37f9ca0e4f3e3e5d04ac08939c00",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "click",
+      "split": "development",
+      "test_path": "tests/test_termui.py",
+      "test_qualname": "test_getchar_windows"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-6345e8b2cba738b66e9ee591",
+      "event_class": "retained",
+      "event_id": "6345e8b2cba738b66e9ee591",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/test_runner.py::test_runtest_in_module_ordering. Markers: pytest.mark.xfail."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.xfail\ndef test_runtest_in_module_ordering(pytester: Pytester) -> None:\n    p1 = pytester.makepyfile(\n        \"\"\"\n        import pytest\n        def pytest_runtest_setup(item): # runs after class-level!\n            item.function.mylist.append(\"module\")\n        class TestClass(object):\n            def pytest_runtest_setup(self, item):\n                assert not hasattr(item.function, 'mylist')\n                item.function.mylist = ['class']\n            @pytest.fixture\n            def mylist(self, request):\n                return request.function.mylist\n            @pytest.hookimpl(wrapper=True)\n            def pytest_runtest_call(self, item):\n                try:\n                    yield\n                except ValueError:\n                    pass\n            def test_hello1(self, mylist):\n                assert mylist == ['class', 'module'], mylist\n                raise ValueError()\n            def test_hello2(self, mylist):\n                assert mylist == ['class', 'module'], mylist\n        def pytest_runtest_teardown(item):\n            del item.function.mylist\n    \"\"\"\n    )\n    result = pytester.runpytest(p1)\n    result.stdout.fnmatch_lines([\"*2 passed*\"])"
+        },
+        {
+          "derived_from_sha": "a698465487a9cd92e8223d7f9be0e7710272f8ca",
+          "kind": "blame",
+          "text": "Marker introduced by commit a698465487: 2010-11-17 streamline docs, especially use \"import pytest\" and \"pytest.*\" in python code examples instead of \"import py\" and \"py.test.*\".."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "43068cea7ce851b067dca5942c424c9be43051190ad8eabb3d40aa41a202cb5b",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_runner.py",
+      "test_qualname": "test_runtest_in_module_ordering"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-6369d65f14db6d4ba933e67c",
+      "event_class": "fix_with_removal",
+      "event_id": "6369d65f14db6d4ba933e67c",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_cached_property_allows_call. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_cached_property_allows_call():\n    \"\"\"\n    cached_property in slotted class allows call.\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        @functools.cached_property\n        def f(self):\n            return self.x\n\n    assert A(11).f == 11"
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "9e1f53e51d7bc0e500b7e5eb19933752be5f8642aa599643f68f33958ec0ba47",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_cached_property_allows_call"
+    },
+    {
+      "as_of_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+      "case_id": "bt-63e7783ad4b6aaa532e9c42a",
+      "event_class": "marker_only_removal",
+      "event_id": "63e7783ad4b6aaa532e9c42a",
+      "evidence": [
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "marker",
+          "text": "Test: testing/test_debugging.py::TestDebuggingBreakpoints::test_pdb_not_altered. Markers: pytest.mark.skipif(not SUPPORTS_BREAKPOINT_BUILTIN, reason='Requires breakpoint() builtin')."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        not SUPPORTS_BREAKPOINT_BUILTIN, reason=\"Requires breakpoint() builtin\"\n    )\n    def test_pdb_not_altered(self, pytester: Pytester) -> None:\n        p1 = pytester.makepyfile(\n            \"\"\"\n            import pdb\n            def test_1():\n                pdb.set_trace()\n                assert 0\n        \"\"\"\n        )\n        child = pytester.spawn_pytest(str(p1))\n        child.expect(\"test_1\")\n        child.expect(\"Pdb\")\n        child.sendline(\"c\")\n        rest = child.read().decode(\"utf8\")\n        assert \"1 failed\" in rest\n        assert \"reading from stdin while output\" not in rest\n        TestPDB.flush(child)"
+        },
+        {
+          "derived_from_sha": "703e4b11ba76171eccd3f13e723c47b810ded7ef",
+          "kind": "blame",
+          "text": "Marker introduced by commit 703e4b11ba: 2018-05-23 run black."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-28. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "3078349f57e6ed6b30e18701b9b24f37344316e84be6c6bb0fdc32a9255e28f1",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_debugging.py",
+      "test_qualname": "TestDebuggingBreakpoints::test_pdb_not_altered"
+    },
+    {
+      "as_of_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+      "case_id": "bt-6798fa1f780cd98dfdec6613",
+      "event_class": "fix_with_removal",
+      "event_id": "6798fa1f780cd98dfdec6613",
+      "evidence": [
+        {
+          "derived_from_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "kind": "marker",
+          "text": "Test: testing/test_unittest.py::test_do_class_cleanups_on_setupclass_failure. Markers: pytest.mark.skipif(sys.version_info < (3, 8), reason='Feature introduced in Python 3.8')."
+        },
+        {
+          "derived_from_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(\n    sys.version_info < (3, 8), reason=\"Feature introduced in Python 3.8\"\n)\ndef test_do_class_cleanups_on_setupclass_failure(pytester: Pytester) -> None:\n    testpath = pytester.makepyfile(\n        \"\"\"\n        import unittest\n        class MyTestCase(unittest.TestCase):\n            values = []\n            @classmethod\n            def setUpClass(cls):\n                def cleanup():\n                    cls.values.append(1)\n                cls.addClassCleanup(cleanup)\n                assert False\n            def test_one(self):\n                pass\n        def test_cleanup_called_exactly_once():\n            assert MyTestCase.values == [1]\n    \"\"\"\n    )\n    reprec = pytester.inline_run(testpath)\n    passed, skipped, failed = reprec.countoutcomes()\n    assert failed == 1\n    assert passed == 1"
+        },
+        {
+          "derived_from_sha": "eda681af2b00a628fe2c747b5ec0ef90b4be5cbc",
+          "kind": "blame",
+          "text": "Marker introduced by commit eda681af2b: 2020-11-19 Call Python 3.8 doClassCleanups (#8033)."
+        },
+        {
+          "derived_from_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2023-06-28. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "88a9e4e7dd354cfff978c4d816dbfdb7ee1d6db470d45264f21589b29d60a684",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_unittest.py",
+      "test_qualname": "test_do_class_cleanups_on_setupclass_failure"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-67c1a23219f2b156b773a314",
+      "event_class": "retained",
+      "event_id": "67c1a23219f2b156b773a314",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/test_argcomplete.py::TestArgComplete::test_remove_dir_prefix. Markers: pytest.mark.skipif(\"sys.platform in ('win32', 'darwin')\")."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\"sys.platform in ('win32', 'darwin')\")\n    def test_remove_dir_prefix(self):\n        \"\"\"This is not compatible with compgen but it is with bash itself: ls /usr/<TAB>.\"\"\"\n        from _pytest._argcomplete import FastFilesCompleter\n\n        ffc = FastFilesCompleter()\n        fc = FilesCompleter()\n        for x in \"/usr/\".split():\n            assert not equal_with_bash(x, ffc, fc, out=sys.stdout)"
+        },
+        {
+          "derived_from_sha": "ba5d4ae42f3f91eed0bcfb37518ee25f96c4662a",
+          "kind": "blame",
+          "text": "Marker introduced by commit ba5d4ae42f: 2013-11-12 ignore argcomplete on darwin."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "55a1a231aae425d0e31c7c3bbae5f3542c07fd7f0594dff554b1bc9b3413e390",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_argcomplete.py",
+      "test_qualname": "TestArgComplete::test_remove_dir_prefix"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-6caa7ff37de3b1082dbf348a",
+      "event_class": "marker_only_removal",
+      "event_id": "6caa7ff37de3b1082dbf348a",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_comparing_two_different_data_classes. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_comparing_two_different_data_classes(self, pytester: Pytester) -> None:\n        p = pytester.copy_example(\n            \"dataclasses/test_compare_two_different_dataclasses.py\"\n        )\n        result = pytester.runpytest(p, \"-vv\")\n        result.assert_outcomes(failed=0, passed=1)"
+        },
+        {
+          "derived_from_sha": "1184db827373822863fe936b3027b225cb77ed02",
+          "kind": "blame",
+          "text": "Marker introduced by commit 1184db8273: 2018-11-12 cleaning up."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "fd4ff095be7dd78ea0a4ec1073b6e63260395bf13d8dd99c53ecaa7dda581f7a",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_comparing_two_different_data_classes"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-743c4c3c6c3d23ee5ad7f8bb",
+      "event_class": "marker_only_removal",
+      "event_id": "743c4c3c6c3d23ee5ad7f8bb",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/python/approx.py::TestApprox::test_nonnumeric_dict_repr. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='requires ordered dicts')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"requires ordered dicts\")\n    def test_nonnumeric_dict_repr(self):\n        \"\"\"Dicts with non-numerics and infinites have no tolerances\"\"\"\n        x1 = {\"foo\": 1.0000005, \"bar\": None, \"foobar\": inf}\n        assert (\n            repr(approx(x1))\n            == \"approx({'foo': 1.0000005 ± 1.0e-06, 'bar': None, 'foobar': inf})\"\n        )"
+        },
+        {
+          "derived_from_sha": "91fa11bed093329edb1006def90d17f545092ab6",
+          "kind": "blame",
+          "text": "Marker introduced by commit 91fa11bed0: 2020-09-28 python_api: let approx() take nonnumeric values (#7710)."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "8c6a0b0d13c8d262ecc6bbbcdec3f4a1d478f5f9b1da2ae94afad5569683cc70",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/python/approx.py",
+      "test_qualname": "TestApprox::test_nonnumeric_dict_repr"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-7660a9a2a5b155111a7f0f41",
+      "event_class": "marker_only_removal",
+      "event_id": "7660a9a2a5b155111a7f0f41",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_recursive_dataclasses. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_recursive_dataclasses(self, pytester: Pytester) -> None:\n        p = pytester.copy_example(\"dataclasses/test_compare_recursive_dataclasses.py\")\n        result = pytester.runpytest(p)\n        result.assert_outcomes(failed=1, passed=0)\n        result.stdout.fnmatch_lines(\n            [\n                \"E         Omitting 1 identical items, use -vv to show\",\n                \"E         Differing attributes:\",\n                \"E         ['g', 'h', 'j']\",\n                \"E         \",\n                \"E         Drill down into differing attribute g:\",\n                \"E           g: S(a=10, b='ten') != S(a=20, b='xxx')...\",\n                \"E         \",\n                \"E         ...Full output truncated (52 lines hidden), use '-vv' to show\",\n            ],\n            consecutive=True,\n        )"
+        },
+        {
+          "derived_from_sha": "e2e7f15b719f480c4d2a3aea028c55f2dc3f0b75",
+          "kind": "blame",
+          "text": "Marker introduced by commit e2e7f15b71: 2020-06-09 Make dataclasses/attrs comparison recursive, fixes #4675."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "908341afcd854385cb7e3d7152ea8c543dbef6b767dbf411d3ea97876e00ce74",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_recursive_dataclasses"
+    },
+    {
+      "as_of_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+      "case_id": "bt-835d3abd0b93bb2251be8773",
+      "event_class": "fix_with_removal",
+      "event_id": "835d3abd0b93bb2251be8773",
+      "evidence": [
+        {
+          "derived_from_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+          "kind": "marker",
+          "text": "Test: tests/test_version_info.py::TestVersionInfo::test_wrong_len. Markers: pytest.mark.skipif(PY2, reason='Python 2 is too YOLO to care about comparability.')."
+        },
+        {
+          "derived_from_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        PY2, reason=\"Python 2 is too YOLO to care about comparability.\"\n    )\n    @pytest.mark.parametrize(\"other\", [(), (19, 2, 0, \"final\", \"garbage\")])\n    def test_wrong_len(self, vi, other):\n        \"\"\"\n        Comparing with a tuple that has the wrong length raises an error.\n        \"\"\"\n        assert vi != other\n\n        with pytest.raises(TypeError):\n            vi < other"
+        },
+        {
+          "derived_from_sha": "955d622493795b4d14cd950f0da2c90bc1e3006a",
+          "kind": "blame",
+          "text": "Marker introduced by commit 955d622493: 2019-10-01 Add attr.__version_info__ (#580)."
+        },
+        {
+          "derived_from_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2022-03-20. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "ecd7e072cf70afef05a59161df1ade563946239563705e9d3a48c70770ecd6d4",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_version_info.py",
+      "test_qualname": "TestVersionInfo::test_wrong_len"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-8bd7073c937df4663b639c85",
+      "event_class": "retained",
+      "event_id": "8bd7073c937df4663b639c85",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/_py/test_local.py::test_samefile_symlink. Markers: pytest.mark.skipif(not hasattr(os, 'symlink'), reason='os.symlink not available')."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not hasattr(os, \"symlink\"), reason=\"os.symlink not available\")\ndef test_samefile_symlink(tmpdir):\n    p1 = tmpdir.ensure(\"foo.txt\")\n    p2 = tmpdir.join(\"linked.txt\")\n    try:\n        os.symlink(str(p1), str(p2))\n    except (OSError, NotImplementedError) as e:\n        # on Windows this might fail if the user doesn't have special symlink permissions\n        # pypy3 on Windows doesn't implement os.symlink and raises NotImplementedError\n        pytest.skip(str(e.args[0]))\n\n    assert p1.samefile(p2)"
+        },
+        {
+          "derived_from_sha": "82344ba4f8e6bd49afd52235385a105890dc3d88",
+          "kind": "blame",
+          "text": "Marker introduced by commit 82344ba4f8: 2022-10-19 add py.path.local tests."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "9235229174f0e78eec8053a105ed5e8bf523947ead7e9b228949911798a83c7c",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/_py/test_local.py",
+      "test_qualname": "test_samefile_symlink"
+    },
+    {
+      "as_of_sha": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+      "case_id": "bt-8c7e45f45ec483c74d44d417",
+      "event_class": "fix_with_removal",
+      "event_id": "8c7e45f45ec483c74d44d417",
+      "evidence": [
+        {
+          "derived_from_sha": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+          "kind": "marker",
+          "text": "Test: tests/test_testing.py::test_with_color. Markers: pytest.mark.skipif(WIN, reason='Test does not make sense on Windows.')."
+        },
+        {
+          "derived_from_sha": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(WIN, reason=\"Test does not make sense on Windows.\")\ndef test_with_color():\n    @click.command()\n    def cli():\n        click.secho(\"hello world\", fg=\"blue\")\n\n    runner = CliRunner()\n\n    result = runner.invoke(cli)\n    assert result.output == \"hello world\\n\"\n    assert not result.exception\n\n    result = runner.invoke(cli, color=True)\n    assert result.output == f\"{click.style('hello world', fg='blue')}\\n\"\n    assert not result.exception"
+        },
+        {
+          "derived_from_sha": "93ba3ba112d2f8ba7bdd8b231e510f74dd0b037e",
+          "kind": "blame",
+          "text": "Marker introduced by commit 93ba3ba112: 2020-03-06 apply black."
+        },
+        {
+          "derived_from_sha": "d3e3852eba45a6f7ce0ae5e02ca49106e228add6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-05-21. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "2b667673f59d3300bd51ec089359e71fbe9fd23eade5196a418d7ea04db7b63b",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "click",
+      "split": "development",
+      "test_path": "tests/test_testing.py",
+      "test_qualname": "test_with_color"
+    },
+    {
+      "as_of_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+      "case_id": "bt-8e8e4f799124c1bb1c96c357",
+      "event_class": "fix_with_removal",
+      "event_id": "8e8e4f799124c1bb1c96c357",
+      "evidence": [
+        {
+          "derived_from_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+          "kind": "marker",
+          "text": "Test: tests/test_cmp.py::TestEqOrder::test_lt_unorderable. Markers: pytest.mark.skipif(PY2, reason='PY2 does not raise TypeError')."
+        },
+        {
+          "derived_from_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(PY2, reason=\"PY2 does not raise TypeError\")\n    @pytest.mark.parametrize(\"cls, requires_same_type\", eq_data, ids=eq_ids)\n    def test_lt_unorderable(self, cls, requires_same_type):\n        \"\"\"\n        TypeError is raised if class does not implement __lt__.\n        \"\"\"\n        with pytest.raises(TypeError):\n            cls(1) < cls(2)"
+        },
+        {
+          "derived_from_sha": "71b4638b3221cc965978d6619ac7032f4d7f750e",
+          "kind": "blame",
+          "text": "Marker introduced by commit 71b4638b32: 2021-05-01 New attr.cmp_using helper function (#787)."
+        },
+        {
+          "derived_from_sha": "d0c73d8faa184cdff8d6a0378ed5b85ca57cde7d",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2022-03-20. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "4380b276cbe8570a583d89a9722049b4426a89c1f43d34a9857d5c9745b29c97",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_cmp.py",
+      "test_qualname": "TestEqOrder::test_lt_unorderable"
+    },
+    {
+      "as_of_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+      "case_id": "bt-92e59f6e29aa282d546258b2",
+      "event_class": "retained",
+      "event_id": "92e59f6e29aa282d546258b2",
+      "evidence": [
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_not_weakrefable. Markers: pytest.mark.skipif(PYPY, reason='__slots__ only block weakref on CPython')."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(PYPY, reason=\"__slots__ only block weakref on CPython\")\ndef test_not_weakrefable():\n    \"\"\"\n    Instance is not weak-referenceable when `weakref_slot=False` in CPython.\n    \"\"\"\n\n    @attr.s(slots=True, weakref_slot=False)\n    class C:\n        pass\n\n    c = C()\n\n    with pytest.raises(TypeError):\n        weakref.ref(c)"
+        },
+        {
+          "derived_from_sha": "7fe111cbe288603c730d777cb4f28dff4b8b921a",
+          "kind": "blame",
+          "text": "Marker introduced by commit 7fe111cbe2: 2018-08-25 T325 weakref with slots (#420)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-04. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "c461f14b6238049bca22f82d97075d13b5574625ed934ff5ea71f51f61dd7efa",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_not_weakrefable"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-9499994e1a8eb7337b4eaac4",
+      "event_class": "retained",
+      "event_id": "9499994e1a8eb7337b4eaac4",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/_py/test_local.py::TestUnicode::test_read_write. Markers: pytest.mark.xfail(reason='changing read/write might break existing usages')."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.xfail(reason=\"changing read/write might break existing usages\")\n    def test_read_write(self, tmpdir):\n        x = tmpdir.join(\"hello\")\n        part = \"hällo\"\n        with ignore_encoding_warning():\n            x.write(part)\n            assert x.read() == part\n            x.write(part.encode(sys.getdefaultencoding()))\n            assert x.read() == part.encode(sys.getdefaultencoding())"
+        },
+        {
+          "derived_from_sha": "82344ba4f8e6bd49afd52235385a105890dc3d88",
+          "kind": "blame",
+          "text": "Marker introduced by commit 82344ba4f8: 2022-10-19 add py.path.local tests."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "8272314842c482d568dfca90a4e41ffe7448450e70d5b977059cae2591118aa3",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/_py/test_local.py",
+      "test_qualname": "TestUnicode::test_read_write"
+    },
+    {
+      "as_of_sha": "189ada2ddbec2bfe3a684faccf0ba484a24aeb7a",
+      "case_id": "bt-a1c5207ce7866f3cb94e48f1",
+      "event_class": "fix_with_removal",
+      "event_id": "a1c5207ce7866f3cb94e48f1",
+      "evidence": [
+        {
+          "derived_from_sha": "189ada2ddbec2bfe3a684faccf0ba484a24aeb7a",
+          "kind": "marker",
+          "text": "Test: testing/test_assertrewrite.py::TestIssue14445::test_walrus_no_double_eval_in_boolop. Markers: pytest.mark.xfail(reason='BoolOp condition re-evaluates walrus operand')."
+        },
+        {
+          "derived_from_sha": "189ada2ddbec2bfe3a684faccf0ba484a24aeb7a",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.xfail(reason=\"BoolOp condition re-evaluates walrus operand\")\n    def test_walrus_no_double_eval_in_boolop(self, pytester: Pytester) -> None:\n        \"\"\"Bare walrus as a BoolOp operand must not be evaluated twice.\"\"\"\n        pytester.makepyfile(\n            \"\"\"\n            call_count = 0\n\n            def side_effect():\n                global call_count\n                call_count += 1\n                return call_count\n\n            def test_walrus_boolop():\n                assert (x := side_effect()) and x == 1\n                assert call_count == 1\n        \"\"\"\n        )\n        result = pytester.runpytest()\n        assert result.ret == 0"
+        },
+        {
+          "derived_from_sha": "189ada2ddbec2bfe3a684faccf0ba484a24aeb7a",
+          "kind": "blame",
+          "text": "Marker introduced by commit 189ada2ddb: 2026-09-01 test(rewrite): add xfail tests for remaining walrus edge cases."
+        },
+        {
+          "derived_from_sha": "189ada2ddbec2bfe3a684faccf0ba484a24aeb7a",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2026-09-01. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "f1c294baa35b31cd64f0a197bcdcd7e78465a25b08ff43b6e4800ecb904972fd",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_assertrewrite.py",
+      "test_qualname": "TestIssue14445::test_walrus_no_double_eval_in_boolop"
+    },
+    {
+      "as_of_sha": "05ed0d0f943ce25b635e92e4e166524435386018",
+      "case_id": "bt-a251da245316b36b0e136d3e",
+      "event_class": "fix_with_removal",
+      "event_id": "a251da245316b36b0e136d3e",
+      "evidence": [
+        {
+          "derived_from_sha": "05ed0d0f943ce25b635e92e4e166524435386018",
+          "kind": "marker",
+          "text": "Test: testing/test_assertrewrite.py::TestRewriteOnImport::test_load_resource_via_files_with_rewrite. Markers: pytest.mark.skipif(sys.version_info < (3, 9), reason='importlib.resources.files was introduced in 3.9')."
+        },
+        {
+          "derived_from_sha": "05ed0d0f943ce25b635e92e4e166524435386018",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        sys.version_info < (3, 9),\n        reason=\"importlib.resources.files was introduced in 3.9\",\n    )\n    def test_load_resource_via_files_with_rewrite(self, pytester: Pytester) -> None:\n        example = pytester.path.joinpath(\"demo\") / \"example\"\n        init = pytester.path.joinpath(\"demo\") / \"__init__.py\"\n        pytester.makepyfile(\n            **{\n                \"demo/__init__.py\": \"\"\"\n                from importlib.resources import files\n\n                def load():\n                    return files(__name__)\n                \"\"\",\n                \"test_load\": f\"\"\"\n                pytest_plugins = [\"demo\"]\n\n                def test_load():\n                    from demo import load\n                    found = {{str(i) for i in load().iterdir() if i.name != \"__pycache__\"}}\n                    assert found == {{{str(example)!r}, {str(init)!r}}}\n                \"\"\",\n            }\n        )\n        example.mkdir()\n\n        assert pytester.runpytest(\"-vv\").ret == ExitCode.OK"
+        },
+        {
+          "derived_from_sha": "3407fe63e20346f51d1c0155ffd6939ff865d59d",
+          "kind": "blame",
+          "text": "Marker introduced by commit 3407fe63e2: 2021-10-09 Support the importlib.resources files API in rewritten files (#9173)."
+        },
+        {
+          "derived_from_sha": "05ed0d0f943ce25b635e92e4e166524435386018",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-11-25. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "eb3f7020cf162dd1ef78ca5245be8cf56aa4fdb402948c86edf06dd3c0446b30",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_assertrewrite.py",
+      "test_qualname": "TestRewriteOnImport::test_load_resource_via_files_with_rewrite"
+    },
+    {
+      "as_of_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+      "case_id": "bt-a405629f4b3a539af91b2f0a",
+      "event_class": "fix_with_removal",
+      "event_id": "a405629f4b3a539af91b2f0a",
+      "evidence": [
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "marker",
+          "text": "Test: testing/test_assertrewrite.py::TestAssertionRewriteHookDetails::test_read_pyc_more_invalid. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Only the Python 3.7 format for simplicity')."
+        },
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        sys.version_info < (3, 7), reason=\"Only the Python 3.7 format for simplicity\"\n    )\n    def test_read_pyc_more_invalid(self, tmp_path: Path) -> None:\n        from _pytest.assertion.rewrite import _read_pyc\n\n        source = tmp_path / \"source.py\"\n        pyc = tmp_path / \"source.pyc\"\n\n        source_bytes = b\"def test(): pass\\n\"\n        source.write_bytes(source_bytes)\n\n        magic = importlib.util.MAGIC_NUMBER\n\n        flags = b\"\\x00\\x00\\x00\\x00\"\n\n        mtime = b\"\\x58\\x3c\\xb0\\x5f\"\n        mtime_int = int.from_bytes(mtime, \"little\")\n        os.utime(source, (mtime_int, mtime_int))\n\n        size = len(source_bytes).to_bytes(4, \"little\")\n\n        code = marshal.dumps(compile(source_bytes, str(source), \"exec\"))\n\n        # Good header.\n        pyc.write_bytes(magic + flags + mtime + size + code)\n        assert _read_pyc(source, pyc, print) is not None\n\n        # Too short.\n        pyc.write_bytes(magic + flags + mtime)\n        assert _read_pyc(source, pyc, print) is None\n\n        # Bad magic.\n        pyc.write_bytes(b\"\\x12\\x34\\x56\\x78\" + flags + mtime + size + code)\n        assert _read_pyc(source, pyc, print) is None\n\n        # Unsupported flags.\n        pyc.write_bytes(magic + b\"\\x00\\xff\\x00\\x00\" + mtime + size + code)\n        assert _read_pyc(source, pyc, print) is None\n\n        # Bad mtime.\n        pyc.write_bytes(magic + flags + b\"\\x58\\x3d\\xb0\\x5f\" + size + code)\n        assert _read_pyc(source, pyc, print) is None\n\n        # Bad size.\n        pyc.write_bytes(magic + flags + mtime + b\"\\x99\\x00\\x00\\x00\" + code)\n        assert _read_pyc(s"
+        },
+        {
+          "derived_from_sha": "1d532da49ec7e25ff9d78509a61c3aa82a29b482",
+          "kind": "blame",
+          "text": "Marker introduced by commit 1d532da49e: 2020-11-14 assertion/rewrite: write pyc's according to PEP-552 on Python>=3.7."
+        },
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "ade95e3a5587bf39e85264047c4a4b4fd57885d2f8aad0ed5849a02c40953dc5",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_assertrewrite.py",
+      "test_qualname": "TestAssertionRewriteHookDetails::test_read_pyc_more_invalid"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-a4b327547cb6bae9f85441be",
+      "event_class": "fix_with_removal",
+      "event_id": "a4b327547cb6bae9f85441be",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_cached_property_works_on_frozen_isntances. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_cached_property_works_on_frozen_isntances():\n    \"\"\"\n    Infers type of cached property.\n    \"\"\"\n\n    @attrs.frozen(slots=True)\n    class A:\n        x: int\n\n        @functools.cached_property\n        def f(self) -> int:\n            return self.x\n\n    assert A(x=1).f == 1"
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "32a33182cf201e9ea1bdb5e08eef8df6662db0cbc763457785ae56b83e473654",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_cached_property_works_on_frozen_isntances"
+    },
+    {
+      "as_of_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+      "case_id": "bt-a72f2de4e01072d8418ba5a0",
+      "event_class": "retained",
+      "event_id": "a72f2de4e01072d8418ba5a0",
+      "evidence": [
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "marker",
+          "text": "Test: tests/test_annotations.py::TestAnnotations::test_auto_attribs. Markers: pytest.mark.skipif(sys.version_info[:2] < (3, 11), reason='Incompatible behavior on older Pythons')."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        sys.version_info[:2] < (3, 11),\n        reason=\"Incompatible behavior on older Pythons\",\n    )\n    def test_auto_attribs(self, slots):\n        \"\"\"\n        If *auto_attribs* is True, bare annotations are collected too.\n        Defaults work and class variables are ignored.\n        \"\"\"\n\n        @attr.s(auto_attribs=True, slots=slots)\n        class C:\n            cls_var: typing.ClassVar[int] = 23\n            a: int\n            x: typing.List[int] = attr.Factory(list)\n            y: int = 2\n            z: int = attr.ib(default=3)\n            foo: typing.Any = None\n\n        i = C(42)\n        assert \"C(a=42, x=[], y=2, z=3, foo=None)\" == repr(i)\n\n        attr_names = {a.name for a in C.__attrs_attrs__}\n        assert \"a\" in attr_names  # just double check that the set works\n        assert \"cls_var\" not in attr_names\n\n        attr.resolve_types(C)\n\n        assert int is attr.fields(C).a.type\n\n        assert attr.Factory(list) == attr.fields(C).x.default\n        assert typing.List[int] is attr.fields(C).x.type\n\n        assert int is attr.fields(C).y.type\n        assert 2 == attr.fields(C).y.default\n\n        assert int is attr.fields(C).z.type\n\n        assert typing.Any == attr.fields(C).foo.type\n\n        # Class body is clean.\n        if slots is False:\n            with pytest.raises(AttributeError):\n                C.y\n\n            assert 2 == i.y\n        else:\n            assert isinstance(C.y, types.MemberDescriptorType)\n\n            i.y = 23\n            assert 23 == i.y\n\n        assert_init_annotations(\n            C,\n            a=int,\n       "
+        },
+        {
+          "derived_from_sha": "a18b3957d55c669de56799a9a72ea31febe93ce4",
+          "kind": "blame",
+          "text": "Marker introduced by commit a18b3957d5: 2022-06-24 Add support for Python 3.11 (#969)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-04. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "391d218afcb4ae6e40b4638fd2f98b5a537e6b678ca6838eb1941efb45e04713",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_annotations.py",
+      "test_qualname": "TestAnnotations::test_auto_attribs"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-a9c7a326ff7b34e956fda4ba",
+      "event_class": "retained",
+      "event_id": "a9c7a326ff7b34e956fda4ba",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/test_terminal.py::test_fdopen_kept_alive_issue124. Markers: pytest.mark.xfail(\"not hasattr(os, 'dup')\")."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.xfail(\"not hasattr(os, 'dup')\")\ndef test_fdopen_kept_alive_issue124(pytester: Pytester) -> None:\n    pytester.makepyfile(\n        \"\"\"\n        import os, sys\n        k = []\n        def test_open_file_and_keep_alive(capfd):\n            stdout = os.fdopen(1, 'w', buffering=1, encoding='utf-8')\n            k.append(stdout)\n\n        def test_close_kept_alive_file():\n            stdout = k.pop()\n            stdout.close()\n    \"\"\"\n    )\n    result = pytester.runpytest()\n    result.stdout.fnmatch_lines([\"*2 passed*\"])"
+        },
+        {
+          "derived_from_sha": "a698465487a9cd92e8223d7f9be0e7710272f8ca",
+          "kind": "blame",
+          "text": "Marker introduced by commit a698465487: 2010-11-17 streamline docs, especially use \"import pytest\" and \"pytest.*\" in python code examples instead of \"import py\" and \"py.test.*\".."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "28a3454d34eacf4d4b272c3d0fdd6d8d710fbcc9ce2610035ee6eda17a98a10c",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_terminal.py",
+      "test_qualname": "test_fdopen_kept_alive_issue124"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-afa5ae517edb2d7792c41f58",
+      "event_class": "marker_only_removal",
+      "event_id": "afa5ae517edb2d7792c41f58",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_dataclasses_verbose. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_dataclasses_verbose(self, pytester: Pytester) -> None:\n        p = pytester.copy_example(\"dataclasses/test_compare_dataclasses_verbose.py\")\n        result = pytester.runpytest(p, \"-vv\")\n        result.assert_outcomes(failed=1, passed=0)\n        result.stdout.fnmatch_lines(\n            [\n                \"*Matching attributes:*\",\n                \"*['field_a']*\",\n                \"*Differing attributes:*\",\n                \"*field_b: 'b' != 'c'*\",\n            ]\n        )"
+        },
+        {
+          "derived_from_sha": "d42f1e87c3c4b55ef5faa1a11a4f3083860c864d",
+          "kind": "blame",
+          "text": "Marker introduced by commit d42f1e87c3: 2018-11-12 Add tests for attrs and dataclasses."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "7dbc0f54f0d7b7afd4b626b95357ae720bf4e6fa1914d64e24583f2517a3e22a",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_dataclasses_verbose"
+    },
+    {
+      "as_of_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+      "case_id": "bt-b128c34ab599fa8715492f34",
+      "event_class": "retained",
+      "event_id": "b128c34ab599fa8715492f34",
+      "evidence": [
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "marker",
+          "text": "Test: tests/test_annotations.py::TestAnnotations::test_annotations_strings. Markers: pytest.mark.skipif(sys.version_info[:2] < (3, 11), reason='Incompatible behavior on older Pythons')."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        sys.version_info[:2] < (3, 11),\n        reason=\"Incompatible behavior on older Pythons\",\n    )\n    def test_annotations_strings(self, slots):\n        \"\"\"\n        String annotations are passed into __init__ as is.\n\n        The strings keep changing between releases.\n        \"\"\"\n        import typing as t\n\n        from typing import ClassVar\n\n        @attr.s(auto_attribs=True, slots=slots)\n        class C:\n            cls_var1: \"typing.ClassVar[int]\" = 23\n            cls_var2: \"ClassVar[int]\" = 23\n            cls_var3: \"t.ClassVar[int]\" = 23\n            a: \"int\"\n            x: \"typing.List[int]\" = attr.Factory(list)\n            y: \"int\" = 2\n            z: \"int\" = attr.ib(default=3)\n            foo: \"typing.Any\" = None\n\n        attr.resolve_types(C, locals(), globals())\n\n        assert_init_annotations(\n            C,\n            a=int,\n            x=typing.List[int],\n            y=int,\n            z=int,\n            foo=typing.Any,\n        )"
+        },
+        {
+          "derived_from_sha": "a18b3957d55c669de56799a9a72ea31febe93ce4",
+          "kind": "blame",
+          "text": "Marker introduced by commit a18b3957d5: 2022-06-24 Add support for Python 3.11 (#969)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-04. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "4bab8872247bfbf65875ca1664a95564a03098f1735f1785a0fbc9c176ed41b6",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_annotations.py",
+      "test_qualname": "TestAnnotations::test_annotations_strings"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-ba7dba1b90aa3a824b0b04dc",
+      "event_class": "fix_with_removal",
+      "event_id": "ba7dba1b90aa3a824b0b04dc",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_getattr_in_superclass__is_called_for_missing_attributes_when_cached_property_present. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_getattr_in_superclass__is_called_for_missing_attributes_when_cached_property_present():\n    \"\"\"\n    Ensure __getattr__ implementation is maintained in subclass.\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        def __getattr__(self, item):\n            return item\n\n    @attr.s(slots=True)\n    class B(A):\n        @functools.cached_property\n        def f(self):\n            return self.x\n\n    b = B(1)\n    assert b.f == 1\n    assert b.z == \"z\""
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "9198e7f36818a6c636e0065777b1b8cd94cc4e61cc95c276d9c6e8326f2e83cc",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "development",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_getattr_in_superclass__is_called_for_missing_attributes_when_cached_property_present"
+    },
+    {
+      "as_of_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+      "case_id": "bt-bff48ed84e76b6c175b37a87",
+      "event_class": "fix_with_removal",
+      "event_id": "bff48ed84e76b6c175b37a87",
+      "evidence": [
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "marker",
+          "text": "Test: testing/python/fixtures.py::test_fixture_closure_with_overrides_and_intermediary. Markers: pytest.mark.xfail(reason='not currently handled correctly')."
+        },
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.xfail(reason=\"not currently handled correctly\")\ndef test_fixture_closure_with_overrides_and_intermediary(pytester: Pytester) -> None:\n    \"\"\"Test that an item's static fixture closure properly includes transitive\n    dependencies through overridden fixtures (#13773).\n\n    A more complicated case than test_fixture_closure_with_overrides, adds an\n    intermediary so the override chain is not direct.\n    \"\"\"\n    pytester.makeconftest(\n        \"\"\"\n        import pytest\n\n        @pytest.fixture\n        def db(): pass\n\n        @pytest.fixture\n        def app(db): pass\n\n        @pytest.fixture\n        def intermediate(app): pass\n        \"\"\"\n    )\n    pytester.makepyfile(\n        \"\"\"\n        import pytest\n\n        # Overrides conftest-level `app` and requests it.\n        @pytest.fixture\n        def app(intermediate): pass\n\n        class TestClass:\n            # Overrides module-level `app` and requests it.\n            @pytest.fixture\n            def app(self, app): pass\n\n            def test_something(self, request, app):\n                # Both dynamic and static fixture closures should include 'db'.\n                assert 'db' in request.fixturenames\n                assert 'db' in request.node.fixturenames\n                # No dynamic dependencies, should be equal.\n                assert set(request.fixturenames) == set(request.node.fixturenames)\n        \"\"\"\n    )\n    result = pytester.runpytest(\"-v\")\n    result.assert_outcomes(passed=1)"
+        },
+        {
+          "derived_from_sha": "72ae3dbf9608a70df683d081cf53146a8d79f1ea",
+          "kind": "blame",
+          "text": "Marker introduced by commit 72ae3dbf96: 2025-10-02 fixtures: fix fixture closure calculation to properly consider overridden fixtures."
+        },
+        {
+          "derived_from_sha": "8606fdcd3b334780085c52dab5480c6eab53c64f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2025-10-06. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "e5f941284d4b955a98b057edbabfd1ca2d277665f4d2ee0a2cf6672b453288e4",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/python/fixtures.py",
+      "test_qualname": "test_fixture_closure_with_overrides_and_intermediary"
+    },
+    {
+      "as_of_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+      "case_id": "bt-c167bb1654c8dafd627b9dce",
+      "event_class": "retained",
+      "event_id": "c167bb1654c8dafd627b9dce",
+      "evidence": [
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "marker",
+          "text": "Test: tests/test_setattr.py::TestSetAttr::test_slotted_confused. Markers: pytest.mark.xfail(raises=attr.exceptions.FrozenAttributeError)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.xfail(raises=attr.exceptions.FrozenAttributeError)\n    def test_slotted_confused(self):\n        \"\"\"\n        If we have a in-between non-attrs class, setattr reset detection\n        should still work, but currently doesn't.\n\n        It works with dict classes because we can look the finished class and\n        patch it.  With slotted classes we have to deduce it ourselves.\n        \"\"\"\n\n        @attr.s(slots=True)\n        class A:\n            x = attr.ib(on_setattr=setters.frozen)\n\n        class B(A):\n            pass\n\n        @attr.s(slots=True)\n        class C(B):\n            x = attr.ib()\n\n        C(1).x = 2"
+        },
+        {
+          "derived_from_sha": "48755905ee8088da927a6dc583d4962f7ca16b9b",
+          "kind": "blame",
+          "text": "Marker introduced by commit 48755905ee: 2020-09-05 Don't reset custom __setattr__ in slotted classes (#681)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-04. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "03cfcd061f1adc4385be3983831fd3f594c9fbe7720314d17c78fcbc4188974a",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "attrs",
+      "split": "holdout",
+      "test_path": "tests/test_setattr.py",
+      "test_qualname": "TestSetAttr::test_slotted_confused"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-c35809136132604cc035fccd",
+      "event_class": "fix_with_removal",
+      "event_id": "c35809136132604cc035fccd",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_cached_property_raising_attributeerror. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_cached_property_raising_attributeerror():\n    \"\"\"\n    Ensures AttributeError raised by a property is preserved by __getattr__()\n    implementation.\n\n    Regression test for issue https://github.com/python-attrs/attrs/issues/1230\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        @functools.cached_property\n        def f(self):\n            return self.p\n\n        @property\n        def p(self):\n            raise AttributeError(\"I am a property\")\n\n        @functools.cached_property\n        def g(self):\n            return self.q\n\n        @property\n        def q(self):\n            return 2\n\n    a = A(1)\n    with pytest.raises(AttributeError, match=r\"^I am a property$\"):\n        a.p\n    with pytest.raises(AttributeError, match=r\"^I am a property$\"):\n        a.f\n\n    assert a.g == 2\n    assert a.q == 2"
+        },
+        {
+          "derived_from_sha": "88e2896ca9351cd48711bd320571a832ae122cd5",
+          "kind": "blame",
+          "text": "Marker introduced by commit 88e2896ca9: 2024-04-02 Preserve AttributeError in slotted classes with cached_property (#1253)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "075ba35ea5e2e31e161fba0129969f24ce6d8380436b097747481879101c778f",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "holdout",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_cached_property_raising_attributeerror"
+    },
+    {
+      "as_of_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+      "case_id": "bt-c4cfcfa2c91bf1baa0e903cb",
+      "event_class": "retained",
+      "event_id": "c4cfcfa2c91bf1baa0e903cb",
+      "evidence": [
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "marker",
+          "text": "Test: tests/test_termui.py::test_secho_non_text. Markers: pytest.mark.skipif(platform.system() == 'Windows', reason='No style on Windows.')."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(platform.system() == \"Windows\", reason=\"No style on Windows.\")\n@pytest.mark.parametrize(\n    (\"value\", \"expect\"), [(123, b\"\\x1b[45m123\\x1b[0m\"), (b\"test\", b\"test\")]\n)\ndef test_secho_non_text(runner, value, expect):\n    with runner.isolation() as (out, _):\n        click.secho(value, nl=False, color=True, bg=\"magenta\")\n        result = out.getvalue()\n        assert result == expect"
+        },
+        {
+          "derived_from_sha": "353dd895ffa390c127a0ead2ed86f9510b1a33ad",
+          "kind": "blame",
+          "text": "Marker introduced by commit 353dd895ff: 2020-08-07 pass bytes unstyled from secho to echo."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-09-01. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "1069597dad3093d3fbc74a3a7b85f7252358154c22d2681bf339b4181425dc37",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "click",
+      "split": "holdout",
+      "test_path": "tests/test_termui.py",
+      "test_qualname": "test_secho_non_text"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-c5e39b75f57afbe8893aa450",
+      "event_class": "fix_with_removal",
+      "event_id": "c5e39b75f57afbe8893aa450",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_cached_property_class_does_not_have__dict__. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_cached_property_class_does_not_have__dict__():\n    \"\"\"\n    slotted class with cached property has no __dict__ attribute.\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        @functools.cached_property\n        def f(self):\n            return self.x\n\n    assert set(A.__slots__) == {\"x\", \"f\", \"__weakref__\"}\n    assert \"__dict__\" not in dir(A)"
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "d33f7a96cc0745df191527d66afd55e002079424c11bbfaacadd37ee63b09c18",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "holdout",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_cached_property_class_does_not_have__dict__"
+    },
+    {
+      "as_of_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+      "case_id": "bt-ccf91b51652bdb34fcde2a0e",
+      "event_class": "fix_with_removal",
+      "event_id": "ccf91b51652bdb34fcde2a0e",
+      "evidence": [
+        {
+          "derived_from_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "kind": "marker",
+          "text": "Test: testing/test_unittest.py::test_do_class_cleanups_on_teardownclass_failure. Markers: pytest.mark.skipif(sys.version_info < (3, 8), reason='Feature introduced in Python 3.8')."
+        },
+        {
+          "derived_from_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(\n    sys.version_info < (3, 8), reason=\"Feature introduced in Python 3.8\"\n)\ndef test_do_class_cleanups_on_teardownclass_failure(pytester: Pytester) -> None:\n    testpath = pytester.makepyfile(\n        \"\"\"\n        import unittest\n        class MyTestCase(unittest.TestCase):\n            values = []\n            @classmethod\n            def setUpClass(cls):\n                def cleanup():\n                    cls.values.append(1)\n                cls.addClassCleanup(cleanup)\n            @classmethod\n            def tearDownClass(cls):\n                assert False\n            def test_one(self):\n                pass\n            def test_two(self):\n                pass\n        def test_cleanup_called_exactly_once():\n            assert MyTestCase.values == [1]\n    \"\"\"\n    )\n    reprec = pytester.inline_run(testpath)\n    passed, skipped, failed = reprec.countoutcomes()\n    assert passed == 3"
+        },
+        {
+          "derived_from_sha": "eda681af2b00a628fe2c747b5ec0ef90b4be5cbc",
+          "kind": "blame",
+          "text": "Marker introduced by commit eda681af2b: 2020-11-19 Call Python 3.8 doClassCleanups (#8033)."
+        },
+        {
+          "derived_from_sha": "81cfb3fc874d5a4127dcc8f11e6bb4ae424fb094",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2023-06-28. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "1c0dd7bf7f7b137c1766c3a5596c0786efa8b4c11f9ee5b7df2d0f90e867bd92",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_unittest.py",
+      "test_qualname": "test_do_class_cleanups_on_teardownclass_failure"
+    },
+    {
+      "as_of_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+      "case_id": "bt-cd08e98f64ce890b55c5c498",
+      "event_class": "marker_only_removal",
+      "event_id": "cd08e98f64ce890b55c5c498",
+      "evidence": [
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "marker",
+          "text": "Test: testing/test_debugging.py::TestDebuggingBreakpoints::test_pdb_custom_cls. Markers: pytest.mark.skipif(not SUPPORTS_BREAKPOINT_BUILTIN, reason='Requires breakpoint() builtin')."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        not SUPPORTS_BREAKPOINT_BUILTIN, reason=\"Requires breakpoint() builtin\"\n    )\n    def test_pdb_custom_cls(self, pytester: Pytester, custom_debugger_hook) -> None:\n        p1 = pytester.makepyfile(\n            \"\"\"\n            def test_nothing():\n                breakpoint()\n        \"\"\"\n        )\n        result = pytester.runpytest_inprocess(\n            \"--pdb\", \"--pdbcls=_pytest:_CustomDebugger\", p1\n        )\n        result.stdout.fnmatch_lines([\"*CustomDebugger*\", \"*1 passed*\"])\n        assert custom_debugger_hook == [\"init\", \"set_trace\"]"
+        },
+        {
+          "derived_from_sha": "703e4b11ba76171eccd3f13e723c47b810ded7ef",
+          "kind": "blame",
+          "text": "Marker introduced by commit 703e4b11ba: 2018-05-23 run black."
+        },
+        {
+          "derived_from_sha": "400915067f1f867a79fbb21e19db1dd1b0de213f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-28. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "bf26986df72fb6fe32f76a08f143efe5906d1eccab5d1e2fd73d7dbcadda88a8",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/test_debugging.py",
+      "test_qualname": "TestDebuggingBreakpoints::test_pdb_custom_cls"
+    },
+    {
+      "as_of_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+      "case_id": "bt-cf713d54a311906911a7f66c",
+      "event_class": "fix_with_removal",
+      "event_id": "cf713d54a311906911a7f66c",
+      "evidence": [
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "marker",
+          "text": "Test: testing/deprecated_test.py::test_importing_instance_is_deprecated. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='This deprecation can only be emitted on python>=3.7')."
+        },
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(\n    sys.version_info < (3, 7),\n    reason=\"This deprecation can only be emitted on python>=3.7\",\n)\ndef test_importing_instance_is_deprecated(pytester: Pytester) -> None:\n    with pytest.warns(\n        pytest.PytestDeprecationWarning,\n        match=re.escape(\"The pytest.Instance collector type is deprecated\"),\n    ):\n        pytest.Instance\n\n    with pytest.warns(\n        pytest.PytestDeprecationWarning,\n        match=re.escape(\"The pytest.Instance collector type is deprecated\"),\n    ):\n        from _pytest.python import Instance  # noqa: F401"
+        },
+        {
+          "derived_from_sha": "062d91ab474881b58ae1ff49b4844402677faf45",
+          "kind": "blame",
+          "text": "Marker introduced by commit 062d91ab47: 2021-11-13 python: remove the `Instance` collector node."
+        },
+        {
+          "derived_from_sha": "b9663fed6f9e19fe0c4ccbfbd4a79c35206aaaf8",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "ece9374398429fb3132918e149875af562443dd2e54f44c11486f72d542d3627",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "development",
+      "test_path": "testing/deprecated_test.py",
+      "test_qualname": "test_importing_instance_is_deprecated"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-d68375a315bcb3ffdca62b44",
+      "event_class": "fix_with_removal",
+      "event_id": "d68375a315bcb3ffdca62b44",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_cached_properties_work_independently. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_cached_properties_work_independently():\n    \"\"\"\n    Multiple cached properties should work independently.\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        @functools.cached_property\n        def f_1(self):\n            return self.x\n\n        @functools.cached_property\n        def f_2(self):\n            return self.x * 2\n\n    obj = A(1)\n\n    assert obj.f_1 == 1\n    assert obj.f_2 == 2"
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "4e865b502a15036f15307166178acf58a461198c1c671cbb523342179cd3ba69",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "holdout",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_cached_properties_work_independently"
+    },
+    {
+      "as_of_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+      "case_id": "bt-d9972bdb313e23876795152b",
+      "event_class": "fix_with_removal",
+      "event_id": "d9972bdb313e23876795152b",
+      "evidence": [
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "marker",
+          "text": "Test: tests/test_slots.py::test_slots_sub_class_with_independent_cached_properties_both_work. Markers: pytest.mark.skipif(not PY_3_8_PLUS, reason='cached_property is 3.8+')."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(not PY_3_8_PLUS, reason=\"cached_property is 3.8+\")\ndef test_slots_sub_class_with_independent_cached_properties_both_work():\n    \"\"\"\n    Subclassing shouldn't break cached properties.\n    \"\"\"\n\n    @attr.s(slots=True)\n    class A:\n        x = attr.ib()\n\n        @functools.cached_property\n        def f(self):\n            return self.x\n\n    @attr.s(slots=True)\n    class B(A):\n        @functools.cached_property\n        def g(self):\n            return self.x * 2\n\n    assert B(1).f == 1\n    assert B(1).g == 2"
+        },
+        {
+          "derived_from_sha": "597c3a8adb5abeda66e0f6e9aed7fcaec26ee1a0",
+          "kind": "blame",
+          "text": "Marker introduced by commit 597c3a8adb: 2023-12-08 Add support for cached_properties to slotted attrs classes. (#1200)."
+        },
+        {
+          "derived_from_sha": "5c3af47603ebe88eca930f364d821fdcc2735ef6",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-08-26. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "acb86e7f9b9942c2c5fa340b7226279fc069c47a35e8eaf192f2a596061fe62b",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "holdout",
+      "test_path": "tests/test_slots.py",
+      "test_qualname": "test_slots_sub_class_with_independent_cached_properties_both_work"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-e3358dcfe26656b702b6475f",
+      "event_class": "marker_only_removal",
+      "event_id": "e3358dcfe26656b702b6475f",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_data_classes_with_custom_eq. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_data_classes_with_custom_eq(self, pytester: Pytester) -> None:\n        p = pytester.copy_example(\n            \"dataclasses/test_compare_dataclasses_with_custom_eq.py\"\n        )\n        # issue 9362\n        result = pytester.runpytest(p, \"-vv\")\n        result.assert_outcomes(failed=1, passed=0)\n        result.stdout.no_re_match_line(\".*Differing attributes.*\")"
+        },
+        {
+          "derived_from_sha": "897395afd584b54394ab0b747ff03c80da07871d",
+          "kind": "blame",
+          "text": "Marker introduced by commit 897395afd5: 2021-12-12 fix 9326."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "b8b06427363e9d6ce10c1bf4469291f3ff35f574d4009845a0d8fc87db3d98d6",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_data_classes_with_custom_eq"
+    },
+    {
+      "as_of_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+      "case_id": "bt-eb5eaeb1bd7325de5668f368",
+      "event_class": "retained",
+      "event_id": "eb5eaeb1bd7325de5668f368",
+      "evidence": [
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "marker",
+          "text": "Test: tests/test_termui.py::test_getchar_windows_exceptions. Markers: pytest.mark.skipif(not WIN, reason='Tests user-input using the msvcrt module.')."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.parametrize(\n    (\"key_char\", \"exc\"), [(\"\\x03\", KeyboardInterrupt), (\"\\x1a\", EOFError)]\n)\n@pytest.mark.skipif(not WIN, reason=\"Tests user-input using the msvcrt module.\")\ndef test_getchar_windows_exceptions(runner, monkeypatch, key_char, exc):\n    monkeypatch.setattr(click._termui_impl.msvcrt, \"getwch\", lambda: key_char)\n    monkeypatch.setattr(click.termui, \"_getchar\", None)\n\n    with pytest.raises(exc):\n        click.getchar()"
+        },
+        {
+          "derived_from_sha": "93ba3ba112d2f8ba7bdd8b231e510f74dd0b037e",
+          "kind": "blame",
+          "text": "Marker introduced by commit 93ba3ba112: 2020-03-06 apply black."
+        },
+        {
+          "derived_from_sha": "4a758f5c38636ecd9d030356d85bcca3d8fbd0ca",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-09-01. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "9ebf899aa0a0819af296302b4fa37611b8682b9e733ce632a0589637ad109c7f",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "click",
+      "split": "holdout",
+      "test_path": "tests/test_termui.py",
+      "test_qualname": "test_getchar_windows_exceptions"
+    },
+    {
+      "as_of_sha": "c4e38858817b02b33aec103e049b16630449c46f",
+      "case_id": "bt-ebd2305eb3563f04648998f0",
+      "event_class": "fix_with_removal",
+      "event_id": "ebd2305eb3563f04648998f0",
+      "evidence": [
+        {
+          "derived_from_sha": "c4e38858817b02b33aec103e049b16630449c46f",
+          "kind": "marker",
+          "text": "Test: testing/python/fixtures.py::test_fixture_closure_with_overrides_and_parametrization. Markers: pytest.mark.xfail(reason='#14248 still not fixed')."
+        },
+        {
+          "derived_from_sha": "c4e38858817b02b33aec103e049b16630449c46f",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.xfail(reason=\"#14248 still not fixed\")\ndef test_fixture_closure_with_overrides_and_parametrization(pytester: Pytester) -> None:\n    \"\"\"Test that an item's static fixture closure properly includes transitive\n    dependencies through overridden fixtures (#13773) when also including\n    parametrization (#14248).\"\"\"\n    pytester.makeconftest(\n        \"\"\"\n        import pytest\n\n        @pytest.fixture\n        def db(): pass\n\n        @pytest.fixture\n        def app(db): pass\n        \"\"\"\n    )\n    pytester.makepyfile(\n        \"\"\"\n        import pytest\n\n        # Overrides conftest-level `app` and requests it.\n        @pytest.fixture\n        def app(app): pass\n\n        class TestClass:\n            # Overrides module-level `app` and requests it.\n            @pytest.fixture\n            def app(self, app): pass\n\n            @pytest.mark.parametrize(\"a\", [1])\n            def test_something(self, request, app, a):\n                # Both dynamic and static fixture closures should include 'db'.\n                assert 'db' in request.fixturenames\n                assert 'db' in request.node.fixturenames\n                # No dynamic dependencies, should be equal.\n                assert set(request.fixturenames) == set(request.node.fixturenames)\n        \"\"\"\n    )\n    result = pytester.runpytest(\"-v\")\n    result.assert_outcomes(passed=1)"
+        },
+        {
+          "derived_from_sha": "5d674ca2f246f7ff612afb28ae978d07e90ee483",
+          "kind": "blame",
+          "text": "Marker introduced by commit 5d674ca2f2: 2026-04-08 testing/python/fixtures: add xfail test for static fixture closure with overrides and parametrization."
+        },
+        {
+          "derived_from_sha": "c4e38858817b02b33aec103e049b16630449c46f",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2026-04-08. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "96ea7dc680df608fcdcb8f8766cd84acacd6d8cb425d7597002c1f38a72f7ecd",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/python/fixtures.py",
+      "test_qualname": "test_fixture_closure_with_overrides_and_parametrization"
+    },
+    {
+      "as_of_sha": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+      "case_id": "bt-f49d84ab6fa1706732d762ec",
+      "event_class": "fix_with_removal",
+      "event_id": "f49d84ab6fa1706732d762ec",
+      "evidence": [
+        {
+          "derived_from_sha": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+          "kind": "marker",
+          "text": "Test: tests/test_utils.py::test_echo_via_pager. Markers: pytest.mark.skipif(WIN, reason='Different behavior on windows.')."
+        },
+        {
+          "derived_from_sha": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+          "kind": "test_source",
+          "text": "Full test source:\n@pytest.mark.skipif(WIN, reason=\"Different behavior on windows.\")\n@pytest.mark.parametrize(\"cat\", [\"cat\", \"cat \", \"cat \"])\n@pytest.mark.parametrize(\n    \"test\",\n    [\n        # We need lambda here, because pytest will\n        # reuse the parameters, and then the generators\n        # are already used and will not yield anymore\n        (\"just text\\n\", lambda: \"just text\"),\n        (\"iterable\\n\", lambda: [\"itera\", \"ble\"]),\n        (\"abcabc\\n\", lambda: _test_gen_func),\n        (\"abcabc\\n\", lambda: _test_gen_func()),\n        (\"012345\\n\", lambda: (c for c in range(6))),\n    ],\n)\ndef test_echo_via_pager(monkeypatch, capfd, cat, test):\n    monkeypatch.setitem(os.environ, \"PAGER\", cat)\n    monkeypatch.setattr(click._termui_impl, \"isatty\", lambda x: True)\n\n    expected_output = test[0]\n    test_input = test[1]()\n\n    click.echo_via_pager(test_input)\n\n    out, err = capfd.readouterr()\n    assert out == expected_output"
+        },
+        {
+          "derived_from_sha": "93ba3ba112d2f8ba7bdd8b231e510f74dd0b037e",
+          "kind": "blame",
+          "text": "Marker introduced by commit 93ba3ba112: 2020-03-06 apply black."
+        },
+        {
+          "derived_from_sha": "70c673d37eb91ba42a129be9037caf3ebed62f3e",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-11-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "b737c842c6cffb281d2dfdc3b63ecbdaf9a6977b16ee65304b0913622c1a230b",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "click",
+      "split": "development",
+      "test_path": "tests/test_utils.py",
+      "test_qualname": "test_echo_via_pager"
+    },
+    {
+      "as_of_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+      "case_id": "bt-fa32e5d4200512737d22ab3d",
+      "event_class": "marker_only_removal",
+      "event_id": "fa32e5d4200512737d22ab3d",
+      "evidence": [
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "marker",
+          "text": "Test: testing/test_assertion.py::TestAssert_reprcompare_dataclass::test_dataclasses. Markers: pytest.mark.skipif(sys.version_info < (3, 7), reason='Dataclasses in Python3.7+')."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(sys.version_info < (3, 7), reason=\"Dataclasses in Python3.7+\")\n    def test_dataclasses(self, pytester: Pytester) -> None:\n        p = pytester.copy_example(\"dataclasses/test_compare_dataclasses.py\")\n        result = pytester.runpytest(p)\n        result.assert_outcomes(failed=1, passed=0)\n        result.stdout.fnmatch_lines(\n            [\n                \"E         Omitting 1 identical items, use -vv to show\",\n                \"E         Differing attributes:\",\n                \"E         ['field_b']\",\n                \"E         \",\n                \"E         Drill down into differing attribute field_b:\",\n                \"E           field_b: 'b' != 'c'...\",\n                \"E         \",\n                \"E         ...Full output truncated (3 lines hidden), use '-vv' to show\",\n            ],\n            consecutive=True,\n        )"
+        },
+        {
+          "derived_from_sha": "d42f1e87c3c4b55ef5faa1a11a4f3083860c864d",
+          "kind": "blame",
+          "text": "Marker introduced by commit d42f1e87c3: 2018-11-12 Add tests for attrs and dataclasses."
+        },
+        {
+          "derived_from_sha": "325744ef869568e38458f75091fd0377f8b1ceb9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2021-12-30. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "6fe9d2770f4a4d916785c25213bde2b93e5a4e8b9339ba6f933bc5f4d47d01cd",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_assertion.py",
+      "test_qualname": "TestAssert_reprcompare_dataclass::test_dataclasses"
+    },
+    {
+      "as_of_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+      "case_id": "bt-fbc61aede931e17be41c685a",
+      "event_class": "retained",
+      "event_id": "fbc61aede931e17be41c685a",
+      "evidence": [
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "marker",
+          "text": "Test: tests/test_annotations.py::TestAnnotations::test_extra_resolve. Markers: pytest.mark.skipif(sys.version_info[:2] < (3, 9), reason='Incompatible behavior on older Pythons')."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.skipif(\n        sys.version_info[:2] < (3, 9),\n        reason=\"Incompatible behavior on older Pythons\",\n    )\n    def test_extra_resolve(self):\n        \"\"\"\n        `get_type_hints` returns extra type hints.\n        \"\"\"\n        from typing import Annotated\n\n        globals = {\"Annotated\": Annotated}\n\n        @attr.define\n        class C:\n            x: 'Annotated[float, \"test\"]'\n\n        attr.resolve_types(C, globals)\n\n        assert Annotated[float, \"test\"] is attr.fields(C).x.type\n\n        @attr.define\n        class D:\n            x: 'Annotated[float, \"test\"]'\n\n        attr.resolve_types(D, globals, include_extras=False)\n\n        assert float is attr.fields(D).x.type"
+        },
+        {
+          "derived_from_sha": "c7308a66ef1f4e60f7dbfa75177634666817d861",
+          "kind": "blame",
+          "text": "Marker introduced by commit c7308a66ef: 2023-03-18 Flesh out resolve_types (#1099)."
+        },
+        {
+          "derived_from_sha": "0e8e82a7a0dc2e4e2786e7e683daa763aac72ade",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-04. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "132dd19ff44161392656baa0f3a2f03b6b0925d2e2a120e2c3d1009fa64b4f8e",
+      "marker_kinds": [
+        "skipif"
+      ],
+      "repository": "attrs",
+      "split": "holdout",
+      "test_path": "tests/test_annotations.py",
+      "test_qualname": "TestAnnotations::test_extra_resolve"
+    },
+    {
+      "as_of_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+      "case_id": "bt-fbdc4177f3d85317a7426e4e",
+      "event_class": "retained",
+      "event_id": "fbdc4177f3d85317a7426e4e",
+      "evidence": [
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "marker",
+          "text": "Test: testing/test_collection.py::TestPrunetraceback::test_collect_report_postprocessing. Markers: pytest.mark.xfail(reason='other mechanism for adding to reporting needed')."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "test_source",
+          "text": "Full test source:\n    @pytest.mark.xfail(reason=\"other mechanism for adding to reporting needed\")\n    def test_collect_report_postprocessing(self, pytester: Pytester) -> None:\n        p = pytester.makepyfile(\n            \"\"\"\n            import not_exists\n        \"\"\"\n        )\n        pytester.makeconftest(\n            \"\"\"\n            import pytest\n            @pytest.hookimpl(wrapper=True)\n            def pytest_make_collect_report():\n                rep = yield\n                rep.headerlines += [\"header1\"]\n                return rep\n        \"\"\"\n        )\n        result = pytester.runpytest(p)\n        result.stdout.fnmatch_lines([\"*ERROR collecting*\", \"*header1*\"])"
+        },
+        {
+          "derived_from_sha": "a698465487a9cd92e8223d7f9be0e7710272f8ca",
+          "kind": "blame",
+          "text": "Marker introduced by commit a698465487: 2010-11-17 streamline docs, especially use \"import pytest\" and \"pytest.*\" in python code examples instead of \"import py\" and \"py.test.*\".."
+        },
+        {
+          "derived_from_sha": "f373974707f57a0b28d12563e4d03c7cd54c70d9",
+          "kind": "as_of",
+          "text": "Repository snapshot date: 2024-10-10. An xfail/skip marker disables a test; the reason states why. Judge whether the protected condition is still in force."
+        }
+      ],
+      "evidence_digest": "d02bccacdb6507b972040905522a68ff58e8a8cf9dd23ada04be4fb525972134",
+      "marker_kinds": [
+        "xfail"
+      ],
+      "repository": "pytest",
+      "split": "holdout",
+      "test_path": "testing/test_collection.py",
+      "test_qualname": "TestPrunetraceback::test_collect_report_postprocessing"
+    }
+  ],
+  "mining_counts": {
+    "attrs": {
+      "by_class": {
+        "fix_with_removal": 10,
+        "marker_only_removal": 0,
+        "retained": 6
+      },
+      "by_exclusion": {
+        "marker_changed_by_head": 2,
+        "marker_edited": 7,
+        "not_sampled": 15,
+        "partial_marker_removal": 2,
+        "test_missing_at_child": 9,
+        "test_missing_at_head": 1,
+        "test_modified": 4
+      },
+      "excluded": 40,
+      "included": 16,
+      "mined_total": 56
+    },
+    "click": {
+      "by_class": {
+        "fix_with_removal": 2,
+        "marker_only_removal": 0,
+        "retained": 5
+      },
+      "by_exclusion": {
+        "marker_changed_by_head": 1,
+        "marker_edited": 6,
+        "outside_eligibility_window": 1,
+        "test_missing_at_child": 11,
+        "test_missing_at_head": 9,
+        "test_modified": 5
+      },
+      "excluded": 33,
+      "included": 7,
+      "mined_total": 40
+    },
+    "pytest": {
+      "by_class": {
+        "fix_with_removal": 10,
+        "marker_only_removal": 13,
+        "retained": 8
+      },
+      "by_exclusion": {
+        "marker_changed_by_head": 5,
+        "marker_edited": 69,
+        "not_sampled": 43,
+        "outside_eligibility_window": 83,
+        "parse_error": 505,
+        "partial_marker_removal": 2,
+        "test_missing_at_child": 59,
+        "test_missing_at_head": 1,
+        "test_modified": 30
+      },
+      "excluded": 797,
+      "included": 31,
+      "mined_total": 828
+    }
+  },
+  "schema_version": "1"
+}
