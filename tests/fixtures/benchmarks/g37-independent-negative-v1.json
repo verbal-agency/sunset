@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {"case_id":"g37-negative-contradictory","kind":"contradictory","evidence_roles":["support","contradict"],"expected":"contradictory_evidence"},
+    {"case_id":"g37-negative-malformed","kind":"malformed","error_code":"recorded_response_invalid","expected":"inconclusive"},
+    {"case_id":"g37-negative-moving-ref","kind":"moving_ref","ref":"main","expected":"reject_before_execution"},
+    {"case_id":"g37-negative-unavailable-runtime","kind":"unavailable_runtime","retry_limit":2,"expected":"environment_error"},
+    {"case_id":"g37-negative-holdout","kind":"holdout","tuning":false,"expected":"reported_without_tuning"}
+  ]
+}

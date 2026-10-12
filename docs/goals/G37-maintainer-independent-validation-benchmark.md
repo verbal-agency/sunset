@@ -1,6 +1,6 @@
 # G37 — Maintainer-independent validation benchmark
 
-**Status:** active
+**Status:** complete
 **Dependencies:** G33 (complete), G34 (complete)
 
 ## Purpose
@@ -61,6 +61,7 @@ production-safety claim in G27.
 
 - `tests/fixtures/benchmarks/g37-independent-manifest-v1.json`
 - `tests/fixtures/benchmarks/g37-independent-runs-v1.json`
+- `tests/fixtures/benchmarks/g37-independent-negative-v1.json`
 - `tests/fixtures/benchmarks/g37-independent-report-v1.json`
 - `docs/research/G37-maintainer-independent-validation-report-v1.md`
 - `tests/test_maintainer_independent_validation.py`
@@ -132,3 +133,20 @@ the condition's scope in downstream deployments. Recorded agent traces measure
 replay behavior, not live-model quality. Small public samples can overstate
 coverage. These risks must remain visible in the report and are not reasons to
 upgrade a proxy result to a human judgment.
+
+## Completion evidence
+
+| Criterion | Evidence | Result |
+| --- | --- | --- |
+| G37-AC01 | `tests/test_maintainer_independent_validation.py::test_g37_manifest_and_receipts_are_exact_sha_and_complete`; `g37-independent-manifest-v1.json` | Pass: 9 exact-SHA cases and complete receipts |
+| G37-AC02 | `tests/test_maintainer_independent_validation.py::test_g37_g33_paths_execute_heuristic_and_recorded_agentic_without_mutation` | Pass: both paths execute through `PilotService`; approval is required before validation |
+| G37-AC03 | `docs/research/G37-maintainer-independent-validation-report-v1.md`; `test_g37_report_binds_inputs_and_preserves_label_limits` | Pass: mechanical, evidence, validation, historical, and limitation sections are separate |
+| G37-AC04 | `test_g37_report_binds_inputs_and_preserves_label_limits` | Pass: report is non-authoritative and contains no human-confirmed or safe-to-remove result |
+| G37-AC05 | `test_g37_fail_closed_cases_and_reviewer_boundary`; `test_g37_negative_matrix_covers_contradiction_and_holdout_rules`; `test_g37_report_rebuilds_byte_identically` | Pass: contradictory, moving-ref, malformed, unavailable-runtime, holdout, and replay cases fail closed or remain byte-identical |
+| G37-AC06 | `uv run --locked pytest -q`; `git diff --check` | Pass: locked suite and whitespace check completed successfully |
+
+Recorded result: 18 receipts across nine LangChain cases; 18/18 target
+snapshots unchanged; one confirmed and seven still-failing bounded validation
+outcomes; 22/35 heuristic agreements against G34 historical proxy cases
+(62.86%). These are reproducibility and proxy-agreement measurements, not
+human-confirmed condition accuracy or production-safety evidence.

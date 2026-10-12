@@ -1,0 +1,26 @@
+{
+  "benchmark_id": "g37-maintainer-independent-v1",
+  "evidence_quality": {
+    "contradictions_established": 0,
+    "exact_sha_cases": 9,
+    "note": "G37 records evidence availability and provenance; it does not adjudicate protected conditions.",
+    "recorded_agent_cases": 9,
+    "unsupported_condition_labels": 9
+  },
+  "negative_case_coverage": {"contradictory": "contradictory_evidence", "holdout": "reported_without_tuning", "malformed": "inconclusive", "moving_ref": "reject_before_execution", "unavailable_runtime": "environment_error"},
+  "execution": {"model_calls": 0, "network": "none", "status": "recorded_replay"},
+  "historical_agreement": {"agreement_rate": 0.6286, "heuristic_agreements": 22, "label_provenance": "historical_proxy", "proxy_cases": 35, "source": "G34 historical removal backtest"},
+  "limitations": [
+    "No protected-condition label is human adjudicated in this benchmark.",
+    "Historical removal or retention is a proxy outcome, not proof that a condition expired or that deletion is safe.",
+    "The full orchestration replay is recorded/offline and does not measure live-model quality.",
+    "The LangChain natural corpus is one repository and a selected clone-runnable subset; it does not estimate repository-wide recall.",
+    "A passing disposable validation proves only the declared test scope and deployment assumptions remain unproven."
+  ],
+  "manifest_digest": "c259c012f8af04baae8e713951cbe0b2a089dfe6625a1f0e9ad9242661492279",
+  "mechanical_correctness": {"case_count": 9, "complete_receipts": 18, "mode_counts": {"agentic_recorded": 9, "heuristic": 9}, "replay_byte_identical": true, "run_count": 18, "target_unchanged_receipts": 18},
+  "non_authority": true,
+  "run_digest": "26b8aeb88067186eb8416457a168f0a37d4bed4521045cacd9d4a6b8cccff261",
+  "schema_version": "1",
+  "validation": {"g32_natural_outcomes": {"confirmed": 1, "still_failing": 7}, "outcomes": {"confirmed": 1, "still_failing": 7}, "scope": "declared disposable-clone tests only"}
+}

@@ -476,9 +476,9 @@ usage as a separate proof obligation. G23 now uses one owner-authorized human
 reviewer and records its corpus as single-reviewer provisional; a second review
 is a later strengthening step. G24 is complete with an offline baseline report
 and six non-authoritative cross-repository reference fixtures. G25 is complete
-with a split-safe optimization report; G26 is the only next eligible proposal
-and owns the required breadth expansion. G27 remains the pilot planning
-boundary.
+with a split-safe optimization report; G26 owns the completed breadth
+expansion. G27 remains the pilot planning boundary, while G37 provides the
+maintainer-independent validation lane.
 
 G37 is an independent validation lane for the case where a consenting
 maintainer is unavailable. It can measure reproducibility, evidence quality,
@@ -510,8 +510,8 @@ contracts.
 | [G32](goals/G32-natural-clone-runnable-corpus.md) | complete | Build a natural, clone-runnable corpus of real repo markers for an honest (non-author-biased) agent measurement | G30 + G06 + G22 + G28 + G25 |
 | [G33](goals/G33-unified-orchestration-api.md) | complete | Expose one high-level repository investigation run and execute it through a bounded pinned-clone backend | G30 + G32 |
 | [G34](goals/G34-historical-removal-backtest.md) | complete | Measure Sunset against real maintainer removal history, with lead time and characterized label bias | G30 + G32 + G33 + G25 + live-model authorization |
-| [G37](goals/G37-maintainer-independent-validation-benchmark.md) | active | Measure the full investigation pipeline on pinned public repositories without claiming human-confirmed condition labels | G33 + G34 |
-| [G35](goals/G35-pilot-readiness-gap-closure.md) | proposed | Close the unexercised exact-HEAD validation gap, audit docs for overclaims, and reconcile stale statuses | G27 + G33 |
+| [G37](goals/G37-maintainer-independent-validation-benchmark.md) | complete | Measure the full investigation pipeline on pinned public repositories without claiming human-confirmed condition labels | G33 + G34 |
+| [G35](goals/G35-pilot-readiness-gap-closure.md) | proposed | Close the unexercised exact-HEAD validation gap, audit docs for overclaims, and reconcile stale statuses | G27 planning artifacts + G33 |
 | [G36](goals/G36-maintainer-pilot-recruitment-kit.md) | proposed | Prepare screening, outreach, consent, and run-packet materials so the G27 participant gate can be cleared | G27 + G33 |
 
 ### G21 — Validation corpus protocol and provenance audit
@@ -1054,11 +1054,12 @@ languages; maintainer contact; agent tuning on the holdout; autonomous cleanup.
 
 **Unlocks:** A maintainer-independent answer to whether Sunset would have said
 something true and early, feeding the G27 decision. The recorded report is
-complete; G37 is now the active maintainer-independent validation goal.
+complete; G37 completed the independent validation lane with 18 recorded G33
+receipts across nine exact-SHA cases. G35 is the next proposed readiness goal.
 
 ### G35 — Pilot readiness gap closure
 
-**Dependencies:** G27, G33.
+**Dependencies:** G27 planning artifacts, G33.
 
 **Purpose:** Remove known weaknesses (an unexercised validation path and
 possible documentation overclaims) before any pilot or backtest result is shown.

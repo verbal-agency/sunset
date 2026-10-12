@@ -1,7 +1,11 @@
 # G35 — Pilot readiness gap closure
 
 **Status:** proposed (outline; not an implementation instruction)
-**Dependencies:** G27 (pilot fixture and handoff), G33 (pinned-clone backend)
+**Dependencies:** G27 planning artifacts and handoff, G33 (pinned-clone backend)
+
+G27 need not be complete or have a participating maintainer for this goal. Its
+existing fixture, exact-head candidate, and handoff are the required inputs;
+the human-gated pilot remains a separate blocked path.
 
 ## Purpose
 
